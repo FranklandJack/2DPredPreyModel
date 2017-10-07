@@ -8,3 +8,4 @@ int Cell::getNumbPrey(){return m_nPrey;}
 
 void Cell::setNumbPred(int numberPred){m_nPredator = numberPred;}
 void Cell::setNumbPrey(int numberPrey){m_nPrey     = numberPrey;}
+
