@@ -1,6 +1,6 @@
 #include "Grid.hpp"
 //TODO: implement
-Grid::Grid(const std::ifstream& inputFile)
+Grid::Grid(std::ifstream& inputFile)
 {
 	//first two numbers in file are number of coloumns and number of rows
 	inputFile>>m_columns;
@@ -33,6 +33,11 @@ Grid::Grid(const std::ifstream& inputFile)
 			bool land = 0;
 			// take the input and put it into land
 			inputFile >> land;
+			//ignore any empty strings or newlines in the file
+			if(land==' ' || land == '\n')
+			{
+				continue;
+			}
 			// make the particlular array entry wet/dry accordingly
 			(*this)(column,row) = land;
 		}

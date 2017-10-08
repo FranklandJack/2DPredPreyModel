@@ -25,7 +25,7 @@ class Grid
 
 	public:
 		// TODO: constructor will take the input file 
-		Grid(const std::ifstream& inputFile);
+		Grid(std::ifstream& inputFile);
 		// TODO: destructor will need to be implemented since memory will be dynamically allocated
 		~Grid();
 

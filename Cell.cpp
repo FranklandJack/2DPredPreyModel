@@ -1,6 +1,18 @@
 #include "Cell.hpp"
 
-Cell::Cell(int numberPred, int numberPrey, bool dry):m_nPredator(numberPred),m_nPrey(numberPrey),m_dry(dry){}
+Cell::Cell(bool dry,int numberPred, int numberPrey):m_dry(dry)
+{
+	if(m_dry == false)
+	{
+		m_nPredator = 0;
+		m_nPrey = 0;
+	}
+	else
+	{
+		m_nPredator = numberPred;
+		m_nPrey     = numberPrey;
+	}
+}
 Cell::~Cell(){}
 
 int Cell::getNumbPred() const {return m_nPredator;}

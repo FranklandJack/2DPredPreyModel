@@ -24,7 +24,7 @@ class Cell
 		/*						   bool representing whether the cell is land or water
 		/* if no arguments provided number of predators and defaults to 0 and cell is assumed to be wet
 		*/
-		Cell(int numberPred = 0, int numberPrey = 0, bool dry = false);
+		Cell(bool dry = false,int numberPred = 0, int numberPrey = 0);
 		// default destructor; no dynamic memory allocation
 		~Cell();
 
