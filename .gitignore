@@ -3,3 +3,4 @@
 #to stop .o files being uploaded to the master repo
 *.o
 testInput.txt
+testMain.cpp

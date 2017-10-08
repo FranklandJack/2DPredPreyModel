@@ -36,7 +36,7 @@ class Cell
 		/* getter for determining whether it is wet or dry
 		/* returns true if it is dry/land false if wet/water
 		*/
-		bool isDry();
+		bool isDry() const;
 
 		//setter for number of predators in cell
 		void setNumbPred(int numberPred = 0);
