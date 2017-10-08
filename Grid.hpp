@@ -1,5 +1,16 @@
+
+//header guard
+#ifndef Grid_hpp
+#define Grid_hpp
+
 //cell included since the Grid will contain an array of cells
 #include "Cell.hpp"
+//fstream included since the grid constructor will take a file stream
+//from the input file to construct its cells
+#include <fstream>
+//cassert for assert in bounds checking on arrarys
+#include <cassert>
+
 class Grid
 {
 	private:
@@ -14,23 +25,27 @@ class Grid
 
 	public:
 		// TODO: constructor will take the input file 
-		Grid();
+		Grid(const std::ifstream& inputFile);
 		// TODO: destructor will need to be implemented since memory will be dynamically allocated
 		~Grid();
 
 		//function to return predator density over whole grid
-		double predDensity();
+		double predDensity() const;
 
 		//function to return prey denisty over whole grid
-		double preyDensity();
+		double preyDensity() const;
 
 		//function to return total number of predator in grid
-		int totalPred();
+		int totalPred() const;
 
 		//function to return total number of prey in grid
-		int totalPrey();
+		int totalPrey() const ;
 
 		//overload () operator to return cell at i,j th position in grid, 
-		Cell operator()(int i, int j);
+		// i is the x coordinate and j is the y coordinate, indexed from 1
+		//this is to match the figure given in section 2.1 in the pdf
+		Cell& operator()(int i, int j);
 	
 };
+
+#endif /* Grid_hpp */

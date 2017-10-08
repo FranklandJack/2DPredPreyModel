@@ -1,3 +1,8 @@
+
+//header guard
+#ifndef Cell_hpp
+#define Cell_hpp
+
 class Cell
 {
 	private:
@@ -17,16 +22,16 @@ class Cell
 		/* constructor that takes: number of predators
 		/*						   number of prey 
 		/*						   bool representing whether the cell is land or water
-		/* if no arguments provided number of predators and defaults to 0 and cell is assumed to be dry
+		/* if no arguments provided number of predators and defaults to 0 and cell is assumed to be wet
 		*/
-		Cell(int numberPred = 0, int numberPrey = 0, bool dry = true);
+		Cell(int numberPred = 0, int numberPrey = 0, bool dry = false);
 		// default destructor; no dynamic memory allocation
 		~Cell();
 
 		// getter for number of predators in cell
-		int getNumbPred();
+		int getNumbPred() const;
 		// getter for number of prey in cell
-		int getNumbPrey();
+		int getNumbPrey() const;
 		/*
 		/* getter for determining whether it is wet or dry
 		/* returns true if it is dry/land false if wet/water
@@ -42,3 +47,5 @@ class Cell
 		//setter for making cell wet/watter, used instead of giving setDry() an argument
 		void setWet();
 };
+
+#endif /* Cell_hpp */
