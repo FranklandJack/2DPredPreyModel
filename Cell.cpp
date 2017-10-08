@@ -1,8 +1,8 @@
 #include "Cell.hpp"
 
-Cell::Cell(bool dry,int numberPred, int numberPrey):m_dry(dry)
+Cell::Cell(bool state,int numberPred, int numberPrey):m_state(state)
 {
-	if(m_dry == false)
+	if(m_state == false)
 	{
 		m_nPredator = 0;
 		m_nPrey = 0;
@@ -17,10 +17,9 @@ Cell::~Cell(){}
 
 int Cell::getNumbPred() const {return m_nPredator;}
 int Cell::getNumbPrey() const {return m_nPrey;}
-bool Cell::isDry() const	    {return m_dry;}
+bool Cell::getState() const	    {return m_state;}
 
 void Cell::setNumbPred(int numberPred){m_nPredator = numberPred;}
 void Cell::setNumbPrey(int numberPrey){m_nPrey     = numberPrey;}
-void Cell::setDry() 				  {m_dry = true;}
-void Cell::setWet()					  {m_dry = false;}
+void Cell::setState(bool state) 				  {m_state = state;}
 

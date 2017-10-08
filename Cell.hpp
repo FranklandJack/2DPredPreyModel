@@ -11,11 +11,11 @@ class Cell
 		// m_nPrey holds number of prey in cell
 		int m_nPrey;
 		/*
-		/* m_dry tells us whether the cell is land or not
+		/* m_state tells us whether the cell is land or not
 		/* true = land/dry
 		/* false = wet/water
 		*/
-		bool m_dry;
+		bool m_state;
 
 	public:
 		/*
@@ -24,7 +24,7 @@ class Cell
 		/*						   bool representing whether the cell is land or water
 		/* if no arguments provided number of predators and defaults to 0 and cell is assumed to be wet
 		*/
-		Cell(bool dry = false,int numberPred = 0, int numberPrey = 0);
+		Cell(bool state = false,int numberPred = 0, int numberPrey = 0);
 		// default destructor; no dynamic memory allocation
 		~Cell();
 
@@ -36,16 +36,15 @@ class Cell
 		/* getter for determining whether it is wet or dry
 		/* returns true if it is dry/land false if wet/water
 		*/
-		bool isDry() const;
+		bool getState() const;
 
 		//setter for number of predators in cell
 		void setNumbPred(int numberPred = 0);
 		//setter for number of prey in cell
 		void setNumbPrey(int numberPrey = 0);
-		//setter for making cell dry/land
-		void setDry();
-		//setter for making cell wet/watter, used instead of giving setDry() an argument
-		void setWet();
+		//setter for making cell dry/wet, defaults to wet
+		void setState(bool state = false);
+		
 };
 
 #endif /* Cell_hpp */
