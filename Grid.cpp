@@ -29,24 +29,20 @@ Grid::Grid(std::ifstream& inputFile)
 	{
 		for(int row = 1; row <= m_rows; ++row)
 		{
-			//create local variable to hold whether this cell will be land or not
-			bool land = 0;
+			//create local variable to hold whether state of this cell will be land or not
+			bool state = 0;
 			// take the input and put it into land
-			inputFile >> land;
-			//ignore any empty strings or newlines in the file
-			if(land==' ' || land == '\n')
-			{
-				continue;
-			}
+			inputFile >> state;
+			
 			// make the particlular array entry wet/dry accordingly
-			(*this)(column,row) = land;
+			(*this)(column,row).setState(state);
 		}
 	}
 
 
 	
 }
-//TODO: implement 
+ 
 Grid::~Grid()
 {
 	delete [] m_cellArray;
