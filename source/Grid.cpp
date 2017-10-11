@@ -175,9 +175,20 @@ Grid::~Grid()
 {
 	delete [] m_cellArray;
 }
+
+int Grid::getColumns() const {return m_columns;}
+
+int Grid::getRows()    const {return m_rows;}
 /*
-//TODO:implement
-double Grid::predDensity();
+double Grid::predDensity()
+{
+	// work out the total area on the grid
+	int totalGridSize = m_rows*m_columns;
+
+	//iterate through the grid 
+
+}
+
 //TODO: implement 
 double Grid::preyDensity();
 //TODO: implement 

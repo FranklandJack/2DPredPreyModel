@@ -43,6 +43,13 @@ class Grid
 		// we implement a move assignment operator as well to go with out move constructor
 		Grid& operator=(Grid&& sourceGrid);
 
+
+		// getter for the number of colummns in the grid
+		int getColumns() const;
+
+		// getter for the number of rows in the grid
+		int getRows() const;
+		
 		//function to return predator density over whole grid
 		double predDensity() const;
 
