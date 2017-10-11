@@ -30,11 +30,18 @@ class Grid
 		// overload copy constructor since the class has dynamic memory allocation so we need to do deep copying
 		Grid(const Grid& sourceGrid);
 
+		// we implement a move constructor since this is more performant for certain operations
+		// such as returning a grid from a function, which we will need to do when we update the grid
+		Grid(Grid&& sourceGrid);
+
 		// destructor is implemented since memory will be dynamically allocated
 		~Grid();
 
 		// overload assignment operator since class has dynamic memory allocation so need to do deep copying
 		Grid& operator=(const Grid& sourceGrid);
+
+		// we implement a move assignment operator as well to go with out move constructor
+		Grid& operator=(Grid&& sourceGrid);
 
 		//function to return predator density over whole grid
 		double predDensity() const;

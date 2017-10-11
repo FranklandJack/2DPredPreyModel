@@ -78,6 +78,22 @@ Grid::Grid(const Grid& sourceGrid)
 
 }
 
+// move constructor
+Grid::Grid(Grid&& sourceGrid): m_rows(sourceGrid.m_rows), 
+									 m_columns(sourceGrid.m_columns),
+									 m_cellArray(sourceGrid.m_cellArray)
+{
+	// transfer ownership of sourceGrid.m_cellArray to the new grid
+	// remove ownership of memory from the sourceGrid 
+
+	sourceGrid.m_rows    = 0;
+	sourceGrid.m_columns = 0;
+
+	sourceGrid.m_cellArray = nullptr;
+
+
+}
+
 Grid& Grid::operator=(const Grid& sourceGrid)
 {
 	// check against self assignment
@@ -122,7 +138,39 @@ Grid& Grid::operator=(const Grid& sourceGrid)
 	return *this;
 
 }
- 
+
+
+ // move assignment operator
+
+Grid& Grid::operator=(Grid&& sourceGrid)
+{
+	//check for self assignment
+	if(&sourceGrid == this)
+	{
+		return *this;
+	}
+
+	// release memory currently in the grid
+	delete [] m_cellArray;
+
+	// copy over the numbers of rows and columns 
+	m_rows    = sourceGrid.m_rows;
+	m_columns = sourceGrid.m_columns;
+
+	// transfer ownership of the m_cellArray
+	m_cellArray = sourceGrid.m_cellArray;
+
+	// remove ownership of the memory from sourceGrid
+
+	sourceGrid.m_rows      = 0;
+	sourceGrid.m_columns   = 0;
+	sourceGrid.m_cellArray = nullptr;
+
+	// returh *this so we can chain the assignment operator
+	return *this;
+
+
+}
 Grid::~Grid()
 {
 	delete [] m_cellArray;
