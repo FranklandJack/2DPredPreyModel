@@ -5,11 +5,16 @@
 
 //cell included since the Grid will contain an array of cells
 #include "Cell.hpp"
+
 //fstream included since the grid constructor will take a file stream
 //from the input file to construct its cells
 #include <fstream>
+
 //cassert for assert in bounds checking on arrarys
 #include <cassert>
+
+// for use in the overloading of << operator
+#include<iostream>
 
 class Grid
 {
@@ -69,6 +74,10 @@ class Grid
 
 		// second overload to return a const reference for a constant grid
 		const Cell& operator()(int i, int j) const;
+
+		// overload << operator so we can easily print our grid into a file or the command line in the same format it was input in
+		friend std::ostream&  operator<<(std::ostream& out, const Grid& grid);
+
 	
 };
 

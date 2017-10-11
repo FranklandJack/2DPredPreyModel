@@ -25,9 +25,10 @@ Grid::Grid(std::ifstream& inputFile)
 
 	//using operator() function since this takes care of all the indexing
 	//remembering it indexes from 1
-	for(int column = 1; column <= m_columns; ++column)
+	//remembering to start indexing from top since first entry will be at largest y-coordinate
+	for(int j = m_rows; j >= 1; --j)
 	{
-		for(int row = 1; row <= m_rows; ++row)
+		for(int i = 1; i <= m_columns; ++i)
 		{
 			//create local variable to hold whether state of this cell will be land or not
 			bool state = 0;
@@ -35,7 +36,7 @@ Grid::Grid(std::ifstream& inputFile)
 			inputFile >> state;
 			
 			// make the particlular array entry wet/dry accordingly
-			(*this)(column,row).setState(state);
+			(*this)(i,j).setState(state);
 		}
 	}
 
@@ -213,4 +214,32 @@ const Cell& Grid::operator()(int i, int j) const
 	//this formula accounts for the fact we are storing are 2-D array, in a 1-D array 
 	//and takes account of the indexing for that configuration
 	return m_cellArray[i + (m_rows + 1 - j) * (m_columns+2)];
+}
+
+std::ostream& operator<<(std::ostream& out, const Grid& grid)
+{
+
+	//we will output the grid in the same format it came in with the number of rows and columns in the first line
+	out<<grid.m_columns<<' '<<grid.m_rows<<'\n';
+
+	//we will then use our overloaded() operator to access the cells and print there state, 0 or 1, remembering the indexing system 
+	//we need to be careful to print out grid the right way round since (1,1) for example will give the cell in the bottom left hand corner we need to 
+	//start from the top and work down 
+	//start in the top row i.e. largest y coordinate
+	for(int j = grid.m_rows; j >= 1 ; --j)
+	{
+		//work along the columns
+		for(int i = 1; i <= grid.m_columns; ++i)
+		{
+			out << grid(i,j).getState() << ' ';
+		}
+
+		//printing a newline at the end of each column
+		out<<'\n';
+	}
+
+	//return the output stream so we can chain together outputs 
+
+	return out;
+
 }
