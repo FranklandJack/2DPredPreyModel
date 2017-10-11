@@ -1,13 +1,21 @@
 #makefile for the 2D-Pred-Prey Simulation
 
+
+
 SRC_DIR=source
+PNM_DIR=landscapes
 
 SRC_FILES=$(wildcard $(SRC_DIR)/*.cpp)
 OBJ_FILES=$(patsubst $(SRC_DIR)/%.cpp, %.o, $(SRC_FILES))
 
+PNM_FILES=$(wildcard $(PNM_DIR)/*.pnm)
+DAT_FILES=$(patsubst $(PNM_DIR)/%.pnm, %.dat,$(PNM_FILES))
+
+
+
 EXE_FILE=PredPrey
 
-## all  : compile sourcefiles and create an executible
+## all       : compile sourcefiles and create an executible
 
 .PHONY : all
 all : $(EXE_FILE)
@@ -15,16 +23,23 @@ all : $(EXE_FILE)
 $(EXE_FILE) : $(OBJ_FILES)
 	g++ $^ -o $@
 
+include config.mk
 
-
-## objs  : create object files
+## objs      : create object files
 .PHONY : objs
 objs : $(OBJ_FILES)
 
-%.o : $(SRC_FILES)
-	g++ -c $^
+%.o : $(SRC_DIR)/%.cpp
+	g++ -c $<
 
-## clean : remove auto generated files
+## dats      : create .dats files for input 
+.PHONY : dats
+dats : $(DAT_FILES)
+
+%.dat : $(PNM_DIR)/%.pnm $(CONVERT_SRC)
+	$(CONVERT_EXE) $< $@
+
+## clean     : remove auto generated files
 .PHONY : clean
 clean :
 	rm -f $(OBJ_FILES)
@@ -38,7 +53,7 @@ variables:
 	@echo OBJ_FILES: $(OBJ_FILES)
 
 
-## help : Print help
+## help      : Print help
 .PHONY : help
 help : Makefile
 	@sed -n 's/^##//p' $<
