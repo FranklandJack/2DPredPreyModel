@@ -24,10 +24,17 @@ class Grid
 		int m_rows;
 
 	public:
-		// TODO: constructor will take the input file 
+		// constructor to take the input file and construct whole grid
 		Grid(std::ifstream& inputFile);
-		// TODO: destructor will need to be implemented since memory will be dynamically allocated
+
+		// overload copy constructor since the class has dynamic memory allocation so we need to do deep copying
+		Grid(const Grid& sourceGrid);
+
+		// destructor is implemented since memory will be dynamically allocated
 		~Grid();
+
+		// overload assignment operator since class has dynamic memory allocation so need to do deep copying
+		Grid& operator=(const Grid& sourceGrid);
 
 		//function to return predator density over whole grid
 		double predDensity() const;
@@ -45,6 +52,9 @@ class Grid
 		// i is the x coordinate and j is the y coordinate, indexed from 1
 		//this is to match the figure given in section 2.1 in the pdf
 		Cell& operator()(int i, int j);
+
+		// second overload to return a const reference for a constant grid
+		const Cell& operator()(int i, int j) const;
 	
 };
 

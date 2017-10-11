@@ -42,6 +42,86 @@ Grid::Grid(std::ifstream& inputFile)
 
 	
 }
+
+Grid::Grid(const Grid& sourceGrid)
+{
+	//because m_rows and m_columns are not dynamically allocated we can just shallow copy them
+	m_rows    = sourceGrid.m_rows;
+	m_columns = sourceGrid.m_columns;
+
+	int totalArraySizeIncBufffer = (m_rows+2)*(m_columns+2);
+	//m_cellArray is a dynamically allocated pointer, we need to deep copy if it is non-null
+	if(sourceGrid.m_cellArray)
+	{
+		//remembering we need to pad our grid with the boundary of water
+		int totalArraySizeIncBufffer = (m_rows+2)*(m_columns+2);
+
+		// allocate the memory for the new array
+		m_cellArray = new Cell[totalArraySizeIncBufffer];
+
+		// do the copy using our overloaded () operator and using the index system provided in the example grid
+
+		for(int i = 1; i <= m_columns;++i)
+		{
+			for (int j = 1; j <= m_rows; ++j)
+			{
+				(*this)(i,j) = sourceGrid(i,j);
+			}
+		}
+
+	}
+	// if we are copying from a grid with a null-pointer in its array member variable we just make our new array null too
+	else
+	{
+		m_cellArray = nullptr;
+	}
+
+}
+
+Grid& Grid::operator=(const Grid& sourceGrid)
+{
+	// check against self assignment
+	if(this == &sourceGrid)
+	{
+		return *this;
+	}
+
+	// if we assign a grid we need to dellocate the memory in its pointer otherwise we will get a memory leak when we assign a new location to the pointer 
+	// however if we hadn't first check for self assignment ew could have deleted the memory, then set the pointer to point at the dealoccated memory which would
+	// cause a crash if we derefenced it since it is no longer owned by the program
+
+	delete [] m_cellArray;
+
+	// because m_rows and m_columns are not dynamically allocated we can just copy them as normal
+	m_rows 	  = sourceGrid.m_rows;
+	m_columns = sourceGrid.m_columns;
+
+	// m_cellArray is a dynamically allocated pointer, so we need to do a deep copy if it is non-null
+	if(sourceGrid.m_cellArray)
+	{
+		//remembering we need to pad our grid with the boundary of water
+		int totalArraySizeIncBufffer = (m_rows+2)*(m_columns+2);
+
+		// do the copy using our overloaded () operator and using the index system provided in the example grid
+
+		for(int i = 1; i <= m_columns;++i)
+		{
+			for (int j = 1; j <= m_rows; ++j)
+			{
+				(*this)(i,j) = sourceGrid(i,j);
+			}
+		}
+
+	}
+	// if we are copying from a grid with a null-pointer in its array member variable we just make our new array null too
+	else
+	{
+		m_cellArray = nullptr;
+	}
+	// return *this so we can chain the assingment operator
+	return *this;
+
+}
  
 Grid::~Grid()
 {
@@ -58,6 +138,16 @@ int Grid::totalPred();
 int Grid::totalPrey();
 */
 Cell& Grid::operator()(int i, int j)
+{
+	//check indicies are within bounds
+	assert(i>=1 && i<=m_columns && j>=1 && j<=m_rows && "indicies out of bounds");
+	//this formula accounts for the fact we are storing are 2-D array, in a 1-D array 
+	//and takes account of the indexing for that configuration
+	return m_cellArray[i + (m_rows + 1 - j) * (m_columns+2)];
+}
+
+//  second overload to return a const reference for a constant grid
+const Cell& Grid::operator()(int i, int j) const
 {
 	//check indicies are within bounds
 	assert(i>=1 && i<=m_columns && j>=1 && j<=m_rows && "indicies out of bounds");
