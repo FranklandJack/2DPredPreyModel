@@ -1,25 +1,26 @@
 #include "Cell.hpp"
 
-Cell::Cell(bool state,int numberPred, int numberPrey):m_state(state)
+Cell::Cell(bool state,int predDensity, int preyDensity):m_state(state)
 {
+	//if the cell is wet it can't contain any predators or prey
 	if(m_state == false)
 	{
-		m_nPredator = 0;
-		m_nPrey = 0;
+		m_predDensity = 0;
+		m_preyDensity = 0;
 	}
 	else
 	{
-		m_nPredator = numberPred;
-		m_nPrey     = numberPrey;
+		m_predDensity = predDensity;
+		m_preyDensity = preyDensity;
 	}
 }
 Cell::~Cell(){}
 
-int Cell::getNumbPred() const {return m_nPredator;}
-int Cell::getNumbPrey() const {return m_nPrey;}
-bool Cell::getState() const	    {return m_state;}
+int Cell::getPredDensity() const {return m_predDensity;}
+int Cell::getPreyDensity() const {return m_preyDensity;}
+bool Cell::getState() const	     {return m_state;}
 
-void Cell::setNumbPred(int numberPred){m_nPredator = numberPred;}
-void Cell::setNumbPrey(int numberPrey){m_nPrey     = numberPrey;}
-void Cell::setState(bool state) 				  {m_state = state;}
+void Cell::setPredDensity(int predDensity){m_predDensity = predDensity;}
+void Cell::setPreyDensity(int preyDensity){m_preyDensity = preyDensity;}
+void Cell::setState(bool state) 		  {m_state = state;}
 
