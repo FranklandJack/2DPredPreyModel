@@ -24,9 +24,11 @@ int main(int argc, char const *argv[])
 	//construct grid from the data in the input file using our constructor designed for this purpose
 	Grid grid(inputFile);
 
+	grid(4,5).setPredDensity(800000);
+
 	
 
-	std::cout<<grid<<std::endl;
+	std::cout<<grid.predDensity(false)<<std::endl;
 	
 
 	return 0;

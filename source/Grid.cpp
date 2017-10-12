@@ -180,23 +180,82 @@ Grid::~Grid()
 int Grid::getColumns() const {return m_columns;}
 
 int Grid::getRows()    const {return m_rows;}
-/*
-double Grid::predDensity()
-{
-	// work out the total area on the grid
-	int totalGridSize = m_rows*m_columns;
 
-	//iterate through the grid 
+double Grid::predDensity(bool includeWetCells) const
+{
+	//initalize to zero since we will be adding to these values
+	double totalPredDensity = 0.0;
+	int    totalNumbWetCell = 0;
+
+	int    totalNumberCells = m_rows * m_columns;
+
+	//indexing from 1 since we are following the system in example landscape
+	for(int j = 1; j <= m_rows; ++j)
+	{
+		for(int i = 1; i <= m_columns; ++i)
+		{
+			totalPredDensity += (*this)(i,j).getPredDensity();
+
+			if(!((*this)(i,j).getState()))
+			{
+				++totalNumbWetCell;
+			}
+
+		}
+
+
+	} 
+
+	if(includeWetCells)
+	{
+		return totalPredDensity/totalNumberCells;
+	}
+
+	else
+	{
+		return totalPredDensity/(totalNumberCells - totalNumbWetCell);
+	}
 
 }
 
-//TODO: implement 
-double Grid::preyDensity();
-//TODO: implement 
-int Grid::totalPred();
-//TODO: implement 
-int Grid::totalPrey();
-*/
+
+double Grid::preyDensity(bool includeWetCells) const
+{
+	//initalize to zero since we will be adding to these values
+	double totalPreyDensity = 0.0;
+	int    totalNumbWetCell = 0;
+
+	int    totalNumberCells = m_rows * m_columns;
+
+	//indexing from 1 since we are following the system in example landscape
+	for(int j = 1; j <= m_rows; ++j)
+	{
+		for(int i = 1; i <= m_columns; ++i)
+		{
+			totalPreyDensity += (*this)(i,j).getPreyDensity();
+
+			if(!((*this)(i,j).getState()))
+			{
+				++totalNumbWetCell;
+			}
+
+		}
+
+
+	} 
+
+	if(includeWetCells)
+	{
+		return totalPreyDensity/totalNumberCells;
+	}
+
+	else
+	{
+		return totalPreyDensity/(totalNumberCells - totalNumbWetCell);
+	}
+}
+
+
 Cell& Grid::operator()(int i, int j)
 {
 	//check indicies are within bounds

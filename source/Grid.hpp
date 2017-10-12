@@ -27,6 +27,7 @@ class Grid
 		int m_columns;
 		//m_rows holds number of rows in the grid
 		int m_rows;
+		
 
 	public:
 		// constructor to take the input file and construct whole grid
@@ -56,16 +57,15 @@ class Grid
 		int getRows() const;
 		
 		//function to return predator density over whole grid
-		double predDensity() const;
+		//bool argument is so that we can customize the function to calculate average over all grid cells including the wet ones where there are no predators or prey
+		//or just the dry cells, defaults to include all cells
+		double predDensity(bool includeWetCells = true) const;
 
 		//function to return prey denisty over whole grid
-		double preyDensity() const;
+		//bool argument is so that we can customize the function to calculate average over all grid cells including the wet ones where there are no predators or prey
+		//or just the dry cells, defaults to include all cells
+		double preyDensity(bool includeWetCells = true ) const;
 
-		//function to return total number of predator in grid
-		int totalPred() const;
-
-		//function to return total number of prey in grid
-		int totalPrey() const ;
 
 		//overload () operator to return cell at i,j th position in grid, 
 		// i is the x coordinate and j is the y coordinate, indexed from 1
