@@ -44,12 +44,10 @@ Grid::Grid(std::ifstream& inputFile)
     
 }
 
-Grid::Grid(const Grid& sourceGrid)
+Grid::Grid(const Grid& sourceGrid): m_rows(sourceGrid.m_rows),
+                                    m_columns(sourceGrid.m_columns)
 {
     //because m_rows and m_columns are not dynamically allocated we can just shallow copy them
-    m_rows    = sourceGrid.m_rows;
-    m_columns = sourceGrid.m_columns;
-
     
     //m_cellArray is a dynamically allocated pointer, we need to deep copy if it is non-null
     if(sourceGrid.m_cellArray)
@@ -81,8 +79,8 @@ Grid::Grid(const Grid& sourceGrid)
 
 // move constructor
 Grid::Grid(Grid&& sourceGrid): m_rows(sourceGrid.m_rows), 
-                                     m_columns(sourceGrid.m_columns),
-                                     m_cellArray(sourceGrid.m_cellArray)
+                               m_columns(sourceGrid.m_columns),
+                               m_cellArray(sourceGrid.m_cellArray)
 {
     // transfer ownership of sourceGrid.m_cellArray to the new grid
     // remove ownership of memory from the sourceGrid 
