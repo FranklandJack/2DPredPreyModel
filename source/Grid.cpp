@@ -179,6 +179,48 @@ int Grid::getColumns() const {return m_columns;}
 
 int Grid::getRows()    const {return m_rows;}
 
+// function to set predator distriubtion across grid, since it will initially be zero everywhere
+// takes a number and will set the pred. density in each cell to be somewhere between 0 and this value with uniform probablity
+// will need to take a seed for the random number generation
+void Grid::setUniformPredDistribution(double upperBound, double seed)
+{
+    std::default_random_engine generator(seed);
+
+    std::uniform_real_distribution<double> distribution (0.0,upperBound);
+
+    for(int j = 1; j <= m_rows; ++j)
+    {
+        for(int i =1; i <=m_columns; ++i)
+        {
+            (*this)(i,j).setPredDensity(distribution(generator));
+        }
+    }
+}
+
+// function to set prey distriubtion across grid, since it will initially be zero everywhere
+// takes a number and will set the prey. density in each cell to be somewhere between 0 and this value with uniform probablity
+void Grid::setUniformPreyDistribution(double upperBound, double seed)
+{
+    std::default_random_engine generator(seed);
+
+    std::uniform_real_distribution<double> distribution (0.0,upperBound);
+
+    for(int j = 1; j <= m_rows; ++j)
+    {
+        for(int i =1; i <=m_columns; ++i)
+        {
+            (*this)(i,j).setPreyDensity(distribution(generator));
+        }
+    }
+}
+
+// function to set both predator and prey uniform distribution across whole grid
+void Grid::setUniformDistriubtion(double predUpperBound, double preyUpperbound, double seed)
+{
+    setUniformPredDistribution(predUpperBound,seed);
+    setUniformPreyDistribution(preyUpperbound,seed);
+}
+
 double Grid::predDensity(bool includeWetCells) const
 {
     //initalize to zero since we will be adding to these values
@@ -257,7 +299,9 @@ double Grid::preyDensity(bool includeWetCells) const
 Cell& Grid::operator()(int i, int j)
 {
     //check indicies are within bounds
-    assert(i>=1 && i<=m_columns && j>=1 && j<=m_rows && "indicies out of bounds");
+    //here we allow checking of the padding cells since we will need to check 
+    // densities of these cells at some points
+    assert(i>=0 && i<=m_columns+1 && j>=0 && j<=m_rows+1 && "indicies out of bounds");
     //this formula accounts for the fact we are storing are 2-D array, in a 1-D array 
     //and takes account of the indexing for that configuration
     return m_cellArray[i + (m_rows + 1 - j) * (m_columns+2)];
@@ -266,8 +310,9 @@ Cell& Grid::operator()(int i, int j)
 //  second overload to return a const reference for a constant grid
 const Cell& Grid::operator()(int i, int j) const
 {
-    //check indicies are within bounds
-    assert(i>=1 && i<=m_columns && j>=1 && j<=m_rows && "indicies out of bounds");
+    //here we allow checking of the padding cells since we will need to check 
+    // densities of these cells at some points
+    assert(i>=0 && i<=m_columns+1 && j>=0 && j<=m_rows+1 && "indicies out of bounds");
     //this formula accounts for the fact we are storing are 2-D array, in a 1-D array 
     //and takes account of the indexing for that configuration
     return m_cellArray[i + (m_rows + 1 - j) * (m_columns+2)];

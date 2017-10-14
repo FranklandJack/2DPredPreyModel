@@ -16,6 +16,9 @@
 // for use in the overloading of << operator
 #include<iostream>
 
+// for use in random number generation for assigning pred/prey distributions
+#include<random>
+
 class Grid
 {
     private:
@@ -55,6 +58,18 @@ class Grid
 
         // getter for the number of rows in the grid
         int getRows() const;
+
+        // function to set predator distriubtion across grid, since it will initially be zero everywhere
+        // takes a number and will set the pred. density in each cell to be somewhere between 0 and this value with uniform probablity
+        void setUniformPredDistribution(double uppperBound, double seed);
+
+        // function to set prey distriubtion across grid, since it will initially be zero everywhere
+        // takes a number and will set the prey. density in each cell to be somewhere between 0 and this value with uniform probablity
+        void setUniformPreyDistribution(double upperBound, double seed);
+
+        // function to set both predator and prey uniform distribution across whole grid
+        void setUniformDistriubtion(double predUpperBound, double preyUpperbound, double seed);
+
         
         //function to return predator density over whole grid
         //bool argument is so that we can customize the function to calculate average over all grid cells including the wet ones where there are no predators or prey

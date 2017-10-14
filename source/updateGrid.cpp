@@ -1,6 +1,6 @@
 #include "updateGrid.hpp"
 
-void updateGrid(Grid& grid, double r, double a, double b, double m, double k, double l, double deltaT)
+Grid updateGrid(Grid& grid, double r, double a, double b, double m, double k, double l, double deltaT)
 {
     // first we will copy the original grid so we have a grid into which we can place the updated cells
     Grid updatedGrid = grid;
@@ -11,17 +11,19 @@ void updateGrid(Grid& grid, double r, double a, double b, double m, double k, do
         {
             int    dryNeighbours  = grid.dryNeighbours(i,j);
 
-            double h_old_i_j       = grid.getPreyDensity(i,j);
-            double h_old_iMinus1_j = grid.getPreyDensity(i-1,j);
-            double h_old_iPlus1_j  = grid.getPreyDensity(i+1,j);
-            double h_old_i_jMinus1 = grid.getPreyDensity(i,j-1);
-            double h_old_i_jPlus1  = grid.getPreyDensity(i,j+1);
+
+
+            double h_old_i_j       = grid(i,j).getPreyDensity();
+            double h_old_iMinus1_j = grid(i-1,j).getPreyDensity();
+            double h_old_iPlus1_j  = grid(i+1,j).getPreyDensity();
+            double h_old_i_jMinus1 = grid(i,j-1).getPreyDensity();
+            double h_old_i_jPlus1  = grid(i,j+1).getPreyDensity();
             
-            double p_old_i_j       = grid.getPredDensity(i,j);
-            double p_old_iMinus1_j = grid.getPredDensity(i-1,j);
-            double p_old_iPlus1_j  = grid.getPredDensity(i+1,j);
-            double p_old_i_jMinus1 = grid.getPredDensity(i,j-1);
-            double p_old_i_jPlus1  = grid.getPredDensity(i,j+1);
+            double p_old_i_j       = grid(i,j).getPredDensity();
+            double p_old_iMinus1_j = grid(i-1,j).getPredDensity();
+            double p_old_iPlus1_j  = grid(i+1,j).getPredDensity();
+            double p_old_i_jMinus1 = grid(i,j-1).getPredDensity();
+            double p_old_i_jPlus1  = grid(i,j+1).getPredDensity();
 
 
             double h_new_i_j = h_old_i_j + deltaT * ( r * h_old_i_j - a * h_old_i_j * p_old_i_j +
@@ -37,5 +39,5 @@ void updateGrid(Grid& grid, double r, double a, double b, double m, double k, do
         }   
     }
 
-    grid = updatedGrid;
+    return updatedGrid;
 }
