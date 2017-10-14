@@ -11,6 +11,21 @@
 
 int main(int argc, char const *argv[])
 {
+    //parameter imput
+    double r, a, b, m, k, l, deltaT;
+    unsigned int T;
+    ifstream input_par("D:\\input_parameters.txt", ios::in);
+	if (input_par.is_open())
+	 {
+		input_par >> r >> a >> b >> m >> k >> l >> deltaT >> T;
+		input_par.close();
+	 }
+	else
+		cout<<"Input file could not open!"<<endl;
+    // test just for now
+    cout<<r<<endl<<a<<endl<<b<<endl<<m<<endl<<k<<endl<<l<<endl<<deltaT<<endl;
+    
+    
     //take the first command line argument as the input file
     std::ifstream inputFile(argv[1]);
 
