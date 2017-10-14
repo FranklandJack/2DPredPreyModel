@@ -6,8 +6,11 @@
 #include <fstream>
 #include <iostream>
 
+
+
 int main(int argc, char const *argv[])
 {
+    
     using namespace std;
     
     //parameter imput
@@ -27,14 +30,14 @@ int main(int argc, char const *argv[])
     
     //take the first command line argument as the input file
     std::ifstream inputFile(argv[1]);
-
+    /*
     //check to make sure the file has been opened for input
     if(!inputFile)
     {
         std::cerr << inputFile << " could not be opened for reading" << std::endl;
         exit(1);
     }
-
+    */
     //construct grid from the data in the input file using our constructor designed for this purpose
     Grid grid(inputFile);
 

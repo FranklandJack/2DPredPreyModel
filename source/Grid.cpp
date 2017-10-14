@@ -273,6 +273,16 @@ const Cell& Grid::operator()(int i, int j) const
     return m_cellArray[i + (m_rows + 1 - j) * (m_columns+2)];
 }
 
+int Grid::dryNeighbours(int i, int j) const
+{
+    int totalDry = 0;
+    if((*this)(i+1,j).getState()) ++totalDry;
+    if((*this)(i-1,j).getState()) ++totalDry;
+    if((*this)(i,j+1).getState()) ++totalDry;
+    if((*this)(i,j-1).getState()) ++totalDry;
+    return totalDry;
+}
+
 std::ostream& operator<<(std::ostream& out, const Grid& grid)
 {
 

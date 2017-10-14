@@ -21,7 +21,7 @@ EXE_FILE=PredPrey
 all : $(EXE_FILE)
 
 $(EXE_FILE) : $(OBJ_FILES)
-	g++ $^ -o $@
+	g++ -std=c++11 $^ -o $@
 
 include config.mk
 
@@ -30,7 +30,7 @@ include config.mk
 objs : $(OBJ_FILES)
 
 %.o : $(SRC_DIR)/%.cpp
-	g++ -c $<
+	g++ -std=c++11 -c $<
 
 ## dats      : create .dats files for input 
 .PHONY : dats

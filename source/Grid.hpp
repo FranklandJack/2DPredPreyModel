@@ -75,6 +75,9 @@ class Grid
         // second overload to return a const reference for a constant grid
         const Cell& operator()(int i, int j) const;
 
+        // function to calculate the number of dry neighbours of a cell, where neighbours are only considered to be non-diagonal
+        int dryNeighbours(int i, int j) const;
+
         // overload << operator so we can easily print our grid into a file or the command line in the same format it was input in
         friend std::ostream&  operator<<(std::ostream& out, const Grid& grid);
 
