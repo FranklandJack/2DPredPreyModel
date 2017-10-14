@@ -3,10 +3,7 @@
 //implementing the grid
 #include "Grid.hpp"
 
-//for file IO
 #include <fstream>
-
-//for general IO
 #include <iostream>
 
 int main(int argc, char const *argv[])
