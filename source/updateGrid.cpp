@@ -9,9 +9,7 @@ Grid updateGrid(Grid& grid, double r, double a, double b, double m, double k, do
     {
         for(int i = 1; i <= grid.getColumns(); ++i)
         {
-            int    dryNeighbours  = grid.dryNeighbours(i,j);
-
-
+            int     dryNeighbours  = grid.dryNeighbours(i,j);
 
             double h_old_i_j       = grid(i,j).getPreyDensity();
             double h_old_iMinus1_j = grid(i-1,j).getPreyDensity();

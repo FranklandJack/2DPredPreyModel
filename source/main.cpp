@@ -11,7 +11,8 @@
 int main(int argc, char const *argv[])
 {
     unsigned int seed = static_cast<unsigned int>(std::chrono::system_clock::now().time_since_epoch().count());
-    std::cout<<seed<<std::endl;
+    std::default_random_engine generator(seed);
+   
     using namespace std;
     
     //parameter imput
@@ -41,18 +42,17 @@ int main(int argc, char const *argv[])
     */
     //construct grid from the data in the input file using our constructor designed for this purpose
     Grid grid(inputFile);
-
-    //grid.setUniformDistriubtion(5.0, 5.0, seed);
-    grid.setUniformPreyDistribution(5.0,seed);
     
-
-    for(int t = 0; t <= 10; ++t)
+    grid.setUniformDistriubtion(5.0, 0.0, generator);
+    
+    
+    for(int t = 0; t <= 5000; ++t)
     {
-        grid =  updateGrid(grid, r, a, b, m, k, l, deltaT);
-        if(0 == t%5) 
-            std::cout << grid.predDensity() << " " << grid.preyDensity() << std::endl;
+        grid = updateGrid(grid,r,a,b,m,k,l,deltaT);
+        if(0 == t%10)
+            std::cout<<grid.predDensity()<< ' ' << grid.preyDensity()<<std::endl;
     }
-
+    
     
     
 

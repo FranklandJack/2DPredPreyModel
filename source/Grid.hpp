@@ -19,6 +19,9 @@
 // for use in random number generation for assigning pred/prey distributions
 #include<random>
 
+// for seeding random nubmber generators
+#include<chrono> 
+
 class Grid
 {
     private:
@@ -58,17 +61,19 @@ class Grid
 
         // getter for the number of rows in the grid
         int getRows() const;
+        
 
         // function to set predator distriubtion across grid, since it will initially be zero everywhere
         // takes a number and will set the pred. density in each cell to be somewhere between 0 and this value with uniform probablity
-        void setUniformPredDistribution(double uppperBound, double seed);
+        // needs a random generator which will come from the main method
+        void setUniformPredDistribution(double uppperBound, std::default_random_engine &generator);
 
         // function to set prey distriubtion across grid, since it will initially be zero everywhere
         // takes a number and will set the prey. density in each cell to be somewhere between 0 and this value with uniform probablity
-        void setUniformPreyDistribution(double upperBound, double seed);
+        void setUniformPreyDistribution(double upperBound, std::default_random_engine &generator);
 
         // function to set both predator and prey uniform distribution across whole grid
-        void setUniformDistriubtion(double predUpperBound, double preyUpperbound, double seed);
+        void setUniformDistriubtion(double predUpperBound, double preyUpperbound, std::default_random_engine &generator);
 
         
         //function to return predator density over whole grid

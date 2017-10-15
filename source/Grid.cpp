@@ -1,5 +1,5 @@
 #include "Grid.hpp"
-//TODO: implement
+
 Grid::Grid(std::ifstream& inputFile)
 {
     //first two numbers in file are number of coloumns and number of rows
@@ -182,43 +182,39 @@ int Grid::getRows()    const {return m_rows;}
 // function to set predator distriubtion across grid, since it will initially be zero everywhere
 // takes a number and will set the pred. density in each cell to be somewhere between 0 and this value with uniform probablity
 // will need to take a seed for the random number generation
-void Grid::setUniformPredDistribution(double upperBound, double seed)
+void Grid::setUniformPredDistribution(double upperBound, std::default_random_engine &generator)
 {
-    std::default_random_engine generator(seed);
-
-    std::uniform_real_distribution<double> distribution (0.0,upperBound);
+    std::uniform_real_distribution<double> distribution(0.0,upperBound);
 
     for(int j = 1; j <= m_rows; ++j)
     {
-        for(int i =1; i <=m_columns; ++i)
+        for(int i =1; i <= m_columns; ++i)
         {
-            (*this)(i,j).setPredDensity(distribution(generator));
+            ((*this)(i,j)).setPredDensity(distribution(generator));
         }
     }
 }
 
 // function to set prey distriubtion across grid, since it will initially be zero everywhere
 // takes a number and will set the prey. density in each cell to be somewhere between 0 and this value with uniform probablity
-void Grid::setUniformPreyDistribution(double upperBound, double seed)
+void Grid::setUniformPreyDistribution(double upperBound, std::default_random_engine &generator)
 {
-    std::default_random_engine generator(seed);
-
-    std::uniform_real_distribution<double> distribution (0.0,upperBound);
+    std::uniform_real_distribution<double> distribution(0.0,upperBound);
 
     for(int j = 1; j <= m_rows; ++j)
     {
-        for(int i =1; i <=m_columns; ++i)
+        for(int i =1; i <= m_columns; ++i)
         {
-            (*this)(i,j).setPreyDensity(distribution(generator));
+            ((*this)(i,j)).setPreyDensity(distribution(generator));
         }
     }
 }
 
 // function to set both predator and prey uniform distribution across whole grid
-void Grid::setUniformDistriubtion(double predUpperBound, double preyUpperbound, double seed)
+void Grid::setUniformDistriubtion(double predUpperBound, double preyUpperbound, std::default_random_engine &generator)
 {
-    setUniformPredDistribution(predUpperBound,seed);
-    setUniformPreyDistribution(preyUpperbound,seed);
+    setUniformPredDistribution(predUpperBound, generator);
+    setUniformPreyDistribution(preyUpperbound, generator);
 }
 
 double Grid::predDensity(bool includeWetCells) const
