@@ -42,15 +42,18 @@ int main(int argc, char const *argv[])
     */
     //construct grid from the data in the input file using our constructor designed for this purpose
     Grid grid(inputFile);
+    grid(1,1).setPredDensity(1.0);
+    grid.setUniformPreyDistribution(5.0, generator);
     
-    grid.setUniformDistriubtion(5.0, 0.0, generator);
+    grid.printDensities();
+    std::cout << std::endl;
     
-    
-    for(int t = 0; t <= 5000; ++t)
+    for(int t = 0; t <= 10; ++t)
     {
         grid = updateGrid(grid,r,a,b,m,k,l,deltaT);
-        if(0 == t%10)
-            std::cout<<grid.predDensity()<< ' ' << grid.preyDensity()<<std::endl;
+        //if(0 == t%10)
+            grid.printDensities();
+            std::cout << std::endl;
     }
     
     

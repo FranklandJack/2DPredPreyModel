@@ -73,7 +73,7 @@ class Grid
         void setUniformPreyDistribution(double upperBound, std::default_random_engine &generator);
 
         // function to set both predator and prey uniform distribution across whole grid
-        void setUniformDistriubtion(double predUpperBound, double preyUpperbound, std::default_random_engine &generator);
+        void setUniformDistribution(double predUpperBound, double preyUpperbound, std::default_random_engine &generator);
 
         
         //function to return predator density over whole grid
@@ -100,6 +100,9 @@ class Grid
 
         // overload << operator so we can easily print our grid into a file or the command line in the same format it was input in
         friend std::ostream&  operator<<(std::ostream& out, const Grid& grid);
+
+        // function to print out the grid with each cell as its density (pred,prey) pair
+        void printDensities() const;
 
     
 };

@@ -211,7 +211,7 @@ void Grid::setUniformPreyDistribution(double upperBound, std::default_random_eng
 }
 
 // function to set both predator and prey uniform distribution across whole grid
-void Grid::setUniformDistriubtion(double predUpperBound, double preyUpperbound, std::default_random_engine &generator)
+void Grid::setUniformDistribution(double predUpperBound, double preyUpperbound, std::default_random_engine &generator)
 {
     setUniformPredDistribution(predUpperBound, generator);
     setUniformPreyDistribution(preyUpperbound, generator);
@@ -350,4 +350,18 @@ std::ostream& operator<<(std::ostream& out, const Grid& grid)
 
     return out;
 
+}
+
+
+void Grid::printDensities() const
+{
+    for(int j = m_rows; j >= 1; --j)
+    {
+        for (int i = 1; i <= m_columns; ++i)
+        {
+            std::cout << '(' << (*this)(i,j).getPredDensity() << ", " << (*this)(i,j).getPreyDensity() << " )";
+        }
+
+        std::cout << std::endl;
+    }
 }
