@@ -51,10 +51,10 @@ int main(int argc, char const *argv[])
      int t=500;
      int num_iterations=int(t/deltaT);
     
-    for(int k = 1; k <= num_iterations; k++)
+    for(int i = 1; i <= num_iterations; i++)
     {
         grid = updateGrid(grid,r,a,b,m,k,l,deltaT);
-        if(0 == k%10)
+        if(0 == i%10)
             std::cout<<grid.predDensity()<< ' ' << grid.preyDensity()<<std::endl;
        // if(0 == i%T)
          // print output
