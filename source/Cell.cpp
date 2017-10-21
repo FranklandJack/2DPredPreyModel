@@ -23,7 +23,7 @@ bool   Cell::getState()       const {return m_state;}
 void Cell::setPredDensity(double predDensity)
 {
     //need to set the density to be zero if it becomes negative 
-    if(predDensity < 0.0) m_preyDensity = 0.0;
+    if(predDensity < 0.0) m_predDensity = 0.0;
     else
         m_predDensity = predDensity;
 }
