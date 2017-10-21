@@ -57,7 +57,7 @@ int main(int argc, char const *argv[])
      int step_average=10;
      char outputfile[50];
 	
-     for(int iter = 1; iter <= num_iterations; iter++)
+     for(int iter = 1; iter <= num_iterations; ++iter)
      {
         grid = updateGrid(grid,r,a,b,m,k,l,deltaT);
         if(0 == iter % step_average)
@@ -71,10 +71,10 @@ int main(int argc, char const *argv[])
 	    ofstream output_den(outputfile, ios::out);
         if (output_den.is_open())
          {
-           for(int i=1; i<=Nrows; i++){
-             for(int j=1; j<=Ncolumns; j++){
-	 //we have to change h[i][j] and p[i][j] for every cell
-                output_den << i <<" "<< j <<" "<< h[i][j] <<" "<< p[i][j] <<endl;
+           for(int i=1; i<=Nrows; ++i){
+             for(int j=1; j<=Ncolumns; ++j){
+	 //I hope it works (fingers crossed)
+                output_den << i <<" "<< j <<" "<< grid(i,j).getPredDensity() <<" "<< grid(i,j).getPreyDensity()<<endl;
              }
             }
                 output_den.close();
