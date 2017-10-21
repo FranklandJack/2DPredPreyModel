@@ -34,7 +34,7 @@ int main(int argc, char const *argv[])
     
     
     //take the first command line argument as the input file
-    std::ifstream inputFile(argv[1]);
+    ifstream inputFile(argv[1]);
     /*
     //check to make sure the file has been opened for input
     if(!inputFile)

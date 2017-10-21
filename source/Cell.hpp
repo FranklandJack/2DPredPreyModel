@@ -1,5 +1,17 @@
+/**
+ * \class Cell
+ *
+ * \brief Models a single cell
+ *
+ * A cell forms a single "square" in the landscape and is considered to have three properties
+ * a predator density, a prey density and whether or not the cell is land (so dry) or water (so wet)
+ * 
+ *
+ *
+ *
+ */
 
-//header guard
+
 #ifndef Cell_hpp
 #define Cell_hpp
 
