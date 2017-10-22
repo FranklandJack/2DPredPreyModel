@@ -4,12 +4,15 @@
 
 SRC_DIR=source
 PNM_DIR=landscapes
+OUT_DIR=output
 
 SRC_FILES=$(wildcard $(SRC_DIR)/*.cpp)
 OBJ_FILES=$(patsubst $(SRC_DIR)/%.cpp, %.o, $(SRC_FILES))
 
 PNM_FILES=$(wildcard $(PNM_DIR)/*.pnm)
 DAT_FILES=$(patsubst $(PNM_DIR)/%.pnm, %.dat,$(PNM_FILES))
+
+OUT_FILES=$(wildcard $(OUT_DIR)/*.txt)
 
 
 
@@ -44,6 +47,7 @@ dats : $(DAT_FILES)
 clean :
 	rm -f $(OBJ_FILES)
 	rm -f $(EXE_FILE)
+	rm -f $(OUT_FILES)
 
 ## variables : Print variables
 .PHONY :variables
@@ -51,6 +55,7 @@ variables:
 	@echo SRC_DIR:   $(SRC_DIR)
 	@echo SRC_FILES: $(SRC_FILES)
 	@echo OBJ_FILES: $(OBJ_FILES)
+	@echo OUT_FILES: $(OUT_FILES)
 
 
 ## help      : Print help
