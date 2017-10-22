@@ -17,6 +17,14 @@
 
 class Cell
 {
+    public:
+        //user defined type to hold whether the cell is wet or dry, we will use this instead of true/false as it is clearer
+        enum State
+        {
+            Wet,
+            Dry
+        };
+
     private:
         // m_predDensity holds predator density in the cell
         double m_predDensity;
@@ -27,16 +35,19 @@ class Cell
         /* true = land/dry
         /* false = wet/water
         */
-        bool m_state;
+        State m_state;
+
 
     public:
+        
+        
         /*
         /* constructor that takes: number of predators
         /*                         number of prey 
         /*                         bool representing whether the cell is land or water
         /* if no arguments provided number of predators and defaults to 0 and cell is assumed to be wet
         */
-        Cell(bool state = false, double predDensity = 0.0, double preyDensity = 0.0);
+        Cell(State = Wet, double predDensity = 0.0, double preyDensity = 0.0);
         // default destructor; no dynamic memory allocation
         ~Cell();
 
@@ -49,7 +60,7 @@ class Cell
         /* getter for determining whether it is wet or dry
         /* returns true if it is dry/land false if wet/water
         */
-        bool getState() const;
+        State getState() const;
 
         //setter for predator density of the cell
         void setPredDensity(double predDensity = 0.0);
@@ -58,7 +69,7 @@ class Cell
         void setPreyDensity(double preyDensity = 0.0);
 
         //setter for making cell dry/wet, defaults to wet
-        void setState(bool state = false);
+        void setState(State = Wet);
         
 };
 

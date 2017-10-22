@@ -3,8 +3,7 @@
 Grid::Grid(std::ifstream& inputFile)
 {
     //first two numbers in file are number of coloumns and number of rows
-    inputFile>>m_columns;
-    inputFile>>m_rows;
+    inputFile>>m_columns>>m_rows;
 
     //dynamically allocate the array of size (m_columns+2)*(m_rows+2)
     //remembering to include the buffer of water at the edge
@@ -30,13 +29,13 @@ Grid::Grid(std::ifstream& inputFile)
     {
         for(int i = 1; i <= m_columns; ++i)
         {
-            //create local variable to hold whether state of this cell will be land or not
-            bool state = 0;
+        
             // take the input and put it into land
+            int state;
             inputFile >> state;
             
             // make the particlular array entry wet/dry accordingly
-            (*this)(i,j).setState(state);
+            (*this)(i,j).setState(static_cast<Cell::State>(state));
         }
     }
 
@@ -317,10 +316,10 @@ const Cell& Grid::operator()(int i, int j) const
 int Grid::dryNeighbours(int i, int j) const
 {
     int totalDry = 0;
-    if((*this)(i+1,j).getState()) ++totalDry;
-    if((*this)(i-1,j).getState()) ++totalDry;
-    if((*this)(i,j+1).getState()) ++totalDry;
-    if((*this)(i,j-1).getState()) ++totalDry;
+    if(Cell::Dry == (*this)(i+1,j).getState()) ++totalDry;
+    if(Cell::Dry == (*this)(i-1,j).getState()) ++totalDry;
+    if(Cell::Dry == (*this)(i,j+1).getState()) ++totalDry;
+    if(Cell::Dry == (*this)(i,j-1).getState()) ++totalDry;
     return totalDry;
 }
 
@@ -339,7 +338,7 @@ std::ostream& operator<<(std::ostream& out, const Grid& grid)
         //work along the columns
         for(int i = 1; i <= grid.m_columns; ++i)
         {
-            out << grid(i,j).getState() << ' ';
+            out << static_cast<int>(grid(i,j).getState()) << ' ';
         }
 
         //printing a newline at the end of each column

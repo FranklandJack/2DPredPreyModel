@@ -1,9 +1,9 @@
 #include "Cell.hpp"
 
-Cell::Cell(bool state,double predDensity, double preyDensity):m_state(state)
+Cell::Cell(Cell::State state, double predDensity, double preyDensity):m_state(state)
 {
     //if the cell is wet it can't contain any predators or prey
-    if(m_state == false)
+    if(m_state == Wet)
     {
         m_predDensity = 0;
         m_preyDensity = 0;
@@ -14,16 +14,18 @@ Cell::Cell(bool state,double predDensity, double preyDensity):m_state(state)
         m_preyDensity = preyDensity;
     }
 }
+
 Cell::~Cell(){}
 
-double Cell::getPredDensity() const {return m_predDensity;}
-double Cell::getPreyDensity() const {return m_preyDensity;}
-bool   Cell::getState()       const {return m_state;}
+double        Cell::getPredDensity() const {return m_predDensity;}
+double        Cell::getPreyDensity() const {return m_preyDensity;}
+Cell::State   Cell::getState()       const {return m_state;}
 
 void Cell::setPredDensity(double predDensity)
 {
-    //need to set the density to be zero if it becomes negative 
-    if(predDensity < 0.0) m_predDensity = 0.0;
+    //need to set the density to be zero if it becomes negative
+
+    if(predDensity < 0.0 || Wet == m_state) m_predDensity = 0.0;
     else
         m_predDensity = predDensity;
 }
@@ -31,10 +33,10 @@ void Cell::setPredDensity(double predDensity)
 void Cell::setPreyDensity(double preyDensity)
 {
     //need to set the densoty to be zero if it falls bellow zero
-    if(preyDensity < 0.0) m_preyDensity = 0.0;
+    if(preyDensity < 0.0 || Wet == m_state) m_preyDensity = 0.0;
     else
         m_preyDensity = preyDensity;
 }
 
-void Cell::setState(bool state){m_state = state;}
+void Cell::setState(Cell::State state){m_state = state;}
 

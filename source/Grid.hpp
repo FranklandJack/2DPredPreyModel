@@ -24,6 +24,7 @@
 
 class Grid
 {
+
     private:
         //pointer to Cell, cells will be dynamically allocated since there may be a larger number of them
         // memorywise most efficient to allocate a 1-d array and index it using (i,j) operator
@@ -33,9 +34,11 @@ class Grid
         int m_columns;
         //m_rows holds number of rows in the grid
         int m_rows;
+
         
 
     public:
+        
         // constructor to take the input file and construct whole grid
         Grid(std::ifstream& inputFile);
 

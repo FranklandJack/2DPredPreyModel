@@ -9,6 +9,8 @@ Grid updateGrid(Grid& grid, double r, double a, double b, double m, double k, do
     {
         for(int i = 1; i <= grid.getColumns(); ++i)
         {
+            if(grid(i,j).getState() == Cell::Dry)
+            {
             int     dryNeighbours  = grid.dryNeighbours(i,j);
 
             double h_old_i_j       = grid(i,j).getPreyDensity();
@@ -34,6 +36,7 @@ Grid updateGrid(Grid& grid, double r, double a, double b, double m, double k, do
 
             updatedGrid(i,j).setPreyDensity(h_new_i_j);
             updatedGrid(i,j).setPredDensity(p_new_i_j);
+        }
         }   
     }
 
