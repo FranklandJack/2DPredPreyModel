@@ -17,9 +17,11 @@ using namespace std;
 int main(int argc, char const *argv[])
 {
     clock_t begin_time = clock();
-    
-    unsigned int seed = static_cast<unsigned int>(std::chrono::system_clock::now().time_since_epoch().count());
-    std::default_random_engine generator(seed);
+
+	
+    unsigned int seed = static_cast<unsigned int>(chrono::system_clock::now().time_since_epoch().count());
+    default_random_engine generator(seed);
+
    
     //parameter input
     double r, a, b, m, k, l, deltaT;
@@ -51,9 +53,12 @@ int main(int argc, char const *argv[])
     //grid.setUniformPreyDistribution(5.0, generator);
     
     grid.printDensities();
-    std::cout << std::endl;
+
 
     cout<<grid<<endl;
+
+    cout << endl;
+
     
 
      int t=50;
