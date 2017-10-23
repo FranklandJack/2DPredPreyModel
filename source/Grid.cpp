@@ -352,15 +352,14 @@ std::ostream& operator<<(std::ostream& out, const Grid& grid)
 }
 
 
-void Grid::printDensities() const
+void Grid::printDensities(std::ostream& out) const
 {
-    for(int j = m_rows; j >= 1; --j)
+    for(int j = 1; j <= m_rows; ++j)
     {
         for (int i = 1; i <= m_columns; ++i)
         {
-            std::cout << '(' << (*this)(i,j).getPredDensity() << ", " << (*this)(i,j).getPreyDensity() << " )";
+            out << i << " " << j << (*this)(i,j).getPredDensity() << " " << (*this)(i,j).getPreyDensity() << std::endl;
         }
 
-        std::cout << std::endl;
     }
 }

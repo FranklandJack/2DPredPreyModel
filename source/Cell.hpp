@@ -5,10 +5,6 @@
  *
  * A cell forms a single "square" in the landscape and is considered to have three properties
  * a predator density, a prey density and whether or not the cell is land (so dry) or water (so wet)
- * 
- *
- *
- *
  */
 
 
@@ -18,22 +14,29 @@
 class Cell
 {
     public:
-        //user defined type to hold whether the cell is wet or dry, we will use this instead of true/false as it is clearer
-        enum State
-        {
-            Wet,
-            Dry
-        };
+
+        /**
+        * \enum State
+        *
+        * \brief Enum that represents a value that can be either wet or dry.
+        */
+        enum State { Wet, Dry};
 
     private:
-        // m_predDensity holds predator density in the cell
+
+        /// Floating point member variable representing the predator density in the given cell as #predator in the cell.
         double m_predDensity;
-        // m_preyDensity holds prey density in the cell
+
+        /// Floating point member variable representing the prey density in the given cell as #prey in the cell.
         double m_preyDensity;
-        /*
-        /* m_state tells us whether the cell is land or not
-        /* true = land/dry
-        /* false = wet/water
+
+        /**
+        * \brief Member variable representing the state of the Cell as either being Wet(water) or Dry(land)
+        *
+        * This is implemented using the user defined enum State rather than a simple true/false bool since it provides 
+        * far more clarity in terms or function arguments and conditional statements regarding the state of the Cell to 
+        * work with the State variable which is explicitly Wet/Dry. Wet cells cannot contain predator or prey, so their 
+        * densities will always be zero in a wet cell.
         */
         State m_state;
 
@@ -41,35 +44,77 @@ class Cell
     public:
         
         
-        /*
-        /* constructor that takes: number of predators
-        /*                         number of prey 
-        /*                         bool representing whether the cell is land or water
-        /* if no arguments provided number of predators and defaults to 0 and cell is assumed to be wet
+        /** 
+        * \brief Creates a Cell
+        *
+        *  Standard constructor to initialize the member variables of the Cell object.
+        *  If no arguments are provided the Cell defaults to be Wet with predator and
+        *  prey densities of zero.
+        * 
+        * \param state a Cell::State value that is either Wet or Dry setting the state
+        * of the cell. Defaults to Wet.
+        *
+        * \param predDensity a floating point value setting the density of the predators
+        * in the cell. Defaults to 0.
+        *
+        * \param preyDensity a floating point value setting the density of the prey in the
+        * cell. Defaults to 0.
         */
-        Cell(State = Wet, double predDensity = 0.0, double preyDensity = 0.0);
-        // default destructor; no dynamic memory allocation
+        Cell(State state = Wet, double predDensity = 0.0, double preyDensity = 0.0);
+
+
+        /// Default destructor; no dynamic memory allocation is required for this class.
         ~Cell();
 
-        // getter for the predator density of the cell
+
+        /** 
+        * \brief Getter for the predator density in the cell.
+        *
+        * \return The value of m_predDensity.
+        */
         double getPredDensity() const;
 
-        // getter for the prey density of the cell
+
+        /** 
+        * \brief Getter for the prey density in the cell.
+        *
+        * \return The value of m_preyDensity.
+        */
         double getPreyDensity() const;
-        /*
-        /* getter for determining whether it is wet or dry
-        /* returns true if it is dry/land false if wet/water
+
+
+        /** 
+        * \brief Getter for the state of the cell.
+        *
+        * \return The value of m_state.
         */
         State getState() const;
 
-        //setter for predator density of the cell
+
+        /**
+        * \brief Setter for the predator density in the cell
+        *
+        * \param predDensity a floating point value setting the density of the predators in 
+        * the cell. Defaults to 0.
+        */
         void setPredDensity(double predDensity = 0.0);
 
-        //setter for prey density of cell
+
+        /**
+        * \brief Setter for the prey density in the cell
+        *
+        * \param predDensity a floating point value setting the density of the prey in the 
+        * cell. Defaults to 0.
+        */
         void setPreyDensity(double preyDensity = 0.0);
 
-        //setter for making cell dry/wet, defaults to wet
-        void setState(State = Wet);
+        /**
+        * \brief Setter for the state of the cell
+        *
+        * \param state a Cell::State enum value setting the state of the cell to be either 
+        * Wet or Dry. Defaults to Wet.
+        */
+        void setState(State state = Wet);
         
 };
 

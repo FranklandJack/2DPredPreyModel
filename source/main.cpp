@@ -52,12 +52,7 @@ int main(int argc, char const *argv[])
     grid(2,2).setPredDensity(1.0);
     //grid.setUniformPreyDistribution(5.0, generator);
     
-    grid.printDensities();
 
-
-    cout<<grid<<endl;
-
-    cout << endl;
 
     
 
@@ -82,12 +77,7 @@ int main(int argc, char const *argv[])
         
         if (output_den.is_open())
          {
-           for(int i=1; i<=grid.getColumns(); ++i){
-             for(int j=1; j<=grid.getRows(); ++j){
-     //I hope it works (fingers crossed)
-                output_den << i <<" "<< j <<" "<< grid(i,j).getPredDensity() <<" "<< grid(i,j).getPreyDensity()<<endl;
-             }
-            }
+                grid.printDensities(output_den);
                 output_den.close();
          }
         else
