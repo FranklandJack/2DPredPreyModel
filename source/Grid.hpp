@@ -69,6 +69,15 @@ class Grid
 
     public:
 
+
+        /** 
+        *
+        * \brief Creates Grid objects from some input file representing the Grid. 
+        *
+        * This constructor will dynamically allocate a 1-D array of Cells with a halo of water cells, which represents the 2-D 
+        * landscape. 
+        *  
+        */
         Grid(std::ifstream& inputFile);
         
         /** 

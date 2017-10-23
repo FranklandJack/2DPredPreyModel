@@ -2,40 +2,64 @@
 
 Grid::Grid(std::ifstream& inputFile)
 {
-    //first two numbers in file are number of coloumns and number of rows
+    // First two numbers in file are number of coloumns and number of rows
     inputFile>>m_columns>>m_rows;
 
-    //dynamically allocate the array of size (m_columns+2)*(m_rows+2)
-    //remembering to include the buffer of water at the edge
+    /**
+     *
+     * To include the halo the number of rows and columns need to be increased by 2
+     * so that there is an extra row on the top and bottom and extra column on either side.
+     *
+     */
 
-    int totalArraySizeIncBufffer = (m_columns+2)*(m_rows+2);
+    int arraySizeIncBufffer = (m_columns+2)*(m_rows+2);
+
+    /// The actual array size doesn't include the halo.
     int arraySize                = m_columns*m_rows;
 
-    m_cellArray = new Cell[totalArraySizeIncBufffer];
+    /// The 1-D array of Cells is allocated dynamically from the heap and includes the halo.
+    m_cellArray = new Cell[arraySizeIncBufffer];
 
-    //initialise grid to be wet everywhere and contain no prey/predators 
-    //with cell constructor with no arguments
+    
+    for(int cellIndex = 0; cellIndex < arraySizeIncBufffer; ++cellIndex)
+    {
+        /** 
+         *
+         * Initially a Wet cell with predator and prey densities of zero is copied into every 
+         * entry in the Grid Cell array including the halo cells.
+         *
+         */
+        Cell::State  initialState       = Cell::Wet;
+        double       initialPredDensity = 0.0;
+        double       initialPreyDensity = 0.0;
 
-    for(int cellIndex = 0; cellIndex < totalArraySizeIncBufffer; ++cellIndex)
-        m_cellArray[cellIndex] = Cell();
+        m_cellArray[cellIndex] = Cell(initialState, initialPreyDensity, initialPreyDensity);
+    }
 
-    //rest of data is just the array of ones and zeros
-    //whilst there is still data left to read keep reading
-
-    //using operator() function since this takes care of all the indexing
-    //remembering it indexes from 1
-    //remembering to start indexing from top since first entry will be at largest y-coordinate
+    /**
+     * The rest of data in file is just the array of 0 and 1.
+     * Start indexing from top since first entry will be at largest y-coordinate, then move along each row.
+     *
+     */
     for(int j = m_rows; j >= 1; --j)
     {
         for(int i = 1; i <= m_columns; ++i)
         {
         
-            // take the input and put it into land
-            int state;
-            inputFile >> state;
+            /// Take the input Integer which is wet (= 0) or dry (= 1)
+            int inputState;
+            inputFile >> inputState;
+
+            /** 
+             *
+             * Since the state is an enum which has two possible values Wet (= 0) and Dry (= 1)
+             * we can convert the input integer into the correct enum State value
+             *
+             */
+            Cell::State state = static_cast<Cell::State>(inputState);
             
-            // make the particlular array entry wet/dry accordingly
-            (*this)(i,j).setState(static_cast<Cell::State>(state));
+            /// The state of the cell is then set using the operator() overload since this ensures the indexing is correct and consistent.
+            (*this)(i,j).setState(state);
         }
     }
 
@@ -53,7 +77,7 @@ Grid::Grid(int columns, int rows , const int **data):m_columns(columns), m_rows(
      */
     int arraySizeIncBufffer = (m_columns+2)*(m_rows+2);
 
-    /// the actual array size doesn't include the halo.
+    /// The actual array size doesn't include the halo.
     int arraySize           = m_columns*m_rows;
 
     /// The 1-D array of Cells is allocated dynamically from the heap and includes the halo.
