@@ -1,0 +1,161 @@
+\hypertarget{class_cell}{}\section{Cell Class Reference}
+\label{class_cell}\index{Cell@{Cell}}
+
+
+Models a single cell.  
+
+
+
+
+{\ttfamily \#include $<$Cell.\+hpp$>$}
+
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_cell_a21d74a2efcb79c93e5649b06a50b7cf5}\label{class_cell_a21d74a2efcb79c93e5649b06a50b7cf5}} 
+enum \hyperlink{class_cell_a21d74a2efcb79c93e5649b06a50b7cf5}{State} \{ {\bfseries Wet}, 
+{\bfseries Dry}
+ \}
+\begin{DoxyCompactList}\small\item\em Enum that represents a value that can be either wet or dry. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_cell_afc0a4cece64b7689425fa81a4f6ef2e2}{Cell} (\hyperlink{class_cell_a21d74a2efcb79c93e5649b06a50b7cf5}{State} state=Wet, double pred\+Density=0.\+0, double prey\+Density=0.\+0)
+\begin{DoxyCompactList}\small\item\em Creates a \hyperlink{class_cell}{Cell}. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_cell_a9fa559f7a28e2b4336c6879ca09304d8}\label{class_cell_a9fa559f7a28e2b4336c6879ca09304d8}} 
+\hyperlink{class_cell_a9fa559f7a28e2b4336c6879ca09304d8}{$\sim$\+Cell} ()
+\begin{DoxyCompactList}\small\item\em Default destructor; no dynamic memory allocation is required for this class. \end{DoxyCompactList}\item 
+double \hyperlink{class_cell_af5ff36a4a4025053127a4ad77efb103f}{get\+Pred\+Density} () const
+\begin{DoxyCompactList}\small\item\em Getter for the predator density in the cell. \end{DoxyCompactList}\item 
+double \hyperlink{class_cell_a0756af1c045a1488e2b4c2c16d87eec2}{get\+Prey\+Density} () const
+\begin{DoxyCompactList}\small\item\em Getter for the prey density in the cell. \end{DoxyCompactList}\item 
+\hyperlink{class_cell_a21d74a2efcb79c93e5649b06a50b7cf5}{State} \hyperlink{class_cell_ab8c8914c6eb76fa53c4e77e692792435}{get\+State} () const
+\begin{DoxyCompactList}\small\item\em Getter for the state of the cell. \end{DoxyCompactList}\item 
+void \hyperlink{class_cell_adfd2fa8a4b91e18ca6195f34dbf00546}{set\+Pred\+Density} (double pred\+Density=0.\+0)
+\begin{DoxyCompactList}\small\item\em Setter for the predator density in the cell. \end{DoxyCompactList}\item 
+void \hyperlink{class_cell_afd3a85027b67dfd4295e2e50253c1058}{set\+Prey\+Density} (double prey\+Density=0.\+0)
+\begin{DoxyCompactList}\small\item\em Setter for the prey density in the cell. \end{DoxyCompactList}\item 
+void \hyperlink{class_cell_ac388ff95a4d94da1497847ead859f258}{set\+State} (\hyperlink{class_cell_a21d74a2efcb79c93e5649b06a50b7cf5}{State} state=Wet)
+\begin{DoxyCompactList}\small\item\em Setter for the state of the cell. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Models a single cell. 
+
+A cell forms a single \char`\"{}square\char`\"{} in the landscape and is considered to have three properties a predator density, a prey density and whether or not the cell is land (so dry) or water (so wet) 
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_cell_afc0a4cece64b7689425fa81a4f6ef2e2}\label{class_cell_afc0a4cece64b7689425fa81a4f6ef2e2}} 
+\index{Cell@{Cell}!Cell@{Cell}}
+\index{Cell@{Cell}!Cell@{Cell}}
+\subsubsection{\texorpdfstring{Cell()}{Cell()}}
+{\footnotesize\ttfamily Cell\+::\+Cell (\begin{DoxyParamCaption}\item[{\hyperlink{class_cell_a21d74a2efcb79c93e5649b06a50b7cf5}{Cell\+::\+State}}]{state = {\ttfamily Wet},  }\item[{double}]{pred\+Density = {\ttfamily 0.0},  }\item[{double}]{prey\+Density = {\ttfamily 0.0} }\end{DoxyParamCaption})}
+
+
+
+Creates a \hyperlink{class_cell}{Cell}. 
+
+Standard constructor to initialize the member variables of the \hyperlink{class_cell}{Cell} object. If no arguments are provided the \hyperlink{class_cell}{Cell} defaults to be Wet with predator and prey densities of zero.
+
+
+\begin{DoxyParams}{Parameters}
+{\em state} & a \hyperlink{class_cell_a21d74a2efcb79c93e5649b06a50b7cf5}{Cell\+::\+State} value that is either Wet or Dry setting the state of the cell. Defaults to Wet.\\
+\hline
+{\em pred\+Density} & a floating point value setting the density of the predators in the cell. Defaults to 0.\\
+\hline
+{\em prey\+Density} & a floating point value setting the density of the prey in the cell. Defaults to 0. \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_cell_af5ff36a4a4025053127a4ad77efb103f}\label{class_cell_af5ff36a4a4025053127a4ad77efb103f}} 
+\index{Cell@{Cell}!get\+Pred\+Density@{get\+Pred\+Density}}
+\index{get\+Pred\+Density@{get\+Pred\+Density}!Cell@{Cell}}
+\subsubsection{\texorpdfstring{get\+Pred\+Density()}{getPredDensity()}}
+{\footnotesize\ttfamily double Cell\+::get\+Pred\+Density (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Getter for the predator density in the cell. 
+
+\begin{DoxyReturn}{Returns}
+The value of m\+\_\+pred\+Density. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_cell_a0756af1c045a1488e2b4c2c16d87eec2}\label{class_cell_a0756af1c045a1488e2b4c2c16d87eec2}} 
+\index{Cell@{Cell}!get\+Prey\+Density@{get\+Prey\+Density}}
+\index{get\+Prey\+Density@{get\+Prey\+Density}!Cell@{Cell}}
+\subsubsection{\texorpdfstring{get\+Prey\+Density()}{getPreyDensity()}}
+{\footnotesize\ttfamily double Cell\+::get\+Prey\+Density (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Getter for the prey density in the cell. 
+
+\begin{DoxyReturn}{Returns}
+The value of m\+\_\+prey\+Density. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_cell_ab8c8914c6eb76fa53c4e77e692792435}\label{class_cell_ab8c8914c6eb76fa53c4e77e692792435}} 
+\index{Cell@{Cell}!get\+State@{get\+State}}
+\index{get\+State@{get\+State}!Cell@{Cell}}
+\subsubsection{\texorpdfstring{get\+State()}{getState()}}
+{\footnotesize\ttfamily \hyperlink{class_cell_a21d74a2efcb79c93e5649b06a50b7cf5}{Cell\+::\+State} Cell\+::get\+State (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Getter for the state of the cell. 
+
+\begin{DoxyReturn}{Returns}
+The value of m\+\_\+state. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_cell_adfd2fa8a4b91e18ca6195f34dbf00546}\label{class_cell_adfd2fa8a4b91e18ca6195f34dbf00546}} 
+\index{Cell@{Cell}!set\+Pred\+Density@{set\+Pred\+Density}}
+\index{set\+Pred\+Density@{set\+Pred\+Density}!Cell@{Cell}}
+\subsubsection{\texorpdfstring{set\+Pred\+Density()}{setPredDensity()}}
+{\footnotesize\ttfamily void Cell\+::set\+Pred\+Density (\begin{DoxyParamCaption}\item[{double}]{pred\+Density = {\ttfamily 0.0} }\end{DoxyParamCaption})}
+
+
+
+Setter for the predator density in the cell. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em pred\+Density} & a floating point value setting the density of the predators in the cell. Defaults to 0. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_cell_afd3a85027b67dfd4295e2e50253c1058}\label{class_cell_afd3a85027b67dfd4295e2e50253c1058}} 
+\index{Cell@{Cell}!set\+Prey\+Density@{set\+Prey\+Density}}
+\index{set\+Prey\+Density@{set\+Prey\+Density}!Cell@{Cell}}
+\subsubsection{\texorpdfstring{set\+Prey\+Density()}{setPreyDensity()}}
+{\footnotesize\ttfamily void Cell\+::set\+Prey\+Density (\begin{DoxyParamCaption}\item[{double}]{prey\+Density = {\ttfamily 0.0} }\end{DoxyParamCaption})}
+
+
+
+Setter for the prey density in the cell. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em pred\+Density} & a floating point value setting the density of the prey in the cell. Defaults to 0. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_cell_ac388ff95a4d94da1497847ead859f258}\label{class_cell_ac388ff95a4d94da1497847ead859f258}} 
+\index{Cell@{Cell}!set\+State@{set\+State}}
+\index{set\+State@{set\+State}!Cell@{Cell}}
+\subsubsection{\texorpdfstring{set\+State()}{setState()}}
+{\footnotesize\ttfamily void Cell\+::set\+State (\begin{DoxyParamCaption}\item[{\hyperlink{class_cell_a21d74a2efcb79c93e5649b06a50b7cf5}{Cell\+::\+State}}]{state = {\ttfamily Wet} }\end{DoxyParamCaption})}
+
+
+
+Setter for the state of the cell. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em state} & a \hyperlink{class_cell_a21d74a2efcb79c93e5649b06a50b7cf5}{Cell\+::\+State} enum value setting the state of the cell to be either Wet or Dry. Defaults to Wet. \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+source/Cell.\+hpp\item 
+source/Cell.\+cpp\end{DoxyCompactItemize}
