@@ -42,8 +42,7 @@ class Cell
 
 
     public:
-        
-        
+
         /** 
         * \brief Creates a Cell
         *

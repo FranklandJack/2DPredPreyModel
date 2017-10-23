@@ -2,27 +2,14 @@
 #ifndef Grid_hpp
 #define Grid_hpp
 
-//cell included since the Grid will contain an array of cells
 #include "Cell.hpp"
-
-//fstream included since the grid constructor will take a file stream
-//from the input file to construct its cells
 #include <fstream>
-
-//cassert for assert in bounds checking on arrarys
 #include <cassert>
-
-// for use in the overloading of << operator
 #include<iostream>
-
-// for use in random number generation for assigning pred/prey distributions
 #include<random>
 
-// for seeding random nubmber generators
-#include<chrono> 
-
-
 /**
+ *
  * \class Grid
  *
  * \brief Models a 2D landscape of cells.  
@@ -32,8 +19,8 @@
  * densities of predators and prey in these cells is zero. This is very useful for implementing any 
  * differential equations where we may inadvertently check the #columns + 1 or #rows + 1, so rather than 
  * introducing bounds checking, we can introduce this boundary. 
+ *
  */
-
 class Grid
 {
 
@@ -41,6 +28,7 @@ class Grid
 
 
         /**
+         *
          * \brief Cell* member variable that holds an array of Cell objects that represent the landscape.
          *
          * This is implmented as a 1-D pointer. This is because first of all we do not know how big the landscape 
@@ -51,52 +39,127 @@ class Grid
          * This is because of the memory padding that is involved in allocating a 2-D array; it is far more memory efficient
          * to allocate a 1-D array with the same number of elements as the 2-D array and use the overloaded operator() to access
          * the 1-D array as if it was a 2D array.
+         *
          */       
         Cell *m_cellArray;
 
 
         /** 
+         *
          * \brief Integer member variable that holds number of columns in the grid.
          *
          * This member variable hold the number of columns on the grid which is the discritization of the x-axis of the landscape. 
          * It holds the actual number of columns in the landscape, without any halo/buffer surrounding the landscape.
+         *
          */
         int m_columns;
 
 
          /** 
+         *
          * \brief Integer member variable that holds number of rows in the grid.
          *
          * This member variable hold the number of rows on the grid which is the discritization of the y-axis of the landscape. 
          * It holds the actual number of rows in the landscape, without any halo/buffer surrounding the landscape.
+         *
          */
         int m_rows;
 
         
 
     public:
-        
-        // constructor to take the input file and construct whole grid
-        Grid(std::ifstream& inputFile);
 
-        // overload copy constructor since the class has dynamic memory allocation so we need to do deep copying
+        Grid(std::ifstream& inputFile);
+        
+        /** 
+        *
+        * \brief Creates Grid objects from some input array representing the Grid. 
+        *
+        * This constructor will dynamically allocate a 1-D array of Cells with a halo of water cells, which represents the 2-D 
+        * landscape. 
+        *  
+        * \param columns Integer value represnting the number of columns in the Grid object, not inluding the halo.
+        *
+        * \param rows Integer value representing the number of rows in the Grid objecet, not including the halo. 
+        *       
+        * \param data Integer array of values which represent the Wet and Dry cells in the grid, must be 1 and 0 only and 
+        * must have the same number of rows and columns as the explicit values provided
+        *
+        */
+        Grid(int columns, int rows , const int **data);
+
+
+        /** 
+         *
+         * \brief Creates Grid objects from a source Grid with deep copying.
+         *
+         * Due to the dynamic memory allocation that takes place in the constructor, the copy constructor is overloaded to insure
+         * that deep copying takes place and that there are no dangling pointers when grid objects go out of scope.
+         *
+         * \param sourceGrid constant Grid reference from which the deep copying will be done.
+         *
+         */
         Grid(const Grid& sourceGrid);
 
-        // we implement a move constructor since this is more performant for certain operations
-        // such as returning a grid from a function, which we will need to do when we update the grid
+
+        /** 
+         *
+         * \brief Creates Grid objects from a source Grid with move semantics.
+         * 
+         * This is implemented for performance reasons. If a grid is ever returned from a function, for example, a function that might update
+         * the grid, it is quicker to do this via move semantics rather than copy construction. 
+         *
+         * \param sourceGrid constant R-value reference from which the ownership of the member variables will be transfered.
+         *
+         */ 
         Grid(Grid&& sourceGrid);
 
-        // destructor is implemented since memory will be dynamically allocated
+
+        /**
+         *
+         * \brief Releases memory held by m_cellArray
+         *
+         * Destructor is explicitly implemented since the Grid class has dynamic memory allocation in its constructors of the
+         * m_cellArray member variable.
+         *
+         */
         ~Grid();
 
-        // overload assignment operator since class has dynamic memory allocation so need to do deep copying
+
+        /**
+         * \brief Assigns Grid objects from a source with deep copying.
+         * 
+         * Due to the dynamic memory allocation that takes place in the constructor, the copy assignment opeartor
+         * is overloaded to insure that deep copying takes place in any assignment and that there are no dangling 
+         * pointers when grid objects go out of scope. It also checks for self assignment which could otherwise 
+         * lead to memory problems. This pairs with the copy constructor that also does deep copying. 
+         *
+         * \param sourceGrid constant Grid reference from which the deep copying will be done in the assignment of the 
+         * grid member variables.
+         *
+         * \return Grid reference *this, so that the newly assigned operator may be chained into other assignment operations.
+         *
+         */
         Grid& operator=(const Grid& sourceGrid);
 
-        // we implement a move assignment operator as well to go with out move constructor
+        
+        /** 
+        *
+        * \brief Assigns Grid objects from a source Grid with move semantics.
+        *
+        * This is implemented for performance reasons to go with the move constructor. If an R-value Grid is assigned to a Grid
+        * variable, this operator will be used instead of the normal copy assignment and will be more performant. 
+        *
+        * \param sourceGrid constant R-value Grid reference from which the ownership of the member variables will be transfered. 
+        *
+        * \return Grid reference *this, so that the newly assigned operator may be chained into other assignment operations.
+        *
+        */
         Grid& operator=(Grid&& sourceGrid);
 
 
         /**
+         *
          * \brief Getter for the number of actual columns in the grid.
          *
          * \return The value of m_columns, the actual number of columns in the grid without a halo of water.
@@ -106,6 +169,7 @@ class Grid
 
 
         /**
+         *
          * \brief Getter for the number of actual rows in the grid.
          *
          * \return The value of m_rows, the actual number of rows in the grid without a halo of water.
@@ -115,7 +179,8 @@ class Grid
         
 
         /**
-         * \breif Sets uniform random predator distribution in each grid cell.
+         *
+         * \brief Sets uniform random predator distribution in each grid cell.
          *
          * Intially predator density will be zero in each cell since the constructors do no intialization of 
          * densities. This function sets the density of predators in every Dry grid cell to a random number 
@@ -131,10 +196,12 @@ class Grid
          * reproduced if required for debugging. The generator is passed as a reference so that if any other functions
          * which makes use of the same distribution are called from the main method, they do not 
          * produce the same chain of random numbers, rather they act on the next random number given by the generator.
+         *
          */
         void setUniformPredDistribution(double uppperBound, std::default_random_engine &generator);
 
         /**
+         *
          * \breif Sets uniform random prey distribution in each grid cell.
          *
          * Intially prey density will be zero in each cell since the constructors do no intialization of 
@@ -151,10 +218,12 @@ class Grid
          * reproduced if required for debugging. The generator is passed as a reference so that if any other functions
          * which makes use of the same distribution are called from the main method, they do not 
          * produce the same chain of random numbers, rather they act on the next random number given by the generator.
+         *
          */
         void setUniformPreyDistribution(double upperBound, std::default_random_engine &generator);
 
         /**
+         *
          * \breif Sets uniform random predator and prey distribution in each grid cell.
          *
          * This function works by just calling the setUniformPredDistribution() and setUniormPreyDistribution() functions with
@@ -167,12 +236,14 @@ class Grid
          * distriubtion of the prey.   
          *
          * 
-         * \param generator a default_random_engine refernece from the std library <random> class. 
+         * \param generator a default_random_engine refernece from the std library <random> class.
+         * 
          */
         void setUniformDistribution(double predUpperBound, double preyUpperbound, std::default_random_engine &generator);
 
         
         /**
+         *
          * \brief Calulates average predator density across the grid.
          *
          * Calulates the average value of the predator density across the entire grid, not included the halo of Wet cells. However, 
@@ -191,6 +262,7 @@ class Grid
         double predDensity(bool includeWetCells = true) const;
 
         /**
+         *
          * \brief Calulates average prey density across the grid.
          *
          * Calulates the average value of the prey density across the entire grid, not included the halo of Wet cells. However, 
@@ -210,6 +282,7 @@ class Grid
 
 
         /**
+         *
          * \breif Operator overload to access the Cell stored at the (i,j)th coordinates of the grid.
          * Since the 2-D landscape is implemeted as a 1-D array with the same number of elements for memory reasons, this opertor provides a way of acessing
          * the elements of the 1-D array with two indicies (i,j) as if it were a 2D-array. This operator should be used whenever direct acess to the grid cells 
@@ -223,11 +296,13 @@ class Grid
          * \param j row/y-coordinate of cell.
          *
          * \return Cell reference to the cell at the (i,j) coordinate. 
+         *
          */
         Cell& operator()(int i, int j);
 
 
         /**
+        *
         * \brief Second operator overload to acess the Cell stored at the (i,j)th coordinate if the grid is a constant variable.
         *
         * This function behaves in exactly the same way as its non-constant counterpart. However the non-constant operator() overload will not work with any constant 
@@ -238,11 +313,13 @@ class Grid
         * \param j row/y-coordinate of cell.
         *
         * \return Constant Cell reference to the cell at the (i,j) coordinate, so that the main method cannot edit the contents of a constant Grid.  
+        *
         */
         const Cell& operator()(int i, int j) const;
 
 
         /**
+        *
         * \brief Calulates number of Dry neighbours of a given cell.
         * 
         * Neighbours are only considered to be non-diagonal, so this function counts the number of Dry cells directly above/below and to the left/right of the specified
@@ -252,11 +329,13 @@ class Grid
         * \param j row number/y-corrdinate of cell.
         *
         * \return Integer value representing number of Dry neighbours of the cell. 
+        *
         */
         int dryNeighbours(int i, int j) const;
 
 
         /**
+        *
         * \brief Operator overload for outputting the grid
         *
         * Outputs the Grid into an ouput stream in the format: 
@@ -275,11 +354,13 @@ class Grid
         * \param grid const Grid reference which is the grid to be sent into the output stream.
         *
         * \return std::ostream reference that is the same as the out parameter, this is so one can put this opearator in a chain of output operators. 
+        *
         */
         friend std::ostream&  operator<<(std::ostream& out, const Grid& grid);
 
 
         /**
+        *
         * \brief Outputs predator and prey densities to output stream.
         * 
         * Outputs densities of predator and prey for each cell in the format:

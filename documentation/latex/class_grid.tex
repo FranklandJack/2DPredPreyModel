@@ -15,24 +15,24 @@ Models a 2D landscape of cells.
 \mbox{\Hypertarget{class_grid_a88ab1ccc8100827b4da40e62b7b77e96}\label{class_grid_a88ab1ccc8100827b4da40e62b7b77e96}} 
 {\bfseries Grid} (std\+::ifstream \&input\+File)
 \item 
-\mbox{\Hypertarget{class_grid_a2be5432331273bc420c252ea09631965}\label{class_grid_a2be5432331273bc420c252ea09631965}} 
-{\bfseries Grid} (const \hyperlink{class_grid}{Grid} \&source\+Grid)
-\item 
-\mbox{\Hypertarget{class_grid_a3828d0bf34f6c97ed93adc84d4ce6c4b}\label{class_grid_a3828d0bf34f6c97ed93adc84d4ce6c4b}} 
-{\bfseries Grid} (\hyperlink{class_grid}{Grid} \&\&source\+Grid)
-\item 
-\mbox{\Hypertarget{class_grid_aae7b118be13f65bf2e3a72881d8a06df}\label{class_grid_aae7b118be13f65bf2e3a72881d8a06df}} 
-\hyperlink{class_grid}{Grid} \& {\bfseries operator=} (const \hyperlink{class_grid}{Grid} \&source\+Grid)
-\item 
-\mbox{\Hypertarget{class_grid_a9f84434eb37abc5cd0979cd609b2a2d8}\label{class_grid_a9f84434eb37abc5cd0979cd609b2a2d8}} 
-\hyperlink{class_grid}{Grid} \& {\bfseries operator=} (\hyperlink{class_grid}{Grid} \&\&source\+Grid)
-\item 
+\hyperlink{class_grid_a409a82781ea11352ad2615aea0e8cd22}{Grid} (int columns, int rows, const int $\ast$$\ast$data)
+\begin{DoxyCompactList}\small\item\em Creates \hyperlink{class_grid}{Grid} objects from some input array representing the \hyperlink{class_grid}{Grid}. \end{DoxyCompactList}\item 
+\hyperlink{class_grid_a2be5432331273bc420c252ea09631965}{Grid} (const \hyperlink{class_grid}{Grid} \&source\+Grid)
+\begin{DoxyCompactList}\small\item\em Creates \hyperlink{class_grid}{Grid} objects from a source \hyperlink{class_grid}{Grid} with deep copying. \end{DoxyCompactList}\item 
+\hyperlink{class_grid_a3828d0bf34f6c97ed93adc84d4ce6c4b}{Grid} (\hyperlink{class_grid}{Grid} \&\&source\+Grid)
+\begin{DoxyCompactList}\small\item\em Creates \hyperlink{class_grid}{Grid} objects from a source \hyperlink{class_grid}{Grid} with move semantics. \end{DoxyCompactList}\item 
+\hyperlink{class_grid_a3661d0a7f998caaaf8627d7a67072116}{$\sim$\+Grid} ()
+\begin{DoxyCompactList}\small\item\em Releases memory held by m\+\_\+cell\+Array. \end{DoxyCompactList}\item 
+\hyperlink{class_grid}{Grid} \& \hyperlink{class_grid_aae7b118be13f65bf2e3a72881d8a06df}{operator=} (const \hyperlink{class_grid}{Grid} \&source\+Grid)
+\begin{DoxyCompactList}\small\item\em Assigns \hyperlink{class_grid}{Grid} objects from a source with deep copying. \end{DoxyCompactList}\item 
+\hyperlink{class_grid}{Grid} \& \hyperlink{class_grid_a9f84434eb37abc5cd0979cd609b2a2d8}{operator=} (\hyperlink{class_grid}{Grid} \&\&source\+Grid)
+\begin{DoxyCompactList}\small\item\em Assigns \hyperlink{class_grid}{Grid} objects from a source \hyperlink{class_grid}{Grid} with move semantics. \end{DoxyCompactList}\item 
 int \hyperlink{class_grid_aee0114021b6858483965cc1bffd7b88b}{get\+Columns} () const
 \begin{DoxyCompactList}\small\item\em Getter for the number of actual columns in the grid. \end{DoxyCompactList}\item 
 int \hyperlink{class_grid_aa9397afb775457f87b9096acf6082383}{get\+Rows} () const
 \begin{DoxyCompactList}\small\item\em Getter for the number of actual rows in the grid. \end{DoxyCompactList}\item 
 void \hyperlink{class_grid_a3a67056a86378f8ce24cdf3c19ee7817}{set\+Uniform\+Pred\+Distribution} (double uppper\+Bound, std\+::default\+\_\+random\+\_\+engine \&generator)
-\item 
+\begin{DoxyCompactList}\small\item\em Sets uniform random predator distribution in each grid cell. \end{DoxyCompactList}\item 
 void \hyperlink{class_grid_a2f366ddaaa75475a9597f9a85ab24d59}{set\+Uniform\+Prey\+Distribution} (double upper\+Bound, std\+::default\+\_\+random\+\_\+engine \&generator)
 \item 
 void \hyperlink{class_grid_a17c062fcf4063a811bd8d95c32bce723}{set\+Uniform\+Distribution} (double pred\+Upper\+Bound, double prey\+Upperbound, std\+::default\+\_\+random\+\_\+engine \&generator)
@@ -47,9 +47,8 @@ const \hyperlink{class_cell}{Cell} \& \hyperlink{class_grid_aa89f5c17cb78658f3b8
 \begin{DoxyCompactList}\small\item\em Second operator overload to acess the \hyperlink{class_cell}{Cell} stored at the (i,j)th coordinate if the grid is a constant variable. \end{DoxyCompactList}\item 
 int \hyperlink{class_grid_a50f4c0db20b466c84a1d65004e51642e}{dry\+Neighbours} (int i, int j) const
 \begin{DoxyCompactList}\small\item\em Calulates number of Dry neighbours of a given cell. \end{DoxyCompactList}\item 
-\mbox{\Hypertarget{class_grid_a9ca9619c72c3132ad928dab64f587e82}\label{class_grid_a9ca9619c72c3132ad928dab64f587e82}} 
-void {\bfseries print\+Densities} () const
-\end{DoxyCompactItemize}
+void \hyperlink{class_grid_a4971cb9d47440bc63488993d5647f943}{print\+Densities} (std\+::ostream \&out) const
+\begin{DoxyCompactList}\small\item\em Outputs predator and prey densities to output stream. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Friends}
 \begin{DoxyCompactItemize}
 \item 
@@ -61,6 +60,74 @@ std\+::ostream \& \hyperlink{class_grid_a3513576c9cced69b185e4be8fe248e8c}{opera
 Models a 2D landscape of cells. 
 
 A \hyperlink{class_grid}{Grid} consists of a (2D) array of cells that can either be land or water and each have a predator and prey density. The actual array is implemented with a \char`\"{}halo\char`\"{} of Wet cells, this means that the densities of predators and prey in these cells is zero. This is very useful for implementing any differential equations where we may inadvertently check the \#columns + 1 or \#rows + 1, so rather than introducing bounds checking, we can introduce this boundary. 
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_grid_a409a82781ea11352ad2615aea0e8cd22}\label{class_grid_a409a82781ea11352ad2615aea0e8cd22}} 
+\index{Grid@{Grid}!Grid@{Grid}}
+\index{Grid@{Grid}!Grid@{Grid}}
+\subsubsection{\texorpdfstring{Grid()}{Grid()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily Grid\+::\+Grid (\begin{DoxyParamCaption}\item[{int}]{columns,  }\item[{int}]{rows,  }\item[{const int $\ast$$\ast$}]{data }\end{DoxyParamCaption})}
+
+
+
+Creates \hyperlink{class_grid}{Grid} objects from some input array representing the \hyperlink{class_grid}{Grid}. 
+
+This constructor will dynamically allocate a 1-\/D array of Cells with a halo of water cells, which represents the 2-\/D landscape.
+
+
+\begin{DoxyParams}{Parameters}
+{\em columns} & Integer value represnting the number of columns in the \hyperlink{class_grid}{Grid} object, not inluding the halo.\\
+\hline
+{\em rows} & Integer value representing the number of rows in the \hyperlink{class_grid}{Grid} objecet, not including the halo.\\
+\hline
+{\em data} & Integer array of values which represent the Wet and Dry cells in the grid, must be 1 and 0 only and must have the same number of rows and columns as the explicit values provided \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_grid_a2be5432331273bc420c252ea09631965}\label{class_grid_a2be5432331273bc420c252ea09631965}} 
+\index{Grid@{Grid}!Grid@{Grid}}
+\index{Grid@{Grid}!Grid@{Grid}}
+\subsubsection{\texorpdfstring{Grid()}{Grid()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily Grid\+::\+Grid (\begin{DoxyParamCaption}\item[{const \hyperlink{class_grid}{Grid} \&}]{source\+Grid }\end{DoxyParamCaption})}
+
+
+
+Creates \hyperlink{class_grid}{Grid} objects from a source \hyperlink{class_grid}{Grid} with deep copying. 
+
+Due to the dynamic memory allocation that takes place in the constructor, the copy constructor is overloaded to insure that deep copying takes place and that there are no dangling pointers when grid objects go out of scope.
+
+
+\begin{DoxyParams}{Parameters}
+{\em source\+Grid} & constant \hyperlink{class_grid}{Grid} reference from which the deep copying will be done. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_grid_a3828d0bf34f6c97ed93adc84d4ce6c4b}\label{class_grid_a3828d0bf34f6c97ed93adc84d4ce6c4b}} 
+\index{Grid@{Grid}!Grid@{Grid}}
+\index{Grid@{Grid}!Grid@{Grid}}
+\subsubsection{\texorpdfstring{Grid()}{Grid()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily Grid\+::\+Grid (\begin{DoxyParamCaption}\item[{\hyperlink{class_grid}{Grid} \&\&}]{source\+Grid }\end{DoxyParamCaption})}
+
+
+
+Creates \hyperlink{class_grid}{Grid} objects from a source \hyperlink{class_grid}{Grid} with move semantics. 
+
+This is implemented for performance reasons. If a grid is ever returned from a function, for example, a function that might update the grid, it is quicker to do this via move semantics rather than copy construction.
+
+
+\begin{DoxyParams}{Parameters}
+{\em source\+Grid} & constant R-\/value reference from which the ownership of the member variables will be transfered. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_grid_a3661d0a7f998caaaf8627d7a67072116}\label{class_grid_a3661d0a7f998caaaf8627d7a67072116}} 
+\index{Grid@{Grid}!````~Grid@{$\sim$\+Grid}}
+\index{````~Grid@{$\sim$\+Grid}!Grid@{Grid}}
+\subsubsection{\texorpdfstring{$\sim$\+Grid()}{~Grid()}}
+{\footnotesize\ttfamily Grid\+::$\sim$\+Grid (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Releases memory held by m\+\_\+cell\+Array. 
+
+Destructor is explicitly implemented since the \hyperlink{class_grid}{Grid} class has dynamic memory allocation in its constructors of the m\+\_\+cell\+Array member variable. 
 
 \subsection{Member Function Documentation}
 \mbox{\Hypertarget{class_grid_a50f4c0db20b466c84a1d65004e51642e}\label{class_grid_a50f4c0db20b466c84a1d65004e51642e}} 
@@ -153,6 +220,40 @@ This function behaves in exactly the same way as its non-\/constant counterpart.
 \begin{DoxyReturn}{Returns}
 Constant \hyperlink{class_cell}{Cell} reference to the cell at the (i,j) coordinate, so that the main method cannot edit the contents of a constant \hyperlink{class_grid}{Grid}. 
 \end{DoxyReturn}
+\mbox{\Hypertarget{class_grid_aae7b118be13f65bf2e3a72881d8a06df}\label{class_grid_aae7b118be13f65bf2e3a72881d8a06df}} 
+\index{Grid@{Grid}!operator=@{operator=}}
+\index{operator=@{operator=}!Grid@{Grid}}
+\subsubsection{\texorpdfstring{operator=()}{operator=()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \hyperlink{class_grid}{Grid} \& Grid\+::operator= (\begin{DoxyParamCaption}\item[{const \hyperlink{class_grid}{Grid} \&}]{source\+Grid }\end{DoxyParamCaption})}
+
+
+
+Assigns \hyperlink{class_grid}{Grid} objects from a source with deep copying. 
+
+Due to the dynamic memory allocation that takes place in the constructor, the copy assignment opeartor is overloaded to insure that deep copying takes place in any assignment and that there are no dangling pointers when grid objects go out of scope. It also checks for self assignment which could otherwise lead to memory problems. This pairs with the copy constructor that also does deep copying.
+
+
+\begin{DoxyParams}{Parameters}
+{\em source\+Grid} & constant \hyperlink{class_grid}{Grid} reference from which the deep copying will be done in the assignment of the grid member variables. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_grid_a9f84434eb37abc5cd0979cd609b2a2d8}\label{class_grid_a9f84434eb37abc5cd0979cd609b2a2d8}} 
+\index{Grid@{Grid}!operator=@{operator=}}
+\index{operator=@{operator=}!Grid@{Grid}}
+\subsubsection{\texorpdfstring{operator=()}{operator=()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \hyperlink{class_grid}{Grid} \& Grid\+::operator= (\begin{DoxyParamCaption}\item[{\hyperlink{class_grid}{Grid} \&\&}]{source\+Grid }\end{DoxyParamCaption})}
+
+
+
+Assigns \hyperlink{class_grid}{Grid} objects from a source \hyperlink{class_grid}{Grid} with move semantics. 
+
+This is implemented for performance reasons to go with the move constructor. If an R-\/value \hyperlink{class_grid}{Grid} is assigned to a \hyperlink{class_grid}{Grid} variable, this operator will be used instead of the normal copy assignment and will be more performant.
+
+
+\begin{DoxyParams}{Parameters}
+{\em source\+Grid} & constant R-\/value \hyperlink{class_grid}{Grid} reference from which the ownership of the member variables will be transfered. \\
+\hline
+\end{DoxyParams}
 \mbox{\Hypertarget{class_grid_a25eeb1fef1d86fe74b45e615f0376158}\label{class_grid_a25eeb1fef1d86fe74b45e615f0376158}} 
 \index{Grid@{Grid}!pred\+Density@{pred\+Density}}
 \index{pred\+Density@{pred\+Density}!Grid@{Grid}}
@@ -193,7 +294,24 @@ Calulates the average value of the prey density across the entire grid, not incl
 \begin{DoxyReturn}{Returns}
 Floating point value representing the average prey density across the grid either including or not including the Wet cells, depending on how the function was called. 
 \end{DoxyReturn}
-\mbox{\Hypertarget{class_grid_a17c062fcf4063a811bd8d95c32bce723}\label{class_grid_a17c062fcf4063a811bd8d95c32bce723}} 
+\mbox{\Hypertarget{class_grid_a4971cb9d47440bc63488993d5647f943}\label{class_grid_a4971cb9d47440bc63488993d5647f943}} 
+\index{Grid@{Grid}!print\+Densities@{print\+Densities}}
+\index{print\+Densities@{print\+Densities}!Grid@{Grid}}
+\subsubsection{\texorpdfstring{print\+Densities()}{printDensities()}}
+{\footnotesize\ttfamily void Grid\+::print\+Densities (\begin{DoxyParamCaption}\item[{std\+::ostream \&}]{out }\end{DoxyParamCaption}) const}
+
+
+
+Outputs predator and prey densities to output stream. 
+
+Outputs densities of predator and prey for each cell in the format\+: i j predator density prey density and repeats this for all cells in the grid.
+
+
+\begin{DoxyParams}{Parameters}
+{\em out} & std\+::ostream reference which is the output stream. This will also work for fstream since it inherits from ostream. \\
+\hline
+\end{DoxyParams}
+hello \mbox{\Hypertarget{class_grid_a17c062fcf4063a811bd8d95c32bce723}\label{class_grid_a17c062fcf4063a811bd8d95c32bce723}} 
 \index{Grid@{Grid}!set\+Uniform\+Distribution@{set\+Uniform\+Distribution}}
 \index{set\+Uniform\+Distribution@{set\+Uniform\+Distribution}!Grid@{Grid}}
 \subsubsection{\texorpdfstring{set\+Uniform\+Distribution()}{setUniformDistribution()}}
@@ -218,7 +336,9 @@ This function works by just calling the \hyperlink{class_grid_a3a67056a86378f8ce
 \subsubsection{\texorpdfstring{set\+Uniform\+Pred\+Distribution()}{setUniformPredDistribution()}}
 {\footnotesize\ttfamily void Grid\+::set\+Uniform\+Pred\+Distribution (\begin{DoxyParamCaption}\item[{double}]{uppper\+Bound,  }\item[{std\+::default\+\_\+random\+\_\+engine \&}]{generator }\end{DoxyParamCaption})}
 
-Sets uniform random predator distribution in each grid cell.
+
+
+Sets uniform random predator distribution in each grid cell. 
 
 Intially predator density will be zero in each cell since the constructors do no intialization of densities. This function sets the density of predators in every Dry grid cell to a random number between 0 and upper\+Bound according to a uniform distribution. i.\+e. If upper\+Bound = 5.\+0, then each dry cell will be assigned a density between 0.\+0 and 5.\+0 according to a uniform distribution.
 
@@ -259,7 +379,21 @@ Intially prey density will be zero in each cell since the constructors do no int
 
 Operator overload for outputting the grid. 
 
-Outputs the 
+Outputs the \hyperlink{class_grid}{Grid} into an ouput stream in the format\+: \#columns \#rows x x ..... x x x ..... x . . ..... . . . ..... . . . ..... . x x ..... x where x take on the values of 0 or 1 depending on whether the corresponding (i,j)th cell measure from the bottom left corner is Wet or Dry respivtively.
+
+This is a friend function since the first operand (argument on left of operator) is not the \hyperlink{class_cell}{Cell}
+
+
+\begin{DoxyParams}{Parameters}
+{\em out} & std\+::ostream reference which is the output. \\
+\hline
+{\em grid} & const \hyperlink{class_grid}{Grid} reference which is the grid to be sent into the output stream.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+std\+::ostream reference that is the same as the out parameter, this is so one can put this opearator in a chain of output operators. 
+\end{DoxyReturn}
+
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 
