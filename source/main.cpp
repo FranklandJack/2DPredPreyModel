@@ -1,27 +1,47 @@
-//main method of the 2D predator prey simulation
-
-
+// For any command line IO.
 #include <iostream>
+
+
+// For reading data to and from files.
 #include <fstream>
+
+
+// For seeding random number generatrion and timing. 
 #include <chrono>
-#include <ctime>
 
 
-//implementing the grid
+// For random number generation.
+#include <random> 
+//#include <ctime>
+
+
+// For implementing the landscape.
 #include "Grid.hpp"
+
+
+// For updating the landscape.
 #include "updateGrid.hpp"
 
+
+// Lots of use of standard library in this file means its much cleaner to use the std namespace. 
 using namespace std;
 
 
+
+// Main method begins. 
 int main(int argc, char const *argv[])
 {
 
     //clock_t begin_time = clock();
     auto start = std::chrono::system_clock::now();
 
-	
+	// Seed the psuedo random number generation.
     unsigned int seed = static_cast<unsigned int>(chrono::system_clock::now().time_since_epoch().count());
+
+
+    // Create a generator which is fed to any random distributions to produce psuedo random numbers. By using the same
+    // generator for all random number generation, we will only have a single chain of random numbers, which makes them 
+    // reproducbile if seeded by a constant value.
     default_random_engine generator(seed);
 
    
@@ -93,7 +113,7 @@ int main(int argc, char const *argv[])
         exit(1);
     }
 
-    
+
     
     //construct grid from the data in the input file using our constructor designed for this purpose
     Grid grid(input_Landscape);
@@ -103,20 +123,34 @@ int main(int argc, char const *argv[])
 
 
     
+     // Total time for simulation. 
+     int t = 50;
 
-     int t=50;
-     int num_iterations=int(t/deltaT);
-     int step_average=10;
+
+     // Total number of iterations for the simulation.
+     int num_iterations = int(t/deltaT);
+
+     // Invterval at which to print the predator and prey densities to the command line. 
+     int step_average = 10;
+
+     // 
      char outputfile[50];
     
      for(int iter = 1; iter <= num_iterations; ++iter)
      {
         grid = updateGrid(grid,r,a,b,m,k,l,deltaT);
+
+
         if(0 == iter % step_average)
+        {
             std::cout<<grid.predDensity()<< ' ' << grid.preyDensity()<<std::endl;
+        }
+
+        {
         if(0 == iter % T)
             
          // print output
+        }
     {
     //file directory has to be changed
          sprintf(outputfile,"./output/output_densities%d.txt",iter/T);
@@ -140,9 +174,16 @@ int main(int argc, char const *argv[])
     cout<<"Execution time: "<<time_total<<" seconds"<<endl;
     */
    
+   // Register that the program has completed.
    auto end = std::chrono::system_clock::now();
+
+
+   // Calculate the elapsed time to an appropriate order. 
    auto elapsed = std::chrono::duration_cast<std::chrono::milliseconds>(end - start);
+
+
+   // Ouput the time taken to run the code to the command line. 
    cout << "Time take to execute (us):   " << elapsed.count() << endl;
 
-    return 0;
+   return 0;
 }
