@@ -576,7 +576,7 @@ void Grid::printDensities(std::ostream& out) const
         for (int i = 1; i <= m_columns; ++i)
         {
             // Print column number, then row number, followed by predator density, then prey density. 
-            out << i << " " << j << (*this)(i,j).getPredDensity() << " " << (*this)(i,j).getPreyDensity() << std::endl;
+            out << i << " " << j << " " << (*this)(i,j).getPredDensity() << " " << (*this)(i,j).getPreyDensity() << std::endl;
         }
 
     }

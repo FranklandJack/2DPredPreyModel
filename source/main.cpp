@@ -2,20 +2,18 @@
 #include <fstream>
 #include <chrono>
 #include <random> 
+#include <stdexcept>
+#include <string>
 #include "Grid.hpp"
 #include "updateGrid.hpp"
 
 
-// Lots of use of standard library in this file means its much cleaner to use the std namespace. 
 using namespace std;
 
-
-
-// Main method begins. 
 int main(int argc, char const *argv[])
 {
 
-    /// Record a start time so we can time the code.
+    // Record a start time so we can time the code.
     auto start = std::chrono::system_clock::now();
 
 
@@ -26,11 +24,10 @@ int main(int argc, char const *argv[])
     default_random_engine generator(seed);
 
    
-    // Parameter input for differential equation implementation.
+    // Parameters for differential equation implementation.
     double r, a, b, m, k, l, deltaT;
-    int T;
+    int outputSteps;
 
-    
     
     // The parameters are collected from the parameter input file.
     ifstream input_par("./input/input_parameters.txt", ios::in);
@@ -43,21 +40,35 @@ int main(int argc, char const *argv[])
      * error with their input values, and so wouldn't want the code to run anyway. 
      *
      */
+    try
+    {
     if (input_par.is_open())
     {
-        input_par >> r >> a >> b >> m >> k >> l >> deltaT >> T;
+        /*
+         * As specified in the devlopment pdf:
+         * r is the birth rate of hars
+         * a is the predation rate as which pumas eat hares
+         * b is the birth rate of pumas per one hare eaten
+         * m is the puma mortality rate
+         * k is the diffusion rate of hares
+         * l is the diffusion rate of pumas
+         * delta T is the size of the time step
+         *
+         * outputSteps is the number of steps between output
+         */
+        input_par >> r >> a >> b >> m >> k >> l >> deltaT >> outputSteps;
 
         
-        if(r < 0.0 || a < 0.0 || b < 0.0 || m < 0.0 || k < 0.0 || l < 0.0 || deltaT < 0.0 || T < 0)
+        if(r <= 0.0 || a <= 0.0 || b <= 0.0 || m <= 0.0 || k <= 0.0 || l <= 0.0 || deltaT <= 0.0 || outputSteps < 1)
         {
-            cerr << "Input parameters should all be positive" << endl;
-            exit(1);
+            throw runtime_error("Input parameters are not all positive.");
+            
         }
 
         if(input_par.fail()) 
         {
-            cerr << "One or more of the input parameters is of incorrect type" << endl;
-            exit(1);
+            throw runtime_error("One or more parameters are of incorrect type.");
+            
         }
         
 
@@ -67,81 +78,32 @@ int main(int argc, char const *argv[])
     
     else
     {
-           cerr << "input/input_parameters.txt could not be opened for reading." << endl;
-           exit(1);
+            throw runtime_error("input/input_parameters.txt could not be opened for reading.");
+           
+    }
+
+    }
+    catch(exception &exception)
+    {
+        cerr << "Exception: " << exception.what() << endl;
+        return 1;
     }
                 
-    
-    
+
+
+    // This is the grid that is used in the simulation.
+    Grid grid;
     
     // Take the first command line argument as the landscape input file.
     ifstream input_Landscape(argv[1], ios::in);
 
 
-    // Initialize values to hold the input landscape data.
-    int columns = 0;
-    int rows    = 0;
-    int **statesData = nullptr;
-    /*
-    // Check to make sure the file has been opened for input
-    if(input_Landscape.is_open())
-    {
-        // First line of file should contain two integers. The first being the number of columns, the second being the number of rows. 
-        // We need to check that this is the case. 
-
-        input_Landscape >> columns >> rows;
-
-        // Since we know know the dimensions of the landscape we can read the array in element by element.
-        // We will be starting at the top left of the landscape, so we need to read it in top to bottom and left to right.
-
-        // First we need to allocate the memory for the array now we know it's size.
-
-
-
-        
-
-        /*
-        // Need to check that the input suceeded and is meaningful, i.e. is positive integer
-        // Check for failed extaction 
-        if(input_Landscape.fail())
-        {
-            // Clear the buffer
-            input_Landscape.clear();
-
-            // Remove the bad input
-            input_Landscape.ignore(32767, '\n');
-
-            // Exit with an appropriate error message 
-            cerr << argv[1] << " contains erroneous data in #columns or #rows." << endl;
-            exit(1);
-
-        }
-
-
-        // Check that the number of columns and rows are positive
-        if(columns < 0 || rows < 0)
-        {
-            cerr << argv[1] << " has negative column or row numbers." << endl;
-            exit(1);
-        }
-    }
-    
-    else
-    {
-        cerr << argv[1] << " could not be opened for reading." << endl;
-        exit(1);
-    }
-    */
-
-    // Try block ends here since at this point all input is complete. 
-    
-
-    Grid grid;
-
-    // Construct grid from the data in the input file using our constructor designed for this purpose.
     try
     {
+
+    // Construct grid from the data in the input file using the constructor designed for this purpose. This will throw an exception if the input is invalid.
     grid = Grid(input_Landscape);
+
     }
 
     catch(exception &exception)
@@ -155,31 +117,36 @@ int main(int argc, char const *argv[])
 
 
 
-    grid(2,2).setPreyDensity(1.0);
-    //grid.setUniformPreyDistribution(5.0, generator);
+    grid(3,3).setPredDensity(2.0);
+    grid.setUniformPreyDistribution(2.0, generator);
     
     
 
     
-     // Total time for simulation. TODO:CHANGE TO 500.
+     // Total time for simulation. 
      int t = 50;
 
 
      // Total number of iterations for the simulation.
-     int num_iterations = int(t/deltaT);
+     int numIterations = int(t/deltaT);
 
      // Invterval at which to print the predator and prey densities to the command line. 
-     int step_average = 10;
+     int averageDenOutputFreq = 10;
 
-     // TODO: why does this have size 50?
+     // No file name will be longer than 50 characters. 
      char outputfile[50];
-    
-     for(int iter = 1; iter <= num_iterations; ++iter)
+
+
+
+     // Print the column titles for the standard output. 
+     cout << "Pred Density " << "Prey Density" << endl;
+
+     for(int iter = 1; iter <= numIterations; ++iter)
      {
         grid = updateGrid(grid,r,a,b,m,k,l,deltaT);
 
 
-        if(0 == iter % step_average)
+        if(0 == iter % averageDenOutputFreq)
         {
 
             cout << grid.predDensity() << " " << grid.preyDensity() << endl;
@@ -187,13 +154,13 @@ int main(int argc, char const *argv[])
         }
 
         
-        if(0 == iter % T)
+        if(0 == iter % outputSteps)
         {  
-         // print output
-        }
+        
+        
     {
     //file directory has to be changed
-         sprintf(outputfile,"./output/output_densities%d.txt",iter/T);
+         sprintf(outputfile,"./output/output_densities%d.txt",iter/outputSteps);
         
         ofstream output_den(outputfile, ios::out);
         
@@ -203,7 +170,8 @@ int main(int argc, char const *argv[])
                 output_den.close();
          }
         else
-                cout << "Output file could not open!" << endl;
+                cout << "Output file could not open." << endl;
+    }
     }
 
     }

@@ -2,20 +2,44 @@
 
 [![Build Status](https://travis-ci.org/FranklandJack/2DPredPreyModel.svg?branch=master)](https://travis-ci.org/FranklandJack/2DPredPreyModel)
 
+
 Model of the interaction of predator-prey in two-dimensional landscape.
+
+https://github.com/FranklandJack/2DPredPreyModel
 
 Authors: 
 - Denitsa Bankova s1319505
 - Jack Frankland  s1404032
 
-## Instructions
-This program simulates the evolution of a system of predator(pumas) and prey(hares) densities across a 2D landscape which includes land and water. Neither the predators nor prey are considered able to swim so in wet areas density is always zero. The evolution of the system is goverened by differential equations provided in the coursework development pdf.
+## Introduction
+This program simulates the evolution of a system of predator(pumas) and prey(hares) densities across a 2D landscape which includes land and water. Neither the predators nor prey are considered able to swim so in wet areas density is always zero. The evolution of the system is goverened by differential equations provided in the coursework development pdf:
 
-- To build the code; run make
+∂H/∂t = rH - aHP + k (∂^2H/∂x^2 + ∂^2H/∂y^2)
 
-- To Run the code;   run ./PredPrey YOURINPUTLANDSCAPEDATA.dat
+∂P/∂t = bHP - mP + l (∂^2P/∂x^2 + ∂^2P/∂y^2)
+
+where: 
+
+- H is the density of hares (prey).
+- P is the density of pumas (predators).
+- r is the birth rate of hares.
+- a is the predation rate at which pumas eat hares.
+- b is the birth rate of pumas per one hare eaten.
+- m is the pumas mortality rate.
+- k is the diffusion rate for hares. 
+- l is the diffusion rate for pumas.
+
+##Instructions
+- To build the code: 
+run ``` make ```
+
+- To run the code:   run ./PredPrey YOURINPUTLANDSCAPEDATA.dat
+
+- To run the tests:  run !!!!!!!!!!!!!
 
 - To generate the dat files for input from any .pnm files you have just place your pnm files in the landscapes directory and run; make dats which will generate the .dats files and place them in the main 2DPredPreyModel directory. 
+
+- To generate complete documentation run doxygen Doxyfile.
 
 - For a full list of make functionality run make help.
 
