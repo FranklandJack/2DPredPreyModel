@@ -169,7 +169,7 @@ int main(int argc, char const *argv[])
      int num_iterations = int(t/deltaT);
 
      // Invterval at which to print the predator and prey densities to the command line. 
-     int step_average = 10;
+     int stepPrint = 10;
 
      // TODO: why does this have size 50?
      char outputfile[50];
@@ -179,7 +179,7 @@ int main(int argc, char const *argv[])
         grid = updateGrid(grid,r,a,b,m,k,l,deltaT);
 
 
-        if(0 == iter % step_average)
+        if(0 == iter % stepPrint)
         {
 
             cout << grid.predDensity() << " " << grid.preyDensity() << endl;
@@ -211,11 +211,11 @@ int main(int argc, char const *argv[])
     
    
    // Register that the program has completed.
-   auto end = chrono::system_clock::now();
+   auto end = std::chrono::system_clock::now();
 
 
    // Calculate the elapsed time to an appropriate order. 
-   auto elapsed = chrono::duration_cast<chrono::milliseconds>(end - start);
+   auto elapsed = std::chrono::duration_cast<chrono::milliseconds>(end - start);
 
 
    // Ouput the time taken to run the code to the command line. 
