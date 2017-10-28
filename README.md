@@ -29,19 +29,18 @@ where:
 - k is the diffusion rate for hares. 
 - l is the diffusion rate for pumas.
 
-##Instructions
-- To build the code: 
-run ``` make ```
+## Instructions
+- To build the code run: ``` make ```  
 
-- To run the code:   run ./PredPrey YOURINPUTLANDSCAPEDATA.dat
+- To run the code run: ```./PredPrey YOURINPUTLANDSCAPEDATA.dat ```  
 
-- To run the tests:  run !!!!!!!!!!!!!
+- To run the tests:  run ```!!!!!!!!!!!!!```  
 
-- To generate the dat files for input from any .pnm files you have just place your pnm files in the landscapes directory and run; make dats which will generate the .dats files and place them in the main 2DPredPreyModel directory. 
+- To generate the dat files for input from any .pnm files you have just place your pnm files in the landscapes directory and run: ```make dats``` which will generate the .dats files and place them in the main 2DPredPreyModel directory. 
 
-- To generate complete documentation run doxygen Doxyfile.
+- To generate complete documentation run: ```doxygen Doxyfile```  
 
-- For a full list of make functionality run make help.
+- For a full list of make functionality run: ```make help```  
 
 ## Input Formatting
 
@@ -51,27 +50,27 @@ The location of the input parameters is hard coded into the main method, so its 
 
 The format of the input_patameters.txt file **MUST** be:
 
-birth rate of hares 
-predation rate at which pumas eat hares
-birth rate of pumas per one hare eaten
-puma mortality rate
-diffusion rate for hares
-diffusion rate for pumas
-size of timestep
+1. birth rate of hares 
+2. predation rate at which pumas eat hares
+3. birth rate of pumas per one hare eaten
+4. puma mortality rate
+5. diffusion rate for hares
+6. diffusion rate for pumas
+7. size of timestep
+8. the number of timesteps between output of plain .pnm file
 total time of simulation
-
 
 With each value seperated by a newline.
 
 The .dat file is provided as the only command line argument to the executible and **MUST** be of the format:
 
-number columns number rows
-X X X X X X X X ...... X X X X
-X X X X X X X X ...... X X X X
-. . . . . . . . ...... . . . .
-. . . . . . . . ...... . . . .
-. . . . . . . . ...... . . . .
-X X X X X X X X ...... X X X X
+number columns number rows  
+X X X X X X X X ...... X X X X  
+X X X X X X X X ...... X X X X  
+. . . . . . . . ...... . . . .  
+. . . . . . . . ...... . . . .  
+. . . . . . . . ...... . . . .  
+X X X X X X X X ...... X X X X  
 
 where X=0 if the cell in the landscape is Wet and X=1 if the cell in the landscape is dry. 
 
