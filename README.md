@@ -4,17 +4,18 @@
 
 Model of the interaction of predator-prey in two-dimensional landscape.
 
-Authors: - Denitsa Bankova s1319505
-		 - Jack Frankland  s1404032
+Authors: 
+- Denitsa Bankova s1319505
+- Jack Frankland  s1404032
 
 ## Instructions
 This program simulates the evolution of a system of predator(pumas) and prey(hares) densities across a 2D landscape which includes land and water. Neither the predators nor prey are considered able to swim so in wet areas density is always zero. The evolution of the system is goverened by differential equations provided in the coursework development pdf.
 
--To build the code; run make
+- To build the code; run make
 
--To Run the code;   run ./PredPrey YOURINPUTLANDSCAPEDATA.dat
+- To Run the code;   run ./PredPrey YOURINPUTLANDSCAPEDATA.dat
 
--To generate the dat files for input from any .pnm files you have just place your pnm files in the landscapes directory and run; make dats which will generate the .dats files and place them in the main 2DPredPreyModel directory. 
+- To generate the dat files for input from any .pnm files you have just place your pnm files in the landscapes directory and run; make dats which will generate the .dats files and place them in the main 2DPredPreyModel directory. 
 
 ## Input Formatting
 
