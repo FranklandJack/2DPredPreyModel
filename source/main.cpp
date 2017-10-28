@@ -33,7 +33,11 @@ int main(int argc, char const *argv[])
 {
 
     //clock_t begin_time = clock();
-    auto start = std::chrono::system_clock::now();
+
+
+    /// Record a start time so we can time the code.
+    auto start = chrono::system_clock::now();
+
 
 	// Seed the psuedo random number generation.
     unsigned int seed = static_cast<unsigned int>(chrono::system_clock::now().time_since_epoch().count());
@@ -45,9 +49,12 @@ int main(int argc, char const *argv[])
     default_random_engine generator(seed);
 
    
-    //parameter input
+    // Parameter input for differential equation implementation.
     double r, a, b, m, k, l, deltaT;
     unsigned int T;
+
+    // To handel any errors in the parameter input we will throw exceptions and handel them accordingly.
+    
 
     ifstream input_par("./input/input_parameters.txt", ios::in);
 
@@ -56,14 +63,15 @@ int main(int argc, char const *argv[])
         input_par >> r >> a >> b >> m >> k >> l >> deltaT >> T;
         input_par.close();
     }
-       
+
+    /*
     else
     {
            cerr << "input/input_parameters.txt could not be opened for reading." << endl;
            exit(1);
     }
                 
-    
+    */
     
     
     // Take the first command line argument as the landscape input file.
@@ -74,7 +82,7 @@ int main(int argc, char const *argv[])
     int columns = 0;
     int rows    = 0;
     int **statesData = nullptr;
-    
+    /*
     // Check to make sure the file has been opened for input
     if(input_Landscape.is_open())
     {
@@ -83,6 +91,16 @@ int main(int argc, char const *argv[])
 
         input_Landscape >> columns >> rows;
 
+        // Since we know know the dimensions of the landscape we can read the array in element by element.
+        // We will be starting at the top left of the landscape, so we need to read it in top to bottom and left to right.
+
+        // First we need to allocate the memory for the array now we know it's size.
+
+
+
+        
+
+        /*
         // Need to check that the input suceeded and is meaningful, i.e. is positive integer
         // Check for failed extaction 
         if(input_Landscape.fail())
@@ -99,6 +117,7 @@ int main(int argc, char const *argv[])
 
         }
 
+
         // Check that the number of columns and rows are positive
         if(columns < 0 || rows < 0)
         {
@@ -112,12 +131,17 @@ int main(int argc, char const *argv[])
         cerr << argv[1] << " could not be opened for reading." << endl;
         exit(1);
     }
+    */
 
-
+    // Try block ends here since at this point all input is complete. 
     
-    //construct grid from the data in the input file using our constructor designed for this purpose
+
+
+    // Construct grid from the data in the input file using our constructor designed for this purpose.
     Grid grid(input_Landscape);
-    grid(2,2).setPredDensity(1.0);
+
+
+    grid(2,2).setPreyDensity(1.0);
     //grid.setUniformPreyDistribution(5.0, generator);
     
 
@@ -133,7 +157,7 @@ int main(int argc, char const *argv[])
      // Invterval at which to print the predator and prey densities to the command line. 
      int step_average = 10;
 
-     // 
+     // TODO: why does this have size 50?
      char outputfile[50];
     
      for(int iter = 1; iter <= num_iterations; ++iter)
@@ -143,12 +167,12 @@ int main(int argc, char const *argv[])
 
         if(0 == iter % step_average)
         {
-            std::cout<<grid.predDensity()<< ' ' << grid.preyDensity()<<std::endl;
+            cout << grid.predDensity() << " " << grid.preyDensity() << endl;
         }
 
-        {
+        
         if(0 == iter % T)
-            
+        {  
          // print output
         }
     {
@@ -163,7 +187,7 @@ int main(int argc, char const *argv[])
                 output_den.close();
          }
         else
-                cout<<"Output file could not open!"<<endl;
+                cout << "Output file could not open!" << endl;
     }
 
     }
@@ -175,11 +199,11 @@ int main(int argc, char const *argv[])
     */
    
    // Register that the program has completed.
-   auto end = std::chrono::system_clock::now();
+   auto end = chrono::system_clock::now();
 
 
    // Calculate the elapsed time to an appropriate order. 
-   auto elapsed = std::chrono::duration_cast<std::chrono::milliseconds>(end - start);
+   auto elapsed = chrono::duration_cast<chrono::milliseconds>(end - start);
 
 
    // Ouput the time taken to run the code to the command line. 

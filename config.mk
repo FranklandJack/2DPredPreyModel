@@ -1,4 +1,4 @@
-# convert .pnm file to .dat file for input to our program
+# Make file for the program to convert .pnm file to .dat file for input to our program
 CONVERT_SRC=pnm2datConvertor/pnmreader.c
 CONVERT_EXE=pnm2datConvertor/pnm2dat
 
