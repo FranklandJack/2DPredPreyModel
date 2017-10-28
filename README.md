@@ -1,6 +1,6 @@
 # 2DPredPreyModel
 
-https://travis-ci.org/FranklandJack/2DPredPreyModel.svg?branch=master
+[![Build Status](https://travis-ci.org/FranklandJack/2DPredPreyModel.svg?branch=master)](https://travis-ci.org/FranklandJack/2DPredPreyModel)
 
 Model of the interaction of predator-prey in two-dimensional landscape.
 
