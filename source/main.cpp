@@ -1,25 +1,8 @@
-// For any command line IO.
 #include <iostream>
-
-
-// For reading data to and from files.
 #include <fstream>
-
-
-// For seeding random number generatrion and timing. 
 #include <chrono>
-
-
-// For random number generation.
 #include <random> 
-//#include <ctime>
-
-
-// For implementing the landscape.
 #include "Grid.hpp"
-
-
-// For updating the landscape.
 #include "updateGrid.hpp"
 
 
@@ -32,46 +15,63 @@ using namespace std;
 int main(int argc, char const *argv[])
 {
 
-    //clock_t begin_time = clock();
-
-
     /// Record a start time so we can time the code.
-    auto start = chrono::system_clock::now();
+    auto start = std::chrono::system_clock::now();
 
 
 	// Seed the psuedo random number generation.
     unsigned int seed = static_cast<unsigned int>(std::chrono::system_clock::now().time_since_epoch().count());
 
 
-    // Create a generator which is fed to any random distributions to produce psuedo random numbers. By using the same
-    // generator for all random number generation, we will only have a single chain of random numbers, which makes them 
-    // reproducbile if seeded by a constant value.
     default_random_engine generator(seed);
 
    
     // Parameter input for differential equation implementation.
     double r, a, b, m, k, l, deltaT;
-    unsigned int T;
+    int T;
 
-    // To handel any errors in the parameter input we will throw exceptions and handel them accordingly.
     
-
+    
+    // The parameters are collected from the parameter input file.
     ifstream input_par("./input/input_parameters.txt", ios::in);
 
+    /*
+     *
+     * It needs to be checked that for each parameter the input has been sucessfully read in, i.e. it is of the right type
+     * and it needs to be checked that the input is physical, which in all cases here just corresponds to it being non-negative. 
+     * If either of these conditions fail the program exits with an appropraite message, since it is most likley the user made an
+     * error with their input values, and so wouldn't want the code to run anyway. 
+     *
+     */
     if (input_par.is_open())
     {
         input_par >> r >> a >> b >> m >> k >> l >> deltaT >> T;
+
+        
+        if(r < 0.0 || a < 0.0 || b < 0.0 || m < 0.0 || k < 0.0 || l < 0.0 || deltaT < 0.0 || T < 0)
+        {
+            cerr << "Input parameters should all be positive" << endl;
+            exit(1);
+        }
+
+        if(input_par.fail()) 
+        {
+            cerr << "One or more of the input parameters is of incorrect type" << endl;
+            exit(1);
+        }
+        
+
         input_par.close();
     }
 
-    /*
+    
     else
     {
            cerr << "input/input_parameters.txt could not be opened for reading." << endl;
            exit(1);
     }
                 
-    */
+    
     
     
     // Take the first command line argument as the landscape input file.
@@ -136,18 +136,32 @@ int main(int argc, char const *argv[])
     // Try block ends here since at this point all input is complete. 
     
 
+    Grid grid;
 
     // Construct grid from the data in the input file using our constructor designed for this purpose.
-    Grid grid(input_Landscape);
+    try
+    {
+    grid = Grid(input_Landscape);
+    }
+
+    catch(exception &exception)
+    {
+        cerr << "Standard Exception: " << exception.what() << endl;
+        return 1;
+    }
+    
+
+    
+
 
 
     grid(2,2).setPreyDensity(1.0);
     //grid.setUniformPreyDistribution(5.0, generator);
     
-
+    
 
     
-     // Total time for simulation. 
+     // Total time for simulation. TODO:CHANGE TO 500.
      int t = 50;
 
 
@@ -194,11 +208,7 @@ int main(int argc, char const *argv[])
 
     }
     
-    /*
-    clock_t end_time = clock();
-    double time_total = double(end_time - begin_time)/CLOCKS_PER_SEC;   
-    cout<<"Execution time: "<<time_total<<" seconds"<<endl;
-    */
+    
    
    // Register that the program has completed.
    auto end = chrono::system_clock::now();
@@ -212,4 +222,8 @@ int main(int argc, char const *argv[])
    cout << "Time take to execute (us):   " << elapsed.count() << endl;
 
    return 0;
+
+
+
+   
 }

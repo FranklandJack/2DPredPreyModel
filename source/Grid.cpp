@@ -1,9 +1,51 @@
 #include "Grid.hpp"
 
+
+Grid::Grid()
+{
+    m_columns   = 0;
+    m_rows      = 0;
+    m_cellArray = nullptr;
+}
+
 Grid::Grid(std::ifstream& inputFile)
 {
     // First two numbers in file are number of coloumns and number of rows
-    inputFile>>m_columns>>m_rows;
+    // First get the number of columns.
+    inputFile >> m_columns;
+
+    // If extraction fails in columns we need to throw an exception since the grid cannot be constructed. 
+    if(inputFile.fail()) 
+    {
+        throw std::runtime_error("#columns is of incorrect type");
+    }
+
+
+    // Need to make sure the number of columns is physical, i.e. positive definite.
+    if(m_columns <= 0) 
+    {
+        // Throw an exception here since we cannot intupret negative columns, so the code shouln't run until it is dealt with.
+        throw std::runtime_error("#columns in input is unphysical");
+
+    }
+
+    // Now get number of rows.
+    inputFile >> m_rows;
+
+    // If extraction fails in rows we need to throw an exception since the grid cannot be constructed. 
+    if(inputFile.fail()) 
+    {
+        throw std::runtime_error("#rows is of incorrect type");
+    }
+
+    // Need to make sure the number of rows is physical, i.e. positive definite.
+    if(m_rows <= 0) 
+    {
+        // Throw an exception here since we cannot non-positive rows, so the code shouln't run until it is dealt with.
+        throw std::runtime_error("#rows in input is unphysical");
+
+    }
+
 
     /*
      *
@@ -41,6 +83,11 @@ Grid::Grid(std::ifstream& inputFile)
      * Start indexing from top since first entry will be at largest y-coordinate, then move along each row.
      *
      */
+
+    // Counters defined so we can ensure the number of columns/rows in the actual grid match the number of columns/rows defined at the top of the file.
+    int colCounter = 0;
+    int rowCounter = 0;
+
     for(int j = m_rows; j >= 1; --j)
     {
         for(int i = 1; i <= m_columns; ++i)
@@ -49,6 +96,18 @@ Grid::Grid(std::ifstream& inputFile)
             // Take the input Integer which is wet (= 0) or dry (= 1)
             int inputState;
             inputFile >> inputState;
+
+            // Check to see that input was sucessful, if not an exception is thrown since failed extraction will lead to a crash if the grid is used in a main method.
+            if(inputFile.fail())
+            {
+                throw std::runtime_error("anomolous grid entry is of incorrect type");
+            }
+
+            // Check to see that the input was of type 0 or 1 and throw an exception otherwise since cannot interpret other integers.
+            if(1 != inputState && 0 != inputState)
+            {
+                throw std::runtime_error("grid entry detected that is neither 0 nor 1");
+            }
 
             /* 
              *
@@ -483,7 +542,7 @@ std::ostream& operator<<(std::ostream& out, const Grid& grid)
      * the halo of Wet cells since these are not part of the actual grid. 
      *
      */
-    for(int j = grid.m_rows; j >= 1 ; --j)
+    for(int j = grid.m_rows; j >= 1; --j)
     {
        
         for(int i = 1; i <= grid.m_columns; ++i)
@@ -512,7 +571,7 @@ std::ostream& operator<<(std::ostream& out, const Grid& grid)
 void Grid::printDensities(std::ostream& out) const
 {
 
-    for(int j = 1; j <= m_rows; ++j)
+    for(int j = m_rows; j >= 1; --j)
     {
         for (int i = 1; i <= m_columns; ++i)
         {

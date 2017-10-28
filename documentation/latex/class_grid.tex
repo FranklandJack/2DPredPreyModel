@@ -12,9 +12,10 @@ Models a 2D landscape of cells.
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{class_grid_a88ab1ccc8100827b4da40e62b7b77e96}\label{class_grid_a88ab1ccc8100827b4da40e62b7b77e96}} 
-{\bfseries Grid} (std\+::ifstream \&input\+File)
-\item 
+\hyperlink{class_grid_a4ac9ff4f63552b4c61ff90fcb35ad66c}{Grid} ()
+\begin{DoxyCompactList}\small\item\em Default constructor. \end{DoxyCompactList}\item 
+\hyperlink{class_grid_a88ab1ccc8100827b4da40e62b7b77e96}{Grid} (std\+::ifstream \&input\+File)
+\begin{DoxyCompactList}\small\item\em Creates \hyperlink{class_grid}{Grid} objects from some input file representing the \hyperlink{class_grid}{Grid}. \end{DoxyCompactList}\item 
 \hyperlink{class_grid_a409a82781ea11352ad2615aea0e8cd22}{Grid} (int columns, int rows, const int $\ast$$\ast$data)
 \begin{DoxyCompactList}\small\item\em Creates \hyperlink{class_grid}{Grid} objects from some input array representing the \hyperlink{class_grid}{Grid}. \end{DoxyCompactList}\item 
 \hyperlink{class_grid_a2be5432331273bc420c252ea09631965}{Grid} (const \hyperlink{class_grid}{Grid} \&source\+Grid)
@@ -62,10 +63,30 @@ Models a 2D landscape of cells.
 A \hyperlink{class_grid}{Grid} consists of a (2D) array of cells that can either be land or water and each have a predator and prey density. The actual array is implemented with a \char`\"{}halo\char`\"{} of Wet cells, this means that the densities of predators and prey in these cells is zero. This is very useful for implementing any differential equations where we may inadvertently check the \#columns + 1 or \#rows + 1, so rather than introducing bounds checking, we can introduce this boundary. 
 
 \subsection{Constructor \& Destructor Documentation}
-\mbox{\Hypertarget{class_grid_a409a82781ea11352ad2615aea0e8cd22}\label{class_grid_a409a82781ea11352ad2615aea0e8cd22}} 
+\mbox{\Hypertarget{class_grid_a4ac9ff4f63552b4c61ff90fcb35ad66c}\label{class_grid_a4ac9ff4f63552b4c61ff90fcb35ad66c}} 
 \index{Grid@{Grid}!Grid@{Grid}}
 \index{Grid@{Grid}!Grid@{Grid}}
-\subsubsection{\texorpdfstring{Grid()}{Grid()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+\subsubsection{\texorpdfstring{Grid()}{Grid()}\hspace{0.1cm}{\footnotesize\ttfamily [1/5]}}
+{\footnotesize\ttfamily Grid\+::\+Grid (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Default constructor. 
+
+Creates a grid of size 0 with a nullptr as its grid \mbox{\Hypertarget{class_grid_a88ab1ccc8100827b4da40e62b7b77e96}\label{class_grid_a88ab1ccc8100827b4da40e62b7b77e96}} 
+\index{Grid@{Grid}!Grid@{Grid}}
+\index{Grid@{Grid}!Grid@{Grid}}
+\subsubsection{\texorpdfstring{Grid()}{Grid()}\hspace{0.1cm}{\footnotesize\ttfamily [2/5]}}
+{\footnotesize\ttfamily Grid\+::\+Grid (\begin{DoxyParamCaption}\item[{std\+::ifstream \&}]{input\+File }\end{DoxyParamCaption})}
+
+
+
+Creates \hyperlink{class_grid}{Grid} objects from some input file representing the \hyperlink{class_grid}{Grid}. 
+
+This constructor will dynamically allocate a 1-\/D array of Cells with a halo of water cells, which represents the 2-\/D landscape. \mbox{\Hypertarget{class_grid_a409a82781ea11352ad2615aea0e8cd22}\label{class_grid_a409a82781ea11352ad2615aea0e8cd22}} 
+\index{Grid@{Grid}!Grid@{Grid}}
+\index{Grid@{Grid}!Grid@{Grid}}
+\subsubsection{\texorpdfstring{Grid()}{Grid()}\hspace{0.1cm}{\footnotesize\ttfamily [3/5]}}
 {\footnotesize\ttfamily Grid\+::\+Grid (\begin{DoxyParamCaption}\item[{int}]{columns,  }\item[{int}]{rows,  }\item[{const int $\ast$$\ast$}]{data }\end{DoxyParamCaption})}
 
 
@@ -86,7 +107,7 @@ This constructor will dynamically allocate a 1-\/D array of Cells with a halo of
 \mbox{\Hypertarget{class_grid_a2be5432331273bc420c252ea09631965}\label{class_grid_a2be5432331273bc420c252ea09631965}} 
 \index{Grid@{Grid}!Grid@{Grid}}
 \index{Grid@{Grid}!Grid@{Grid}}
-\subsubsection{\texorpdfstring{Grid()}{Grid()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+\subsubsection{\texorpdfstring{Grid()}{Grid()}\hspace{0.1cm}{\footnotesize\ttfamily [4/5]}}
 {\footnotesize\ttfamily Grid\+::\+Grid (\begin{DoxyParamCaption}\item[{const \hyperlink{class_grid}{Grid} \&}]{source\+Grid }\end{DoxyParamCaption})}
 
 
@@ -103,7 +124,7 @@ Due to the dynamic memory allocation that takes place in the constructor, the co
 \mbox{\Hypertarget{class_grid_a3828d0bf34f6c97ed93adc84d4ce6c4b}\label{class_grid_a3828d0bf34f6c97ed93adc84d4ce6c4b}} 
 \index{Grid@{Grid}!Grid@{Grid}}
 \index{Grid@{Grid}!Grid@{Grid}}
-\subsubsection{\texorpdfstring{Grid()}{Grid()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+\subsubsection{\texorpdfstring{Grid()}{Grid()}\hspace{0.1cm}{\footnotesize\ttfamily [5/5]}}
 {\footnotesize\ttfamily Grid\+::\+Grid (\begin{DoxyParamCaption}\item[{\hyperlink{class_grid}{Grid} \&\&}]{source\+Grid }\end{DoxyParamCaption})}
 
 
@@ -234,9 +255,12 @@ Due to the dynamic memory allocation that takes place in the constructor, the co
 
 
 \begin{DoxyParams}{Parameters}
-{\em source\+Grid} & constant \hyperlink{class_grid}{Grid} reference from which the deep copying will be done in the assignment of the grid member variables. \\
+{\em source\+Grid} & constant \hyperlink{class_grid}{Grid} reference from which the deep copying will be done in the assignment of the grid member variables.\\
 \hline
 \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\hyperlink{class_grid}{Grid} reference $\ast$this, so that the newly assigned operator may be chained into other assignment operations. 
+\end{DoxyReturn}
 \mbox{\Hypertarget{class_grid_a9f84434eb37abc5cd0979cd609b2a2d8}\label{class_grid_a9f84434eb37abc5cd0979cd609b2a2d8}} 
 \index{Grid@{Grid}!operator=@{operator=}}
 \index{operator=@{operator=}!Grid@{Grid}}
@@ -251,9 +275,12 @@ This is implemented for performance reasons to go with the move constructor. If 
 
 
 \begin{DoxyParams}{Parameters}
-{\em source\+Grid} & constant R-\/value \hyperlink{class_grid}{Grid} reference from which the ownership of the member variables will be transfered. \\
+{\em source\+Grid} & constant R-\/value \hyperlink{class_grid}{Grid} reference from which the ownership of the member variables will be transfered.\\
 \hline
 \end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\hyperlink{class_grid}{Grid} reference $\ast$this, so that the newly assigned operator may be chained into other assignment operations. 
+\end{DoxyReturn}
 \mbox{\Hypertarget{class_grid_a25eeb1fef1d86fe74b45e615f0376158}\label{class_grid_a25eeb1fef1d86fe74b45e615f0376158}} 
 \index{Grid@{Grid}!pred\+Density@{pred\+Density}}
 \index{pred\+Density@{pred\+Density}!Grid@{Grid}}
@@ -274,7 +301,9 @@ Calulates the average value of the predator density across the entire grid, not 
 \begin{DoxyReturn}{Returns}
 Floating point value representing the average predator density across the grid either including or not including the Wet cells, depending on how the function was called. 
 \end{DoxyReturn}
-\mbox{\Hypertarget{class_grid_a7dc8ae18c31e8e680f6369d7c07ea881}\label{class_grid_a7dc8ae18c31e8e680f6369d7c07ea881}} 
+Add the pred densities of each cell up.
+
+Total up the number of Wet cells as well. \mbox{\Hypertarget{class_grid_a7dc8ae18c31e8e680f6369d7c07ea881}\label{class_grid_a7dc8ae18c31e8e680f6369d7c07ea881}} 
 \index{Grid@{Grid}!prey\+Density@{prey\+Density}}
 \index{prey\+Density@{prey\+Density}!Grid@{Grid}}
 \subsubsection{\texorpdfstring{prey\+Density()}{preyDensity()}}
@@ -294,7 +323,7 @@ Calulates the average value of the prey density across the entire grid, not incl
 \begin{DoxyReturn}{Returns}
 Floating point value representing the average prey density across the grid either including or not including the Wet cells, depending on how the function was called. 
 \end{DoxyReturn}
-\mbox{\Hypertarget{class_grid_a4971cb9d47440bc63488993d5647f943}\label{class_grid_a4971cb9d47440bc63488993d5647f943}} 
+Total up the number of Wet cells as well. \mbox{\Hypertarget{class_grid_a4971cb9d47440bc63488993d5647f943}\label{class_grid_a4971cb9d47440bc63488993d5647f943}} 
 \index{Grid@{Grid}!print\+Densities@{print\+Densities}}
 \index{print\+Densities@{print\+Densities}!Grid@{Grid}}
 \subsubsection{\texorpdfstring{print\+Densities()}{printDensities()}}
@@ -311,7 +340,7 @@ Outputs densities of predator and prey for each cell in the format\+: i j predat
 {\em out} & std\+::ostream reference which is the output stream. This will also work for fstream since it inherits from ostream. \\
 \hline
 \end{DoxyParams}
-hello \mbox{\Hypertarget{class_grid_a17c062fcf4063a811bd8d95c32bce723}\label{class_grid_a17c062fcf4063a811bd8d95c32bce723}} 
+\mbox{\Hypertarget{class_grid_a17c062fcf4063a811bd8d95c32bce723}\label{class_grid_a17c062fcf4063a811bd8d95c32bce723}} 
 \index{Grid@{Grid}!set\+Uniform\+Distribution@{set\+Uniform\+Distribution}}
 \index{set\+Uniform\+Distribution@{set\+Uniform\+Distribution}!Grid@{Grid}}
 \subsubsection{\texorpdfstring{set\+Uniform\+Distribution()}{setUniformDistribution()}}

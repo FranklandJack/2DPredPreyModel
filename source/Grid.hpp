@@ -7,6 +7,7 @@
 #include <cassert>
 #include<iostream>
 #include<random>
+#include<stdexcept>
 
 /**
  *
@@ -69,6 +70,16 @@ class Grid
 
     public:
 
+
+        /** 
+         * 
+         * \brief Default constructor.
+         *
+         *  Creates a grid of size 0 with a nullptr as its grid
+         * 
+         *
+         */
+        Grid();
 
         /** 
         *

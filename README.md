@@ -17,6 +17,8 @@ This program simulates the evolution of a system of predator(pumas) and prey(har
 
 - To generate the dat files for input from any .pnm files you have just place your pnm files in the landscapes directory and run; make dats which will generate the .dats files and place them in the main 2DPredPreyModel directory. 
 
+- For a full list of make functionality run make help.
+
 ## Input Formatting
 
 The program takes as its input: 1. A .txt file containing the various parameters for the differential equation which evolves the system. 2. A .dat file which contains the landscape of the system. 
@@ -32,6 +34,7 @@ puma mortality rate
 diffusion rate for hares
 diffusion rate for pumas
 size of timestep
+total time of simulation
 
 
 With each value seperated by a newline.
