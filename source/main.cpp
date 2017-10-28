@@ -40,7 +40,7 @@ int main(int argc, char const *argv[])
 
 
 	// Seed the psuedo random number generation.
-    unsigned int seed = static_cast<unsigned int>(chrono::system_clock::now().time_since_epoch().count());
+    unsigned int seed = static_cast<unsigned int>(std::chrono::system_clock::now().time_since_epoch().count());
 
 
     // Create a generator which is fed to any random distributions to produce psuedo random numbers. By using the same
@@ -167,7 +167,9 @@ int main(int argc, char const *argv[])
 
         if(0 == iter % step_average)
         {
+
             cout << grid.predDensity() << " " << grid.preyDensity() << endl;
+
         }
 
         
