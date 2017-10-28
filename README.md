@@ -1,5 +1,7 @@
 # 2DPredPreyModel
+
 https://travis-ci.org/FranklandJack/2DPredPreyModel.svg?branch=master
+
 Model of the interaction of predator-prey in two-dimensional landscape.
 
 Authors: - Denitsa Bankova s1319505
