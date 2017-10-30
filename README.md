@@ -36,7 +36,7 @@ where:
 
 - To run the tests:  run ```!!!!!!!!!!!!!```  
 
-- To generate the dat files for input from any .pnm files you have just place your pnm files in the landscapes directory and run: ```make dats``` which will generate the .dats files and place them in the main 2DPredPreyModel directory. 
+- To generate the dat files for input from any .pnm files you have to just place your pnm files in the landscapes directory and run: ```make dats``` which will generate the .dats files and place them in the main 2DPredPreyModel directory. 
 
 - To generate complete documentation run: ```doxygen Doxyfile```  
 
@@ -60,7 +60,7 @@ The format of the input_patameters.txt file **MUST** be:
 6. diffusion rate for pumas
 7. size of timestep
 8. the number of timesteps between output of plain .pnm file
-total time of simulation
+9. total time of simulation
 
 With each value seperated by a newline.
 
