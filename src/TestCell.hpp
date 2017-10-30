@@ -47,7 +47,7 @@ void tearDown();
 protected:
 
 // Test method testInit
-void testInit();
+//void testInit();
 
 // Test method testGetPredatorDensity
 void testGetPredDensity();
