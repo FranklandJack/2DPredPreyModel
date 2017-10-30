@@ -6,5 +6,3 @@
 # stop data files being uploaded 
 *.dat 
 
-# stop .pnm files being uploaded
-*.pnm
