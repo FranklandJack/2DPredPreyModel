@@ -1,0 +1,200 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% University Assignment Title Page 
+% LaTeX Template
+% Version 1.0 (27/12/12)
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% Original author:
+% WikiBooks (http://en.wikibooks.org/wiki/LaTeX/Title_Creation)
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+% 
+% Instructions for using this template:
+% This title page is capable of being compiled as is. This is not useful for 
+% including it in another document. To do this, you have two options: 
+%
+% 1) Copy/paste everything between \begin{document} and \end{document} 
+% starting at \begin{titlepage} and paste this into another LaTeX file where you 
+% want your title page.
+% OR
+% 2) Remove everything outside the \begin{titlepage} and \end{titlepage} and 
+% move this file to the same directory as the LaTeX file you wish to add it to. 
+% Then add \input{./title_page_1.tex} to your LaTeX file where you want your
+% title page.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\title{Title page with logo}
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[12pt]{article}
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage[colorinlistoftodos]{todonotes}
+\usepackage{hyperref}
+\usepackage{listings}
+
+\begin{document}
+
+\begin{titlepage}
+
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}} % Defines a new command for the horizontal lines, change thickness here
+
+\center % Center everything on the page
+ 
+%----------------------------------------------------------------------------------------
+%	HEADING SECTIONS
+%----------------------------------------------------------------------------------------
+
+\textsc{\LARGE University of Edinburgh}\\[1.5cm] % Name of your university/college
+\textsc{\Large Programming Skills}\\[0.5cm] % Major heading such as course name
+\textsc{\large Development Coursework}\\[0.5cm] % Minor heading such as course title
+
+%----------------------------------------------------------------------------------------
+%	TITLE SECTION
+%----------------------------------------------------------------------------------------
+
+\HRule \\[0.4cm]
+{ \huge \bfseries Programming Skills Report}\\[0.4cm] % Title of your document
+\HRule \\[1.5cm]
+ 
+%----------------------------------------------------------------------------------------
+%	AUTHOR SECTION
+%----------------------------------------------------------------------------------------
+
+\begin{minipage}{0.4\textwidth}
+\begin{flushleft} \large
+\emph{Authors:}\\
+Jack \textsc{Frankland} % Your name
+\end{flushleft}
+\end{minipage}
+~
+\begin{minipage}{0.4\textwidth}
+\begin{flushright} \large
+\emph{} \\
+Denitsa \textsc{Bankova} % Supervisor's Name
+\end{flushright}
+\end{minipage}\\[2cm]
+
+% If you don't want a supervisor, uncomment the two lines below and remove the section above
+%\Large \emph{Author:}\\
+%John \textsc{Smith}\\[3cm] % Your name
+
+%----------------------------------------------------------------------------------------
+%	DATE SECTION
+%----------------------------------------------------------------------------------------
+
+{\large \today}\\[2cm] % Date, change the \today to a set date if you want to be precise
+
+%----------------------------------------------------------------------------------------
+%	LOGO SECTION
+%----------------------------------------------------------------------------------------
+
+\includegraphics[width=5cm, height=5cm]{logo.png}\\[5cm] % Include a department/university logo - this will require the graphicx package
+ 
+%----------------------------------------------------------------------------------------
+
+\vfill % Fill the rest of the page with whitespace
+
+\end{titlepage}
+
+
+\begin{abstract}
+This report forms part of the documentation for the coursework. It accompanies a reference manual which provides information on the class structures and methods, as well as the comments in the source code, which provide the implementation details. This document is designed to contain more general information about the code, how to run it and any important design decisions. 
+\end{abstract}
+
+\section{Introduction}
+
+In what follows the basic information about the project implementation is given and instructions are provided for building, running and testing the code. Finally, key design decisions are discussed and justified. 
+
+\section{General Information}
+\label{sec:examples}
+
+\subsection{Programming Language}
+The project source code and tests are written in C++. Due to the fact that it uses move semantics; the source code must be compiled under the C++11 (or later) standard, which is when move semantics were introduced. 
+
+\subsection{Version Control}
+The version control system used for this project was Git with a master repository hosted on Github. Both team members worked from the command line, using the git commands to pull, add, commit changes and push to the repository hosted on Github. The Github repository can be found here: \url{https://github.com/FranklandJack/2DPredPreyModel}.
+
+\subsection{Debuggers}
+The GNU GDB debugger was used for debugging from the command line and memory leak checks were performed with valgrind. 
+
+\subsection{Build Tools}
+A makefile was used with the make command for automated building. The main functionality of the makefile compiles and links the source code, but it also includes commands to generate input files for the code from pnm files using the tool provided in the assignment, and various utility commands such as cleaning up all auto-generated files. There is a second configuration makefile which is included in the primary makefile to take care of any automated building for the converter tool that was provided in the assignment.
+\subsection{Test Tools}
+Unit tests for the program were written using the CppUnit test framework. For continuous integration Travis CI was used, meaning that each time a change was committed to the repository hosted on Github, the code was automatically built and tested by Travis CI using our unit tests. The Travis CI repository can be found here: \url{https://travis-ci.org/FranklandJack/2DPredPreyModel} 
+\subsection{Documentation}
+Doxygen was used as a documentation tool for the source code. A doxyfile is present in the main directory which specifies preferences for the documentation. Using the doxygen commands it is then possible to generate a reference manual(in latex) and on-line documentation browser(in HTML) from the special comments in the source code header files. 
+
+\section{Usage Instructions}
+
+\subsection{Building}
+To build the executable run:
+\begin{lstlisting}[language=bash]
+$ make
+
+\end{lstlisting}
+From the main directory. This will generate the object files and place them in the main directory, as well as linking them to create an executable called PredPrey.
+
+\subsection{Running}
+To run the code run:
+\begin{lstlisting}[language=bash]
+$ ./PredPrey YOURINPUTLANDSCAPE.dat
+
+\end{lstlisting}
+where the first command line argument YOURINPUTLANDSCAPE.dat is the name of the .dat file containing the landscape you wish to simulate. 
+\subsection{Testing}
+To run the unit tests on the code:
+!!!!!!!!!!!!!!!!!
+
+\subsection{Generating Documentation}
+To generate the documentation run:
+\begin{lstlisting}[language=bash]
+$ doxygen Doxyfile
+\end{lstlisting}
+The generated files will then be outputted to the documentation directory, which in tern contains two directories; latex and html. To generate the reference manual, move into the latex directory
+\begin{lstlisting}[language=bash]
+$ mv documentation/latex
+\end{lstlisting}
+and run:
+\begin{lstlisting}[language=bash]
+$ make
+\end{lstlisting}
+which will generate a refman.pdf file that contains the class documentation. To open the on-line code browser move to the html directory:
+ \begin{lstlisting}[language=bash]
+$ mv documentation/html
+\end{lstlisting}
+and open the index.html file with a web browser such as Chrome.
+(Note: for ease of access the reference manual and on-line code browser files have been copied into the main directory, since they will not need regenerating after submission.)
+
+\subsection{Misc.}
+To generate .dat files from any pnm files, first place the pnm files in the landscape directory then run:
+
+\begin{lstlisting}[language=bash]
+$ make dats
+\end{lstlisting}
+This will generate .dat files for all .pnm files in the landscape folder and place them in the main directory, ready to be run with the program. 
+
+
+To clean up all auto-generated files (this includes any output files from the program after it is run, object files and executables, as well as .dat files in the main directory) run:
+\begin{lstlisting}[language=bash]
+$ make clean
+\end{lstlisting}
+
+
+For a full list of make commands and the function run:
+\begin{lstlisting}[language=bash]
+$ make help
+\end{lstlisting}
+
+
+\section{Summary of Key Design Decisions}
+
+
+\end{document}
