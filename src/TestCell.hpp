@@ -13,10 +13,10 @@ class TestCell : public CPPUNIT_NS::TestFixture
 CPPUNIT_TEST_SUITE(TestCell);
 
 // Add test method testInit
-CPPUNIT_TEST( testInit);
+CPPUNIT_TEST(testInit);
 
 // Add test method testGetPredatorDensity
-CPPUNIT_TEST(testGetPredatorDensity);
+CPPUNIT_TEST(testGetPredDensity);
 
 // Add test method testGetPreyDensity
 CPPUNIT_TEST(testGetPreyDensity);
@@ -25,10 +25,10 @@ CPPUNIT_TEST(testGetPreyDensity);
 CPPUNIT_TEST(testGetState);
 
 // Add test method testSetPredatorDensity
-CPPUNIT_TEST(setPredatorDensity);
+CPPUNIT_TEST(testSetPredatorDensity);
 
 // Add test method testSetPreyDensity 
-CPPUNIT_TEST(setPreyDensity);
+CPPUNIT_TEST(testSetPreyDensity);
 
 // Add test method testSetState
 CPPUNIT_TEST(testGetState);
