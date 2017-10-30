@@ -11,6 +11,9 @@
 #ifndef Cell_hpp
 #define Cell_hpp
 
+// Forward declare the test class
+class TestCell;
+
 class Cell
 {
     public:
@@ -39,6 +42,15 @@ class Cell
         * densities will always be zero in a wet cell.
         */
         State m_state;
+
+        /** 
+         * 
+         * \brief Test class for the Cell.
+         * 
+         * Declare a TestCell friend member variable to allow access to private member variables in test class.
+         *
+         */
+        friend class TestCell;
 
 
     public:
