@@ -25,7 +25,7 @@ CPPUNIT_TEST(testGetPreyDensity);
 CPPUNIT_TEST(testGetState);
 
 // Add test method testSetPredatorDensity
-CPPUNIT_TEST(testSetPredatorDensity);
+CPPUNIT_TEST(testSetPredDensity);
 
 // Add test method testSetPreyDensity 
 CPPUNIT_TEST(testSetPreyDensity);
