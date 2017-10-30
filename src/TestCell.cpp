@@ -19,14 +19,14 @@ void TestCell::tearDown()
     delete c;
 
 }
-/*
+
 void TestCell::testInit()
 {
 
-    CPPUNIT_ASSERT(a->realPart==1.0);
+    CPPUNIT_ASSERT(Cell::Wet == c->m_state);
 
 }
-*/
+
 void TestCell::testGetPredDensity()
 {
     CPPUNIT_ASSERT(2.0 == a->getPredDensity());
@@ -59,7 +59,7 @@ void TestCell::testSetState()
 {
 
     a->setState(Cell::Dry);
-    CPPUNIT_ASSERT(Cell::Dry == b->getState());
+    CPPUNIT_ASSERT(Cell::Dry == b->m_state);
 
 }
 

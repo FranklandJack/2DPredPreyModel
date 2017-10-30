@@ -13,7 +13,7 @@ class TestCell : public CPPUNIT_NS::TestFixture
 CPPUNIT_TEST_SUITE(TestCell);
 
 // Add test method testInit
-//CPPUNIT_TEST(testInit);
+CPPUNIT_TEST(testInit);
 
 // Add test method testGetPredatorDensity
 CPPUNIT_TEST(testGetPredDensity);
@@ -47,7 +47,7 @@ void tearDown();
 protected:
 
 // Test method testInit
-//void testInit();
+void testInit();
 
 // Test method testGetPredatorDensity
 void testGetPredDensity();
