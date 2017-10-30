@@ -29,6 +29,7 @@ where:
 - k is the diffusion rate for hares. 
 - l is the diffusion rate for pumas.
 
+
 ## Instructions
 - To build the code run: ``` make ```  
 
@@ -74,6 +75,9 @@ X X X X X X X X ...... X X X X
 X X X X X X X X ...... X X X X  
 
 where X=0 if the cell in the landscape is Wet and X=1 if the cell in the landscape is dry. 
+
+## Output 
+The program will run from t=0 to t=500 and output the average density of the predators and prey (over the whole grid including wet areas) every 10 time steps into a file called Average_Densities.txt. It will also output a plain ppm file every n timesteps called output#step.ppm where n is the number of timesteps between output set by the user. All output files are created in the output directory. 
 
 
 
