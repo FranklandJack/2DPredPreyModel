@@ -581,3 +581,43 @@ void Grid::printDensities(std::ostream& out) const
 
     }
 }
+
+
+void Grid::printPPM(std::ofstream &file) const
+{
+    // Print the header which identifies it as a plain PPM file.
+    file << "P3" << std::endl;
+
+    // Print the width and heigh of the image in pixels.
+    file << m_columns << " " << m_rows << std::endl;
+
+    // We assume the densities won't exceed 50.
+    int maxDensity = 10;
+
+    // Print the maximum value any colour can take into the file since this is part of the format.
+    file << maxDensity << std::endl;
+
+    for(int j = m_rows; j >= 1; --j)
+    {
+        for(int i = 1; i <= m_columns; ++i)
+        {
+            // The first value in the RGB triple will just be zero, which means that the density dependency in the colours will be goverened only by the 
+            // G and B values. 
+            int rValue = 0;
+
+            // The green value will be determined by the predator density.
+            int gValue = static_cast<int>((*this)(i,j).getPredDensity());
+
+            // The blue value will be deterined byt he prey density. 
+            int bValue = static_cast<int>((*this)(i,j).getPreyDensity());
+            
+            file << rValue << " " << gValue << " " << bValue;
+            
+            // Print each pixel to a new line since at most any line can be 70 characters long.
+            file << std::endl;
+
+        }
+
+
+    }
+}

@@ -10,6 +10,8 @@
 
 using namespace std;
 
+
+
 int main(int argc, char const *argv[])
 {
 
@@ -59,7 +61,7 @@ int main(int argc, char const *argv[])
         input_par >> r >> a >> b >> m >> k >> l >> deltaT >> outputSteps;
 
         
-        if(r <= 0.0 || a <= 0.0 || b <= 0.0 || m <= 0.0 || k <= 0.0 || l <= 0.0 || deltaT <= 0.0 || outputSteps < 1)
+        if(r < 0.0 || a < 0.0 || b < 0.0 || m < 0.0 || k < 0.0 || l < 0.0 || deltaT <= 0.0 || outputSteps < 1)
         {
             throw runtime_error("Input parameters are not all positive.");
             
@@ -113,18 +115,15 @@ int main(int argc, char const *argv[])
     }
     
 
-    
+    // Set a uniform predator distriubtion between 0 and 5.0 across the whole grid.
+    grid.setUniformDistribution(1.0, 1.0, generator);
 
-
-
-    grid(3,3).setPredDensity(2.0);
-    grid.setUniformPreyDistribution(2.0, generator);
     
     
 
     
      // Total time for simulation. 
-     int t = 50;
+     int t = 500;
 
 
      // Total number of iterations for the simulation.
@@ -139,21 +138,27 @@ int main(int argc, char const *argv[])
      char outputfile[50];
 
 
+     // Name of output file for average densities
+     string averageDensitiesOutput("./output/Average_Densities.txt");
 
-     // Print the column titles for the standard output. 
-     cout << "Pred Density " << "Prey Density" << endl;
+     // Create an output file for the average densities.
+     ofstream output_avrg_dens(averageDensitiesOutput, ios::out);
+
+     if(output_avrg_dens.is_open())
+     {
+     // Print the column titles for the average density outputs
+     output_avrg_dens << "Time    Pred Dens.    Prey Dens." << endl;
+     }
 
      for(int iter = 1; iter <= numIterations; ++iter)
      {
         grid = updateGrid(grid,r,a,b,m,k,l,deltaT);
-
-
-
+        
         if(0 == iter % averageDenOutputFreq)
 
         {
 
-            cout << grid.predDensity() << " " << grid.preyDensity() << endl;
+            output_avrg_dens << iter * deltaT << "       " << grid.predDensity() << "       " << grid.preyDensity() << endl;
 
         }
 
@@ -161,26 +166,28 @@ int main(int argc, char const *argv[])
         if(0 == iter % outputSteps)
         {  
         
+    
+        {
+    
+         sprintf(outputfile,"./output/output%d.ppm",iter/outputSteps);
         
-    {
-    //file directory has to be changed
-         sprintf(outputfile,"./output/output_densities%d.txt",iter/outputSteps);
+         ofstream outputPPM(outputfile, ios::out);
         
-        ofstream output_den(outputfile, ios::out);
-        
-        if (output_den.is_open())
-         {
-                grid.printDensities(output_den);
-                output_den.close();
-         }
+         if (outputPPM.is_open())
+          {
+                grid.printPPM(outputPPM);
+                outputPPM.close();
+          }
         else
-                cout << "Output file could not open." << endl;
+                cout << "Output .ppm file could not open." << endl;
     }
+
     }
 
     }
     
-    
+   // Print the destination of outputfiles.
+   cout << "Average densities have been printed to " << averageDensitiesOutput << endl; 
    
    // Register that the program has completed.
    auto end = std::chrono::system_clock::now();

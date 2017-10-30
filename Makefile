@@ -1,6 +1,6 @@
 # Makefile for the 2D-Pred-Prey Simulation
 
-SRC_DIR=source
+SRC_DIR=src
 PNM_DIR=landscapes
 OUT_DIR=output
 
@@ -10,7 +10,7 @@ OBJ_FILES=$(patsubst $(SRC_DIR)/%.cpp, %.o, $(SRC_FILES))
 PNM_FILES=$(wildcard $(PNM_DIR)/*.pnm)
 DAT_FILES=$(patsubst $(PNM_DIR)/%.pnm, %.dat, $(PNM_FILES))
 
-OUT_FILES=$(wildcard $(OUT_DIR)/*.txt)
+OUT_FILES=$(wildcard $(OUT_DIR)/*)
 
 
 
@@ -19,7 +19,7 @@ EXE_FILE=PredPrey
 ## all       : compile sourcefiles, create an executible create the dat files from the pnm files provided. 
 
 .PHONY : all
-all : $(EXE_FILE) $(DAT_FILES)
+all : $(EXE_FILE) 
 
 $(EXE_FILE) : $(OBJ_FILES)
 	g++ -std=c++11 $^ -o $@

@@ -392,6 +392,35 @@ class Grid
         */
         void printDensities(std::ostream& out) const;
 
+        /**
+         *
+         *
+         * \brief Prints the densities of the predators and prey to a ppm file provided.
+         *
+         * This function will print the to the file in the format:
+         *
+         * P3 (required for a PPM and means this is a RGB color image in ASCII)
+         * m_columns m_rows (width and height of image)
+         * MAX (maximum value for each colour)
+         * 0 predDensity preyDensity (at coordinate (m_rows, 1))
+         * 0 predDensity preyDensity (at coordinate (m_rows, 2))
+         * 0 predDensity preyDensity (at coordinate (m_rows, 3))
+         * . . . . . .
+         * . . . . . .
+         * . . . . . .
+         * . . . . . .
+         * 0 predDensity preyDensity (at coordinate (1, m_columns))
+         *
+         * To overcome the fact that each line can contain at most 70 characters each coordinate pixel is printed to a new line, this works fine 
+         * formatting wise since the number of rows and columns are printed explcitly at the top of the file, so for any display purposes the file 
+         * knows how to "count" the values into the correct coordinates.
+         *
+         *
+         * \param file ppm file to which the densities should be printed. 
+         */
+
+        void printPPM(std::ofstream &file) const;
+
     
 };
 

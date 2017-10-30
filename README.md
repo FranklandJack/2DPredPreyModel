@@ -44,7 +44,9 @@ where:
 
 ## Input Formatting
 
-The program takes as its input: 1. A .txt file containing the various parameters for the differential equation which evolves the system. 2. A .dat file which contains the landscape of the system. 
+The program takes as its input: 
+1. A .txt file containing the various parameters for the differential equation which evolves the system. 
+2. A .dat file which contains the landscape of the system. 
 
 The location of the input parameters is hard coded into the main method, so its name should not be changed, however the user can feel free to change the values of the parameters in the file input/input_parameters.txt.
 
