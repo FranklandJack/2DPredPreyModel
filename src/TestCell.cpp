@@ -5,7 +5,7 @@ CPPUNIT_TEST_SUITE_REGISTRATION(TestCell);
 void TestCell::setUp()
 {
 
-    a = new Cell(Cell::Dry, 2.0, 1.0);
+    a = new Cell::Cell(Cell::Dry, 2.0, 1.0);
     b = new Cell(Cell::Wet, 1.0, 2.0);
     c = new Cell(Cell::Wet, -1.0, -2.0);
 
