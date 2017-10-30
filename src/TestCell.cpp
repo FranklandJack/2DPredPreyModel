@@ -1,4 +1,4 @@
-#include "TestCell.h"
+#include "TestCell.hpp"
 
 CPPUNIT_TEST_SUITE_REGISTRATION(TestCell);
 
