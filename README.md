@@ -60,7 +60,6 @@ The format of the input_patameters.txt file **MUST** be:
 6. diffusion rate for pumas
 7. size of timestep
 8. the number of timesteps between output of plain .pnm file
-9. total time of simulation
 
 With each value seperated by a newline.
 
