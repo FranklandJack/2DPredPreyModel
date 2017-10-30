@@ -19,14 +19,14 @@ void TestCell::tearDown()
     delete c;
 
 }
-
+/*
 void TestCell::testInit()
 {
 
     CPPUNIT_ASSERT(a->realPart==1.0);
 
 }
-
+*/
 void TestCell::testGetPredDensity()
 {
     CPPUNIT_ASSERT(2.0 == a->getPredDensity());
@@ -44,13 +44,13 @@ void TestCell::testGetState()
 
 void TestCell::testSetPreyDensity()
 {
-    a.setPreyDensity(5.0);
+    a->setPreyDensity(5.0);
     CPPUNIT_ASSERT(5.0 == b->m_preyDensity);
 }
 
 void TestCell::testSetPredDensity()
 {
-    a.setPredDensity(5.0);
+    a->setPredDensity(5.0);
     CPPUNIT_ASSERT(5.0 == b->m_predDensity);
 
 }
@@ -58,7 +58,7 @@ void TestCell::testSetPredDensity()
 void TestCell::testSetState()
 {
 
-    a.setState(State::Dry);
+    a->setState(Cell::Dry);
     CPPUNIT_ASSERT(State::Dry == b->getState());
 
 }

@@ -9,6 +9,11 @@
 #include<random>
 #include<stdexcept>
 
+
+// Forward declare the test class
+class TestGrid;
+
+
 /**
  *
  * \class Grid
@@ -65,6 +70,15 @@ class Grid
          *
          */
         int m_rows;
+
+        /** 
+         * 
+         * \brief Test class for the grid.
+         * 
+         * Declare a TestGrid friend member variable to allow access to private member variables in test class.
+         *
+         */
+        friend class TestGrid;
 
         
 
