@@ -59,7 +59,7 @@ void TestCell::testSetState()
 {
 
     a->setState(Cell::Dry);
-    CPPUNIT_ASSERT(State::Dry == b->getState());
+    CPPUNIT_ASSERT(Cell::Dry == b->getState());
 
 }
 
