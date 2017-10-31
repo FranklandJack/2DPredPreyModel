@@ -23,7 +23,7 @@ void TestCell::tearDown()
 void TestCell::testInit()
 {
 
-    CPPUNIT_ASSERT(Cell::Dry == c->m_state);
+    CPPUNIT_ASSERT(Cell::Wet == c->m_state);
 
 }
 
