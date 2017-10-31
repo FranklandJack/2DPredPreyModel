@@ -39,14 +39,14 @@ void TestCell::testGetPreyDensity()
 
 void TestCell::testGetState()
 {
-    CPPUNIT_ASSERT(Cell::Dry == a->getState());
+    CPPUNIT_ASSERT(Cell::Wet == a->getState());
 }
 
 void TestCell::testSetState()
 {
 
-    //b->setState(Cell::Wet);
-    CPPUNIT_ASSERT(b->setState(Cell::Wet) == b->m_state);
+    b->setState(Cell::Wet);
+    CPPUNIT_ASSERT(Cell::Dry == b->m_state);
 
 }
 
