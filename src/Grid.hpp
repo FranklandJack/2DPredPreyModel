@@ -120,7 +120,7 @@ class Grid
         * must have the same number of rows and columns as the explicit values provided
         *
         */
-        Grid(int columns, int rows , const int **data);
+        Grid(int columns, int rows , int ** const data);
 
 
         /** 

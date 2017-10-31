@@ -2,7 +2,7 @@
 
 CPPUNIT_TEST_SUITE_REGISTRATION(TestGrid);
 
-
+/*
 void 
 TestGrid::testConstructor()
 {
@@ -15,3 +15,4 @@ TestGrid::testConstructor()
 	
   }
 
+*/

@@ -94,7 +94,7 @@ Grid::Grid(std::ifstream& inputFile)
         {
         
             // Take the input Integer which is wet (= 0) or dry (= 1)
-            int inputState;
+            int inputState = 0;
             inputFile >> inputState;
 
             // Check to see that input was sucessful, if not an exception is thrown since failed extraction will lead to a crash if the grid is used in a main method.
@@ -126,7 +126,7 @@ Grid::Grid(std::ifstream& inputFile)
     
 }
 
-Grid::Grid(int columns, int rows , const int **data):m_columns(columns), m_rows(rows)
+Grid::Grid(int columns, int rows , int ** const data):m_columns(columns), m_rows(rows)
 {
     /*
      *
@@ -166,7 +166,7 @@ Grid::Grid(int columns, int rows , const int **data):m_columns(columns), m_rows(
     // Then the non-halo cells have their state set according to the landscape provided to the constructor
     for(int j = 1; j <= m_rows; ++j)
     {
-        for(int i = 1; i <=m_columns; ++i)
+        for(int i = 1; i <= m_columns; ++i)
         {
             /* 
              *
@@ -174,6 +174,9 @@ Grid::Grid(int columns, int rows , const int **data):m_columns(columns), m_rows(
              * data array is 0 (for wet) or 1 (for dry) each array entry can be converted into the State data type.
              *
              */
+
+             // The data from the input is indexed from 0, however the actual landscape data is indexed from 1, inline with the specification
+             // therefore a shift by -1 is required in the x and y directions in the input data to match the coordinates correctly.
              Cell::State state = static_cast<Cell::State>(data[i-1][j-1]);   
 
 

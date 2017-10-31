@@ -15,6 +15,11 @@ using namespace std;
 int main(int argc, char const *argv[])
 {
 
+    /**************************************************************************************************
+     ******************************************* SET UP ***********************************************
+     **************************************************************************************************/
+
+
     // Record a start time so we can time the code.
     auto start = std::chrono::system_clock::now();
 
@@ -25,7 +30,13 @@ int main(int argc, char const *argv[])
 
     default_random_engine generator(seed);
 
-   
+
+    /**************************************************************************************************
+     ******************************************** INPUT ***********************************************
+     **************************************************************************************************/
+
+    
+
     // Parameters for differential equation implementation.
     double r, a, b, m, k, l, deltaT;
     int outputSteps;
@@ -92,34 +103,131 @@ int main(int argc, char const *argv[])
     }
                 
 
+    // Input for the landscape/grid.
 
-    // This is the grid that is used in the simulation.
+    // Forward declare variables here since they will be unreachable if they are place inside a try block. For details about the variables see inside the block.
     Grid grid;
-    
-    // Take the first command line argument as the landscape input file.
-    ifstream input_Landscape(argv[1], ios::in);
-
+    int columns = 0;
+    int rows   = 0;
+    int** landscapeData;
 
     try
     {
+    // Take the first command line argument as the landscape input file.
+    ifstream input_Landscape(argv[1], ios::in);
 
-    // Construct grid from the data in the input file using the constructor designed for this purpose. This will throw an exception if the input is invalid.
-    grid = Grid(input_Landscape);
+    // First value in the file should be the number of columns.
+    input_Landscape >> columns;
+
+    // If extraction fails in columns we need to throw an exception since the grid cannot be constructed. 
+    if(input_Landscape.fail()) 
+    {
+        throw std::runtime_error("#columns is of incorrect type");
+    }
+
+
+    // Need to make sure the number of columns is physical, i.e. positive definite.
+    if(columns <= 0) 
+    {
+        // Throw an exception here since we cannot intupret negative columns, so the code shouldn't run until it is dealt with.
+        throw std::runtime_error("#columns in input is unphysical");
 
     }
 
+    
+    // Second value in the file should be the number of rows.
+    input_Landscape >> rows;
+
+    // If extraction fails in rows we need to throw an exception since the grid cannot be constructed. 
+    if(input_Landscape.fail()) 
+    {
+        throw std::runtime_error("#rows is of incorrect type");
+    }
+
+    // Need to make sure the number of rows is physical, i.e. positive definite.
+    if(rows <= 0) 
+    {
+        // Throw an exception here since we cannot non-positive rows, so the code shouln't run until it is dealt with.
+        throw std::runtime_error("#rows in input is unphysical");
+
+    }
+    
+
+    // The rest of the data in the file is the actual landscape. The landscape data will be temporarliy stored in a 2D array. Which will
+    // need to be dynamically allocated, since the size is not known at compile time.
+    landscapeData = new int*[columns];
+    for(int i = 0; i < columns; ++i)
+    {
+        landscapeData[i] = new int[rows]; 
+    }
+
+    /*
+     *
+     * The rest of the data in the file is the actual landscape. Since the data in the file corresponds to the x-y
+     * the first value will correspond to the coordinate (#rows, 1), i.e. it starts at the top of the landscape in the first
+     * column and will work down the rows.
+     *
+     */
+    // Starting from the top row and working downwards.
+    for(int j = rows - 1; j >= 0; --j)
+    {   
+        // Starting from the left most column and working rightwards.
+        for(int i = 0; i < columns; ++i)
+        {
+            // Get the next landscape data value from the file.
+            int inputState = 0;
+            input_Landscape >> inputState;
+
+            if(input_Landscape.fail())
+            {
+                throw std::runtime_error("anomolous grid entry is of incorrect type");
+            }
+
+            // Check to see that the input was of type 0 or 1 and throw an exception otherwise since cannot interpret other integers.
+            if(1 != inputState && 0 != inputState)
+            {
+                throw std::runtime_error("grid entry detected that is neither 0 nor 1");
+            }
+            landscapeData[i][j] = inputState;
+        }
+    }
+
+
+    // Construct the grid object, that models the landscape from this data.
+    grid = Grid(columns, rows, landscapeData);
+    }
     catch(exception &exception)
     {
-        cerr << "Standard Exception: " << exception.what() << endl;
+        cerr << "Exception: " << exception.what() << endl;
+        // Need to make sure we release all the memory that was allocated in the data array since it might not reach the stage where it is 
+        // normally released if an exception is thrown.
+        for(int i = 0; i < columns; ++i)
+    {
+        delete [] landscapeData[i];
+    }
+
+    delete [] landscapeData;
         return 1;
     }
-    
 
-    // Set a uniform predator distriubtion between 0 and 5.0 across the whole grid.
-    grid.setUniformDistribution(1.0, 1.0, generator);
+    // Now that the data is all stored in the grid the landscape data can be deleted and its memory freed. 
+    for(int i = 0; i < columns; ++i)
+    {
+        delete [] landscapeData[i];
+    }
 
+    delete [] landscapeData;
+
+
+
+
+
+    /**************************************************************************************************
+     ************************************ ALGORITHM AND OUTPUT ****************************************
+     **************************************************************************************************/
     
-    
+    // Set uniform predator and prey distriubtions between 0 and 5.0 across the whole grid.
+    grid.setUniformDistribution(5.0, 5.0, generator);
 
     
      // Total time for simulation. 
@@ -130,7 +238,6 @@ int main(int argc, char const *argv[])
      int numIterations = int(t/deltaT);
 
      // Invterval at which to print the predator and prey densities to the command line. 
-
      int averageDenOutputFreq = 10;
 
 
@@ -141,13 +248,17 @@ int main(int argc, char const *argv[])
      // Name of output file for average densities
      string averageDensitiesOutput("./output/Average_Densities.txt");
 
+
      // Create an output file for the average densities.
      ofstream output_avrg_dens(averageDensitiesOutput, ios::out);
 
+
      if(output_avrg_dens.is_open())
      {
+
      // Print the column titles for the average density outputs
      output_avrg_dens << "Time    Pred Dens.    Prey Dens." << endl;
+     
      }
 
      for(int iter = 1; iter <= numIterations; ++iter)
@@ -185,9 +296,16 @@ int main(int argc, char const *argv[])
     }
 
     }
+
+
+   /**************************************************************************************************
+    *************************************** TIDYING UP ***********************************************
+    **************************************************************************************************/
+     
     
    // Print the destination of outputfiles.
    cout << "Average densities have been printed to " << averageDensitiesOutput << endl; 
+
    
    // Register that the program has completed.
    auto end = std::chrono::system_clock::now();
