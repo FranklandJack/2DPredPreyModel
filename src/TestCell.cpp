@@ -29,12 +29,12 @@ void TestCell::testInit()
 
 void TestCell::testGetPredDensity()
 {
-    CPPUNIT_ASSERT(2.0 == a->getPredDensity());
+    CPPUNIT_ASSERT_DOUBLES_EQUAL(2.0, a->getPredDensity());
 }
 
 void TestCell::testGetPreyDensity()
 {
-    CPPUNIT_ASSERT(1.0 == a->getPreyDensity());
+    CPPUNIT_ASSERT_DOUBLES_EQUAL(1.0, a->getPreyDensity());
 }
 
 void TestCell::testGetState()
@@ -53,13 +53,13 @@ void TestCell::testSetState()
 void TestCell::testSetPreyDensity()
 {
     b->setPreyDensity(5.0);
-    CPPUNIT_ASSERT(1.0 == b->m_preyDensity);
+    CPPUNIT_ASSERT_DOUBLES_EQUAL(5.0, b->m_preyDensity);
 }
 
 void TestCell::testSetPredDensity()
 {
     b->setPredDensity(5.0);
-    CPPUNIT_ASSERT(5.0 == b->m_predDensity);
+    CPPUNIT_ASSERT_DOUBLES_EQUAL(5.0, b->m_predDensity);
 
 }
 
