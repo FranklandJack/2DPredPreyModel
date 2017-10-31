@@ -1,32 +1,42 @@
-#include <cppunit/CompilerOutputter.h>
-#include <cppunit/extensions/TestFactoryRegistry.h>
+#include <stdio.h>
+#include <string.h>
+
+#include <cppunit/BriefTestProgressListener.h>
 #include <cppunit/TestResult.h>
 #include <cppunit/TestResultCollector.h>
-#include <cppunit/TestRunner.h>
-#include <cppunit/BriefTestProgressListener.h>
+#include <cppunit/TextOutputter.h>
+#include <cppunit/XmlOutputter.h>
+#include <cppunit/extensions/HelperMacros.h>
+#include <cppunit/extensions/TestFactoryRegistry.h>
+#include <cppunit/ui/text/TestRunner.h>
 
-int main (int argc, char* argv[])
+/*
+ * Set up and run tests.
+ *
+ * @return 0 if successful else 1.
+ */
+int main() 
 {
-    // informs test-listener about testresults
-    CPPUNIT_NS :: TestResult testresult;
+  // Set up result collection.
+  CppUnit::TestResult controller; 
+  CppUnit::TestResultCollector result; 
+  controller.addListener(&result); 
+  CppUnit::BriefTestProgressListener progressListener;
+  controller.addListener(&progressListener);
 
-    // register listener for collecting the test-results
-    CPPUNIT_NS :: TestResultCollector collectedresults;
-    testresult.addListener (&collectedresults);
+  std::ofstream xmlout("TestResults.xml"); 
+  CppUnit::XmlOutputter xmlOutputter (&result, xmlout); 
+  CppUnit::TextOutputter consoleOutputter (&result, std::cout); 
 
-    // register listener for per-test progress output
-    CPPUNIT_NS :: BriefTestProgressListener progress;
-    testresult.addListener (&progress);
+  CppUnit::TextUi::TestRunner runner;
+  CppUnit::TestFactoryRegistry &registry =
+    CppUnit::TestFactoryRegistry::getRegistry();
+  runner.addTest(registry.makeTest());
 
-    // insert test-suite at test-runner by registry
-    CPPUNIT_NS :: TestRunner testrunner;
-    testrunner.addTest (CPPUNIT_NS :: TestFactoryRegistry :: getRegistry ().makeTest ());
-    testrunner.run (testresult);
+  runner.run(controller); 
+  
+  xmlOutputter.write(); 
+  consoleOutputter.write(); 
 
-    // output results in compiler-format
-    CPPUNIT_NS :: CompilerOutputter compileroutputter (&collectedresults, std::cerr);
-    compileroutputter.write ();
-
-    // return 0 if tests were successful
-    return collectedresults.wasSuccessful () ? 0 : 1;
+  return result.wasSuccessful() ? 0 : 1; 
 }
