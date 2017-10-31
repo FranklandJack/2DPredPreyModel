@@ -52,9 +52,14 @@ void Cell::setPreyDensity(double preyDensity)
      * of the value of predDensity, since in these two cases the density is unphysical. 
      *
      */
-    if(preyDensity < 0.0 || Wet == m_state) m_preyDensity = 0.0;
+    if(preyDensity < 0.0 || Wet == m_state) 
+    {
+        m_preyDensity = 0.0;
+    }
     else
+    {
         m_preyDensity = preyDensity;
+    }
 }
 
 void Cell::setState(Cell::State state){m_state = state;}
