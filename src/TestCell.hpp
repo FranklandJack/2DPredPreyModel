@@ -36,7 +36,10 @@ class TestCell : public CPPUNIT_NS::TestFixture
 
         // Add test method testSetState
         CPPUNIT_TEST(testGetState);
-
+        //new tests for check
+        CPPUNIT_TEST( testConstructorWet );
+        CPPUNIT_TEST( testConstructorDry );
+        CPPUNIT_TEST( testConstructorDryNegative );
         // Finish the process
         CPPUNIT_TEST_SUITE_END();
 
@@ -70,6 +73,10 @@ class TestCell : public CPPUNIT_NS::TestFixture
 
         // Test method testSetState
         void testSetState();
+       //new tests
+        void testConstructorWet();
+        void testConstructorDry();
+        void testConstructorDryNegative();
 
     private:
 
