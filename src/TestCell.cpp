@@ -45,7 +45,7 @@ void TestCell::testGetState()
 void TestCell::testSetPreyDensity()
 {
     b->setPreyDensity(5.0);
-    CPPUNIT_ASSERT(2.0 == b->m_preyDensity);
+    CPPUNIT_ASSERT(1.0 == b->m_preyDensity);
 }
 
 void TestCell::testSetPredDensity()
