@@ -45,8 +45,8 @@ void TestCell::testGetState()
 void TestCell::testSetState()
 {
 
-    b->setState(Cell::Wet);
-    CPPUNIT_ASSERT(Cell::Dry == b->m_state);
+    //b->setState(Cell::Wet);
+    CPPUNIT_ASSERT(b->setState(Cell::Wet) == b->m_state);
 
 }
 
