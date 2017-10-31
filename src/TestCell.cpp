@@ -58,7 +58,7 @@ void TestCell::testSetPredDensity()
 void TestCell::testSetState()
 {
 
-    b->setState(Cell::Dry);
+    b->setState(Cell::Wet);
     CPPUNIT_ASSERT(Cell::Dry == b->m_state);
 
 }
