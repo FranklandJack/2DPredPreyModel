@@ -52,14 +52,14 @@ void TestCell::testSetState()
 
 void TestCell::testSetPreyDensity()
 {
-    //b->setPreyDensity(5.0);
+    a->setPreyDensity(5.0);
     CPPUNIT_ASSERT_DOUBLES_EQUAL(2.0, a->getPreyDensity(), 0.0001);
 }
 
 void TestCell::testSetPredDensity()
 {
-    //b->setPredDensity(5.0);
-    CPPUNIT_ASSERT_DOUBLES_EQUAL(5.0, b->getPredDensity(), 0.0001);
+    a->setPredDensity(5.0);
+    CPPUNIT_ASSERT_DOUBLES_EQUAL(5.0, a->getPredDensity(), 0.0001);
 
 }
 
