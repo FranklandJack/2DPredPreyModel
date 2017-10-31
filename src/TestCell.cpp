@@ -45,6 +45,7 @@ void TestCell::testGetState()
 void TestCell::testSetPreyDensity()
 {
     b->setPreyDensity(5.0);
+    std::cout<<b->m_preyDensity;
     CPPUNIT_ASSERT(5.0 == b->m_preyDensity);
 }
 
