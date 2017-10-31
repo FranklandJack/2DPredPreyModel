@@ -58,7 +58,7 @@ void TestCell::testSetPreyDensity()
 
 void TestCell::testSetPredDensity()
 {
-    b->setPredDensity(5.0);
+    //b->setPredDensity(5.0);
     CPPUNIT_ASSERT_DOUBLES_EQUAL(5.0, b->getPredDensity(), 0.0001);
 
 }
