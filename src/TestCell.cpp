@@ -23,7 +23,7 @@ void TestCell::tearDown()
 void TestCell::testInit()
 {
 
-    CPPUNIT_ASSERT(Cell::Wet == c->m_state);
+    CPPUNIT_ASSERT(Cell::Dry == c->m_state);
 
 }
 
@@ -39,7 +39,7 @@ void TestCell::testGetPreyDensity()
 
 void TestCell::testGetState()
 {
-    CPPUNIT_ASSERT(Cell::Wet == a->getState());
+    CPPUNIT_ASSERT(Cell::Dry == a->getState());
 }
 
 void TestCell::testSetState()
