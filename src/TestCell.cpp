@@ -42,6 +42,14 @@ void TestCell::testGetState()
     CPPUNIT_ASSERT(Cell::Dry == a->getState());
 }
 
+void TestCell::testSetState()
+{
+
+    b->setState(Cell::Wet);
+    CPPUNIT_ASSERT(Cell::Dry == b->m_state);
+
+}
+
 void TestCell::testSetPreyDensity()
 {
     b->setPreyDensity(5.0);
@@ -55,11 +63,5 @@ void TestCell::testSetPredDensity()
 
 }
 
-void TestCell::testSetState()
-{
 
-    b->setState(Cell::Wet);
-    CPPUNIT_ASSERT(Cell::Dry == b->m_state);
-
-}
 
