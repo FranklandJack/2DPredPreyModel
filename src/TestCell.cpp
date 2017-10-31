@@ -87,14 +87,16 @@ TestCell::testConstructorDry()
 void 
 TestCell::testConstructorDryNegative()
 {
-  	const Cell::State stateDryNegative = Cell::Dry;
+  const Cell::State stateDryNegative = Cell::Dry;
 	const double predDensityDryNegative = -1.23;
 	const double preyDensityDryNegative = -4.56;
+
 	Cell CellDryNegative(stateDryNegative,predDensityDryNegative,preyDensityDryNegative);
+
 	CPPUNIT_ASSERT_EQUAL( stateDryNegative, CellDryNegative.getState() );
-    CPPUNIT_ASSERT_EQUAL( 0.0, CellDryNegative.getPredDensity() );
-	CPPUNIT_ASSERT_EQUAL( 0.0, CellDryNegative.getPreyDensity() );
-  }
+  CPPUNIT_ASSERT_DOUBLES_EQUAL( 0.0, CellDryNegative.getPredDensity(), 0.0001 );
+	CPPUNIT_ASSERT_DOUBLES_EQUAL( 0.0, CellDryNegative.getPreyDensity(), 0.0001 );
+}
 
 
 
