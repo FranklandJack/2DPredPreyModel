@@ -19,7 +19,7 @@ predprey: $(OBJ_FILES) $(HEADERS)
 	$(CXX) -o $@ -std=c++11  $^ $(INC) 
 
 predprey-cppunittests: $(HEADERS) $(CPPUNITTESTS) CppunitTestDriver.o
-	$(CXX) -o $@ -std=c++11  $^ $(INC) $(CPPUNITLDFLAGS) 
+	$(CXX) -std=c++11 -o $@  $^ $(INC) $(CPPUNITLDFLAGS) 
 
 
 %.o : $(SRC_DIR)/%.cpp $(HEADERS)
