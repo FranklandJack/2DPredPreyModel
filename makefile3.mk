@@ -1,7 +1,4 @@
-CXX=c++
-LDFLAGS=-lcunit
 
-CPPUNITLDFLAGS=-lcppunit
 
 CPPUNIT_PATH=$(HOME)/include
 

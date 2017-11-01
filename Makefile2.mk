@@ -15,18 +15,18 @@ OBJ_FILES=$(patsubst $(SRC_DIR)/%.cpp, %.o, $(SRC_FILES))
 CPPUNITTESTS=TestCell.o
 
 
-predprey: $(OBJ_FILES) $(HEADERS)
-	$(CXX) -o $@ -std=c++11  $^ $(INC) 
+predprey: $(OBJ_FILES) 
+	$(CXX) -std=c++11 -o $@  $^ 
 
-predprey-cppunittests: $(HEADERS) $(CPPUNITTESTS)  CppunitTestDriver.o
-	$(CXX) -std=c++11 -o $@  $^ -L$(INC) $(OBJ_FILES) $(CPPUNITLDFLAGS) 
+predprey-cppunittests: $(HEADERS) $(CPPUNITTESTS) $(OBJ_FILES) CppunitTestDriver.o
+	$(CXX) -std=c++11 -o $@  $^ $(INC) Cell.o $(CPPUNITLDFLAGS) 
 
 
 %.o : $(SRC_DIR)/%.cpp $(HEADERS)
-	$(CXX) -std=c++11 -c $< -o $@ -L$(INC) 
+	$(CXX) -std=c++11 -c $< -o $@ $(INC) 
 
 %.o : $(TEST_DIR)/%.cpp $(HEADERS)
-	$(CXX) -std=c++11 -c $< -o $@ -L$(INC) 
+	$(CXX) -std=c++11 -c $< -o $@ $(INC) 
 
 .PHONY : test
 test : predprey-cppunittests
