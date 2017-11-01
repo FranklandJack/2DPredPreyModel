@@ -35,7 +35,7 @@ EXE_TEST=predprey-cppunittests
 $(EXE_FILE): $(OBJ_FILES) 
 	$(CXX) -std=c++11 -o $@  $^ 
 
-$(EXE_TEST): $(TEST_OBJ_FILES)
+$(EXE_TEST): $(TEST_OBJ_FILES) Cell.o
 	$(CXX) -std=c++11 -o $@  $^ $(INC) $(CPPUNITLDFLAGS) 
 
 ## objs      : create object files
@@ -49,7 +49,7 @@ objs : $(OBJ_FILES)
 	$(CXX) -std=c++11 -c $< -o $@ $(INC) 
 
 
-
+## test    : create and run unit tests
 .PHONY : test
 test : predprey-cppunittests
 	./$<
