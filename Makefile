@@ -9,7 +9,7 @@ OBJ_FILES=$(patsubst $(SRC_DIR)/%.cpp, %.o, $(SRC_FILES))
 TEST_DIR=test
 TEST_HEADERS=$(wildcard $(TEST_DIR)/*.hpp)
 TEST_SRC_FILES=$(wildcard $(TEST_DIR)/*.cpp)
-TEST_OBJ_FILES=$(patsubst $(TEST_DIR)/%.cpp, %.o, $(TEST_FILES))
+TEST_OBJ_FILES=$(patsubst $(TEST_DIR)/%.cpp, %.o, $(TEST_SRC_FILES))
 
 
 PNM_DIR=landscapes
