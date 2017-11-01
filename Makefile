@@ -76,6 +76,7 @@ clean :
 
 	rm -f $(OUT_FILES)
 	rm -f $(DAT_FILES)
+	rm -f TestResults.xml
 
 ## variables : Print variables
 .PHONY :variables
