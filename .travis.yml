@@ -9,7 +9,6 @@ before_install:
   - make install
   - ls $HOME/include/cppunit
   - ls $HOME/lib
-  - ls $HOME/share/cppunit
   - cd ..
   - export CPLUS_INCLUDE_PATH=$HOME/include:$CPLUS_INCLUDE_PATH
   - export LIBRARY_PATH=$HOME/lib:$LIBRARY_PATH
