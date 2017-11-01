@@ -26,7 +26,7 @@ TestGrid::testConstructor()
 	const int **inputStates = &landStates;
 	const Cell::State stateWet = Cell::Wet;
 	const Cell::State stateDry = Cell::Dry;
-  	const int cellStates [numberColumns][numberRows]={{stateDry,stateWet,stateWet},{stateDry,stateWet,stateWet}};
+  	const int cellStates [numberColumns][numberRows]={{stateWet,stateDry,stateDry},{stateWet,stateDry,stateDry}};
 	
 	Grid NewGrid(numberColumns, numberRows, inputStates);
 
