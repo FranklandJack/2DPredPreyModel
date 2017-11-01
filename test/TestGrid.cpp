@@ -3,7 +3,19 @@ const double precision=0.0001;
 
 CPPUNIT_TEST_SUITE_REGISTRATION(TestGrid);
 
+void TestGrid::setUp()
+{
 
+    
+}
+
+void TestGrid::tearDown()
+{
+
+    
+
+}
+/*
 void 
 TestGrid::testConstructor()
 {
@@ -15,12 +27,12 @@ TestGrid::testConstructor()
         CPPUNIT_ASSERT_DOUBLES_EQUAL( numberColumns, NewGrid.getColumns(), precision);
         CPPUNIT_ASSERT_DOUBLES_EQUAL( numberRows, NewGrid.getRows(), precision);
         //Is there an easy way to check the cell states of NewGird?
-/*      for(int i=0; i<=1; ++i){
+     for(int i=0; i<=1; ++i){
               for(int j=0; j<=2; ++j){
                  CPPUNIT_ASSERT_EQUAL( landStates[i][j], NewGrid.?());
               }
         }
-  */
+  
   }
-
+*/
 

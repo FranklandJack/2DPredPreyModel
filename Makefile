@@ -45,7 +45,7 @@ objs : $(OBJ_FILES)
 %.o : $(SRC_DIR)/%.cpp $(HEADERS)
 	$(CXX) -std=c++11 -c $< -o $@ $(INC) 
 
-%.o : $(TEST_DIR)/%.cpp $(HEADERS)
+%.o : $(TEST_DIR)/%.cpp $(TEST_HEADERS)
 	$(CXX) -std=c++11 -c $< -o $@ $(INC) 
 
 
