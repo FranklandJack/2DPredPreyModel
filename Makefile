@@ -21,7 +21,6 @@ OUT_FILES=$(wildcard $(OUT_DIR)/*)
 
 
 CXX=c++
-LDFLAGS=-lcunit
 CPPUNITLDFLAGS=-lcppunit
 INC=-I$(SRC_DIR) -I$(TEST_DIR) -I$(HOME)/include
 
@@ -40,10 +39,10 @@ $(EXE_TEST): $(TEST_OBJ_FILES) Cell.o Grid.o
 
 ## objs      : create object files
 .PHONY : objs
-objs : $(OBJ_FILES)
+objs : $(OBJ_FILES) $(TEST_OBJ_FILES)
 
 %.o : $(SRC_DIR)/%.cpp $(HEADERS)
-	$(CXX) -std=c++11 -c $< -o $@ $(INC) 
+	$(CXX) -std=c++11 -c $< -o $@ $(INC)
 
 %.o : $(TEST_DIR)/%.cpp $(TEST_HEADERS)
 	$(CXX) -std=c++11 -c $< -o $@ $(INC) 
