@@ -9,6 +9,7 @@ before_install:
   - ./configure --prefix=$HOME
   - make
   - make install
+  - ls $HOME
   - ls $HOME/include/cppunit
   - ls $HOME/lib
   - ls $HOME/share/cppunit
