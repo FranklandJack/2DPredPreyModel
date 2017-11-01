@@ -35,7 +35,7 @@ EXE_TEST=predprey-cppunittests
 $(EXE_FILE): $(OBJ_FILES) 
 	$(CXX) -std=c++11 -o $@  $^ 
 
-$(EXE_TEST): $(TEST_OBJ_FILES) Cell.o
+$(EXE_TEST): $(TEST_OBJ_FILES) Cell.o Grid.o
 	$(CXX) -std=c++11 -o $@  $^ $(INC) $(CPPUNITLDFLAGS) 
 
 ## objs      : create object files
