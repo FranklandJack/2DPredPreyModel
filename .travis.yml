@@ -7,11 +7,13 @@ before_install:
   - ./configure --prefix=$HOME
   - make
   - make install
-  - ls -R $HOME
+  - ls $HOME/include/cppunit
+  - ls $HOME/lib
+  - ls $HOME/share/cppunit
   - cd ..
-  - export CPLUS_INCLUDE_PATH=$TRAVIS_BUILD_DIR/include:$CPLUS_INCLUDE_PATH
-  - export LIBRARY_PATH=$TRAVIS_BUILD_DIR/lib:$LIBRARY_PATH
-  - export LD_LIBRARY_PATH=$TRAVIS_BUILD_DIR/lib:$LD_LIBRARY_PATH
+  - export CPLUS_INCLUDE_PATH=$HOME/include:$CPLUS_INCLUDE_PATH
+  - export LIBRARY_PATH=$HOME/lib:$LIBRARY_PATH
+  - export LD_LIBRARY_PATH=$HOME/lib:$LD_LIBRARY_PATH
   
 script:
   - make test
