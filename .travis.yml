@@ -1,6 +1,8 @@
 language: cpp
 
 before_install:
+  - echo $TRAVIS_BUILD_DIR
+  - echo $HOME
   - wget http://dev-www.libreoffice.org/src/cppunit-1.13.2.tar.gz
   - tar -xvzf cppunit-1.13.2.tar.gz
   - cd cppunit-1.13.2
