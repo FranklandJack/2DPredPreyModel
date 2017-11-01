@@ -29,13 +29,13 @@ INC=-I$(SRC_DIR) -I$(TEST_DIR) -I$(HOME)/include
 CPPUNITTESTS=TestCell.o
 
 EXE_FILE=predprey
-TEST_EXE=predprey-cppunittests
+EXE_TEST=predprey-cppunittests
 
 
 $(EXE_FILE): $(OBJ_FILES) 
 	$(CXX) -std=c++11 -o $@  $^ 
 
-$(TEST_EXE): $(TEST_OBJ_FILES)
+$(EXE_TEST): $(TEST_OBJ_FILES)
 	$(CXX) -std=c++11 -o $@  $^ $(INC) $(CPPUNITLDFLAGS) 
 
 ## objs      : create object files
