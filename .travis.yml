@@ -1,1 +1,15 @@
 language: cpp
+
+before_install:
+  - wget http://dev-www.libreoffice.org/src/cppunit-1.13.2.tar.gz
+  - tar -xvzf cppunit-1.13.2.tar.gz
+  - cd cppunit-1.13.2
+  - ./configure --prefix=$HOME
+  - make
+  - make install
+  - export CPLUS_INCLUDE_PATH=$TRAVIS_BUILD_DIR/include:$C_INCLUDE_PATH
+  - export LIBRARY_PATH=$TRAVIS_BUILD_DIR/lib:$LIBRARY_PATH
+  - export LD_LIBRARY_PATH=$TRAVIS_BUILD_DIR/lib:$LD_LIBRARY_PATH
+
+script:
+  - make test
