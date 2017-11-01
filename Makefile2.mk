@@ -18,8 +18,8 @@ CPPUNITTESTS=TestCell.o
 predprey: $(OBJ_FILES) 
 	$(CXX) -std=c++11 -o $@  $^ 
 
-predprey-cppunittests: $(HEADERS) $(CPPUNITTESTS) $(OBJ_FILES) CppunitTestDriver.o
-	$(CXX) -std=c++11 -o $@  $^ $(INC) Cell.o $(CPPUNITLDFLAGS) 
+predprey-cppunittests: $(HEADERS) $(CPPUNITTESTS) Cell.o CppunitTestDriver.o
+	$(CXX) -std=c++11 -o $@  $^ $(INC) $(CPPUNITLDFLAGS) 
 
 
 %.o : $(SRC_DIR)/%.cpp $(HEADERS)
