@@ -12,7 +12,7 @@ before_install:
   - ls $HOME
   - ls $HOME/include/cppunit
   - ls $HOME/lib
-  - ls $HOME/share/cppunit
+  - ls $HOME/share
   - cd ..
   - export CPLUS_INCLUDE_PATH=$TRAVIS_BUILD_DIR/include:$C_INCLUDE_PATH
   - export LIBRARY_PATH=$TRAVIS_BUILD_DIR/lib:$LIBRARY_PATH
