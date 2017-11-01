@@ -16,17 +16,17 @@ CPPUNITTESTS=TestCell.o
 
 
 predprey: $(OBJ_FILES) $(HEADERS)
-	$(CXX) -std=c++11  $^ $(INC) -o $@
+	$(CXX) -o $@ -std=c++11  $^ $(INC) 
 
 predprey-cppunittests: $(HEADERS) $(CPPUNITTESTS) CppunitTestDriver.o
-	$(CXX) -std=c++11  $^ $(INC) $(CPPUNITLDFLAGS) -o $@
+	$(CXX) -o $@ -std=c++11  $^ $(INC) $(CPPUNITLDFLAGS) 
 
 
 %.o : $(SRC_DIR)/%.cpp $(HEADERS)
-	$(CXX) -std=c++11 -c $< $(INC) -o $@
+	$(CXX) -std=c++11 -c $< -o $@ $(INC) 
 
 %.o : $(TEST_DIR)/%.cpp $(HEADERS)
-	$(CXX) -std=c++11 -c $< $(INC) -o $@
+	$(CXX) -std=c++11 -c $< -o $@ $(INC) 
 
 .PHONY : test
 test : predprey-cppunittests
