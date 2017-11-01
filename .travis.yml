@@ -2,7 +2,7 @@ language: cpp
 
 before_install:
   - echo $HOME
-  - ls $HOME
+  - ls -R $HOME
   - wget http://dev-www.libreoffice.org/src/cppunit-1.13.2.tar.gz
   - tar -xvzf cppunit-1.13.2.tar.gz
   - cd cppunit-1.13.2
