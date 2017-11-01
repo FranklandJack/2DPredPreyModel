@@ -116,42 +116,25 @@ int main(int argc, char const *argv[])
     // Take the first command line argument as the landscape input file.
     ifstream input_Landscape(argv[1], ios::in);
 
-    // First value in the file should be the number of columns.
-    input_Landscape >> columns;
+    // First value in the file should be the number of columns and second value in the file should be the number of rows.
+    input_Landscape >> columns >> rows;
 
-    // If extraction fails in columns we need to throw an exception since the grid cannot be constructed. 
+    // If extraction fails in columns or rows we need to throw an exception since the grid cannot be constructed. 
     if(input_Landscape.fail()) 
     {
-        throw std::runtime_error("#columns is of incorrect type");
+        throw std::runtime_error("#columns or #rows is of incorrect type");
     }
 
 
-    // Need to make sure the number of columns is physical, i.e. positive definite.
-    if(columns <= 0) 
+    // Need to make sure the number of columns and rows is physical, i.e. positive definite.
+    if(columns <= 0 || rows <= 0) 
     {
-        // Throw an exception here since we cannot intupret negative columns, so the code shouldn't run until it is dealt with.
-        throw std::runtime_error("#columns in input is unphysical");
+        // Throw an exception here since we cannot intupret negative columns or rows, so the code shouldn't run until it is dealt with.
+        throw std::runtime_error("#columns or #rows in input is unphysical");
 
     }
 
-    
-    // Second value in the file should be the number of rows.
-    input_Landscape >> rows;
-
-    // If extraction fails in rows we need to throw an exception since the grid cannot be constructed. 
-    if(input_Landscape.fail()) 
-    {
-        throw std::runtime_error("#rows is of incorrect type");
-    }
-
-    // Need to make sure the number of rows is physical, i.e. positive definite.
-    if(rows <= 0) 
-    {
-        // Throw an exception here since we cannot non-positive rows, so the code shouln't run until it is dealt with.
-        throw std::runtime_error("#rows in input is unphysical");
-
-    }
-    
+        
 
     // The rest of the data in the file is the actual landscape. The landscape data will be temporarliy stored in a 2D array. Which will
     // need to be dynamically allocated, since the size is not known at compile time.
