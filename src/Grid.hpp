@@ -211,9 +211,7 @@ class Grid
          */
         int getRows() const;
         
-        //returns the state (Wet or Dry) of a cell in the grid
-        Cell::State getCellState(int rowIndex, int columnIndex);
-    
+            
         /**
          *
          * \brief Sets uniform random predator distribution in each grid cell.
