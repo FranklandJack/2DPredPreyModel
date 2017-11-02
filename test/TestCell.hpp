@@ -13,29 +13,30 @@
 class TestCell : public CPPUNIT_NS::TestFixture
 {
 
-        // Establish the test suit of TestCell
+        /// Establish the test suit of TestCell
         CPPUNIT_TEST_SUITE(TestCell);
 
         // Add test method testInit
         CPPUNIT_TEST(testInit);
 
-        // Add test method testGetPredatorDensity
+        /// Add test method to test the predator density getter.
         CPPUNIT_TEST(testGetPredDensity);
 
-        // Add test method testGetPreyDensity
+        /// Add test method to test the prey density getter.
         CPPUNIT_TEST(testGetPreyDensity);
 
-        // Add test method testGetState
+        /// Add test metho to test the state getter.
         CPPUNIT_TEST(testGetState);
 
-        // Add test method testSetPredatorDensity
+        /// Add test method to test the predator density setter.
         CPPUNIT_TEST(testSetPredDensity);
 
-        // Add test method testSetPreyDensity 
+        // Add test method to test the prey density setter.
         CPPUNIT_TEST(testSetPreyDensity);
 
-        // Add test method testSetState
-        CPPUNIT_TEST(testGetState);
+        // Add test method to test the state setter.
+        CPPUNIT_TEST(testSetState);
+
         //new tests for check
         CPPUNIT_TEST( testConstructorWet );
         CPPUNIT_TEST( testConstructorDry );
@@ -73,6 +74,8 @@ class TestCell : public CPPUNIT_NS::TestFixture
 
         // Test method testSetState
         void testSetState();
+
+
        //new tests
         void testConstructorWet();
         void testConstructorDry();
@@ -80,8 +83,23 @@ class TestCell : public CPPUNIT_NS::TestFixture
 
     private:
 
-        // Three instances of Grid for test
-    Cell *a , *b, *c;
+    /// Three test cases for the fixture. 
+
+    /// Test case for a dry cell with positive predator and prey densities. 
+    Cell *dryPosDens;
+
+    /// Test case for a wet cell with positive predator and prey densities. 
+    Cell *wetPosDens;
+    
+    /// Test case for a dry cell with negative densities.
+    Cell *dryNegDens;
+
+    /// Test case for a wet cell with negative densities. 
+    Cell *wetNegDens;
+
+
+    // Delta value within which doubles are considered equal.
+    const double precision = 0.0001;
 };
 
 #endif /* TestCell_hpp */

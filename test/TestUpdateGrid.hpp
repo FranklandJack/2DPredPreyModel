@@ -77,6 +77,12 @@ class TestUpdateGrid : public CPPUNIT_NS::TestFixture
     // Third is a realistic grid which will have density values set after it is constructed and then its densities after each iteration will be compared to those
     // calulated by hand.
     Grid *realisticGrid;
+
+    // Delta value within which doubles are considered equal.
+    const double precision = 0.0001;
+
+    // Number of time updates to do to the grid when they are being tested
+    const int    numberTestIterations = 10;
 };
 
 #endif /* TestUpdateGrid_hpp */

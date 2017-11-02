@@ -1,6 +1,4 @@
 #include "TestUpdateGrid.hpp"
-const double precision=0.0001;
-const int    numberTestIterations = 10;
 
 CPPUNIT_TEST_SUITE_REGISTRATION(TestUpdateGrid);
 
@@ -14,13 +12,13 @@ void TestUpdateGrid::setUp()
     const int wet = 0;
     const int dry = 1;
 
-    int** wetLandscape         = new int*[columnCount];
-    int** zeroDensityLandscape = new int*[columnCount];
+    int** wetLandscape          = new int*[columnCount];
+    int** zeroDensityLandscape  = new int*[columnCount];
     int** realisticLandscape    = new int*[columnCount];
      
     for(int i = 0; i < columnCount; ++i)
     {
-        wetLandscape[i]      = new int[rowCount];
+        wetLandscape[i]         = new int[rowCount];
         zeroDensityLandscape[i] = new int[rowCount];
         realisticLandscape[i]   = new int[rowCount]; 
     }

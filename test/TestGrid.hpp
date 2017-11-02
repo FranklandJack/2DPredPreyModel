@@ -27,8 +27,7 @@ class TestGrid : public CPPUNIT_NS::TestFixture
 
     public:
 
-        // Precision value for comparing doubles in any assert statments.
-        const double precision = 0.0001;
+        
 
         // Overide setUp(), init data etc
         void setUp();
@@ -48,8 +47,11 @@ class TestGrid : public CPPUNIT_NS::TestFixture
 
     private:
 
-        // Three instances of Grid for test
+    // Three instances of Grid for test
     Cell *a , *b, *c;
+
+    // Delta value within which doubles are considered equal.
+    const double precision = 0.0001;
 };
 
 #endif /* TestCell_hpp */
