@@ -17,7 +17,7 @@ class TestUpdateGrid : public CPPUNIT_NS::TestFixture
         // Establish the test suit of TestCell
         CPPUNIT_TEST_SUITE(TestUpdateGrid);
 
-        CPPUNIT_TEST(TestUpdated);
+        CPPUNIT_TEST(testWetGridUpdated);
 
         // Finish the process
         CPPUNIT_TEST_SUITE_END();
@@ -37,7 +37,7 @@ class TestUpdateGrid : public CPPUNIT_NS::TestFixture
 
     protected:
 
-        void TestUpdated();
+        void testWetGridUpdated();
 
         
 
@@ -45,8 +45,26 @@ class TestUpdateGrid : public CPPUNIT_NS::TestFixture
 
     private:
 
-        // Three instances of Grid for test
-    Grid *emptyGrid , *zeroDensityGrid, *realisticGrid;
+    // Test parameters for updating the grid will just be default values of 1 for everything since we can easily check these are correct.
+    const int r = 1;
+    const int a = 1;
+    const int b = 1;
+    const int m = 1;
+    const int k = 1;
+    const int l = 1;
+    const double deltaT = 1.0;
+
+    // Three instances of Grid for test
+
+    // First is a grid that is wet everywhere, so the densities should be zero everywhere even after updating.
+    Grid *wetGrid;
+
+    // Second is a grid with intial predator and prey densities of zero everywhere, this system should stay at zero everywhere, even after updating.
+    Grid *zeroDensityGrid;
+
+    // Third is a realistic grid which will have density values set after it is constructed and then its densities after each iteration will be compared to those
+    // calulated by hand.
+    Grid *realisticGrid;
 };
 
 #endif /* TestUpdateGrid_hpp */
