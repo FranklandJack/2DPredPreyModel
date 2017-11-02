@@ -21,6 +21,8 @@ OUT_FILES=$(wildcard $(OUT_DIR)/*)
 
 
 CXX=c++
+CPPSTD=-std=c++11 
+DEBUG=-g
 CPPUNITLDFLAGS=-lcppunit
 INC=-I$(SRC_DIR) -I$(TEST_DIR) -I$(HOME)/include
 
@@ -32,20 +34,20 @@ EXE_TEST=predprey-cppunittests
 
 
 $(EXE_FILE): $(OBJ_FILES) 
-	$(CXX) -std=c++11 -o $@  $^ 
+	$(CXX) $(CPPSTD) $(DEBUG) -o $@  $^ 
 
 $(EXE_TEST): $(TEST_OBJ_FILES) Cell.o Grid.o
-	$(CXX) -std=c++11 -o $@  $^ $(INC) $(CPPUNITLDFLAGS) 
+	$(CXX) $(CPPSTD) $(DEBUG) -o $@  $^ $(INC) $(CPPUNITLDFLAGS) 
 
 ## objs      : create object files
 .PHONY : objs
 objs : $(OBJ_FILES) $(TEST_OBJ_FILES)
 
 %.o : $(SRC_DIR)/%.cpp $(HEADERS)
-	$(CXX) -std=c++11 -c $< -o $@ $(INC)
+	$(CXX) $(CPPSTD) $(DEBUG) -c $< -o $@ $(INC)
 
 %.o : $(TEST_DIR)/%.cpp $(TEST_HEADERS)
-	$(CXX) -std=c++11 -c $< -o $@ $(INC) 
+	$(CXX) $(CPPSTD) $(DEBUG) -c $< -o $@ $(INC) 
 
 
 ## test    : create and run unit tests

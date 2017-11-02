@@ -29,19 +29,55 @@ where:
 - k is the diffusion rate for hares. 
 - l is the diffusion rate for pumas.
 
+## Prerequisites
+
+The source code in this project makes use of C++ move semantics, as such it needs to be compiled under the c++11 standard (or higher) hence the compiler on the user's machine must be C++11 compliant. 
+
+The unit test framework used is cppunit. To download, build and install see [CppUnit](http://www.freedesktop.org/wiki/Software/cppunit/), or do the following:
+```$ wget http://dev-www.libreoffice.org/src/cppunit-1.13.2.tar.gz
+$ tar -xvzf cppunit-1.13.2.tar.gz
+$ cd cppunit-1.13.2
+$ ./configure --prefix=$HOME
+$ make
+$ make install 
+$ ls $HOME/include/cppunit
+AdditionalMessage.h          Protector.h           TestResultCollector.h
+Asserter.h                   SourceLine.h          TestResult.h
+BriefTestProgressListener.h  SynchronizedObject.h  TestRunner.h
+CompilerOutputter.h          TestAssert.h          TestSuccessListener.h
+config                       TestCaller.h          TestSuite.h
+config-auto.h                TestCase.h            TextOutputter.h
+Exception.h                  TestComposite.h       TextTestProgressListener.h
+extensions                   TestFailure.h         TextTestResult.h
+Message.h                    TestFixture.h         TextTestRunner.h
+Outputter.h                  Test.h                tools
+plugin                       TestLeaf.h            ui
+portability                  TestListener.h        XmlOutputter.h
+Portability.h                TestPath.h            XmlOutputterHook.h
+$ ls $HOME/lib
+libcppunit-1.13.so.0      libcppunit.a   libcppunit.so
+libcppunit-1.13.so.0.0.2  libcppunit.la
+$ ls $HOME/share/cppunit
+html
+$ export CPLUS_INCLUDE_PATH=$HOME/include:$CPLUS_INCLUDE_PATH
+$ export LIBRARY_PATH=$HOME/lib:$LIBRARY_PATH
+$ export LD_LIBRARY_PATH=$HOME/lib:$LD_LIBRARY_PATH```
+
+These instructions were taken from: <https://github.com/softwaresaved/build_and_test_examples/blob/master/cpp/README.md>
+
 
 ## Instructions
 - To build the code run: ``` make ```  
 
 - To run the code run: ```./PredPrey YOURINPUTLANDSCAPEDATA.dat ```  
 
-- To run the tests:  run ```!!!!!!!!!!!!!```  
+- To build and run the tests run: ```make test```  
 
-- To generate the dat files for input from any .pnm files you have to just place your pnm files in the landscapes directory and run: ```make dats``` which will generate the .dats files and place them in the main 2DPredPreyModel directory. 
+- To generate the dat files for input from any .pnm files you have to just place your pnm files in the landscapes directory and run: ```make dats``` which will generate the .dats files and place them in the main 2DPredPreyModel directory ready to be run with the executuble. 
 
-- To generate complete documentation run: ```doxygen Doxyfile```  
+- For a full list of make functionality run: ```make help``` 
 
-- For a full list of make functionality run: ```make help```  
+- To generate the code documentation run: ```doxygen Doxyfile```  which will output into the documentation directory two subdirectories called latex and html. To generate the reference manual ```mv documentation/latex``` and run ```make``` which will create a refman.pdf. The generated html documentation can be viewed by pointing a HTML broweser to the index.html file in the html directory.
 
 ## Input Formatting
 
