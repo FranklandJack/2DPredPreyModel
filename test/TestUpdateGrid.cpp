@@ -97,9 +97,7 @@ void TestUpdateGrid::testWetGridUpdated()
 
     updateGrid(*wetGrid, r, a, b, m, k, l, deltaT);
 
-    // Do the specified number of iterations, checking on each one that the densities match the expected values.
-    for(int iteration = 1; iteration <= numberTestIterations; ++iteration)
-    {
+    
 
         for(int columnIndex = 1; columnIndex <= wetGrid->getColumns(); ++columnIndex)
         {
@@ -114,9 +112,6 @@ void TestUpdateGrid::testWetGridUpdated()
             }
         }
 
-    }
-    
-
     CPPUNIT_ASSERT(!hasFailed);
 }
 
@@ -128,9 +123,7 @@ void TestUpdateGrid::testZeroDensityGridUpdated()
 
     updateGrid(*zeroDensityGrid, r, a, b, m, k, l, deltaT);
 
-    // Do the specified number of iterations, checking on each one that the densities match the expected values.
-    for(int iteration = 1; iteration <= numberTestIterations; ++iteration)
-    {
+       
 
         for(int columnIndex = 1; columnIndex <= zeroDensityGrid->getColumns(); ++columnIndex)
         {
@@ -144,9 +137,6 @@ void TestUpdateGrid::testZeroDensityGridUpdated()
             }
         }
 
-    }
-    
-
     CPPUNIT_ASSERT(!hasFailed);
 }
 
@@ -156,58 +146,50 @@ void TestUpdateGrid::testRealisticGridUpdated()
     CPPUNIT_ASSERT(true);
 }
 
-void 
-TestGrid::updateFunctionGrid()
+void TestGrid::updateFunctionGrid()
 {
-     const double r = 0.02;
-	 const double a = 0.04;
-	 const double b = 0.6;
-	 const double m = 0.3;
-	 const double k = 0.4;
-	 const double l = 0.15;
-	 const double deltaT = 0.8;
-
-	 const int numberColumns = 2;
+     const int numberColumns = 2;
      const int numberRows = 1;
-     const int landStates [numberColumns][numberRows]={{1},{1}};
-     const Cell::State stateWet = Cell::Wet;
-     const Cell::State stateDry = Cell::Dry;
-     const int cellStates [numberColumns][numberRows]={{stateDry},{stateDry}};
-	 const double predDensityWet = 0.0;
-     const double preyDensityWet = 0.0;
      const double preyDensityDry1 = 7.96;
-	 const double predDensityDry1 = 2.38;
-	 const double preyDensityDry2 = 5.28;
-	 const double predDensityDry2 = 6.34;
+     const double predDensityDry1 = 2.38;
+     const double preyDensityDry2 = 5.28;
+     const double predDensityDry2 = 6.34;
      
 
-	 //I have to change that!!!!
-     const int **inputStates = &landStates;
-     Grid oldGrid(numberColumns, numberRows, inputStates);
+	
+     int** landStates = new int*[numberColumns];
+     for(int columnIndex = 0; columnIndex < numberColumns; ++columnIndex)
+     {
+        landStates[columnIndex] = new int[numberRows]; 
+     }
+     landStates[0][0] = 1;
+     landStates[1][0] = 1;
+	
+     Grid oldGrid(numberColumns, numberRows, landStates);
 
-	 oldGrid(numberColumns-1, numberRows).setPreyDensity(preyDensityDry1);
-	 oldGrid(numberColumns-1, numberRows).setPredDensity(predDensityDry1);
-	 oldGrid(numberColumns, numberRows).setPreyDensity(preyDensityDry2);
-	 oldGrid(numberColumns, numberRows).setPredDensity(predDensityDry2);
+     oldGrid(numberColumns-1, numberRows).setPreyDensity(preyDensityDry1);
+     oldGrid(numberColumns-1, numberRows).setPredDensity(predDensityDry1);
+     oldGrid(numberColumns, numberRows).setPreyDensity(preyDensityDry2);
+     oldGrid(numberColumns, numberRows).setPredDensity(predDensityDry2);
 
-	 double newPreyDensity1 = preyDensityDry1 + deltaT * ( r * preyDensityDry1 - a * preyDensityDry1 * predDensityDry1 +
+     double newPreyDensity1 = preyDensityDry1 + deltaT * ( r * preyDensityDry1 - a * preyDensityDry1 * predDensityDry1 +
                                k * ( preyDensityDry2 - preyDensityDry1 ) );
 	 
      double newPredDensity1 = predDensityDry1 + deltaT * ( b * preyDensityDry1 * predDensityDry1 - m * predDensityDry1 +
                                l * ( predDensityDry2 - predDensityDry1)  );
 
-	 double newPreyDensity2 = preyDensityDry2 + deltaT * ( r * preyDensityDry2 - a * preyDensityDry2 * predDensityDry2 +
+     double newPreyDensity2 = preyDensityDry2 + deltaT * ( r * preyDensityDry2 - a * preyDensityDry2 * predDensityDry2 +
                                k * ( preyDensityDry1 - preyDensityDry2 ) );
 
-	 double newPredDensity2 = predDensityDry2 + deltaT * ( b * preyDensityDry2 * predDensityDry2 - m * predDensityDry2 +
+     double newPredDensity2 = predDensityDry2 + deltaT * ( b * preyDensityDry2 * predDensityDry2 - m * predDensityDry2 +
                                l * ( predDensityDry1 - predDensityDry2)  );
 
-	 newGrid = updateGrid(oldGrid, r, a, b, m, k, l, deltaT);
+     newGrid = updateGrid(oldGrid, r, a, b, m, k, l, deltaT);
 
-	 CPPUNIT_ASSERT_DOUBLES_EQUAL( newPreyDensity1, newGrid(numberColumns-1, numberRows).getPreyDensity() , precision);
-	 CPPUNIT_ASSERT_DOUBLES_EQUAL( newPredDensity1, newGrid(numberColumns-1, numberRows).getPredDensity() , precision);
-	 CPPUNIT_ASSERT_DOUBLES_EQUAL( newPreyDensity2, newGrid(numberColumns, numberRows).getPreyDensity() , precision);
-	 CPPUNIT_ASSERT_DOUBLES_EQUAL( newPredDensity2, newGrid(numberColumns, numberRows).getPredDensity() , precision);
+     CPPUNIT_ASSERT_DOUBLES_EQUAL( newPreyDensity1, newGrid(numberColumns-1, numberRows).getPreyDensity() , precision);
+     CPPUNIT_ASSERT_DOUBLES_EQUAL( newPredDensity1, newGrid(numberColumns-1, numberRows).getPredDensity() , precision);
+     CPPUNIT_ASSERT_DOUBLES_EQUAL( newPreyDensity2, newGrid(numberColumns, numberRows).getPreyDensity() , precision);
+     CPPUNIT_ASSERT_DOUBLES_EQUAL( newPredDensity2, newGrid(numberColumns, numberRows).getPredDensity() , precision);
 }
 
 
