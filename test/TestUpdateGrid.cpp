@@ -1,5 +1,6 @@
 #include "TestUpdateGrid.hpp"
 
+
 CPPUNIT_TEST_SUITE_REGISTRATION(TestUpdateGrid);
 
 void TestUpdateGrid::setUp()
@@ -104,11 +105,12 @@ void TestUpdateGrid::testWetGridUpdated()
         {
             for(int rowIndex = 1; rowIndex <= wetGrid->getRows(); ++rowIndex)
             {
-                // Since the whole grid is wet, every grid cell should have zero predator and prey density.
-                if(0.0 != (*wetGrid)(columnIndex, rowIndex).getPredDensity() || 0.0 != (*wetGrid)(columnIndex, rowIndex).getPreyDensity())
-                {
-                    hasFailed = true;
-                }
+                // Since the whole grid is wet, every grid cell should have zero predator density... 
+                CPPUNIT_ASSERT_DOUBLES_EQUAL(0.0, (*wetGrid)(columnIndex, rowIndex).getPredDensity(), precision);
+                
+                // ... and zero prey density.
+                CPPUNIT_ASSERT_DOUBLES_EQUAL(0.0, (*wetGrid)(columnIndex, rowIndex).getPreyDensity(), precision);
+                
             }
         }
 

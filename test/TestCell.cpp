@@ -49,6 +49,8 @@ void TestCell::testSetPosPredDensity()
 
 }
 
+
+
 void TestCell::testSetPosPreyDensity()
 {
     dryPosDens->setPreyDensity(5.0);
@@ -80,7 +82,7 @@ void TestCell::testSetStateWet()
 {
     dryPosDens->setState(Cell::Wet);
     CPPUNIT_ASSERT(Cell::Wet == dryPosDens->m_state);
-    
+
 }
 
 

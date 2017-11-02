@@ -185,9 +185,9 @@ int main(int argc, char const *argv[])
         // Need to make sure we release all the memory that was allocated in the data array since it might not reach the stage where it is 
         // normally released if an exception is thrown.
         for(int i = 0; i < columns; ++i)
-    {
+        {
         delete [] landscapeData[i];
-    }
+        }   
 
     delete [] landscapeData;
         return 1;
