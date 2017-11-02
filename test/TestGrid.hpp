@@ -19,7 +19,8 @@ class TestGrid : public CPPUNIT_NS::TestFixture
         // Add test method testInit
         //CPPUNIT_TEST(testInit);
 
-        CPPUNIT_TEST( testConstructor );
+        CPPUNIT_TEST(testConstructor1);
+        CPPUNIT_TEST(testConstructor2);
 
         // Finish the process
         CPPUNIT_TEST_SUITE_END();
@@ -35,7 +36,8 @@ class TestGrid : public CPPUNIT_NS::TestFixture
         // Overide tearDown(), free allocated memory,etc
         void tearDown();
         
-        void testConstructor();
+        void testConstructor1();
+        void testConstructor2();
 
     protected:
 
