@@ -19,6 +19,10 @@ class TestUpdateGrid : public CPPUNIT_NS::TestFixture
 
         CPPUNIT_TEST(testWetGridUpdated);
 
+        CPPUNIT_TEST(testZeroDensityGridUpdated);
+
+        CPPUNIT_TEST(testRealisticGridUpdated);
+
         // Finish the process
         CPPUNIT_TEST_SUITE_END();
 
@@ -37,12 +41,20 @@ class TestUpdateGrid : public CPPUNIT_NS::TestFixture
 
     protected:
 
+        // Test to see whether a grid that is wet everywhere remains at zero density everywhere.
         void testWetGridUpdated();
 
-        
 
-        
+        // Test to see whether a grid that initially has zero density everywhere stays at zero density after updating.
+        void testZeroDensityGridUpdated();
 
+
+        // Test to see whether a realistic grid with non-zero densities updates as expected. 
+        void testRealisticGridUpdated();
+
+
+
+    
     private:
 
     // Test parameters for updating the grid will just be default values of 1 for everything since we can easily check these are correct.
