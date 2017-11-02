@@ -69,17 +69,17 @@ These instructions were taken from: <https://github.com/softwaresaved/build_and_
 
 
 ## Instructions
-- To build the code run: ``` make ```  
+- To build the code run: ```$ make ```  
 
-- To run the code run: ```./PredPrey YOURINPUTLANDSCAPEDATA.dat ```  
+- To run the code run: ```$ ./PredPrey YOURINPUTLANDSCAPEDATA.dat ```  
 
-- To build and run the tests run: ```make test```  
+- To build and run the tests run: ```$ make test```  
 
-- To generate the dat files for input from any .pnm files you have to just place your pnm files in the landscapes directory and run: ```make dats``` which will generate the .dats files and place them in the main 2DPredPreyModel directory ready to be run with the executuble. 
+- To generate the dat files for input from any .pnm files you have to just place your pnm files in the landscapes directory and run: ```$ make dats``` which will generate the .dats files and place them in the main 2DPredPreyModel directory ready to be run with the executuble. 
 
-- For a full list of make functionality run: ```make help``` 
+- For a full list of make functionality run: ```$ make help``` 
 
-- To generate the code documentation run: ```doxygen Doxyfile```  which will output into the documentation directory two subdirectories called latex and html. To generate the reference manual ```mv documentation/latex``` and run ```make``` which will create a refman.pdf. The generated html documentation can be viewed by pointing a HTML broweser to the index.html file in the html directory.
+- To generate the code documentation run: ```$ doxygen Doxyfile```  which will output into the documentation directory two subdirectories called latex and html. To generate the reference manual ```$ mv documentation/latex``` and run ```$ make``` which will create a refman.pdf. The generated html documentation can be viewed by pointing a HTML broweser to the index.html file in the html directory.
 
 ## Input Formatting
 
