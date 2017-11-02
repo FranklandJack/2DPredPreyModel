@@ -10,7 +10,7 @@ Grid::Grid()
 
 Grid::Grid(std::ifstream& inputFile)
 {
-    // First two numbers in file are number of coloumns and number of rows
+    // First two numbers in file are number of columns and number of rows
     // First get the number of columns.
     inputFile >> m_columns;
 
@@ -24,7 +24,7 @@ Grid::Grid(std::ifstream& inputFile)
     // Need to make sure the number of columns is physical, i.e. positive definite.
     if(m_columns <= 0) 
     {
-        // Throw an exception here since we cannot intupret negative columns, so the code shouln't run until it is dealt with.
+        // Throw an exception here since we cannot interpret negative columns, so the code should not run until it is dealt with.
         throw std::runtime_error("#columns in input is unphysical");
 
     }
@@ -41,19 +41,16 @@ Grid::Grid(std::ifstream& inputFile)
     // Need to make sure the number of rows is physical, i.e. positive definite.
     if(m_rows <= 0) 
     {
-        // Throw an exception here since we cannot non-positive rows, so the code shouln't run until it is dealt with.
+        // Throw an exception here since we cannot non-positive rows, so the code should not run until it is dealt with.
         throw std::runtime_error("#rows in input is unphysical");
 
     }
 
 
     /*
-     *
      * To include the halo the number of rows and columns need to be increased by 2
      * so that there is an extra row on the top and bottom and extra column on either side.
-     *
      */
-
     int arraySizeIncBufffer = (m_columns+2)*(m_rows+2);
 
     // The actual array size doesn't include the halo.
@@ -66,10 +63,8 @@ Grid::Grid(std::ifstream& inputFile)
     for(int cellIndex = 0; cellIndex < arraySizeIncBufffer; ++cellIndex)
     {
         /* 
-         *
          * Initially a Wet cell with predator and prey densities of zero is copied into every 
          * entry in the Grid Cell array including the halo cells.
-         *
          */
         Cell::State  initialState       = Cell::Wet;
         double       initialPredDensity = 0.0;
@@ -81,7 +76,6 @@ Grid::Grid(std::ifstream& inputFile)
     /*
      * The rest of data in file is just the array of 0 and 1.
      * Start indexing from top since first entry will be at largest y-coordinate, then move along each row.
-     *
      */
 
     // Counters defined so we can ensure the number of columns/rows in the actual grid match the number of columns/rows defined at the top of the file.
@@ -92,15 +86,14 @@ Grid::Grid(std::ifstream& inputFile)
     {
         for(int i = 1; i <= m_columns; ++i)
         {
-        
             // Take the input Integer which is wet (= 0) or dry (= 1)
             int inputState = 0;
             inputFile >> inputState;
 
-            // Check to see that input was sucessful, if not an exception is thrown since failed extraction will lead to a crash if the grid is used in a main method.
+            // Check to see that input was successful, if not an exception is thrown since failed extraction will lead to a crash if the grid is used in a main method.
             if(inputFile.fail())
             {
-                throw std::runtime_error("anomolous grid entry is of incorrect type");
+                throw std::runtime_error("anomalous grid entry is of incorrect type");
             }
 
             // Check to see that the input was of type 0 or 1 and throw an exception otherwise since cannot interpret other integers.
@@ -110,10 +103,8 @@ Grid::Grid(std::ifstream& inputFile)
             }
 
             /* 
-             *
              * Since the state is an enum which has two possible values Wet (= 0) and Dry (= 1)
              * we can convert the input integer into the correct enum State value
-             *
              */
             Cell::State state = static_cast<Cell::State>(inputState);
             
@@ -129,10 +120,8 @@ Grid::Grid(std::ifstream& inputFile)
 Grid::Grid(int columns, int rows , int ** const data):m_columns(columns), m_rows(rows)
 {
     /*
-     *
      * To include the halo the number of rows and columns need to be increased by 2
      * so that there is an extra row on the top and bottom and extra column on either side.
-     *
      */
     int arraySizeIncBufffer = (m_columns+2)*(m_rows+2);
 
@@ -148,10 +137,8 @@ Grid::Grid(int columns, int rows , int ** const data):m_columns(columns), m_rows
     for(int cellIndex = 0; cellIndex < arraySizeIncBufffer; ++cellIndex)
     {
         /*
-         *
          * Initially a Wet cell with predator and prey densities of zero is copied into every 
          * entry in the Grid Cell array including the halo cells.
-         *
          */
         Cell::State  initialState       = Cell::Wet;
         double       initialPredDensity = 0.0;
@@ -169,14 +156,12 @@ Grid::Grid(int columns, int rows , int ** const data):m_columns(columns), m_rows
         for(int i = 1; i <= m_columns; ++i)
         {
             /* 
-             *
              * Since the state is an enum which has two possible values Wet (= 0) and Dry (= 1), and  and each value in the input 
              * data array is 0 (for wet) or 1 (for dry) each array entry can be converted into the State data type.
              *
+             * The data from the input is indexed from 0, however the actual landscape data is indexed from 1, in line with the specification
+             * therefore a shift by -1 is required in the x and y directions in the input data to match the coordinates correctly.
              */
-
-             // The data from the input is indexed from 0, however the actual landscape data is indexed from 1, inline with the specification
-             // therefore a shift by -1 is required in the x and y directions in the input data to match the coordinates correctly.
              Cell::State state = static_cast<Cell::State>(data[i-1][j-1]);   
 
 
@@ -198,17 +183,15 @@ Grid::Grid(const Grid& sourceGrid): m_rows(sourceGrid.m_rows),
     if(nullptr != sourceGrid.m_cellArray)
     {
         /*
-        *
-        * To include the halo the number of rows and columns need to be increased by 2
-        * so that there is an extra row on the top and bottom and extra column on either side.
-        *
-        */
+         * To include the halo the number of rows and columns need to be increased by 2
+         * so that there is an extra row on the top and bottom and extra column on either side.
+         */
         int arraySizeIncBufffer = (m_rows+2)*(m_columns+2);
 
         // The 1-D array of Cells is allocated dynamically from the heap and includes the halo.
         m_cellArray = new Cell[arraySizeIncBufffer];
 
-        // The cells are copied and placed in the newely allocated array, including the halo. 
+        // The cells are copied and placed in the newly allocated array, including the halo. 
         for(int j = 0; j < m_rows + 2; ++j)
         {
             for (int i = 0; i < m_columns + 2; ++i)
@@ -219,7 +202,7 @@ Grid::Grid(const Grid& sourceGrid): m_rows(sourceGrid.m_rows),
 
     }
 
-    // If copying from a grid with a null-pointer in its array member variable the new array is made null aswell.
+    // If copying from a grid with a null-pointer in its array member variable the new array is made null as well.
     else
     {
         m_cellArray = nullptr;
@@ -233,13 +216,11 @@ Grid::Grid(Grid&& sourceGrid): m_rows(sourceGrid.m_rows),
                                m_cellArray(sourceGrid.m_cellArray)
 {
     /*
-     * 
-     * Ownership of member variables in sourceGrid is transfered to the new grid. 
+     * Ownership of member variables in sourceGrid is transferred to the new grid. 
      *
      * Ownership of the member variables is then removed from the sourceGrid. 
      * Technically since m_columns and m_cellArray are just Integer variables that are non-dynamic they do not need to 
      * have their ownership by the sourceGrid removed, it is only done here for completeness. 
-     *
      */
     sourceGrid.m_rows    = 0;
     sourceGrid.m_columns = 0;
@@ -253,20 +234,16 @@ Grid& Grid::operator=(const Grid& sourceGrid)
     if(this == &sourceGrid)
     {
         /*
-         *
-         * If self assignment has occured then the method can return early since there is nothing to do. 
+         * If self assignment has occurred then the method can return early since there is nothing to do. 
          * Return *this so assignment operations can be chained together.
-         *
          */
         return *this;
     }
 
 
     /*
-     *
-     * Current memory held by the m_cellArray must be dealocated to avoid a memory leak. 
+     * Current memory held by the m_cellArray must be deallocated to avoid a memory leak. 
      * The same memory cannot be reused since more or less might be required.
-     *
      */
     delete [] m_cellArray;
 
@@ -278,17 +255,15 @@ Grid& Grid::operator=(const Grid& sourceGrid)
     if(nullptr != sourceGrid.m_cellArray)
     {
         /*
-        *
-        * To include the halo the number of rows and columns need to be increased by 2
-        * so that there is an extra row on the top and bottom and extra column on either side.
-        *
-        */
+         * To include the halo the number of rows and columns need to be increased by 2
+         * so that there is an extra row on the top and bottom and extra column on either side.
+         */
         int arraySizeIncBufffer = (m_rows+2)*(m_columns+2);
 
         // The 1-D array of Cells is allocated dynamically from the heap and includes the halo.
         m_cellArray = new Cell[arraySizeIncBufffer];
 
-        // The cells are copied and placed in the newely allocated array, including the halo.
+        // The cells are copied and placed in the newly allocated array, including the halo.
         for(int j = 0; j < m_rows + 2; ++j)
         {
             for (int i = 0; i < m_columns + 2; ++i)
@@ -299,7 +274,7 @@ Grid& Grid::operator=(const Grid& sourceGrid)
 
     }
 
-    // If copying from a grid with a null-pointer in its array member variable the new array is made null aswell.
+    // If copying from a grid with a null-pointer in its array member variable the new array is made null as well.
     else
     {
         m_cellArray = nullptr;
@@ -318,20 +293,18 @@ Grid& Grid::operator=(Grid&& sourceGrid)
     // Check against self assignment using memory addresses.
     if(&sourceGrid == this)
     {
-        // If self assignment has occured then the method can return early since there is nothing to do.
+        // If self assignment has occurred then the method can return early since there is nothing to do.
         return *this;
     }
 
     /*
-     *
-     * Current memory held by the m_cellArray must be dealocated to avoid a memory leak. 
+     * Current memory held by the m_cellArray must be deallocated to avoid a memory leak. 
      * The same memory cannot be reused since more or less might be required.
-     *
      */
     delete [] m_cellArray;
 
 
-    // Ownership of member variables in sourceGrid is transfered to the new grid. 
+    // Ownership of member variables in sourceGrid is transferred to the new grid. 
     m_rows    = sourceGrid.m_rows;
     m_columns = sourceGrid.m_columns;
     m_cellArray = sourceGrid.m_cellArray;
@@ -340,7 +313,6 @@ Grid& Grid::operator=(Grid&& sourceGrid)
      * Ownership of the member variables is then removed from the sourceGrid. 
      * Technically since m_columns and m_cellArray are just Integer variables that are non-dynamic they do not need to 
      * have their ownership by the sourceGrid removed, it is only done here for completeness. 
-     *
      */
     sourceGrid.m_rows      = 0;
     sourceGrid.m_columns   = 0;
@@ -365,13 +337,13 @@ int Grid::getRows()    const {return m_rows;}
 
 Cell::State Grid::getCellState(int columnIndex, int rowIndex) const
 {
-         return (*this)(columnIndex,rowIndex).getState();
+    return (*this)(columnIndex,rowIndex).getState();
 }
 
 
 void Grid::setUniformPredDistribution(double upperBound, std::default_random_engine &generator)
 {
-    // Create a uniform distribution of random numbers between 0.0 and upperbound.
+    // Create a uniform distribution of random numbers between 0.0 and upper bound.
     std::uniform_real_distribution<double> distribution(0.0,upperBound);
 
     // Loop through the entire grid not including the halo, hence only index from 1 to m_row and 1 to m_column.
@@ -379,7 +351,7 @@ void Grid::setUniformPredDistribution(double upperBound, std::default_random_eng
     {
         for(int i = 1; i <= m_columns; ++i)
         {             
-            // Acting on the generator with the distribution produces a new psuedo random number in the range (0.0, upperBound) according to the uniform distribution.
+            // Acting on the generator with the distribution produces a new pseudo random number in the range (0.0, upperBound) according to the uniform distribution.
             double randomDensity = distribution(generator);
 
             // Set each cell to have a random density. 
@@ -391,7 +363,7 @@ void Grid::setUniformPredDistribution(double upperBound, std::default_random_eng
 
 void Grid::setUniformPreyDistribution(double upperBound, std::default_random_engine &generator)
 {
-    // Create a uniform distribution of random numbers between 0.0 and upperbound.
+    // Create a uniform distribution of random numbers between 0.0 and upper bound.
     std::uniform_real_distribution<double> distribution(0.0,upperBound);
 
     // Loop through the entire grid not including the halo, hence only index from 1 to m_row and 1 to m_column.
@@ -399,7 +371,7 @@ void Grid::setUniformPreyDistribution(double upperBound, std::default_random_eng
     {
         for(int i = 1; i <= m_columns; ++i)
         {
-            // Acting on the generator with the distribution produces a new psuedo random number in the range (0.0, upperBound) according to the uniform distribution.
+            // Acting on the generator with the distribution produces a new pseudo random number in the range (0.0, upperBound) according to the uniform distribution.
             double randomDensity = distribution(generator);
 
             // Set each cell to have a random density. 
@@ -426,10 +398,10 @@ double Grid::predDensity(bool includeWetCells) const
     {
         for(int i = 1; i <= m_columns; ++i)
         {
-            /// Add the pred densities of each cell up.
+            // Add the predator densities of each cell up.
             totalPredDensity += (*this)(i,j).getPredDensity();
 
-            /// Total up the number of Wet cells as well.
+            // Total up the number of Wet cells as well.
             if(Cell::Wet == !((*this)(i,j).getState()))
             {
                 ++totalNumbWetCells;
@@ -501,14 +473,12 @@ Cell& Grid::operator()(int i, int j)
 {
     
     /*
-     *
      * This formula accounts for the fact that m_cellArray is a "2D-landscape" being stored as a 1-D array. 
      * It allows the caller, and anyone using the function to continue thinking of the data as a 2-D array
      * of 0 (water) and 1 (land), which simplifies access. The index system is chosen to be consistent with 
      * the specification document which is described in detail in the class summary. Note that this means that 
      * the 0th row and 0th column and m_columns + 1 and m_rows + 1 rows correspond to the halo of water that bounds
      * the grid.
-     *
      */
     return m_cellArray[i + (m_rows + 1 - j) * (m_columns+2)];
 }
@@ -516,7 +486,7 @@ Cell& Grid::operator()(int i, int j)
 
 const Cell& Grid::operator()(int i, int j) const
 {
-    // See the non-constant version of this overload for the implmentation explanation. 
+    // See the non-constant version of this overload for the implementation explanation. 
     return m_cellArray[i + (m_rows + 1 - j) * (m_columns+2)];
 }
 
@@ -526,7 +496,7 @@ int Grid::dryNeighbours(int i, int j) const
     // Check the cell to the right of the cell in question.
     if(Cell::Dry == (*this)(i+1,j).getState()) ++totalDry;
 
-    // Check the vell to the left of the cell in question.
+    // Check the cell to the left of the cell in question.
     if(Cell::Dry == (*this)(i-1,j).getState()) ++totalDry;
 
     // Check the cell above the cell in question. 
@@ -544,11 +514,9 @@ std::ostream& operator<<(std::ostream& out, const Grid& grid)
     out << grid.m_columns <<" "<< grid.m_rows << "\n";
 
     /*
-     * 
      * Output works from the top of the grid first i.e. the largest y-coordinate so that the grid is not 
      * output upside down. So output goes from "top" to "bottom"  and "left" to "right" and doesn't include
      * the halo of Wet cells since these are not part of the actual grid. 
-     *
      */
     for(int j = grid.m_rows; j >= 1; --j)
     {
@@ -556,10 +524,8 @@ std::ostream& operator<<(std::ostream& out, const Grid& grid)
         for(int i = 1; i <= grid.m_columns; ++i)
         {
             /* 
-             *
              * The state should be converted into an integer so it can be printed. Since it is an enum with only two 
              * states Wet (= 0) and Dry (= 1) a cast will give the correct 0s and 1s representing the states in the grid. 
-             *
              */
             Cell::State state = grid(i,j).getState();
             int stateOutput = static_cast<int>(state);
@@ -569,10 +535,9 @@ std::ostream& operator<<(std::ostream& out, const Grid& grid)
         // Print a newline at the end of each column for the correct format.
         out<<'\n';
     }
-
+    
     // Return the output stream so we can chain together outputs 
     return out;
-
 }
 
 
@@ -586,7 +551,6 @@ void Grid::printDensities(std::ostream& out) const
             // Print column number, then row number, followed by predator density, then prey density. 
             out << i << " " << j << " " << (*this)(i,j).getPredDensity() << " " << (*this)(i,j).getPreyDensity() << std::endl;
         }
-
     }
 }
 
@@ -625,7 +589,5 @@ void Grid::printPPM(std::ofstream &file) const
             file << std::endl;
 
         }
-
-
     }
 }

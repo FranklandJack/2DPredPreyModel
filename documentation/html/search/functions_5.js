@@ -5,5 +5,6 @@ var searchData=
   ['setstate',['setState',['../class_cell.html#ac388ff95a4d94da1497847ead859f258',1,'Cell']]],
   ['setuniformdistribution',['setUniformDistribution',['../class_grid.html#a17c062fcf4063a811bd8d95c32bce723',1,'Grid']]],
   ['setuniformpreddistribution',['setUniformPredDistribution',['../class_grid.html#a3a67056a86378f8ce24cdf3c19ee7817',1,'Grid']]],
-  ['setuniformpreydistribution',['setUniformPreyDistribution',['../class_grid.html#a2f366ddaaa75475a9597f9a85ab24d59',1,'Grid']]]
+  ['setuniformpreydistribution',['setUniformPreyDistribution',['../class_grid.html#a2f366ddaaa75475a9597f9a85ab24d59',1,'Grid']]],
+  ['setup',['setUp',['../class_test_cell.html#a2b9eac7e600f08cff408df54562daa61',1,'TestCell']]]
 ];

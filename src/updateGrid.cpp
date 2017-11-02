@@ -18,7 +18,7 @@ Grid updateGrid(Grid& grid, double r, double a, double b, double m, double k, do
             {
             int     dryNeighbours  = grid.dryNeighbours(i,j);
 
-
+            // This is the implementation of the differential equations provided in the coursework development pdf.
             double newPreyDensity = grid(i,j).getPreyDensity() + deltaT * ( r * grid(i,j).getPreyDensity() - a * grid(i,j).getPreyDensity() * grid(i,j).getPredDensity() +
                                k * ( ( grid(i-1,j).getPreyDensity() + grid(i+1,j).getPreyDensity() + grid(i,j-1).getPreyDensity() + grid(i,j+1).getPreyDensity() ) -
                                    dryNeighbours * grid(i,j).getPreyDensity() )  );

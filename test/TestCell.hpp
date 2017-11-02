@@ -4,12 +4,17 @@
 #include <cppunit/extensions/HelperMacros.h>
 #include <cppunit/TestFixture.h>
 #include "Cell.hpp"
-/*
-*
-* A test case that is designed to produce
-* example errors and failures
-*
-*/
+
+/**
+ *
+ * \class TestCell
+ *
+ * \brief Tests the Cell class.  
+ *
+ * This test class is written using the CppUnit test framework and tests the various methods of the Cell class.
+ *
+ *
+ */
 class TestCell : public CPPUNIT_NS::TestFixture
 {
 
@@ -22,7 +27,7 @@ class TestCell : public CPPUNIT_NS::TestFixture
         /// Add test method to test the prey density getter.
         CPPUNIT_TEST(testGetPreyDensity);
 
-        /// Add test metho to test the state getter.
+        /// Add test method to test the state getter.
         CPPUNIT_TEST(testGetState);
 
         /// Add test method to test the predator density setter for positive densities.
@@ -63,10 +68,10 @@ class TestCell : public CPPUNIT_NS::TestFixture
 
     public:
 
-        /// Overide setUp(), init data etc.
+        /// Override setUp(), initialise test cases etc.
         void setUp();
 
-        /// Overide tearDown(), free allocated memory,etc.
+        /// Override tearDown(), free allocated memory in test cases, etc.
         void tearDown();
 
     protected:
@@ -224,7 +229,7 @@ class TestCell : public CPPUNIT_NS::TestFixture
         /// Test case for a dry cell with negative prey density.
         Cell *dryNegPreyDensCell;
 
-        /// Test case for a cell which is construted via the default constructor.
+        /// Test case for a cell which is constructed via the default constructor.
         Cell *defaultCell;
 
 

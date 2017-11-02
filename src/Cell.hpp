@@ -1,4 +1,14 @@
+#ifndef Cell_hpp
+#define Cell_hpp
+
+// Forward declare the test class so we can friend it to the cell and then the test class will have access to the member variables.
+class TestCell;
+
+
 /**
+ *
+ * \file
+ *
  * \class Cell
  *
  * \brief Models a single cell
@@ -6,14 +16,6 @@
  * A cell forms a single "square" in the landscape and is considered to have three properties
  * a predator density, a prey density and whether or not the cell is land (so dry) or water (so wet)
  */
-
-
-#ifndef Cell_hpp
-#define Cell_hpp
-
-// Forward declare the test class
-class TestCell;
-
 class Cell
 {
     public:

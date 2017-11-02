@@ -16,7 +16,7 @@ Models a 2D landscape of cells.
 \begin{DoxyCompactList}\small\item\em Default constructor. \end{DoxyCompactList}\item 
 \hyperlink{class_grid_a88ab1ccc8100827b4da40e62b7b77e96}{Grid} (std\+::ifstream \&input\+File)
 \begin{DoxyCompactList}\small\item\em Creates \hyperlink{class_grid}{Grid} objects from some input file representing the \hyperlink{class_grid}{Grid}. \end{DoxyCompactList}\item 
-\hyperlink{class_grid_a9422d584f13d6e3bba52d3e15b3aecae}{Grid} (int columns, int rows, const int $\ast$data)
+\hyperlink{class_grid_ab64f5607521a89e7a2fb99cbfa5f2b44}{Grid} (int columns, int rows, int $\ast$$\ast$const data)
 \begin{DoxyCompactList}\small\item\em Creates \hyperlink{class_grid}{Grid} objects from some input array representing the \hyperlink{class_grid}{Grid}. \end{DoxyCompactList}\item 
 \hyperlink{class_grid_a2be5432331273bc420c252ea09631965}{Grid} (const \hyperlink{class_grid}{Grid} \&source\+Grid)
 \begin{DoxyCompactList}\small\item\em Creates \hyperlink{class_grid}{Grid} objects from a source \hyperlink{class_grid}{Grid} with deep copying. \end{DoxyCompactList}\item 
@@ -49,10 +49,16 @@ const \hyperlink{class_cell}{Cell} \& \hyperlink{class_grid_aa89f5c17cb78658f3b8
 int \hyperlink{class_grid_a50f4c0db20b466c84a1d65004e51642e}{dry\+Neighbours} (int i, int j) const
 \begin{DoxyCompactList}\small\item\em Calulates number of Dry neighbours of a given cell. \end{DoxyCompactList}\item 
 void \hyperlink{class_grid_a4971cb9d47440bc63488993d5647f943}{print\+Densities} (std\+::ostream \&out) const
-\begin{DoxyCompactList}\small\item\em Outputs predator and prey densities to output stream. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Outputs predator and prey densities to output stream. \end{DoxyCompactList}\item 
+void \hyperlink{class_grid_a518355eee78ffbe468034fed65bbcb48}{print\+P\+PM} (std\+::ofstream \&file) const
+\begin{DoxyCompactList}\small\item\em Prints the densities of the predators and prey to a ppm file provided. \end{DoxyCompactList}\item 
+\hyperlink{class_cell_a21d74a2efcb79c93e5649b06a50b7cf5}{Cell\+::\+State} \hyperlink{class_grid_a425801f2747d6be34c10eb6535ab0829}{get\+Cell\+State} (int column\+Index, int row\+Index) const
+\begin{DoxyCompactList}\small\item\em Retrieves state of cell at a given coordinate. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Friends}
 \begin{DoxyCompactItemize}
 \item 
+class \hyperlink{class_grid_ac2cfb15a02d10acf2c124625070a2de8}{Test\+Grid}
+\begin{DoxyCompactList}\small\item\em Test class for the grid. \end{DoxyCompactList}\item 
 std\+::ostream \& \hyperlink{class_grid_a3513576c9cced69b185e4be8fe248e8c}{operator$<$$<$} (std\+::ostream \&out, const \hyperlink{class_grid}{Grid} \&grid)
 \begin{DoxyCompactList}\small\item\em Operator overload for outputting the grid. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
@@ -83,11 +89,11 @@ Creates a grid of size 0 with a nullptr as its grid \mbox{\Hypertarget{class_gri
 
 Creates \hyperlink{class_grid}{Grid} objects from some input file representing the \hyperlink{class_grid}{Grid}. 
 
-This constructor will dynamically allocate a 1-\/D array of Cells with a halo of water cells, which represents the 2-\/D landscape. \mbox{\Hypertarget{class_grid_a9422d584f13d6e3bba52d3e15b3aecae}\label{class_grid_a9422d584f13d6e3bba52d3e15b3aecae}} 
+This constructor will dynamically allocate a 1-\/D array of Cells with a halo of water cells, which represents the 2-\/D landscape. \mbox{\Hypertarget{class_grid_ab64f5607521a89e7a2fb99cbfa5f2b44}\label{class_grid_ab64f5607521a89e7a2fb99cbfa5f2b44}} 
 \index{Grid@{Grid}!Grid@{Grid}}
 \index{Grid@{Grid}!Grid@{Grid}}
 \subsubsection{\texorpdfstring{Grid()}{Grid()}\hspace{0.1cm}{\footnotesize\ttfamily [3/5]}}
-{\footnotesize\ttfamily Grid\+::\+Grid (\begin{DoxyParamCaption}\item[{int}]{columns,  }\item[{int}]{rows,  }\item[{const int $\ast$}]{data }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily Grid\+::\+Grid (\begin{DoxyParamCaption}\item[{int}]{columns,  }\item[{int}]{rows,  }\item[{int $\ast$$\ast$const}]{data }\end{DoxyParamCaption})}
 
 
 
@@ -172,6 +178,26 @@ Neighbours are only considered to be non-\/diagonal, so this function counts the
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
 Integer value representing number of Dry neighbours of the cell. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_grid_a425801f2747d6be34c10eb6535ab0829}\label{class_grid_a425801f2747d6be34c10eb6535ab0829}} 
+\index{Grid@{Grid}!get\+Cell\+State@{get\+Cell\+State}}
+\index{get\+Cell\+State@{get\+Cell\+State}!Grid@{Grid}}
+\subsubsection{\texorpdfstring{get\+Cell\+State()}{getCellState()}}
+{\footnotesize\ttfamily \hyperlink{class_cell_a21d74a2efcb79c93e5649b06a50b7cf5}{Cell\+::\+State} Grid\+::get\+Cell\+State (\begin{DoxyParamCaption}\item[{int}]{column\+Index,  }\item[{int}]{row\+Index }\end{DoxyParamCaption}) const}
+
+
+
+Retrieves state of cell at a given coordinate. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em column\+Index} & integer value representing the column in which the state of the cell should be retrieved.\\
+\hline
+{\em row\+Index} & integer value representing the row in which the state of the cell should be retrieved.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\hyperlink{class_cell_a21d74a2efcb79c93e5649b06a50b7cf5}{Cell\+::\+State} value (either wet or dry) representing the state of the specified cell. 
 \end{DoxyReturn}
 \mbox{\Hypertarget{class_grid_aee0114021b6858483965cc1bffd7b88b}\label{class_grid_aee0114021b6858483965cc1bffd7b88b}} 
 \index{Grid@{Grid}!get\+Columns@{get\+Columns}}
@@ -340,6 +366,27 @@ Outputs densities of predator and prey for each cell in the format\+: i j predat
 {\em out} & std\+::ostream reference which is the output stream. This will also work for fstream since it inherits from ostream. \\
 \hline
 \end{DoxyParams}
+\mbox{\Hypertarget{class_grid_a518355eee78ffbe468034fed65bbcb48}\label{class_grid_a518355eee78ffbe468034fed65bbcb48}} 
+\index{Grid@{Grid}!print\+P\+PM@{print\+P\+PM}}
+\index{print\+P\+PM@{print\+P\+PM}!Grid@{Grid}}
+\subsubsection{\texorpdfstring{print\+P\+P\+M()}{printPPM()}}
+{\footnotesize\ttfamily void Grid\+::print\+P\+PM (\begin{DoxyParamCaption}\item[{std\+::ofstream \&}]{file }\end{DoxyParamCaption}) const}
+
+
+
+Prints the densities of the predators and prey to a ppm file provided. 
+
+This function will print the to the file in the format\+:
+
+P3 (required for a P\+PM and means this is a R\+GB color image in A\+S\+C\+II) m\+\_\+columns m\+\_\+rows (width and height of image) M\+AX (maximum value for each colour) 0 pred\+Density prey\+Density (at coordinate (m\+\_\+rows, 1)) 0 pred\+Density prey\+Density (at coordinate (m\+\_\+rows, 2)) 0 pred\+Density prey\+Density (at coordinate (m\+\_\+rows, 3)) . . . . . . . . . . . . . . . . . . . . . . . . 0 pred\+Density prey\+Density (at coordinate (1, m\+\_\+columns))
+
+To overcome the fact that each line can contain at most 70 characters each coordinate pixel is printed to a new line, this works fine formatting wise since the number of rows and columns are printed explcitly at the top of the file, so for any display purposes the file knows how to \char`\"{}count\char`\"{} the values into the correct coordinates.
+
+
+\begin{DoxyParams}{Parameters}
+{\em file} & ppm file to which the densities should be printed. \\
+\hline
+\end{DoxyParams}
 \mbox{\Hypertarget{class_grid_a17c062fcf4063a811bd8d95c32bce723}\label{class_grid_a17c062fcf4063a811bd8d95c32bce723}} 
 \index{Grid@{Grid}!set\+Uniform\+Distribution@{set\+Uniform\+Distribution}}
 \index{set\+Uniform\+Distribution@{set\+Uniform\+Distribution}!Grid@{Grid}}
@@ -422,9 +469,19 @@ This is a friend function since the first operand (argument on left of operator)
 \begin{DoxyReturn}{Returns}
 std\+::ostream reference that is the same as the out parameter, this is so one can put this opearator in a chain of output operators. 
 \end{DoxyReturn}
+\mbox{\Hypertarget{class_grid_ac2cfb15a02d10acf2c124625070a2de8}\label{class_grid_ac2cfb15a02d10acf2c124625070a2de8}} 
+\index{Grid@{Grid}!Test\+Grid@{Test\+Grid}}
+\index{Test\+Grid@{Test\+Grid}!Grid@{Grid}}
+\subsubsection{\texorpdfstring{Test\+Grid}{TestGrid}}
+{\footnotesize\ttfamily friend class \hyperlink{class_test_grid}{Test\+Grid}\hspace{0.3cm}{\ttfamily [friend]}}
 
+
+
+Test class for the grid. 
+
+Declare a \hyperlink{class_test_grid}{Test\+Grid} friend member variable to allow access to private member variables in test class. 
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 
-source/Grid.\+hpp\item 
-source/Grid.\+cpp\end{DoxyCompactItemize}
+src/\hyperlink{_grid_8hpp}{Grid.\+hpp}\item 
+src/Grid.\+cpp\end{DoxyCompactItemize}
