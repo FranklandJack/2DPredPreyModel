@@ -22,6 +22,8 @@ class TestUpdateGrid : public CPPUNIT_NS::TestFixture
         CPPUNIT_TEST(testZeroDensityGridUpdated);
 
         CPPUNIT_TEST(testRealisticGridUpdated);
+        
+        CPPUNIT_TEST(updateFunctionGrid);
 
         // Finish the process
         CPPUNIT_TEST_SUITE_END();
@@ -51,7 +53,8 @@ class TestUpdateGrid : public CPPUNIT_NS::TestFixture
         // Test to see whether a realistic grid with non-zero densities updates as expected. 
         void testRealisticGridUpdated();
 
-
+        // A different name for testRealisticGridUpdated()
+        void updateFunctionGrid();
 
     
     private:
@@ -79,9 +82,6 @@ class TestUpdateGrid : public CPPUNIT_NS::TestFixture
 
     // Delta value within which doubles are considered equal.
     const double precision = 0.0001;
-
-    // Number of time updates to do to the grid when they are being tested
-    const int    numberTestIterations = 10;
 };
 
 #endif /* TestUpdateGrid_hpp */
