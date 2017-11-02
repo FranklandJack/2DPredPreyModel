@@ -4,48 +4,110 @@ CPPUNIT_TEST_SUITE_REGISTRATION(TestCell);
 void TestCell::setUp()
 {
 
-    dryPosDens = new Cell(Cell::Dry, 2.0, 1.0);
-    wetPosDens = new Cell(Cell::Wet, 1.0, 2.0);
-    dryNegDens = new Cell(Cell::Dry, -2.0, -1.0);
-    wetNegDens = new Cell(Cell::Wet, -1.0, -2.0);
+    dryPosDensCell      = new Cell(Cell::Dry, 2.0, 1.0);
+    wetPosDensCell      = new Cell(Cell::Wet, 1.0, 2.0);
+    dryNegPredDensCell  = new Cell(Cell::Dry, -2.0, 1.0);
+    dryNegPreyDensCell  = new Cell(Cell::Dry, 1.0, -2.0);
+    defaultCell         = new Cell();
 
 }
 
 void TestCell::tearDown()
 {
 
-    delete dryPosDens;
-    delete wetPosDens;
-    delete wetNegDens;
+    delete dryPosDensCell;
+    delete wetPosDensCell;
+    delete dryNegPredDensCell;
+    delete dryNegPreyDensCell;
+    delete defaultCell;
 
 }
 
-void TestCell::testInit()
+void TestCell::testConstructorWet()
 {
+        // Cell should be wet.
+        CPPUNIT_ASSERT(Cell::Wet == wetPosDensCell->m_state);
 
-    CPPUNIT_ASSERT(Cell::Wet == wetNegDens->m_state);
+        // Predator density should be zero.
+        CPPUNIT_ASSERT_DOUBLES_EQUAL(0.0, wetPosDensCell->m_predDensity, precision);
+
+        // Prey density should be zero.
+        CPPUNIT_ASSERT_DOUBLES_EQUAL(0.0, wetPosDensCell->m_preyDensity, precision);
+}
+
+void TestCell::testConstructorDry()
+{
+        // Cell should be dry.
+        CPPUNIT_ASSERT(Cell::Dry == dryPosDensCell->m_state);
+
+        // Predator density should be set to the value given to the constructor.
+        CPPUNIT_ASSERT_DOUBLES_EQUAL(2.0, dryPosDensCell->m_predDensity, precision);
+
+        // Prey density should be set to the value given to the constructor.
+        CPPUNIT_ASSERT_DOUBLES_EQUAL(1.0, dryPosDensCell->m_preyDensity, precision);
+}
+
+void TestCell::testConstructorDryNegPredDensity()
+{
+    // Cell should be dry.
+    CPPUNIT_ASSERT(Cell::Dry == dryNegPredDensCell->m_state);
+
+    // Predator density should be set to 0 since the value given to the constructor was negative.
+    CPPUNIT_ASSERT_DOUBLES_EQUAL(0.0, dryNegPredDensCell->m_predDensity, precision);
+
+    // Prey density should be set to the value given to the constructor.
+    CPPUNIT_ASSERT_DOUBLES_EQUAL(1.0, dryNegPredDensCell->m_preyDensity, precision);
+}
+
+void TestCell::testConstructorDryNegPreyDensity()
+{
+    // Cell should be dry.
+    CPPUNIT_ASSERT(Cell::Dry == dryNegPreyDensCell->m_state);
+
+    // Predator density should be set to the value given to the constructor.
+    CPPUNIT_ASSERT_DOUBLES_EQUAL(1.0, dryNegPreyDensCell->m_predDensity, precision);
+
+    // Prey density should be set to 0 since the value given to the constructor was negative.
+    CPPUNIT_ASSERT_DOUBLES_EQUAL(0.0, dryNegPreyDensCell->m_preyDensity, precision);
 
 }
+
+
+        
+void TestCell::testConstructorDefault()
+{
+    // Cell should be wet by default.
+    CPPUNIT_ASSERT(Cell::Wet == defaultCell->m_state);
+
+    // Predator density should be zero by default.
+    CPPUNIT_ASSERT_DOUBLES_EQUAL(0.0, defaultCell->m_predDensity, precision);
+
+    // Prey density should be zero by default.
+    CPPUNIT_ASSERT_DOUBLES_EQUAL(0.0, defaultCell->m_preyDensity, precision);
+
+}
+
+
 
 void TestCell::testGetPredDensity()
 {
-    CPPUNIT_ASSERT_DOUBLES_EQUAL(2.0, dryPosDens->getPredDensity(), precision);
+    CPPUNIT_ASSERT_DOUBLES_EQUAL(2.0, dryPosDensCell->getPredDensity(), precision);
 }
 
 void TestCell::testGetPreyDensity()
 {
-    CPPUNIT_ASSERT_DOUBLES_EQUAL(1.0, dryPosDens->getPreyDensity(), precision);
+    CPPUNIT_ASSERT_DOUBLES_EQUAL(1.0, dryPosDensCell->getPreyDensity(), precision);
 }
 
 void TestCell::testGetState()
 {
-    CPPUNIT_ASSERT(Cell::Dry == dryPosDens->getState());
+    CPPUNIT_ASSERT(Cell::Dry == dryPosDensCell->getState());
 }
 
 void TestCell::testSetPosPredDensity()
 {
-    dryPosDens->setPredDensity(5.0);
-    CPPUNIT_ASSERT_DOUBLES_EQUAL(5.0, dryPosDens->m_predDensity, precision);
+    dryPosDensCell->setPredDensity(5.0);
+    CPPUNIT_ASSERT_DOUBLES_EQUAL(5.0, dryPosDensCell->m_predDensity, precision);
 
 }
 
@@ -53,35 +115,35 @@ void TestCell::testSetPosPredDensity()
 
 void TestCell::testSetPosPreyDensity()
 {
-    dryPosDens->setPreyDensity(5.0);
-    CPPUNIT_ASSERT_DOUBLES_EQUAL(5.0, dryPosDens->m_preyDensity, precision);
+    dryPosDensCell->setPreyDensity(5.0);
+    CPPUNIT_ASSERT_DOUBLES_EQUAL(5.0, dryPosDensCell->m_preyDensity, precision);
 }
 
 void TestCell::testSetNegPredDensity()
 {
-    dryPosDens->setPredDensity(-5.0);
-    CPPUNIT_ASSERT_DOUBLES_EQUAL(0.0,dryPosDens->m_predDensity, precision);
+    dryPosDensCell->setPredDensity(-5.0);
+    CPPUNIT_ASSERT_DOUBLES_EQUAL(0.0,dryPosDensCell->m_predDensity, precision);
 }
 
 void TestCell::testSetNegPreyDensity()
 {
-    dryPosDens->setPreyDensity(-5.0);
-    CPPUNIT_ASSERT_DOUBLES_EQUAL(0.0, dryPosDens->m_preyDensity, precision);
+    dryPosDensCell->setPreyDensity(-5.0);
+    CPPUNIT_ASSERT_DOUBLES_EQUAL(0.0, dryPosDensCell->m_preyDensity, precision);
 }
 
 
 void TestCell::testSetStateDry()
 {
 
-    wetPosDens->setState(Cell::Dry);
-    CPPUNIT_ASSERT(Cell::Dry == wetPosDens->m_state);
+    wetPosDensCell->setState(Cell::Dry);
+    CPPUNIT_ASSERT(Cell::Dry == wetPosDensCell->m_state);
 
 }
 
 void TestCell::testSetStateWet()
 {
-    dryPosDens->setState(Cell::Wet);
-    CPPUNIT_ASSERT(Cell::Wet == dryPosDens->m_state);
+    dryPosDensCell->setState(Cell::Wet);
+    CPPUNIT_ASSERT(Cell::Wet == dryPosDensCell->m_state);
 
 }
 
@@ -91,41 +153,7 @@ void TestCell::testSetStateWet()
 
 
 
-void TestCell::testConstructorWet()
-{
-        const Cell::State stateWet = Cell::Wet;
-        const double predDensityWet = 0.0;
-        const double preyDensityWet = 0.0;
-        Cell CellWet(stateWet,predDensityWet,preyDensityWet);
-        CPPUNIT_ASSERT_EQUAL( stateWet, CellWet.getState());
-        CPPUNIT_ASSERT_DOUBLES_EQUAL( predDensityWet, CellWet.getPredDensity(), precision);
-        CPPUNIT_ASSERT_DOUBLES_EQUAL( preyDensityWet, CellWet.getPreyDensity(), precision);
-}
 
-void TestCell::testConstructorDry()
-{
-    const Cell::State stateDry = Cell::Dry;
-    const double predDensityDry = 3.45;
-    const double preyDensityDry = 1.23;
-    Cell CellDry(stateDry,predDensityDry,preyDensityDry);
-    CPPUNIT_ASSERT_EQUAL( stateDry, CellDry.getState());
-    CPPUNIT_ASSERT_DOUBLES_EQUAL( predDensityDry, CellDry.getPredDensity(), precision);
-    CPPUNIT_ASSERT_DOUBLES_EQUAL( preyDensityDry, CellDry.getPreyDensity(), precision);
-}
-
-void TestCell::testConstructorDryNegative()
-{
-    const Cell::State stateDryNegative = Cell::Dry;
-    const double predDensityDryNegative = -1.23;
-    const double preyDensityDryNegative = -4.56;
-    const double densityWet = 0.0;
-
-    Cell CellDryNegative(stateDryNegative,predDensityDryNegative,preyDensityDryNegative);
-
-    CPPUNIT_ASSERT_EQUAL( stateDryNegative, CellDryNegative.getState());
-    CPPUNIT_ASSERT_DOUBLES_EQUAL( densityWet, CellDryNegative.getPredDensity(), precision);
-    CPPUNIT_ASSERT_DOUBLES_EQUAL( densityWet, CellDryNegative.getPreyDensity(), precision );
-}
 
 
 

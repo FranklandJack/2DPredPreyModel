@@ -16,9 +16,6 @@ class TestCell : public CPPUNIT_NS::TestFixture
         /// Establish the test suit of TestCell
         CPPUNIT_TEST_SUITE(TestCell);
 
-        // Add test method testInit
-        CPPUNIT_TEST(testInit);
-
         /// Add test method to test the predator density getter.
         CPPUNIT_TEST(testGetPredDensity);
 
@@ -46,29 +43,39 @@ class TestCell : public CPPUNIT_NS::TestFixture
         /// Add test method to test the state setter for wet states.
         CPPUNIT_TEST(testSetStateWet);
 
-        //new tests for check
-        CPPUNIT_TEST( testConstructorWet );
-        CPPUNIT_TEST( testConstructorDry );
-        CPPUNIT_TEST( testConstructorDryNegative );
-        // Finish the process
+        /// Add test method to test whether the constructor creates a wet cell correctly.
+        CPPUNIT_TEST(testConstructorWet);
+
+        /// Add test method to test whether the constructor creates a dry cell correctly.
+        CPPUNIT_TEST(testConstructorDry);
+
+        /// Add test method to test whether the constructor creates a dry cell correctly when provided with a negative predator density. 
+        CPPUNIT_TEST(testConstructorDryNegPredDensity);
+
+        /// Add test method to test whether the constructor creates a dry cell correctly when provided with a negative prey density. 
+        CPPUNIT_TEST(testConstructorDryNegPreyDensity);
+
+        /// Add test method to test the default behaviour of the constructor.
+        CPPUNIT_TEST(testConstructorDefault);
+
+        /// Finish the process.
         CPPUNIT_TEST_SUITE_END();
 
     public:
 
-        // Overide setUp(), init data etc
+        /// Overide setUp(), init data etc.
         void setUp();
 
-        // Overide tearDown(), free allocated memory,etc
+        /// Overide tearDown(), free allocated memory,etc.
         void tearDown();
 
     protected:
 
-        // Test method testInit
-        void testInit();
+
 
         /**
          *
-         * Test method for Cell::getPredDensity() method.
+         * \brief Test method for Cell::getPredDensity() method.
          *
          * Tests that the getter returns the correct predator density for the cell.
          *
@@ -78,7 +85,7 @@ class TestCell : public CPPUNIT_NS::TestFixture
 
         /**
          *
-         * Test method for Cell::getPreyDensity() method.
+         * \brief Test method for Cell::getPreyDensity() method.
          *
          * Tests that the getter returns the correct prey density for the cell.
          *
@@ -87,7 +94,7 @@ class TestCell : public CPPUNIT_NS::TestFixture
 
         /**
          *
-         * Test method for Cell::getState() method.
+         * \brief Test method for Cell::getState() method.
          *
          * Tests that the getter returns the state for the cell.
          *
@@ -96,7 +103,7 @@ class TestCell : public CPPUNIT_NS::TestFixture
 
         /**
          *
-         * Test method for Cell::setPredDensity() method.
+         * \brief Test method for Cell::setPredDensity() method.
          *
          * Tests that the setter sets the correct density for positive arguments.
          *
@@ -106,7 +113,7 @@ class TestCell : public CPPUNIT_NS::TestFixture
 
         /**
          *
-         * Test method for Cell::setPreyDensity() method.
+         * \brief Test method for Cell::setPreyDensity() method.
          *
          * Tests that the setter sets the correct density for positive arguments.
          *
@@ -116,7 +123,7 @@ class TestCell : public CPPUNIT_NS::TestFixture
 
         /**
          *
-         * Test method for Cell::setPredDensity() method.
+         * \brief Test method for Cell::setPredDensity() method.
          *
          * Tests that the setter sets the correct density for negative arguments.
          *
@@ -126,7 +133,7 @@ class TestCell : public CPPUNIT_NS::TestFixture
 
         /**
          *
-         * Test method for Cell::setPreyDensity() method.
+         * \brief Test method for Cell::setPreyDensity() method.
          *
          * Tests that the setter sets the correct density for negative arguments.
          *
@@ -136,7 +143,7 @@ class TestCell : public CPPUNIT_NS::TestFixture
 
         /**
          *
-         * Test method for Cell::setState() method.
+         * \brief Test method for Cell::setState() method.
          *
          * Tests that the setter sets the correct state for Cell::Dry arguments.
          *
@@ -145,7 +152,7 @@ class TestCell : public CPPUNIT_NS::TestFixture
 
         /**
          *
-         * Test method for Cell::setState() method.
+         * \brief Test method for Cell::setState() method.
          *
          * Tests that the setter sets the state for Cell::Wet arguments.
          *
@@ -153,24 +160,72 @@ class TestCell : public CPPUNIT_NS::TestFixture
         void testSetStateWet();
 
 
-       //new tests
+        /**
+         * 
+         * \brief Test method for Cell::Cell() method.
+         *
+         * Tests that the constructor creates a cell with zero densities if it is wet.
+         *
+         */
         void testConstructorWet();
+
+
+        /**
+         * 
+         * \brief Test method for Cell::Cell() method.
+         *
+         * Tests that the constructor creates a cell with correct densities if it is dry.
+         *
+         */
         void testConstructorDry();
-        void testConstructorDryNegative();
+
+
+        /**
+         * 
+         * \brief Test method for Cell::Cell() method.
+         *
+         * Tests that the constructor creates a cell with zero predator density if the predator density provided to the constructor 
+         * is less than 0.
+         *
+         */
+        void testConstructorDryNegPredDensity();
+
+        /**
+         *
+         * \brief Test method for Cell::Cell() method.
+         *
+         * Tests that the constructor creates a cell with zero prey density if the predator density provided to the constructor 
+         * is less than 0.
+         *
+         */
+        void testConstructorDryNegPreyDensity();
+
+
+        /**
+         *
+         * \brief Test method for Cell::Cell() method.
+         *
+         * Tests the default behaviour of the constructor i.e. if no arguments provided should create a wet cell with zero densities.
+         *
+         */
+        void testConstructorDefault();
 
     private:
 
         /// Test case for a dry cell with positive predator and prey densities. 
-        Cell *dryPosDens;
+        Cell *dryPosDensCell;
 
         /// Test case for a wet cell with positive predator and prey densities. 
-        Cell *wetPosDens;
-    
-        /// Test case for a dry cell with negative densities.
-        Cell *dryNegDens;
+        Cell *wetPosDensCell;
 
-        /// Test case for a wet cell with negative densities. 
-        Cell *wetNegDens;
+        /// Test case for a dry cell with negative predator density.
+        Cell *dryNegPredDensCell;
+    
+        /// Test case for a dry cell with negative prey density.
+        Cell *dryNegPreyDensCell;
+
+        /// Test case for a cell which is construted via the default constructor.
+        Cell *defaultCell;
 
 
         /// Delta value within which doubles are considered equal.
