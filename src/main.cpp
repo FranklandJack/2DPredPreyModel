@@ -244,9 +244,9 @@ int main(int argc, char const *argv[])
      
      }
 
-     for(int iter = 1; iter <= numIterations; ++iter)
+     for(int iter = 0; iter <= numIterations; ++iter)
      {
-        grid = updateGrid(grid,r,a,b,m,k,l,deltaT);
+        
         
         if(0 == iter % averageDenOutputFreq)
 
@@ -277,9 +277,9 @@ int main(int argc, char const *argv[])
     }
 
     }
-
-    }
-
+     grid = updateGrid(grid,r,a,b,m,k,l,deltaT);
+   }
+   output_avrg_dens.close();
 
    /**************************************************************************************************
     *************************************** TIDYING UP ***********************************************
