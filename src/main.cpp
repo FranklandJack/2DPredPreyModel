@@ -262,8 +262,7 @@ int main(int argc, char const *argv[])
         
     
         {
-       //Creates different names for each output file in the output folder, called output.
-       //For different inputs the folder name, output, must be changed to something else (e.g. output1).
+       //Creates different names for each output file in the output folder, called output
          sprintf(outputfile,"./output/output%d.ppm",iter/outputSteps);
         
          ofstream outputPPM(outputfile, ios::out);
@@ -274,7 +273,7 @@ int main(int argc, char const *argv[])
                 outputPPM.close();
           }
         else
-                cout << "Output .ppm file could not open." << endl;
+                cout << "Output .ppm file could not open." << endl<< "Check if you have created output directory!"<<endl;
     }
 
     }
