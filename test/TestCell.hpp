@@ -235,6 +235,18 @@ class TestCell : public CPPUNIT_NS::TestFixture
 
         /// Delta value within which doubles are considered equal.
         const double precision = 0.0001;
+
+        /// Positive predator density value for initialisation of test case.
+        const double posPredDensity = 3.142;
+
+        /// Positive prey density value for initialisation of test case.
+        const double posPreyDensity = 2.718;
+
+        /// Negative predator density value for initialisation of test case.
+        const double negPredDensity = -0.577;
+
+        /// negative prey density value for initialisation of test case.
+        const double negPreyDensity = -4.669;
 };
 
 #endif /* TestCell_hpp */

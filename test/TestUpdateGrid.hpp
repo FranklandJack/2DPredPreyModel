@@ -23,7 +23,7 @@ class TestUpdateGrid : public CPPUNIT_NS::TestFixture
 
         CPPUNIT_TEST(testRealisticGridUpdated);
         
-        CPPUNIT_TEST(updateFunctionGrid);
+        //CPPUNIT_TEST(updateFunctionGrid);
 
         // Finish the process
         CPPUNIT_TEST_SUITE_END();
@@ -54,7 +54,7 @@ class TestUpdateGrid : public CPPUNIT_NS::TestFixture
         void testRealisticGridUpdated();
 
         // A different name for testRealisticGridUpdated()
-        void updateFunctionGrid();
+        //void updateFunctionGrid();
 
     
     private:
