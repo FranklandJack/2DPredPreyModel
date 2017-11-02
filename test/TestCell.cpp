@@ -42,7 +42,33 @@ void TestCell::testGetState()
     CPPUNIT_ASSERT(Cell::Dry == dryPosDens->getState());
 }
 
-void TestCell::testSetState()
+void TestCell::testSetPosPredDensity()
+{
+    dryPosDens->setPredDensity(5.0);
+    CPPUNIT_ASSERT_DOUBLES_EQUAL(5.0, dryPosDens->m_predDensity, precision);
+
+}
+
+void TestCell::testSetPosPreyDensity()
+{
+    dryPosDens->setPreyDensity(5.0);
+    CPPUNIT_ASSERT_DOUBLES_EQUAL(5.0, dryPosDens->m_preyDensity, precision);
+}
+
+void TestCell::testSetNegPredDensity()
+{
+    dryPosDens->setPredDensity(-5.0);
+    CPPUNIT_ASSERT_DOUBLES_EQUAL(0.0,dryPosDens->m_predDensity, precision);
+}
+
+void TestCell::testSetNegPreyDensity()
+{
+    dryPosDens->setPreyDensity(-5.0);
+    CPPUNIT_ASSERT_DOUBLES_EQUAL(0.0, dryPosDens->m_preyDensity, precision);
+}
+
+
+void TestCell::testSetStateDry()
 {
 
     wetPosDens->setState(Cell::Dry);
@@ -50,18 +76,18 @@ void TestCell::testSetState()
 
 }
 
-void TestCell::testSetPreyDensity()
+void TestCell::testSetStateWet()
 {
-    dryPosDens->setPreyDensity(5.0);
-    CPPUNIT_ASSERT_DOUBLES_EQUAL(5.0, dryPosDens->m_preyDensity, precision);
+    dryPosDens->setState(Cell::Wet);
+    CPPUNIT_ASSERT(Cell::Wet == dryPosDens->m_state);
+    
 }
 
-void TestCell::testSetPredDensity()
-{
-    dryPosDens->setPredDensity(5.0);
-    CPPUNIT_ASSERT_DOUBLES_EQUAL(5.0, dryPosDens->m_predDensity, precision);
 
-}
+
+
+
+
 
 void TestCell::testConstructorWet()
 {

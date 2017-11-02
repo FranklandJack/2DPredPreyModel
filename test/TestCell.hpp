@@ -28,14 +28,23 @@ class TestCell : public CPPUNIT_NS::TestFixture
         /// Add test metho to test the state getter.
         CPPUNIT_TEST(testGetState);
 
-        /// Add test method to test the predator density setter.
-        CPPUNIT_TEST(testSetPredDensity);
+        /// Add test method to test the predator density setter for positive densities.
+        CPPUNIT_TEST(testSetPosPredDensity);
 
-        // Add test method to test the prey density setter.
-        CPPUNIT_TEST(testSetPreyDensity);
+        /// Add test method to test the prey density setter for positive densities.
+        CPPUNIT_TEST(testSetPosPreyDensity);
 
-        // Add test method to test the state setter.
-        CPPUNIT_TEST(testSetState);
+        /// Add test method to test the predator density setter for negative densities.
+        CPPUNIT_TEST(testSetNegPredDensity);
+
+        // Add test method to test the prey density setter for negative densities.
+        CPPUNIT_TEST(testSetNegPreyDensity);
+
+        /// Add test method to test the state setter for dry states.
+        CPPUNIT_TEST(testSetStateDry);
+
+        /// Add test method to test the state setter for wet states.
+        CPPUNIT_TEST(testSetStateWet);
 
         //new tests for check
         CPPUNIT_TEST( testConstructorWet );
@@ -57,23 +66,91 @@ class TestCell : public CPPUNIT_NS::TestFixture
         // Test method testInit
         void testInit();
 
-        // Test method testGetPredatorDensity
+        /**
+         *
+         * Test method for Cell::getPredDensity() method.
+         *
+         * Tests that the getter returns the correct predator density for the cell.
+         *
+         */
         void testGetPredDensity();
     
-        // Test method testGetPreyDensity
+
+        /**
+         *
+         * Test method for Cell::getPreyDensity() method.
+         *
+         * Tests that the getter returns the correct prey density for the cell.
+         *
+         */
         void testGetPreyDensity();
 
-        // Test method testGetState
+        /**
+         *
+         * Test method for Cell::getState() method.
+         *
+         * Tests that the getter returns the state for the cell.
+         *
+         */
         void testGetState();
 
-        // Test method testSetPredatorDensity
-        void testSetPredDensity();
+        /**
+         *
+         * Test method for Cell::setPredDensity() method.
+         *
+         * Tests that the setter sets the correct density for positive arguments.
+         *
+         */
+        void testSetPosPredDensity();
 
-        // Test method testSetPreyDensity
-        void testSetPreyDensity();
 
-        // Test method testSetState
-        void testSetState();
+        /**
+         *
+         * Test method for Cell::setPreyDensity() method.
+         *
+         * Tests that the setter sets the correct density for positive arguments.
+         *
+         */
+        void testSetPosPreyDensity();
+
+
+        /**
+         *
+         * Test method for Cell::setPredDensity() method.
+         *
+         * Tests that the setter sets the correct density for negative arguments.
+         *
+         */
+        void testSetNegPredDensity();
+
+
+        /**
+         *
+         * Test method for Cell::setPreyDensity() method.
+         *
+         * Tests that the setter sets the correct density for negative arguments.
+         *
+         */
+        void testSetNegPreyDensity();
+
+
+        /**
+         *
+         * Test method for Cell::setState() method.
+         *
+         * Tests that the setter sets the correct state for Cell::Dry arguments.
+         *
+         */
+        void testSetStateDry();
+
+        /**
+         *
+         * Test method for Cell::setState() method.
+         *
+         * Tests that the setter sets the state for Cell::Wet arguments.
+         *
+         */ 
+        void testSetStateWet();
 
 
        //new tests
@@ -83,23 +160,21 @@ class TestCell : public CPPUNIT_NS::TestFixture
 
     private:
 
-    /// Three test cases for the fixture. 
+        /// Test case for a dry cell with positive predator and prey densities. 
+        Cell *dryPosDens;
 
-    /// Test case for a dry cell with positive predator and prey densities. 
-    Cell *dryPosDens;
-
-    /// Test case for a wet cell with positive predator and prey densities. 
-    Cell *wetPosDens;
+        /// Test case for a wet cell with positive predator and prey densities. 
+        Cell *wetPosDens;
     
-    /// Test case for a dry cell with negative densities.
-    Cell *dryNegDens;
+        /// Test case for a dry cell with negative densities.
+        Cell *dryNegDens;
 
-    /// Test case for a wet cell with negative densities. 
-    Cell *wetNegDens;
+        /// Test case for a wet cell with negative densities. 
+        Cell *wetNegDens;
 
 
-    // Delta value within which doubles are considered equal.
-    const double precision = 0.0001;
+        /// Delta value within which doubles are considered equal.
+        const double precision = 0.0001;
 };
 
 #endif /* TestCell_hpp */

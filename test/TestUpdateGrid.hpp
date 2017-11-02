@@ -28,8 +28,7 @@ class TestUpdateGrid : public CPPUNIT_NS::TestFixture
 
     public:
 
-        // Precision value for comparing doubles in any assert statments.
-        const double precision = 0.0001;
+        
 
         // Overide setUp(), init data etc
         void setUp();
