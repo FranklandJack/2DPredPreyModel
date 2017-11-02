@@ -3,7 +3,7 @@
 
 #include <cppunit/extensions/HelperMacros.h>
 #include <cppunit/TestFixture.h>
-#include "../src/Cell.hpp"
+#include "Cell.hpp"
 /*
 *
 * A test case that is designed to produce

@@ -14,8 +14,9 @@ Cell::Cell(Cell::State state, double predDensity, double preyDensity):m_state(st
     }
     else
     {
-        m_predDensity = (predDensity < 0.0 ? 0.0 : predDensity);
-        m_preyDensity = (preyDensity < 0.0 ? 0.0 : preyDensity);
+        // If the constructor tries to set either density to a negative value, it will automatically be set to zero.
+        m_predDensity = (predDensity < 0.0) ? 0.0 : predDensity;
+        m_preyDensity = (preyDensity < 0.0) ? 0.0 : preyDensity;
     }
 }
 

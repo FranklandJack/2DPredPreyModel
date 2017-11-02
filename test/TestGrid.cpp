@@ -1,5 +1,5 @@
 #include "TestGrid.hpp"
-//const double precision=0.0001;
+//const double precision = 0.0001;
 
 CPPUNIT_TEST_SUITE_REGISTRATION(TestGrid);
 
@@ -18,15 +18,15 @@ void TestGrid::tearDown()
 
 void 
 TestGrid::testConstructor()
-{
-  /*
+{/*
+  
 	const int numberColumns = 2;
 	const int numberRows = 3;
 	const int landStates [numberColumns][numberRows]={{0,1,1},{0,1,1}};
-	const int **inputStates = &landStates;
+	int ** const  inputStates = &landStates;
 	const Cell::State stateWet = Cell::Wet;
 	const Cell::State stateDry = Cell::Dry;
-  	const int cellStates [numberColumns][numberRows]={{stateWet,stateDry,stateDry},{stateWet,stateDry,stateDry}};
+  const int cellStates [numberColumns][numberRows]={{stateWet,stateDry,stateDry},{stateWet,stateDry,stateDry}};
 	
 	Grid NewGrid(numberColumns, numberRows, inputStates);
 

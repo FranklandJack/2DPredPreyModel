@@ -362,9 +362,9 @@ int Grid::getColumns() const {return m_columns;}
 
 int Grid::getRows()    const {return m_rows;}
 
-Cell::State Grid::getCellState(int rowIndex, int columnIndex)
+Cell::State Grid::getCellState(int columnIndex, int rowIndex) const
 {
-         return (*this)(rowIndex,columnIndex).getState();
+         return (*this)(columnIndex,rowIndex).getState();
 }
 
 void Grid::setUniformPredDistribution(double upperBound, std::default_random_engine &generator)

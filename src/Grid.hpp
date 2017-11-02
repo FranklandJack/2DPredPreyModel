@@ -437,6 +437,21 @@ class Grid
 
         void printPPM(std::ofstream &file) const;
 
+        /**
+         *
+         * \brief Retrieves state of cell at a given coordinate.
+         *
+         * \param columnIndex integer value representing the column in which the state of the cell should be retrieved. 
+         *
+         * \param rowIndex integer value representing the row in which the state of the cell should be retrieved. 
+         *
+         * \return Cell::State value (either wet or dry) representing the state of the specified cell.
+         * 
+         *
+         */
+        Cell::State getCellState(int columnIndex, int rowIndex) const;
+
+
     
 };
 
