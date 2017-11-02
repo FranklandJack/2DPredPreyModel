@@ -34,7 +34,8 @@ where:
 The source code in this project makes use of C++ move semantics, as such it needs to be compiled under the c++11 standard (or higher) hence the compiler on the user's machine must be C++11 compliant. 
 
 The unit test framework used is cppunit. To download, build and install see [CppUnit](http://www.freedesktop.org/wiki/Software/cppunit/), or do the following:
-```$ wget http://dev-www.libreoffice.org/src/cppunit-1.13.2.tar.gz
+```
+$ wget http://dev-www.libreoffice.org/src/cppunit-1.13.2.tar.gz
 $ tar -xvzf cppunit-1.13.2.tar.gz
 $ cd cppunit-1.13.2
 $ ./configure --prefix=$HOME
@@ -61,7 +62,8 @@ $ ls $HOME/share/cppunit
 html
 $ export CPLUS_INCLUDE_PATH=$HOME/include:$CPLUS_INCLUDE_PATH
 $ export LIBRARY_PATH=$HOME/lib:$LIBRARY_PATH
-$ export LD_LIBRARY_PATH=$HOME/lib:$LD_LIBRARY_PATH```
+$ export LD_LIBRARY_PATH=$HOME/lib:$LD_LIBRARY_PATH
+```
 
 These instructions were taken from: <https://github.com/softwaresaved/build_and_test_examples/blob/master/cpp/README.md>
 
