@@ -30,6 +30,8 @@ int main(int argc, char const *argv[])
      ******************************************** INPUT ***********************************************
      **************************************************************************************************/
 
+    /***************************  Input for the differential equation *********************************/
+
     // Parameters for differential equation implementation.
     double r, a, b, m, k, l, deltaT;
     int outputSteps;
@@ -82,8 +84,7 @@ int main(int argc, char const *argv[])
 
     else
     {
-            throw runtime_error("input/input_parameters.txt could not be opened for reading.");
-           
+        throw runtime_error("input/input_parameters.txt could not be opened for reading.");    
     }
 
     }
@@ -127,12 +128,12 @@ int main(int argc, char const *argv[])
     // Need to make sure the number of columns and rows is physical, i.e. positive definite.
     if(columns <= 0 || rows <= 0) 
     {
-        // Throw an exception here since we cannot intupret negative columns or rows, so the code shouldn't run until it is dealt with.
+        // Throw an exception here since we cannot interpret negative columns or rows, so the code shouldn't run until it is dealt with.
         throw std::runtime_error("#columns or #rows in input is unphysical");
 
     }
 
-    // The rest of the data in the file is the actual landscape. The landscape data will be temporarliy stored in a 2D array. Which will
+    // The rest of the data in the file is the actual landscape. The landscape data will be temporarily stored in a 2D array. Which will
     // need to be dynamically allocated, since the size is not known at compile time.
     landscapeData = new int*[columns];
     for(int i = 0; i < columns; ++i)
@@ -250,24 +251,25 @@ int main(int argc, char const *argv[])
 
         
         if(0 == iter % outputSteps)
-        {      
+        {  
             {
-                //Creates different names for each output file in the output folder, called output.
-                //For different inputs the folder name, output, must be changed to something else (e.g. output1).
+                //Creates different names for each output file in the output folder, called output
                 sprintf(outputfile,"./output/output%d.ppm",iter/outputSteps);
-        
+                
                 ofstream outputPPM(outputfile, ios::out);
         
-            if (outputPPM.is_open())
-            {
-                grid.printPPM(outputPPM);
-                outputPPM.close();
+                if (outputPPM.is_open())
+                {
+                    grid.printPPM(outputPPM);
+                    outputPPM.close();
+                }
+                else
+                {
+                    cout << "Output .ppm file could not open." << endl;
+                    cout << "Check that the specified output directory exists" << endl;
+                }
             }
-            else
-            {
-                cout << "Output .ppm file could not open." << endl;
-            }
-            }
+
 
         }
 

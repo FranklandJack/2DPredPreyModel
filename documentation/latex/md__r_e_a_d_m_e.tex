@@ -1,0 +1,120 @@
+\href{https://travis-ci.org/FranklandJack/2DPredPreyModel}{\tt }
+
+Model of the interaction of predator-\/prey in two-\/dimensional landscape.
+
+\href{https://github.com/FranklandJack/2DPredPreyModel}{\tt https\+://github.\+com/\+Frankland\+Jack/2\+D\+Pred\+Prey\+Model}
+
+Authors\+:
+\begin{DoxyItemize}
+\item Denitsa Bankova s1319505
+\item Jack Frankland s1404032
+\end{DoxyItemize}
+
+\subsection*{Introduction}
+
+This program simulates the evolution of a system of predator(pumas) and prey(hares) densities across a 2D landscape which includes land and water. Neither the predators nor prey are considered able to swim so in wet areas density is always zero. The evolution of the system is goverened by differential equations provided in the coursework development pdf\+:
+
+∂\+H/∂t = rH -\/ a\+HP + k (∂$^\wedge$2\+H/∂x$^\wedge$2 + ∂$^\wedge$2\+H/∂y$^\wedge$2)
+
+∂\+P/∂t = b\+HP -\/ mP + l (∂$^\wedge$2\+P/∂x$^\wedge$2 + ∂$^\wedge$2\+P/∂y$^\wedge$2)
+
+where\+:
+
+
+\begin{DoxyItemize}
+\item H is the density of hares (prey).
+\item P is the density of pumas (predators).
+\item r is the birth rate of hares.
+\item a is the predation rate at which pumas eat hares.
+\item b is the birth rate of pumas per one hare eaten.
+\item m is the pumas mortality rate.
+\item k is the diffusion rate for hares.
+\item l is the diffusion rate for pumas.
+\end{DoxyItemize}
+
+\subsection*{Prerequisites}
+
+The source code in this project makes use of C++ move semantics, as such it needs to be compiled under the c++11 standard (or higher) hence the compiler on the user\textquotesingle{}s machine must be C++11 compliant.
+
+The unit test framework used is cppunit. To download, build and install see \href{http://www.freedesktop.org/wiki/Software/cppunit/}{\tt Cpp\+Unit}, or do the following\+: 
+\begin{DoxyCode}
+$ wget http://dev-www.libreoffice.org/src/cppunit-1.13.2.tar.gz
+$ tar -xvzf cppunit-1.13.2.tar.gz
+$ cd cppunit-1.13.2
+$ ./configure --prefix=$HOME
+$ make
+$ make install 
+$ ls $HOME/include/cppunit
+AdditionalMessage.h          Protector.h           TestResultCollector.h
+Asserter.h                   SourceLine.h          TestResult.h
+BriefTestProgressListener.h  SynchronizedObject.h  TestRunner.h
+CompilerOutputter.h          TestAssert.h          TestSuccessListener.h
+config                       TestCaller.h          TestSuite.h
+config-auto.h                TestCase.h            TextOutputter.h
+Exception.h                  TestComposite.h       TextTestProgressListener.h
+extensions                   TestFailure.h         TextTestResult.h
+Message.h                    TestFixture.h         TextTestRunner.h
+Outputter.h                  Test.h                tools
+plugin                       TestLeaf.h            ui
+portability                  TestListener.h        XmlOutputter.h
+Portability.h                TestPath.h            XmlOutputterHook.h
+$ ls $HOME/lib
+libcppunit-1.13.so.0      libcppunit.a   libcppunit.so
+libcppunit-1.13.so.0.0.2  libcppunit.la
+$ ls $HOME/share/cppunit
+html
+$ export CPLUS\_INCLUDE\_PATH=$HOME/include:$CPLUS\_INCLUDE\_PATH
+$ export LIBRARY\_PATH=$HOME/lib:$LIBRARY\_PATH
+$ export LD\_LIBRARY\_PATH=$HOME/lib:$LD\_LIBRARY\_PATH
+\end{DoxyCode}
+
+
+These instructions were taken from\+: \href{https://github.com/softwaresaved/build_and_test_examples/blob/master/cpp/README.md}{\tt https\+://github.\+com/softwaresaved/build\+\_\+and\+\_\+test\+\_\+examples/blob/master/cpp/\+R\+E\+A\+D\+M\+E.\+md}
+
+\subsection*{Instructions}
+
+
+\begin{DoxyItemize}
+\item To build the code run\+: {\ttfamily \$ make}.
+\item To run the code run\+: {\ttfamily \$ ./\+Pred\+Prey Y\+O\+U\+R\+I\+N\+P\+U\+T\+L\+A\+N\+D\+S\+C\+A\+P\+E\+D\+A\+T\+A.\+dat}.
+\item To build and run the tests run\+: {\ttfamily \$ make test} or alternatively check the Travis CI repository \href{https://travis-ci.org/FranklandJack/2DPredPreyModel}{\tt here}.
+\item To generate the dat files for input from any .pnm files you have to just place your pnm files in the landscapes directory and run\+: {\ttfamily \$ make dats} which will generate the .dats files and place them in the main 2\+D\+Pred\+Prey\+Model directory ready to be run with the executuble.
+\item For a full list of make functionality run\+: {\ttfamily \$ make help}.
+\item To generate the code documentation run\+: {\ttfamily \$ doxygen Doxyfile} which will output into the documentation directory two subdirectories called latex and html. To generate the reference manual {\ttfamily \$ mv documentation/latex} and run {\ttfamily \$ make} which will create a refman.\+pdf. The generated html documentation can be viewed by pointing a H\+T\+ML broweser to the index.\+html file in the html directory.
+\end{DoxyItemize}
+
+\subsection*{Input Formatting}
+
+The program takes as its input\+:
+\begin{DoxyEnumerate}
+\item A .txt file containing the various parameters for the differential equation which evolves the system.
+\item A .dat file which contains the landscape of the system.
+\end{DoxyEnumerate}
+
+The location of the input parameters is hard coded into the main method, so its name should not be changed, however the user can feel free to change the values of the parameters in the file input/input\+\_\+parameters.\+txt.
+
+The format of the input\+\_\+patameters.\+txt file {\bfseries M\+U\+ST} be\+:
+
+
+\begin{DoxyEnumerate}
+\item birth rate of hares
+\item predation rate at which pumas eat hares
+\item birth rate of pumas per one hare eaten
+\item puma mortality rate
+\item diffusion rate for hares
+\item diffusion rate for pumas
+\item size of timestep
+\item the number of timesteps between output of plain .pnm file
+\end{DoxyEnumerate}
+
+With each value seperated by a newline.
+
+The .dat file is provided as the only command line argument to the executible and {\bfseries M\+U\+ST} be of the format\+:
+
+number columns number rows X X X X X X X X ...... X X X X X X X X X X X X ...... X X X X . . . . . . . . ...... . . . . . . . . . . . . ...... . . . . . . . . . . . . ...... . . . . X X X X X X X X ...... X X X X
+
+where X=0 if the cell in the landscape is Wet and X=1 if the cell in the landscape is dry.
+
+\subsection*{Output}
+
+The program will run from t=0 to t=500 and output the average density of the predators and prey (over the whole grid including wet areas) every 10 time steps into a file called Average\+\_\+\+Densities.\+txt. It will also output a plain ppm file every n timesteps called output\+::step.\+ppm where n is the number of timesteps between output set by the user. All output files are created in the output directory. 

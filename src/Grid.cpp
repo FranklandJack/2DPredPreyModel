@@ -8,115 +8,6 @@ Grid::Grid()
     m_cellArray = nullptr;
 }
 
-Grid::Grid(std::ifstream& inputFile)
-{
-    // First two numbers in file are number of columns and number of rows
-    // First get the number of columns.
-    inputFile >> m_columns;
-
-    // If extraction fails in columns we need to throw an exception since the grid cannot be constructed. 
-    if(inputFile.fail()) 
-    {
-        throw std::runtime_error("#columns is of incorrect type");
-    }
-
-
-    // Need to make sure the number of columns is physical, i.e. positive definite.
-    if(m_columns <= 0) 
-    {
-        // Throw an exception here since we cannot interpret negative columns, so the code should not run until it is dealt with.
-        throw std::runtime_error("#columns in input is unphysical");
-
-    }
-
-    // Now get number of rows.
-    inputFile >> m_rows;
-
-    // If extraction fails in rows we need to throw an exception since the grid cannot be constructed. 
-    if(inputFile.fail()) 
-    {
-        throw std::runtime_error("#rows is of incorrect type");
-    }
-
-    // Need to make sure the number of rows is physical, i.e. positive definite.
-    if(m_rows <= 0) 
-    {
-        // Throw an exception here since we cannot non-positive rows, so the code should not run until it is dealt with.
-        throw std::runtime_error("#rows in input is unphysical");
-
-    }
-
-
-    /*
-     * To include the halo the number of rows and columns need to be increased by 2
-     * so that there is an extra row on the top and bottom and extra column on either side.
-     */
-    int arraySizeIncBufffer = (m_columns+2)*(m_rows+2);
-
-    // The actual array size doesn't include the halo.
-    int arraySize                = m_columns*m_rows;
-
-    // The 1-D array of Cells is allocated dynamically from the heap and includes the halo.
-    m_cellArray = new Cell[arraySizeIncBufffer];
-
-    
-    for(int cellIndex = 0; cellIndex < arraySizeIncBufffer; ++cellIndex)
-    {
-        /* 
-         * Initially a Wet cell with predator and prey densities of zero is copied into every 
-         * entry in the Grid Cell array including the halo cells.
-         */
-        Cell::State  initialState       = Cell::Wet;
-        double       initialPredDensity = 0.0;
-        double       initialPreyDensity = 0.0;
-
-        m_cellArray[cellIndex] = Cell(initialState, initialPreyDensity, initialPreyDensity);
-    }
-
-    /*
-     * The rest of data in file is just the array of 0 and 1.
-     * Start indexing from top since first entry will be at largest y-coordinate, then move along each row.
-     */
-
-    // Counters defined so we can ensure the number of columns/rows in the actual grid match the number of columns/rows defined at the top of the file.
-    int colCounter = 0;
-    int rowCounter = 0;
-
-    for(int j = m_rows; j >= 1; --j)
-    {
-        for(int i = 1; i <= m_columns; ++i)
-        {
-            // Take the input Integer which is wet (= 0) or dry (= 1)
-            int inputState = 0;
-            inputFile >> inputState;
-
-            // Check to see that input was successful, if not an exception is thrown since failed extraction will lead to a crash if the grid is used in a main method.
-            if(inputFile.fail())
-            {
-                throw std::runtime_error("anomalous grid entry is of incorrect type");
-            }
-
-            // Check to see that the input was of type 0 or 1 and throw an exception otherwise since cannot interpret other integers.
-            if(1 != inputState && 0 != inputState)
-            {
-                throw std::runtime_error("grid entry detected that is neither 0 nor 1");
-            }
-
-            /* 
-             * Since the state is an enum which has two possible values Wet (= 0) and Dry (= 1)
-             * we can convert the input integer into the correct enum State value
-             */
-            Cell::State state = static_cast<Cell::State>(inputState);
-            
-            // The state of the cell is then set using the operator() overload since this ensures the indexing is correct and consistent.
-            (*this)(i,j).setState(state);
-        }
-    }
-
-
-    
-}
-
 Grid::Grid(int columns, int rows , int ** const data):m_columns(columns), m_rows(rows)
 {
     /*
@@ -535,7 +426,7 @@ std::ostream& operator<<(std::ostream& out, const Grid& grid)
         // Print a newline at the end of each column for the correct format.
         out<<'\n';
     }
-    
+
     // Return the output stream so we can chain together outputs 
     return out;
 }

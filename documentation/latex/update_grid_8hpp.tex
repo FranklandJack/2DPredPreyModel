@@ -1,0 +1,43 @@
+\hypertarget{update_grid_8hpp}{}\section{src/update\+Grid.hpp File Reference}
+\label{update_grid_8hpp}\index{src/update\+Grid.\+hpp@{src/update\+Grid.\+hpp}}
+
+
+Updates the grid by one timestep.  
+
+
+{\ttfamily \#include \char`\"{}Grid.\+hpp\char`\"{}}\newline
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{update_grid_8hpp_a0e191f0c2c19b666638c4c6936edc10f}\label{update_grid_8hpp_a0e191f0c2c19b666638c4c6936edc10f}} 
+\hyperlink{class_grid}{Grid} {\bfseries update\+Grid} (\hyperlink{class_grid}{Grid} \&grid, double r, double a, double b, double m, double k, double l, double deltaT)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Updates the grid by one timestep. 
+
+Function to update the densities of predator and prey in a grid instance according to the differential equation specified in the coursework pdf.
+
+
+\begin{DoxyParams}{Parameters}
+{\em grid} & \hyperlink{class_grid}{Grid} reference instance to be updated.\\
+\hline
+{\em r} & double instance representing the birth rate of hares (prey).\\
+\hline
+{\em a} & double instance representing the predation rate at which pumas (predators).\\
+\hline
+{\em b} & double instance representing the birth rate of pumas (predators) per one hare (prey) eaten.\\
+\hline
+{\em m} & double instance representing the puma (predator) mortality rate.\\
+\hline
+{\em k} & double instance representing the diffusion rate for hares (prey).\\
+\hline
+{\em l} & double instance representing the diffusion rate for pumas (predators).\\
+\hline
+{\em deltaT} & double instance representing the timestep value.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\hyperlink{class_grid}{Grid} instance which is the original grid updated by one timestep. 
+\end{DoxyReturn}
