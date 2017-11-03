@@ -87,13 +87,13 @@ class TestUpdateGrid : public CPPUNIT_NS::TestFixture
     
     private:
 
-    /// Test parameters for updating the grid will just be default values of 1 for everything since we can easily check these are correct.
+    /// Test parameters for updating the grid will just be default values since we can easily check these are correct.
     const int r = 1;
-    const int a = 1;
-    const int b = 1;
-    const int m = 1;
-    const int k = 1;
-    const int l = 1;
+    const int a = 2;
+    const int b = 3;
+    const int m = 4;
+    const int k = 5;
+    const int l = 6;
     const double deltaT = 1.0;
 
   
