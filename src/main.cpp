@@ -238,8 +238,9 @@ int main(int argc, char const *argv[])
         output_avrg_dens << "Time    Pred Dens.    Prey Dens." << endl;
     }
 
-
-    for(int iter = 0; iter < numIterations; ++iter)
+    // The densities of the cells in the grid are printed before any updates of the grid.
+    // Iteration number numIterations allows printing values after numIterations updates, although one more update is made after that.
+    for(int iter = 0; iter <= numIterations; ++iter)
     {
         
         
@@ -276,10 +277,10 @@ int main(int argc, char const *argv[])
 
         }
 
-    grid = updateGrid(grid,r,a,b,m,k,l,deltaT);
+        grid = updateGrid(grid,r,a,b,m,k,l,deltaT);
 
     }
-   output_avrg_dens.close();
+    output_avrg_dens.close();
 
 
    /**************************************************************************************************
