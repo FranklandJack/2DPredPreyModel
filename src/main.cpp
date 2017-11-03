@@ -219,7 +219,9 @@ int main(int argc, char const *argv[])
     // Interval at which to print the predator and prey densities to the command line. 
     int averageDenOutputFreq = 10;
 
-
+    // Initial maximal colour value for the PPM output files. 
+    int maxNumberPPM = 10;
+	
     // No file name will be longer than 50 characters. 
     char outputfile[50];
 
@@ -262,7 +264,7 @@ int main(int argc, char const *argv[])
         
                 if (outputPPM.is_open())
                 {
-                    grid.printPPM(outputPPM);
+                    maxNumberPPM = grid.printPPM(outputPPM, maxNumberPPM);
                     outputPPM.close();
                 }
                 else
