@@ -4,20 +4,23 @@
 #include <cppunit/extensions/HelperMacros.h>
 #include <cppunit/TestFixture.h>
 #include "Grid.hpp"
-/*
-*
-* A test case that is designed to produce
-* example errors and failures
-*
-*/
+/**
+ *
+ * \file
+ *
+ * \class TestGrid
+ *
+ * \brief Tests the Grid class.  
+ *
+ * This test class is written using the CppUnit test framework and tests the various methods of the Grid class.
+ *
+ *
+ */
 class TestGrid : public CPPUNIT_NS::TestFixture
 {
 
-        // Establish the test suit of TestCell
+        /// Establish the test suit of TestCell
         CPPUNIT_TEST_SUITE(TestGrid);
-
-        // Add test method testInit
-        //CPPUNIT_TEST(testInit);
 
         CPPUNIT_TEST(testConstructor1);
         CPPUNIT_TEST(testConstructor2);

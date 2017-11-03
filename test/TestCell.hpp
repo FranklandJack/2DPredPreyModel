@@ -7,6 +7,8 @@
 
 /**
  *
+ * \file
+ *
  * \class TestCell
  *
  * \brief Tests the Cell class.  

@@ -6,38 +6,38 @@ CPPUNIT_TEST_SUITE_REGISTRATION(TestUpdateGrid);
 void TestUpdateGrid::setUp()
 {
     // All test landscapes will be of 3x3.
-    const int columnCount = 2;
-    const int rowCount    = 1;
+    const int columns = 2;
+    const int rows    = 1;
 
     // 0 in input corresponds to wet cell, 1 corresponds to dry.
     const int wet = 0;
     const int dry = 1;
 
-    int** wetLandscape          = new int*[columnCount];
-    int** zeroDensityLandscape  = new int*[columnCount];
-    int** realisticLandscape    = new int*[columnCount];
+    int** wetLandscape          = new int*[columns];
+    int** zeroDensityLandscape  = new int*[columns];
+    int** realisticLandscape    = new int*[columns];
      
-    for(int i = 0; i < columnCount; ++i)
+    for(int i = 0; i < columns; ++i)
     {
-        wetLandscape[i]         = new int[rowCount];
-        zeroDensityLandscape[i] = new int[rowCount];
-        realisticLandscape[i]   = new int[rowCount]; 
+        wetLandscape[i]         = new int[rows];
+        zeroDensityLandscape[i] = new int[rows];
+        realisticLandscape[i]   = new int[rows]; 
     }
 
     
-    for(int columnIndex = 0; columnIndex < columnCount; ++columnIndex)
+    for(int i = 0; i < columns; ++i)
     {
-        for(int rowIndex = 0; rowIndex < rowCount; ++rowIndex)
+        for(int j = 0; j < rows; ++j)
         {   
             // Wet landscape needs to be wet everywhere.
-            wetLandscape[columnIndex][rowIndex] = wet;
+            wetLandscape[i][j] = wet;
 
             // Zero density landscape will be dry everywhere, since we are testing densities 
             // at zero, and they will always be zero in wet cells anyway.
-            zeroDensityLandscape[columnIndex][rowIndex] = dry;
+            zeroDensityLandscape[i][j] = dry;
 
             // In the realistic landscape we will set both cells to be dry.
-           realisticLandscape[columnIndex][rowIndex] = dry;
+           realisticLandscape[i][j] = dry;
         }   
 
     }  
@@ -47,13 +47,13 @@ void TestUpdateGrid::setUp()
 
 
 
-    wetGrid         = new Grid(columnCount, rowCount, wetLandscape);
-    zeroDensityGrid = new Grid(columnCount, rowCount, zeroDensityLandscape);
-    realisticGrid   = new Grid(columnCount, rowCount, realisticLandscape);
+    wetGrid         = new Grid(columns, rows, wetLandscape);
+    zeroDensityGrid = new Grid(columns, rows, zeroDensityLandscape);
+    realisticGrid   = new Grid(columns, rows, realisticLandscape);
 
 
 
-    for(int i = 0; i < columnCount; ++i)
+    for(int i = 0; i < columns; ++i)
     {
         delete [] wetLandscape[i];
         delete [] zeroDensityLandscape[i];
@@ -86,15 +86,15 @@ void TestUpdateGrid::testWetGridUpdated()
 {
     updateGrid(*wetGrid, r, a, b, m, k, l, deltaT);
 
-    for(int columnIndex = 1; columnIndex <= wetGrid->getColumns(); ++columnIndex)
+    for(int i = 1; i <= wetGrid->getColumns(); ++i)
     {
-        for(int rowIndex = 1; rowIndex <= wetGrid->getRows(); ++rowIndex)
+        for(int j = 1; j <= wetGrid->getRows(); ++j)
             {
                 // Since the whole grid is wet, every grid cell should have zero predator density... 
-                CPPUNIT_ASSERT_DOUBLES_EQUAL(0.0, (*wetGrid)(columnIndex, rowIndex).getPredDensity(), precision);
+                CPPUNIT_ASSERT_DOUBLES_EQUAL(0.0, (*wetGrid)(i, j).getPredDensity(), precision);
                 
                 // ... and zero prey density after each update.
-                CPPUNIT_ASSERT_DOUBLES_EQUAL(0.0, (*wetGrid)(columnIndex, rowIndex).getPreyDensity(), precision);   
+                CPPUNIT_ASSERT_DOUBLES_EQUAL(0.0, (*wetGrid)(i, j).getPreyDensity(), precision);   
             }
         }
 }
@@ -105,15 +105,15 @@ void TestUpdateGrid::testZeroDensityGridUpdated()
     
     updateGrid(*zeroDensityGrid, r, a, b, m, k, l, deltaT);
 
-    for(int columnIndex = 1; columnIndex <= zeroDensityGrid->getColumns(); ++columnIndex)
+    for(int i = 1; i <= zeroDensityGrid->getColumns(); ++i)
         {
-            for(int rowIndex = 1; rowIndex <= zeroDensityGrid->getRows(); ++rowIndex)
+            for(int j = 1; j <= zeroDensityGrid->getRows(); ++j)
             {
                 // Since the grid intially had zero density, every grid cell should still have zero predator density... 
-                CPPUNIT_ASSERT_DOUBLES_EQUAL(0.0, (*wetGrid)(columnIndex, rowIndex).getPredDensity(), precision);
+                CPPUNIT_ASSERT_DOUBLES_EQUAL(0.0, (*wetGrid)(i, j).getPredDensity(), precision);
                 
                 // ... and zero prey density after each update.
-                CPPUNIT_ASSERT_DOUBLES_EQUAL(0.0, (*wetGrid)(columnIndex, rowIndex).getPreyDensity(), precision);
+                CPPUNIT_ASSERT_DOUBLES_EQUAL(0.0, (*wetGrid)(i, j).getPreyDensity(), precision);
             }
         }
 
@@ -138,9 +138,9 @@ void TestUpdateGrid::testRealisticGridUpdated()
 
 	/*
      int** landStates = new int*[numberColumns];
-     for(int columnIndex = 0; columnIndex < numberColumns; ++columnIndex)
+     for(int i = 0; i < numberColumns; ++i)
      {
-        landStates[columnIndex] = new int[numberRows]; 
+        landStates[i] = new int[numberRows]; 
      }
      landStates[0][0] = 1;
      landStates[1][0] = 1;
