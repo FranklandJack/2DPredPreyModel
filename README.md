@@ -73,7 +73,7 @@ These instructions were taken from: <https://github.com/softwaresaved/build_and_
 
 - To run the code run: ```$ ./PredPrey YOURINPUTLANDSCAPEDATA.dat ```.
 
-- To build and run the tests run: ```$ make test``` or alternatively check the Travis CI repository [here](https://travis-ci.org/FranklandJack/2DPredPreyModel). 
+- To build and run the tests run: ```$ make test``` or alternatively check the Travis CI repository [here](https://travis-ci.org/FranklandJack/2DPredPreyModel). Running the tests will produce a summary of success and failures in the command line as well as TestResults.xml file that contains the same information.
 
 - To generate the dat files for input from any .pnm files you have to just place your pnm files in the landscapes directory and run: ```$ make dats``` which will generate the .dats files and place them in the main 2DPredPreyModel directory ready to be run with the executable. 
 

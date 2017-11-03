@@ -5,7 +5,7 @@ CPPUNIT_TEST_SUITE_REGISTRATION(TestUpdateGrid);
 
 void TestUpdateGrid::setUp()
 {
-    // All test landscapes will be of 3x3.
+    // All test landscapes will be of size 2x1.
     const int columns = 2;
     const int rows    = 1;
 
@@ -119,12 +119,7 @@ void TestUpdateGrid::testZeroDensityGridUpdated()
 
 }
 
-/*
-void TestUpdateGrid::testRealisticGridUpdated()
-{
-    CPPUNIT_ASSERT(true);
-}
-*/
+
 void TestUpdateGrid::testRealisticGridUpdated()
 {
     
