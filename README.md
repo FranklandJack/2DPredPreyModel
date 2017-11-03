@@ -71,7 +71,7 @@ These instructions were taken from: <https://github.com/softwaresaved/build_and_
 ## Instructions
 - To build the code run: ```$ make ```.  
 
-- To run the code run: ```$ ./PredPrey YOURINPUTLANDSCAPEDATA.dat ```.
+- To run the code run: ```$ ./predprey YOURINPUTLANDSCAPEDATA.dat ```.
 
 - To build and run the tests run: ```$ make test``` or alternatively check the Travis CI repository [here](https://travis-ci.org/FranklandJack/2DPredPreyModel). Running the tests will produce a summary of success and failures in the command line as well as TestResults.xml file that contains the same information.
 
