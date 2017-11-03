@@ -206,8 +206,6 @@ int main(int argc, char const *argv[])
     // Set uniform predator and prey distributions between 0 and 5.0 across the whole grid.
     double upperBound = 5.0;
 	
-    //can be added to exception  upperBound should be > 0
-    
     grid.setUniformDistribution(upperBound, upperBound, generator);
 
     
