@@ -113,6 +113,28 @@ This report forms part of the documentation for the coursework. It accompanies a
 
 In what follows the basic information about the project implementation is given and instructions are provided for building, running and testing the code. Finally, key design decisions are discussed and justified.
 
+\section{The Program}
+This program simulates the evolution of a system of predator(pumas) and prey(hares) densities across a 2D landscape which includes land and water. Neither the predators nor prey are considered able to swim so in wet areas density is always zero. The evolution of the system is governed by differential equations provided in the coursework development pdf:
+\begin{equation}
+\frac{\partial H}{\partial t} = rH - aHP + k\nabla^2(H)
+\end{equation}
+and
+\begin{equation}
+\frac{\partial P}{\partial t} = bHP - mP + l\nabla^2(P)
+\end{equation}
+
+where: 
+\begin{itemize}
+\item H is the density of hares (prey).
+\item P is the density of pumas (predators).
+\item r is the birth rate of hares.
+\item a is the predation rate at which pumas eat hares.
+\item b is the birth rate of pumas per one hare eaten.
+\item m is the pumas mortality rate.
+\item k is the diffusion rate for hares. 
+\item l is the diffusion rate for pumas.
+\end{itemize}
+
 \section{Prerequisites}
 The source code in this project makes use of C++ move semantics, as such it needs to be compiled under the C++11 standard (or higher) hence the compiler on the user's machine must be C++11 compliant. 
 
@@ -222,7 +244,7 @@ We chose to implement the 2D landscape using two classes; a Cell and a Grid. The
 Within the Cell class it was obvious that the densities should each be modelled with floating point values, since they are not necessarily integers. We choose to create an enumeration to represent the state of the cell being wet or dry, rather than using 0 and 1 or false and true. This is because it simplifies the source code enormously, since whenever we set or check a state it is clear what we are doing as we either either have Cell::Wet or Cell:Dry in the code. It also saves having to remember which is which of 0 and 1 is dry and which is wet. 
 
 \subsubsection{Grid}
-Within the Grid class it is obvious that the values that represent the width and height of the landscape (the number of columns and rows) should be chosen to be integers. We choose to implement the 2D array of cells as a 1D array within the class. This is because each Cell is in the Grid is dynamically allocated at runtime according to the user input. Dynamically allocating a 2D array of Cells is computationally expensive due to padding memory in each array entry. We overloaded the () operator to take two arguments and used a clever indexing system so that the Cells in the Grid can be accessed through the operator as if they are stored in a 2D array. We choose to implement the indexing system to match that in the coursework development pdf, that is Grid(i,j) corresponds to the ith column and the jth row, so they are x-y coordinate, this is not the same as matrix notation. They column and row numbers are also indexed from 1 to #numberColumns and 1 to #numberRows which matches the convention in the pdf.
+Within the Grid class it is obvious that the values that represent the width and height of the landscape (the number of columns and rows) should be chosen to be integers. We choose to implement the 2D array of cells as a 1D array within the class. This is because each Cell is in the Grid is dynamically allocated at runtime according to the user input. Dynamically allocating a 2D array of Cells is computationally expensive due to padding memory in each array entry. We overloaded the () operator to take two arguments and used a clever indexing system so that the Cells in the Grid can be accessed through the operator as if they are stored in a 2D array. We choose to implement the indexing system to match that in the coursework development pdf, that is Grid(i,j) corresponds to the ith column and the jth row, so they are x-y coordinate, this is not the same as matrix notation. They column and row numbers are also indexed from 1 to total number columns and 1 to total number rows which matches the convention in the pdf.
 
 
 \end{document}

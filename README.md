@@ -31,7 +31,7 @@ where:
 
 ## Prerequisites
 
-The source code in this project makes use of C++ move semantics, as such it needs to be compiled under the c++11 standard (or higher) hence the compiler on the user's machine must be C++11 compliant. 
+The source code in this project makes use of C++ move semantics, as such it needs to be compiled under the C++11 standard (or higher) hence the compiler on the user's machine must be C++11 compliant. 
 
 The unit test framework used is cppunit. To download, build and install see [CppUnit](http://www.freedesktop.org/wiki/Software/cppunit/), or do the following:
 ```

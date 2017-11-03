@@ -1,20 +1,21 @@
 \BOOKMARK [1][-]{section.1}{Introduction}{}% 1
-\BOOKMARK [1][-]{section.2}{Prerequisites}{}% 2
-\BOOKMARK [1][-]{section.3}{General Information}{}% 3
-\BOOKMARK [2][-]{subsection.3.1}{Programming Language}{section.3}% 4
-\BOOKMARK [2][-]{subsection.3.2}{Version Control}{section.3}% 5
-\BOOKMARK [2][-]{subsection.3.3}{Debuggers}{section.3}% 6
-\BOOKMARK [2][-]{subsection.3.4}{Build Tools}{section.3}% 7
-\BOOKMARK [2][-]{subsection.3.5}{Test Tools}{section.3}% 8
-\BOOKMARK [2][-]{subsection.3.6}{Documentation}{section.3}% 9
-\BOOKMARK [1][-]{section.4}{Usage Instructions}{}% 10
-\BOOKMARK [2][-]{subsection.4.1}{Building}{section.4}% 11
-\BOOKMARK [2][-]{subsection.4.2}{Running}{section.4}% 12
-\BOOKMARK [2][-]{subsection.4.3}{Testing}{section.4}% 13
-\BOOKMARK [2][-]{subsection.4.4}{Generating Documentation}{section.4}% 14
-\BOOKMARK [2][-]{subsection.4.5}{Misc.}{section.4}% 15
-\BOOKMARK [1][-]{section.5}{Summary of Key Design Decisions}{}% 16
-\BOOKMARK [2][-]{subsection.5.1}{Directory Hierarchy}{section.5}% 17
-\BOOKMARK [2][-]{subsection.5.2}{Classes}{section.5}% 18
-\BOOKMARK [3][-]{subsubsection.5.2.1}{Cell}{subsection.5.2}% 19
-\BOOKMARK [3][-]{subsubsection.5.2.2}{Grid}{subsection.5.2}% 20
+\BOOKMARK [1][-]{section.2}{The Program}{}% 2
+\BOOKMARK [1][-]{section.3}{Prerequisites}{}% 3
+\BOOKMARK [1][-]{section.4}{General Information}{}% 4
+\BOOKMARK [2][-]{subsection.4.1}{Programming Language}{section.4}% 5
+\BOOKMARK [2][-]{subsection.4.2}{Version Control}{section.4}% 6
+\BOOKMARK [2][-]{subsection.4.3}{Debuggers}{section.4}% 7
+\BOOKMARK [2][-]{subsection.4.4}{Build Tools}{section.4}% 8
+\BOOKMARK [2][-]{subsection.4.5}{Test Tools}{section.4}% 9
+\BOOKMARK [2][-]{subsection.4.6}{Documentation}{section.4}% 10
+\BOOKMARK [1][-]{section.5}{Usage Instructions}{}% 11
+\BOOKMARK [2][-]{subsection.5.1}{Building}{section.5}% 12
+\BOOKMARK [2][-]{subsection.5.2}{Running}{section.5}% 13
+\BOOKMARK [2][-]{subsection.5.3}{Testing}{section.5}% 14
+\BOOKMARK [2][-]{subsection.5.4}{Generating Documentation}{section.5}% 15
+\BOOKMARK [2][-]{subsection.5.5}{Misc.}{section.5}% 16
+\BOOKMARK [1][-]{section.6}{Summary of Key Design Decisions}{}% 17
+\BOOKMARK [2][-]{subsection.6.1}{Directory Hierarchy}{section.6}% 18
+\BOOKMARK [2][-]{subsection.6.2}{Classes}{section.6}% 19
+\BOOKMARK [3][-]{subsubsection.6.2.1}{Cell}{subsection.6.2}% 20
+\BOOKMARK [3][-]{subsubsection.6.2.2}{Grid}{subsection.6.2}% 21
