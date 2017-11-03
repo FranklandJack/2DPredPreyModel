@@ -446,19 +446,19 @@ void Grid::printDensities(std::ostream& out) const
 }
 
 
-void Grid::printPPM(std::ofstream &file) const
+int Grid::printPPM(std::ofstream &file, int maxNumberPPM) const
 {
+    double rounding = 0.5;
+    int scaleFactor = 2;
+    double maxDensity;
     // Print the header which identifies it as a plain PPM file.
     file << "P3" << std::endl;
 
     // Print the width and heigh of the image in pixels.
     file << m_columns << " " << m_rows << std::endl;
 
-    // We assume the densities won't exceed 50.
-    int maxDensity = 10;
-
     // Print the maximum value any colour can take into the file since this is part of the format.
-    file << maxDensity << std::endl;
+    file << maxNumberPPM << std::endl;
 
     for(int j = m_rows; j >= 1; --j)
     {
@@ -468,17 +468,25 @@ void Grid::printPPM(std::ofstream &file) const
             // G and B values. 
             int rValue = 0;
 
-            // The green value will be determined by the predator density.
-            int gValue = static_cast<int>((*this)(i,j).getPredDensity());
+            // The green value will be determined by the rounded predator density.
+            int gValue = static_cast<int>((*this)(i,j).getPredDensity() + rounding);
 
-            // The blue value will be deterined byt he prey density. 
-            int bValue = static_cast<int>((*this)(i,j).getPreyDensity());
+            // The blue value will be deterined by the rounded prey density. 
+            int bValue = static_cast<int>((*this)(i,j).getPreyDensity() + rounding);
             
             file << rValue << " " << gValue << " " << bValue;
             
             // Print each pixel to a new line since at most any line can be 70 characters long.
             file << std::endl;
-
+            
+            //Finds the higher density and changes maxNumberPPM so that for the next output maxNumberPPM is a high enough number.
+            maxDensity = ( ((*this)(i,j).getPredDensity()) > ((*this)(i,j).getPreyDensity()) ? ((*this)(i,j).getPredDensity()) : ((*this)(i,j).getPreyDensity()) );
+            while(maxNumberPPM < scaleFactor * maxDensity)
+             {
+                maxNumberPPM = scaleFactor * maxNumberPPM;
+             }
         }
     }
+    
+    return maxNumberPPM;
 }
