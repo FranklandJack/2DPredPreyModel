@@ -290,5 +290,14 @@ Within the Cell class it was obvious that the densities should each be modelled 
 \subsubsection{Grid}
 Within the Grid class it is obvious that the values that represent the width and height of the landscape (the number of columns and rows) should be chosen to be integers. We choose to implement the 2D array of cells as a 1D array within the class. This is because each Cell is in the Grid is dynamically allocated at runtime according to the user input. Dynamically allocating a 2D array of Cells is computationally expensive due to padding memory in each array entry. We overloaded the () operator to take two arguments and used a clever indexing system so that the Cells in the Grid can be accessed through the operator as if they are stored in a 2D array. We choose to implement the indexing system to match that in the coursework development pdf, that is Grid(i,j) corresponds to the ith column and the jth row, so they are x-y coordinate, this is not the same as matrix notation. They column and row numbers are also indexed from 1 to total number columns and 1 to total number rows which matches the convention in the pdf.
 
+\subsection{Output}
+We have decided to present the output using output files.
+
+\subsubsection{Average values}
+The average values of predator and prey densities over the grid are printed in a file averageDensitiesOutput. The average values are evaluated over the whole grid.
+
+\subsubsection{Output function for the PPM files}
+When printing the plain PPM file, we want to a have a constant maximum colour number so that falling and rising of the densities of predators and preys could be observed. That is why an initial value, maxNumberPPM, is used for the maximum colour number. This value changes if the maximum density of either predators or preys rises above a certain value.
+A minimal maximum colour number and a scaling number have been presented in case of low initial predator and prey densities. The minimal number gives a lower limit for the maximum colour number. The scaling number is then used to improve the densities resolution.  
 
 \end{document}
