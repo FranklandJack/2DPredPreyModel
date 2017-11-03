@@ -40,12 +40,10 @@ int main(int argc, char const *argv[])
     ifstream input_par("./input/input_parameters.txt", ios::in);
 
     /*
-     *
      * It needs to be checked that for each parameter the input has been successfully read in, i.e. it is of the right type
      * and it needs to be checked that the input is physical, which in all cases here just corresponds to it being non-negative. 
      * If either of these conditions fail the program exits with an appropriate message, since it is most likely the user made an
      * error with their input values, and so wouldn't want the code to run anyway. 
-     *
      */
     try
     {

@@ -11,6 +11,9 @@
 #include <cppunit/ui/text/TestRunner.h>
 
 /*
+ * This code is taken from https://github.com/softwaresaved/build_and_test_examples/blob/master/cpp/test/cppunit_test_driver.cc
+ * since it will work with any test suites.
+ *
  * Set up and run tests.
  *
  * @return 0 if successful else 1.

@@ -91,7 +91,7 @@ class Grid
          * 
          * \brief Default constructor.
          *
-         *  Creates a grid of size 0 with a nullptr as its grid
+         *  Creates a grid of size 0 with a null pointer as its grid
          * 
          *
          */
@@ -311,7 +311,7 @@ class Grid
         /**
          *
          * \brief Operator overload to access the Cell stored at the (i,j)th coordinates of the grid.
-         * Since the 2-D landscape is implemented as a 1-D array with the same number of elements for memory reasons, this opertor provides a way of acessing
+         * Since the 2-D landscape is implemented as a 1-D array with the same number of elements for memory reasons, this operator provides a way of accessing
          * the elements of the 1-D array with two indices (i,j) as if it were a 2D-array. This operator should be used whenever direct access to the grid cells 
          * is needed and extensive use of it is made in the constructors.
          * 

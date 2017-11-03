@@ -25,33 +25,32 @@ class TestGrid : public CPPUNIT_NS::TestFixture
         CPPUNIT_TEST(testConstructor1);
         CPPUNIT_TEST(testConstructor2);
 
-        // Finish the process
+        /// Finish the process
         CPPUNIT_TEST_SUITE_END();
 
     public:
 
         
 
-        // Overide setUp(), init data etc
+        /// Override setUp(), initialise test cases etc.
         void setUp();
 
-        // Overide tearDown(), free allocated memory,etc
+        /// Override tearDown(), free allocated memory in test cases, etc.
         void tearDown();
         
-        void testConstructor1();
-        void testConstructor2();
+        
 
     protected:
 
-        // Test method testInit
-        //void testInit();
-
+        
+        void testConstructor1();
+        void testConstructor2();
         
 
     private:
 
-    // Three instances of Grid for test
-    Cell *a , *b, *c;
+    /// Three instances of Grid for test
+    Grid *a , *b, *c;
 
     // Delta value within which doubles are considered equal.
     const double precision = 0.0001;
