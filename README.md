@@ -115,7 +115,7 @@ X X X X X X X X ...... X X X X
 where X=0 if the cell in the landscape is Wet and X=1 if the cell in the landscape is dry. 
 
 ## Output 
-The program will run from t=0 to t=500 and output the average density of the predators and prey (over the whole grid including wet areas) every 10 time steps into a file called Average_Densities.txt. It will also output a plain ppm file every n time steps called output#step.ppm where n is the number of time steps between output set by the user. All output files are created in the output directory. 
+The program will run from t=0 to t=500 and output the average density of the predators and prey (over the whole grid including wet areas) every 10 time steps into a file called Average_Densities.txt. It will also output a plain ppm file every N time steps called outputM.ppm where N is the number of time steps between output set by the user in the input file, and M is the step number of the output. All output files are created in the output directory. The user should note that since output is always sent to the output directory if they run the simulation more than once they will overwrite their output from the first run. The user can either save the outputs into a different directory, or remove the original outputs by running ``` $ make clean ```.
 
 
 

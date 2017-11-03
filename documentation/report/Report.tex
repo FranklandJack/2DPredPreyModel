@@ -176,9 +176,9 @@ The program takes as its input:
 \item A .dat file which contains the landscape of the system. 
 \end{enumerate}
 
-The location of the input parameters for time evolution is hard coded into the main method, so its name should not be changed, however the user can feel free to change the values of the parameters in the file input/input_parameters.txt.
+The location of the input parameters for time evolution is hard coded into the main method, so its name should not be changed, however the user can feel free to change the values of the parameters in the file \textit{input/input\_parameters.txt}.
 
-The format of the input_parameters.txt file \textbf{MUST} be:
+The format of the \textit{input\_parameters.txt} file \textbf{MUST} be:
 \begin{enumerate}
 \item birth rate of hares 
 \item predation rate at which pumas eat hares
@@ -192,9 +192,9 @@ The format of the input_parameters.txt file \textbf{MUST} be:
 
 With each value separated by a newline.
 
-The .dat file is provided as the only command line argument to the executable and \textcf{MUST} be of the format:
+The .dat file is provided as the only command line argument to the executable and \textbf{MUST} be of the format:
 
-number columns number rows  
+number columns number rows      \\
 X X X X X X X X ...... X X X X  \\
 X X X X X X X X ...... X X X X  \\
 . . . . . . . . ...... . . . .  \\
@@ -212,6 +212,13 @@ $ ./predprey YOURINPUTLANDSCAPE.dat
 
 \end{lstlisting}
 where the first command line argument YOURINPUTLANDSCAPE.dat is the name of the .dat file containing the landscape you wish to simulate. 
+
+\subsection{Output}
+The program will run from t=0 to t=500 and output the average density of the predators and prey (over the whole grid including wet areas) every 10 time steps into a file called \textit{Average\_Densities.txt}. It will also output a plain ppm file every N time steps called outputM.ppm where N is the number of time steps between output set by the user in the input file, and M is the step number of the output. All output files are created in the \textit{output} directory. The user should note that since output is always sent to the output directory if they run the simulation more than once they will overwrite their output from the first run. The user can either save the outputs into a different directory, or remove the original outputs by running 
+\begin{lstlisting}[language=bash]
+$ make clean
+\end{lstlisting}
+
 \subsection{Testing}
 To build and run the unit tests on the code:
 \begin{lstlisting}[language=bash]
@@ -245,7 +252,7 @@ To generate .dat files from any pnm files, first place the pnm files in the land
 \begin{lstlisting}[language=bash]
 $ make dats
 \end{lstlisting}
-This will generate .dat files for all .pnm files in the landscape folder and place them in the main directory, ready to be run with the program. 
+This will generate .dat files for all .pnm files in the landscape folder and place them in the main directory, ready to be run with the program. \\
 
 
 To clean up all auto-generated files (this includes any output files in the output directory from the program after it is run, object files and executables, as well as .dat files in the main directory) run:
@@ -254,7 +261,7 @@ $ make clean
 \end{lstlisting}
 
 
-For a full list of make commands and the function run:
+For a full list of make commands and their function run:
 \begin{lstlisting}[language=bash]
 $ make help
 \end{lstlisting}
