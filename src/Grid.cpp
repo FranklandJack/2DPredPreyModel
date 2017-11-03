@@ -420,11 +420,11 @@ std::ostream& operator<<(std::ostream& out, const Grid& grid)
              */
             Cell::State state = grid(i,j).getState();
             int stateOutput = static_cast<int>(state);
-            out << stateOutput << ' ';
+            out << stateOutput << " ";
         }
 
         // Print a newline at the end of each column for the correct format.
-        out<<'\n';
+        out<<"\n";
     }
 
     // Return the output stream so we can chain together outputs 
