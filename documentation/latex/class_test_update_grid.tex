@@ -1,5 +1,14 @@
 \hypertarget{class_test_update_grid}{}\section{Test\+Update\+Grid Class Reference}
 \label{class_test_update_grid}\index{Test\+Update\+Grid@{Test\+Update\+Grid}}
+
+
+Tests the update\+Grid function.  
+
+
+
+
+{\ttfamily \#include $<$Test\+Update\+Grid.\+hpp$>$}
+
 Inheritance diagram for Test\+Update\+Grid\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -10,26 +19,61 @@ Inheritance diagram for Test\+Update\+Grid\+:\begin{figure}[H]
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\Hypertarget{class_test_update_grid_a0a50fd0d318cb2fe27dfc7fa5c8a0f33}\label{class_test_update_grid_a0a50fd0d318cb2fe27dfc7fa5c8a0f33}} 
-void {\bfseries set\+Up} ()
-\item 
+void \hyperlink{class_test_update_grid_a0a50fd0d318cb2fe27dfc7fa5c8a0f33}{set\+Up} ()
+\begin{DoxyCompactList}\small\item\em Override \hyperlink{class_test_update_grid_a0a50fd0d318cb2fe27dfc7fa5c8a0f33}{set\+Up()}, initialise test cases etc. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{class_test_update_grid_a482b2a4a0f2fd8252032bde4b28c3778}\label{class_test_update_grid_a482b2a4a0f2fd8252032bde4b28c3778}} 
-void {\bfseries tear\+Down} ()
-\end{DoxyCompactItemize}
+void \hyperlink{class_test_update_grid_a482b2a4a0f2fd8252032bde4b28c3778}{tear\+Down} ()
+\begin{DoxyCompactList}\small\item\em Override \hyperlink{class_test_update_grid_a482b2a4a0f2fd8252032bde4b28c3778}{tear\+Down()}, free allocated memory in test cases, etc. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{class_test_update_grid_a96aa33a3e1362f9a24237c234a13f3b9}\label{class_test_update_grid_a96aa33a3e1362f9a24237c234a13f3b9}} 
-void {\bfseries test\+Wet\+Grid\+Updated} ()
-\item 
-\mbox{\Hypertarget{class_test_update_grid_ac9edeb07286572669ab1464895f3f452}\label{class_test_update_grid_ac9edeb07286572669ab1464895f3f452}} 
-void {\bfseries test\+Zero\+Density\+Grid\+Updated} ()
-\item 
-\mbox{\Hypertarget{class_test_update_grid_a5ae8a15bf6d4fc2429b9e0b0946b08c8}\label{class_test_update_grid_a5ae8a15bf6d4fc2429b9e0b0946b08c8}} 
-void {\bfseries test\+Realistic\+Grid\+Updated} ()
-\end{DoxyCompactItemize}
+void \hyperlink{class_test_update_grid_a96aa33a3e1362f9a24237c234a13f3b9}{test\+Wet\+Grid\+Updated} ()
+\begin{DoxyCompactList}\small\item\em Test method for update\+Grid() function. \end{DoxyCompactList}\item 
+void \hyperlink{class_test_update_grid_ac9edeb07286572669ab1464895f3f452}{test\+Zero\+Density\+Grid\+Updated} ()
+\begin{DoxyCompactList}\small\item\em Test method for update\+Grid() function. \end{DoxyCompactList}\item 
+void \hyperlink{class_test_update_grid_a5ae8a15bf6d4fc2429b9e0b0946b08c8}{test\+Realistic\+Grid\+Updated} ()
+\begin{DoxyCompactList}\small\item\em Test method for update\+Grid() function. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
+
+\subsection{Detailed Description}
+Tests the update\+Grid function. 
+
+This test class is written using the Cpp\+Unit test framework and tests the function that updates the grid. 
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_test_update_grid_a5ae8a15bf6d4fc2429b9e0b0946b08c8}\label{class_test_update_grid_a5ae8a15bf6d4fc2429b9e0b0946b08c8}} 
+\index{Test\+Update\+Grid@{Test\+Update\+Grid}!test\+Realistic\+Grid\+Updated@{test\+Realistic\+Grid\+Updated}}
+\index{test\+Realistic\+Grid\+Updated@{test\+Realistic\+Grid\+Updated}!Test\+Update\+Grid@{Test\+Update\+Grid}}
+\subsubsection{\texorpdfstring{test\+Realistic\+Grid\+Updated()}{testRealisticGridUpdated()}}
+{\footnotesize\ttfamily void Test\+Update\+Grid\+::test\+Realistic\+Grid\+Updated (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Test method for update\+Grid() function. 
+
+Tests that the function correctly updates a grid that initially has non-\/zero densities. \mbox{\Hypertarget{class_test_update_grid_a96aa33a3e1362f9a24237c234a13f3b9}\label{class_test_update_grid_a96aa33a3e1362f9a24237c234a13f3b9}} 
+\index{Test\+Update\+Grid@{Test\+Update\+Grid}!test\+Wet\+Grid\+Updated@{test\+Wet\+Grid\+Updated}}
+\index{test\+Wet\+Grid\+Updated@{test\+Wet\+Grid\+Updated}!Test\+Update\+Grid@{Test\+Update\+Grid}}
+\subsubsection{\texorpdfstring{test\+Wet\+Grid\+Updated()}{testWetGridUpdated()}}
+{\footnotesize\ttfamily void Test\+Update\+Grid\+::test\+Wet\+Grid\+Updated (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Test method for update\+Grid() function. 
+
+Tests that the function correctly updates a grid that is wet everywhere. \mbox{\Hypertarget{class_test_update_grid_ac9edeb07286572669ab1464895f3f452}\label{class_test_update_grid_ac9edeb07286572669ab1464895f3f452}} 
+\index{Test\+Update\+Grid@{Test\+Update\+Grid}!test\+Zero\+Density\+Grid\+Updated@{test\+Zero\+Density\+Grid\+Updated}}
+\index{test\+Zero\+Density\+Grid\+Updated@{test\+Zero\+Density\+Grid\+Updated}!Test\+Update\+Grid@{Test\+Update\+Grid}}
+\subsubsection{\texorpdfstring{test\+Zero\+Density\+Grid\+Updated()}{testZeroDensityGridUpdated()}}
+{\footnotesize\ttfamily void Test\+Update\+Grid\+::test\+Zero\+Density\+Grid\+Updated (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Test method for update\+Grid() function. 
+
+Tests that the function correctly updates a grid that initially has zero densities everywhere. 
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 
-test/Test\+Update\+Grid.\+hpp\item 
+test/\hyperlink{_test_update_grid_8hpp}{Test\+Update\+Grid.\+hpp}\item 
 test/Test\+Update\+Grid.\+cpp\end{DoxyCompactItemize}

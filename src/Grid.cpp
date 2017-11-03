@@ -471,7 +471,7 @@ int Grid::printPPM(std::ofstream &file, int maxNumberPPM) const
             // The green value will be determined by the rounded predator density.
             int gValue = static_cast<int>((*this)(i,j).getPredDensity() + rounding);
 
-            // The blue value will be deterined by the rounded prey density. 
+            // The blue value will be determined by the rounded prey density. 
             int bValue = static_cast<int>((*this)(i,j).getPreyDensity() + rounding);
             
             file << rValue << " " << gValue << " " << bValue;

@@ -14,8 +14,6 @@ Models a 2D landscape of cells.
 \item 
 \hyperlink{class_grid_a4ac9ff4f63552b4c61ff90fcb35ad66c}{Grid} ()
 \begin{DoxyCompactList}\small\item\em Default constructor. \end{DoxyCompactList}\item 
-\hyperlink{class_grid_a88ab1ccc8100827b4da40e62b7b77e96}{Grid} (std\+::ifstream \&input\+File)
-\begin{DoxyCompactList}\small\item\em Creates \hyperlink{class_grid}{Grid} objects from some input file representing the \hyperlink{class_grid}{Grid}. \end{DoxyCompactList}\item 
 \hyperlink{class_grid_ab64f5607521a89e7a2fb99cbfa5f2b44}{Grid} (int columns, int rows, int $\ast$$\ast$const data)
 \begin{DoxyCompactList}\small\item\em Creates \hyperlink{class_grid}{Grid} objects from some input array representing the \hyperlink{class_grid}{Grid}. \end{DoxyCompactList}\item 
 \hyperlink{class_grid_a2be5432331273bc420c252ea09631965}{Grid} (const \hyperlink{class_grid}{Grid} \&source\+Grid)
@@ -39,18 +37,18 @@ void \hyperlink{class_grid_a2f366ddaaa75475a9597f9a85ab24d59}{set\+Uniform\+Prey
 void \hyperlink{class_grid_a17c062fcf4063a811bd8d95c32bce723}{set\+Uniform\+Distribution} (double pred\+Upper\+Bound, double prey\+Upperbound, std\+::default\+\_\+random\+\_\+engine \&generator)
 \item 
 double \hyperlink{class_grid_a25eeb1fef1d86fe74b45e615f0376158}{pred\+Density} (bool include\+Wet\+Cells=true) const
-\begin{DoxyCompactList}\small\item\em Calulates average predator density across the grid. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Calculates average predator density across the grid. \end{DoxyCompactList}\item 
 double \hyperlink{class_grid_a7dc8ae18c31e8e680f6369d7c07ea881}{prey\+Density} (bool include\+Wet\+Cells=true) const
-\begin{DoxyCompactList}\small\item\em Calulates average prey density across the grid. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Calculates average prey density across the grid. \end{DoxyCompactList}\item 
 \hyperlink{class_cell}{Cell} \& \hyperlink{class_grid_aed06be122077b3a0c1fe7c412c2535fc}{operator()} (int i, int j)
-\item 
+\begin{DoxyCompactList}\small\item\em Operator overload to access the \hyperlink{class_cell}{Cell} stored at the (i,j)th coordinates of the grid. Since the 2-\/D landscape is implemented as a 1-\/D array with the same number of elements for memory reasons, this opertor provides a way of acessing the elements of the 1-\/D array with two indices (i,j) as if it were a 2\+D-\/array. This operator should be used whenever direct access to the grid cells is needed and extensive use of it is made in the constructors. \end{DoxyCompactList}\item 
 const \hyperlink{class_cell}{Cell} \& \hyperlink{class_grid_aa89f5c17cb78658f3b82a3b2d93aeb92}{operator()} (int i, int j) const
-\begin{DoxyCompactList}\small\item\em Second operator overload to acess the \hyperlink{class_cell}{Cell} stored at the (i,j)th coordinate if the grid is a constant variable. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Second operator overload to access the \hyperlink{class_cell}{Cell} stored at the (i,j)th coordinate if the grid is a constant variable. \end{DoxyCompactList}\item 
 int \hyperlink{class_grid_a50f4c0db20b466c84a1d65004e51642e}{dry\+Neighbours} (int i, int j) const
-\begin{DoxyCompactList}\small\item\em Calulates number of Dry neighbours of a given cell. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Calculates number of Dry neighbours of a given cell. \end{DoxyCompactList}\item 
 void \hyperlink{class_grid_a4971cb9d47440bc63488993d5647f943}{print\+Densities} (std\+::ostream \&out) const
 \begin{DoxyCompactList}\small\item\em Outputs predator and prey densities to output stream. \end{DoxyCompactList}\item 
-void \hyperlink{class_grid_a518355eee78ffbe468034fed65bbcb48}{print\+P\+PM} (std\+::ofstream \&file) const
+int \hyperlink{class_grid_acf89a88b063c4f641ad1331bcf9447ad}{print\+P\+PM} (std\+::ofstream \&file, int max\+Number\+P\+PM) const
 \begin{DoxyCompactList}\small\item\em Prints the densities of the predators and prey to a ppm file provided. \end{DoxyCompactList}\item 
 \hyperlink{class_cell_a21d74a2efcb79c93e5649b06a50b7cf5}{Cell\+::\+State} \hyperlink{class_grid_a425801f2747d6be34c10eb6535ab0829}{get\+Cell\+State} (int column\+Index, int row\+Index) const
 \begin{DoxyCompactList}\small\item\em Retrieves state of cell at a given coordinate. \end{DoxyCompactList}\end{DoxyCompactItemize}
@@ -72,27 +70,17 @@ A \hyperlink{class_grid}{Grid} consists of a (2D) array of cells that can either
 \mbox{\Hypertarget{class_grid_a4ac9ff4f63552b4c61ff90fcb35ad66c}\label{class_grid_a4ac9ff4f63552b4c61ff90fcb35ad66c}} 
 \index{Grid@{Grid}!Grid@{Grid}}
 \index{Grid@{Grid}!Grid@{Grid}}
-\subsubsection{\texorpdfstring{Grid()}{Grid()}\hspace{0.1cm}{\footnotesize\ttfamily [1/5]}}
+\subsubsection{\texorpdfstring{Grid()}{Grid()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
 {\footnotesize\ttfamily Grid\+::\+Grid (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
 
 
 Default constructor. 
 
-Creates a grid of size 0 with a nullptr as its grid \mbox{\Hypertarget{class_grid_a88ab1ccc8100827b4da40e62b7b77e96}\label{class_grid_a88ab1ccc8100827b4da40e62b7b77e96}} 
+Creates a grid of size 0 with a nullptr as its grid \mbox{\Hypertarget{class_grid_ab64f5607521a89e7a2fb99cbfa5f2b44}\label{class_grid_ab64f5607521a89e7a2fb99cbfa5f2b44}} 
 \index{Grid@{Grid}!Grid@{Grid}}
 \index{Grid@{Grid}!Grid@{Grid}}
-\subsubsection{\texorpdfstring{Grid()}{Grid()}\hspace{0.1cm}{\footnotesize\ttfamily [2/5]}}
-{\footnotesize\ttfamily Grid\+::\+Grid (\begin{DoxyParamCaption}\item[{std\+::ifstream \&}]{input\+File }\end{DoxyParamCaption})}
-
-
-
-Creates \hyperlink{class_grid}{Grid} objects from some input file representing the \hyperlink{class_grid}{Grid}. 
-
-This constructor will dynamically allocate a 1-\/D array of Cells with a halo of water cells, which represents the 2-\/D landscape. \mbox{\Hypertarget{class_grid_ab64f5607521a89e7a2fb99cbfa5f2b44}\label{class_grid_ab64f5607521a89e7a2fb99cbfa5f2b44}} 
-\index{Grid@{Grid}!Grid@{Grid}}
-\index{Grid@{Grid}!Grid@{Grid}}
-\subsubsection{\texorpdfstring{Grid()}{Grid()}\hspace{0.1cm}{\footnotesize\ttfamily [3/5]}}
+\subsubsection{\texorpdfstring{Grid()}{Grid()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
 {\footnotesize\ttfamily Grid\+::\+Grid (\begin{DoxyParamCaption}\item[{int}]{columns,  }\item[{int}]{rows,  }\item[{int $\ast$$\ast$const}]{data }\end{DoxyParamCaption})}
 
 
@@ -103,9 +91,9 @@ This constructor will dynamically allocate a 1-\/D array of Cells with a halo of
 
 
 \begin{DoxyParams}{Parameters}
-{\em columns} & Integer value represnting the number of columns in the \hyperlink{class_grid}{Grid} object, not inluding the halo.\\
+{\em columns} & Integer value representing the number of columns in the \hyperlink{class_grid}{Grid} object, not including the halo.\\
 \hline
-{\em rows} & Integer value representing the number of rows in the \hyperlink{class_grid}{Grid} objecet, not including the halo.\\
+{\em rows} & Integer value representing the number of rows in the \hyperlink{class_grid}{Grid} object, not including the halo.\\
 \hline
 {\em data} & Integer array of values which represent the Wet and Dry cells in the grid, must be 1 and 0 only and must have the same number of rows and columns as the explicit values provided \\
 \hline
@@ -113,7 +101,7 @@ This constructor will dynamically allocate a 1-\/D array of Cells with a halo of
 \mbox{\Hypertarget{class_grid_a2be5432331273bc420c252ea09631965}\label{class_grid_a2be5432331273bc420c252ea09631965}} 
 \index{Grid@{Grid}!Grid@{Grid}}
 \index{Grid@{Grid}!Grid@{Grid}}
-\subsubsection{\texorpdfstring{Grid()}{Grid()}\hspace{0.1cm}{\footnotesize\ttfamily [4/5]}}
+\subsubsection{\texorpdfstring{Grid()}{Grid()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
 {\footnotesize\ttfamily Grid\+::\+Grid (\begin{DoxyParamCaption}\item[{const \hyperlink{class_grid}{Grid} \&}]{source\+Grid }\end{DoxyParamCaption})}
 
 
@@ -130,7 +118,7 @@ Due to the dynamic memory allocation that takes place in the constructor, the co
 \mbox{\Hypertarget{class_grid_a3828d0bf34f6c97ed93adc84d4ce6c4b}\label{class_grid_a3828d0bf34f6c97ed93adc84d4ce6c4b}} 
 \index{Grid@{Grid}!Grid@{Grid}}
 \index{Grid@{Grid}!Grid@{Grid}}
-\subsubsection{\texorpdfstring{Grid()}{Grid()}\hspace{0.1cm}{\footnotesize\ttfamily [5/5]}}
+\subsubsection{\texorpdfstring{Grid()}{Grid()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
 {\footnotesize\ttfamily Grid\+::\+Grid (\begin{DoxyParamCaption}\item[{\hyperlink{class_grid}{Grid} \&\&}]{source\+Grid }\end{DoxyParamCaption})}
 
 
@@ -141,7 +129,7 @@ This is implemented for performance reasons. If a grid is ever returned from a f
 
 
 \begin{DoxyParams}{Parameters}
-{\em source\+Grid} & constant R-\/value reference from which the ownership of the member variables will be transfered. \\
+{\em source\+Grid} & constant R-\/value reference from which the ownership of the member variables will be transferred. \\
 \hline
 \end{DoxyParams}
 \mbox{\Hypertarget{class_grid_a3661d0a7f998caaaf8627d7a67072116}\label{class_grid_a3661d0a7f998caaaf8627d7a67072116}} 
@@ -165,15 +153,15 @@ Destructor is explicitly implemented since the \hyperlink{class_grid}{Grid} clas
 
 
 
-Calulates number of Dry neighbours of a given cell. 
+Calculates number of Dry neighbours of a given cell. 
 
 Neighbours are only considered to be non-\/diagonal, so this function counts the number of Dry cells directly above/below and to the left/right of the specified cell.
 
 
 \begin{DoxyParams}{Parameters}
-{\em i} & column number/x-\/coordinate of cell. \\
+{\em i} & column number/x-\/coordinate of cell.\\
 \hline
-{\em j} & row number/y-\/corrdinate of cell.\\
+{\em j} & row number/y-\/coordinate of cell.\\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
@@ -231,13 +219,15 @@ The value of m\+\_\+rows, the actual number of rows in the grid without a halo o
 \subsubsection{\texorpdfstring{operator()()}{operator()()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
 {\footnotesize\ttfamily \hyperlink{class_cell}{Cell} \& Grid\+::operator() (\begin{DoxyParamCaption}\item[{int}]{i,  }\item[{int}]{j }\end{DoxyParamCaption})}
 
-Operator overload to access the \hyperlink{class_cell}{Cell} stored at the (i,j)th coordinates of the grid. Since the 2-\/D landscape is implemeted as a 1-\/D array with the same number of elements for memory reasons, this opertor provides a way of acessing the elements of the 1-\/D array with two indicies (i,j) as if it were a 2\+D-\/array. This operator should be used whenever direct acess to the grid cells is needed and extensive use of it is made in the constructors.
 
-The indexing system for this operator and therefore the \hyperlink{class_grid}{Grid} itself follows that given in the specification document for this project in the figure in section 2.\+1. i.\+e. (i,j) corresponds to x (column number) and y coordinates (row number) where the orgin is taken to be in the bottom left corner. This is not the same as matrix notation. For example (3,4) would return the cell in the 3rd column of the 4th row.
+
+Operator overload to access the \hyperlink{class_cell}{Cell} stored at the (i,j)th coordinates of the grid. Since the 2-\/D landscape is implemented as a 1-\/D array with the same number of elements for memory reasons, this opertor provides a way of acessing the elements of the 1-\/D array with two indices (i,j) as if it were a 2\+D-\/array. This operator should be used whenever direct access to the grid cells is needed and extensive use of it is made in the constructors. 
+
+The indexing system for this operator and therefore the \hyperlink{class_grid}{Grid} itself follows that given in the specification document for this project in the figure in section 2.\+1. i.\+e. (i,j) corresponds to x (column number) and y coordinates (row number) where the origin is taken to be in the bottom left corner. This is not the same as matrix notation. For example (3,4) would return the cell in the 3rd column of the 4th row.
 
 
 \begin{DoxyParams}{Parameters}
-{\em i} & column number/x-\/coordinate of cell. \\
+{\em i} & column number/x-\/coordinate of cell.\\
 \hline
 {\em j} & row/y-\/coordinate of cell.\\
 \hline
@@ -253,13 +243,13 @@ The indexing system for this operator and therefore the \hyperlink{class_grid}{G
 
 
 
-Second operator overload to acess the \hyperlink{class_cell}{Cell} stored at the (i,j)th coordinate if the grid is a constant variable. 
+Second operator overload to access the \hyperlink{class_cell}{Cell} stored at the (i,j)th coordinate if the grid is a constant variable. 
 
 This function behaves in exactly the same way as its non-\/constant counterpart. However the non-\/constant operator() overload will not work with any constant grid objects, since it returns a reference, it would be able to edit contents of the constant Cells m\+\_\+cell\+Array member. For an explanation of the indexing system please see the non-\/constant overload.
 
 
 \begin{DoxyParams}{Parameters}
-{\em i} & column number/x-\/coordinate of cell. \\
+{\em i} & column number/x-\/coordinate of cell.\\
 \hline
 {\em j} & row/y-\/coordinate of cell.\\
 \hline
@@ -277,7 +267,7 @@ Constant \hyperlink{class_cell}{Cell} reference to the cell at the (i,j) coordin
 
 Assigns \hyperlink{class_grid}{Grid} objects from a source with deep copying. 
 
-Due to the dynamic memory allocation that takes place in the constructor, the copy assignment opeartor is overloaded to insure that deep copying takes place in any assignment and that there are no dangling pointers when grid objects go out of scope. It also checks for self assignment which could otherwise lead to memory problems. This pairs with the copy constructor that also does deep copying.
+Due to the dynamic memory allocation that takes place in the constructor, the copy assignment operator is overloaded to insure that deep copying takes place in any assignment and that there are no dangling pointers when grid objects go out of scope. It also checks for self assignment which could otherwise lead to memory problems. This pairs with the copy constructor that also does deep copying.
 
 
 \begin{DoxyParams}{Parameters}
@@ -301,7 +291,7 @@ This is implemented for performance reasons to go with the move constructor. If 
 
 
 \begin{DoxyParams}{Parameters}
-{\em source\+Grid} & constant R-\/value \hyperlink{class_grid}{Grid} reference from which the ownership of the member variables will be transfered.\\
+{\em source\+Grid} & constant R-\/value \hyperlink{class_grid}{Grid} reference from which the ownership of the member variables will be transferred.\\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
@@ -315,9 +305,9 @@ This is implemented for performance reasons to go with the move constructor. If 
 
 
 
-Calulates average predator density across the grid. 
+Calculates average predator density across the grid. 
 
-Calulates the average value of the predator density across the entire grid, not included the halo of Wet cells. However, the average can be taken over just the Dry cells in the grid, or over the Dry and Wet cells in the grid if the corresponding argument is provided.
+Calculates the average value of the predator density across the entire grid, not included the halo of Wet cells. However, the average can be taken over just the Dry cells in the grid, or over the Dry and Wet cells in the grid if the corresponding argument is provided.
 
 
 \begin{DoxyParams}{Parameters}
@@ -327,9 +317,7 @@ Calulates the average value of the predator density across the entire grid, not 
 \begin{DoxyReturn}{Returns}
 Floating point value representing the average predator density across the grid either including or not including the Wet cells, depending on how the function was called. 
 \end{DoxyReturn}
-Add the pred densities of each cell up.
-
-Total up the number of Wet cells as well. \mbox{\Hypertarget{class_grid_a7dc8ae18c31e8e680f6369d7c07ea881}\label{class_grid_a7dc8ae18c31e8e680f6369d7c07ea881}} 
+\mbox{\Hypertarget{class_grid_a7dc8ae18c31e8e680f6369d7c07ea881}\label{class_grid_a7dc8ae18c31e8e680f6369d7c07ea881}} 
 \index{Grid@{Grid}!prey\+Density@{prey\+Density}}
 \index{prey\+Density@{prey\+Density}!Grid@{Grid}}
 \subsubsection{\texorpdfstring{prey\+Density()}{preyDensity()}}
@@ -337,9 +325,9 @@ Total up the number of Wet cells as well. \mbox{\Hypertarget{class_grid_a7dc8ae1
 
 
 
-Calulates average prey density across the grid. 
+Calculates average prey density across the grid. 
 
-Calulates the average value of the prey density across the entire grid, not included the halo of Wet cells. However, the average can be taken over just the Dry cells in the grid, or over the Dry and Wet cells in the grid if the corresponding argument is provided.
+Calculates the average value of the prey density across the entire grid, not included the halo of Wet cells. However, the average can be taken over just the Dry cells in the grid, or over the Dry and Wet cells in the grid if the corresponding argument is provided.
 
 
 \begin{DoxyParams}{Parameters}
@@ -366,11 +354,11 @@ Outputs densities of predator and prey for each cell in the format\+: i j predat
 {\em out} & std\+::ostream reference which is the output stream. This will also work for fstream since it inherits from ostream. \\
 \hline
 \end{DoxyParams}
-\mbox{\Hypertarget{class_grid_a518355eee78ffbe468034fed65bbcb48}\label{class_grid_a518355eee78ffbe468034fed65bbcb48}} 
+\mbox{\Hypertarget{class_grid_acf89a88b063c4f641ad1331bcf9447ad}\label{class_grid_acf89a88b063c4f641ad1331bcf9447ad}} 
 \index{Grid@{Grid}!print\+P\+PM@{print\+P\+PM}}
 \index{print\+P\+PM@{print\+P\+PM}!Grid@{Grid}}
 \subsubsection{\texorpdfstring{print\+P\+P\+M()}{printPPM()}}
-{\footnotesize\ttfamily void Grid\+::print\+P\+PM (\begin{DoxyParamCaption}\item[{std\+::ofstream \&}]{file }\end{DoxyParamCaption}) const}
+{\footnotesize\ttfamily int Grid\+::print\+P\+PM (\begin{DoxyParamCaption}\item[{std\+::ofstream \&}]{file,  }\item[{int}]{max\+Number\+P\+PM }\end{DoxyParamCaption}) const}
 
 
 
@@ -378,9 +366,9 @@ Prints the densities of the predators and prey to a ppm file provided.
 
 This function will print the to the file in the format\+:
 
-P3 (required for a P\+PM and means this is a R\+GB color image in A\+S\+C\+II) m\+\_\+columns m\+\_\+rows (width and height of image) M\+AX (maximum value for each colour) 0 pred\+Density prey\+Density (at coordinate (m\+\_\+rows, 1)) 0 pred\+Density prey\+Density (at coordinate (m\+\_\+rows, 2)) 0 pred\+Density prey\+Density (at coordinate (m\+\_\+rows, 3)) . . . . . . . . . . . . . . . . . . . . . . . . 0 pred\+Density prey\+Density (at coordinate (1, m\+\_\+columns))
+P3 (required for a P\+PM and means this is a R\+GB colour image in A\+S\+C\+II) m\+\_\+columns m\+\_\+rows (width and height of image) M\+AX (maximum value for each colour) 0 pred\+Density prey\+Density (at coordinate (m\+\_\+rows, 1)) 0 pred\+Density prey\+Density (at coordinate (m\+\_\+rows, 2)) 0 pred\+Density prey\+Density (at coordinate (m\+\_\+rows, 3)) . . . . . . . . . . . . . . . . . . . . . . . . 0 pred\+Density prey\+Density (at coordinate (1, m\+\_\+columns))
 
-To overcome the fact that each line can contain at most 70 characters each coordinate pixel is printed to a new line, this works fine formatting wise since the number of rows and columns are printed explcitly at the top of the file, so for any display purposes the file knows how to \char`\"{}count\char`\"{} the values into the correct coordinates.
+To overcome the fact that each line can contain at most 70 characters each coordinate pixel is printed to a new line, this works fine formatting wise since the number of rows and columns are printed explicitly at the top of the file, so for any display purposes the file knows how to \char`\"{}count\char`\"{} the values into the correct coordinates.
 
 
 \begin{DoxyParams}{Parameters}
@@ -395,15 +383,15 @@ To overcome the fact that each line can contain at most 70 characters each coord
 
 Sets uniform random predator and prey distribution in each grid cell.
 
-This function works by just calling the \hyperlink{class_grid_a3a67056a86378f8ce24cdf3c19ee7817}{set\+Uniform\+Pred\+Distribution()} and set\+Uniorm\+Prey\+Distribution() functions with their respective upper bounds. For a more in depth discussion of the functionality plesae see those functions where the implementation is explained in full.
+This function works by just calling the \hyperlink{class_grid_a3a67056a86378f8ce24cdf3c19ee7817}{set\+Uniform\+Pred\+Distribution()} and set\+Uniorm\+Prey\+Distribution() functions with their respective upper bounds. For a more in depth discussion of the functionality please see those functions where the implementation is explained in full.
 
 
 \begin{DoxyParams}{Parameters}
-{\em pred\+Upper\+Bound} & floating point value that provides the upper bound for the random number distriubtion of the predators. \\
+{\em pred\+Upper\+Bound} & floating point value that provides the upper bound for the random number distribution of the predators.\\
 \hline
-{\em prey\+Upper\+Bound} & floating point value that provides the upper bound for the random number distriubtion of the prey.\\
+{\em prey\+Upper\+Bound} & floating point value that provides the upper bound for the random number distribution of the prey.\\
 \hline
-{\em generator} & a default\+\_\+random\+\_\+engine refernece from the std library $<$random$>$ class. \\
+{\em generator} & a default\+\_\+random\+\_\+engine reference from the std library $<$random$>$ class. \\
 \hline
 \end{DoxyParams}
 \mbox{\Hypertarget{class_grid_a3a67056a86378f8ce24cdf3c19ee7817}\label{class_grid_a3a67056a86378f8ce24cdf3c19ee7817}} 
@@ -416,13 +404,13 @@ This function works by just calling the \hyperlink{class_grid_a3a67056a86378f8ce
 
 Sets uniform random predator distribution in each grid cell. 
 
-Intially predator density will be zero in each cell since the constructors do no intialization of densities. This function sets the density of predators in every Dry grid cell to a random number between 0 and upper\+Bound according to a uniform distribution. i.\+e. If upper\+Bound = 5.\+0, then each dry cell will be assigned a density between 0.\+0 and 5.\+0 according to a uniform distribution.
+Initially predator density will be zero in each cell since the constructors do no initialization of densities. This function sets the density of predators in every Dry grid cell to a random number between 0 and upper\+Bound according to a uniform distribution. i.\+e. If upper\+Bound = 5.\+0, then each dry cell will be assigned a density between 0.\+0 and 5.\+0 according to a uniform distribution.
 
 
 \begin{DoxyParams}{Parameters}
-{\em upper\+Bound} & floating point value that provides the upper bound for the random number distriubtion.\\
+{\em upper\+Bound} & floating point value that provides the upper bound for the random number distribution.\\
 \hline
-{\em generator} & a default\+\_\+random\+\_\+engine refernece from the std library $<$random$>$ class. This is used to generate the random number from the distriubtion which is a local variable within the function. The generator should be provided by the main method so that chains of random predator densities can be reproduced if required for debugging. The generator is passed as a reference so that if any other functions which makes use of the same distribution are called from the main method, they do not produce the same chain of random numbers, rather they act on the next random number given by the generator. \\
+{\em generator} & a default\+\_\+random\+\_\+engine reference from the std library $<$random$>$ class. This is used to generate the random number from the distribution which is a local variable within the function. The generator should be provided by the main method so that chains of random predator densities can be reproduced if required for debugging. The generator is passed as a reference so that if any other functions which makes use of the same distribution are called from the main method, they do not produce the same chain of random numbers, rather they act on the next random number given by the generator. \\
 \hline
 \end{DoxyParams}
 \mbox{\Hypertarget{class_grid_a2f366ddaaa75475a9597f9a85ab24d59}\label{class_grid_a2f366ddaaa75475a9597f9a85ab24d59}} 
@@ -433,13 +421,13 @@ Intially predator density will be zero in each cell since the constructors do no
 
 Sets uniform random prey distribution in each grid cell.
 
-Intially prey density will be zero in each cell since the constructors do no intialization of densities. This function sets the density of predators in every Dry grid cell to a random number between 0 and upper\+Bound according to a uniform distribution. i.\+e. If upper\+Bound = 5.\+0, then each dry cell will be assigned a density between 0.\+0 and 5.\+0 according to a uniform distribution.
+Intially prey density will be zero in each cell since the constructors do no initialization of densities. This function sets the density of predators in every Dry grid cell to a random number between 0 and upper\+Bound according to a uniform distribution. i.\+e. If upper\+Bound = 5.\+0, then each dry cell will be assigned a density between 0.\+0 and 5.\+0 according to a uniform distribution.
 
 
 \begin{DoxyParams}{Parameters}
-{\em upper\+Bound} & floating point value that provides the upper bound for the random number distriubtion.\\
+{\em upper\+Bound} & floating point value that provides the upper bound for the random number distribution.\\
 \hline
-{\em generator} & a default\+\_\+random\+\_\+engine refernece from the std library $<$random$>$ class. This is used to generate the random number from the distriubtion which is a local variable within the function. The generator should be provided by the main method so that chains of random prey densities can be reproduced if required for debugging. The generator is passed as a reference so that if any other functions which makes use of the same distribution are called from the main method, they do not produce the same chain of random numbers, rather they act on the next random number given by the generator. \\
+{\em generator} & a default\+\_\+random\+\_\+engine reference from the std library $<$random$>$ class. This is used to generate the random number from the distribution which is a local variable within the function. The generator should be provided by the main method so that chains of random prey densities can be reproduced if required for debugging. The generator is passed as a reference so that if any other functions which makes use of the same distribution are called from the main method, they do not produce the same chain of random numbers, rather they act on the next random number given by the generator. \\
 \hline
 \end{DoxyParams}
 
@@ -455,19 +443,19 @@ Intially prey density will be zero in each cell since the constructors do no int
 
 Operator overload for outputting the grid. 
 
-Outputs the \hyperlink{class_grid}{Grid} into an ouput stream in the format\+: \#columns \#rows x x ..... x x x ..... x . . ..... . . . ..... . . . ..... . x x ..... x where x take on the values of 0 or 1 depending on whether the corresponding (i,j)th cell measure from the bottom left corner is Wet or Dry respivtively.
+Outputs the \hyperlink{class_grid}{Grid} into an output stream in the format\+: \#columns \#rows x x ..... x x x ..... x . . ..... . . . ..... . . . ..... . x x ..... x where x takes on the values of 0 or 1 depending on whether the corresponding (i,j)th cell from the bottom left corner is Wet or Dry respectively.
 
 This is a friend function since the first operand (argument on left of operator) is not the \hyperlink{class_cell}{Cell}
 
 
 \begin{DoxyParams}{Parameters}
-{\em out} & std\+::ostream reference which is the output. \\
+{\em out} & std\+::ostream reference which is the output.\\
 \hline
 {\em grid} & const \hyperlink{class_grid}{Grid} reference which is the grid to be sent into the output stream.\\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-std\+::ostream reference that is the same as the out parameter, this is so one can put this opearator in a chain of output operators. 
+std\+::ostream reference that is the same as the out parameter, this is so one can put this operator in a chain of output operators. 
 \end{DoxyReturn}
 \mbox{\Hypertarget{class_grid_ac2cfb15a02d10acf2c124625070a2de8}\label{class_grid_ac2cfb15a02d10acf2c124625070a2de8}} 
 \index{Grid@{Grid}!Test\+Grid@{Test\+Grid}}

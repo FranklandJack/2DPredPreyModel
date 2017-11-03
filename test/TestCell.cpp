@@ -3,11 +3,6 @@ CPPUNIT_TEST_SUITE_REGISTRATION(TestCell);
 
 void TestCell::setUp()
 {
-    const double posPredDensity = 3.142;
-    const double posPreyDensity = 2.718;
-
-    const double negPredDensity = -0.577;
-    const double negPreyDensity = -4.669;
 
     dryPosDensCell      = new Cell(Cell::Dry, posPredDensity, posPreyDensity);
     wetPosDensCell      = new Cell(Cell::Wet, posPredDensity, posPreyDensity);

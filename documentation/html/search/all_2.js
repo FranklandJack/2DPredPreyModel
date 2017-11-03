@@ -6,6 +6,6 @@ var searchData=
   ['getpreydensity',['getPreyDensity',['../class_cell.html#a0756af1c045a1488e2b4c2c16d87eec2',1,'Cell']]],
   ['getrows',['getRows',['../class_grid.html#aa9397afb775457f87b9096acf6082383',1,'Grid']]],
   ['getstate',['getState',['../class_cell.html#ab8c8914c6eb76fa53c4e77e692792435',1,'Cell']]],
-  ['grid',['Grid',['../class_grid.html',1,'Grid'],['../class_grid.html#a4ac9ff4f63552b4c61ff90fcb35ad66c',1,'Grid::Grid()'],['../class_grid.html#a88ab1ccc8100827b4da40e62b7b77e96',1,'Grid::Grid(std::ifstream &amp;inputFile)'],['../class_grid.html#ab64f5607521a89e7a2fb99cbfa5f2b44',1,'Grid::Grid(int columns, int rows, int **const data)'],['../class_grid.html#a2be5432331273bc420c252ea09631965',1,'Grid::Grid(const Grid &amp;sourceGrid)'],['../class_grid.html#a3828d0bf34f6c97ed93adc84d4ce6c4b',1,'Grid::Grid(Grid &amp;&amp;sourceGrid)']]],
+  ['grid',['Grid',['../class_grid.html',1,'Grid'],['../class_grid.html#a4ac9ff4f63552b4c61ff90fcb35ad66c',1,'Grid::Grid()'],['../class_grid.html#ab64f5607521a89e7a2fb99cbfa5f2b44',1,'Grid::Grid(int columns, int rows, int **const data)'],['../class_grid.html#a2be5432331273bc420c252ea09631965',1,'Grid::Grid(const Grid &amp;sourceGrid)'],['../class_grid.html#a3828d0bf34f6c97ed93adc84d4ce6c4b',1,'Grid::Grid(Grid &amp;&amp;sourceGrid)']]],
   ['grid_2ehpp',['Grid.hpp',['../_grid_8hpp.html',1,'']]]
 ];

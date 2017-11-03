@@ -230,7 +230,7 @@ int main(int argc, char const *argv[])
     // Minimal number for the maximal colour number for the PPM output files.
     int minLimit = 10;
 	
-    // Changeing maxNumberPPM when needed
+    // Changing maxNumberPPM when needed
     double scaleFactor = 2.0;
 	
     // Scaling densities before printing them in the PPM output files.

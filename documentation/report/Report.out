@@ -1,15 +1,20 @@
 \BOOKMARK [1][-]{section.1}{Introduction}{}% 1
-\BOOKMARK [1][-]{section.2}{General Information}{}% 2
-\BOOKMARK [2][-]{subsection.2.1}{Programming Language}{section.2}% 3
-\BOOKMARK [2][-]{subsection.2.2}{Version Control}{section.2}% 4
-\BOOKMARK [2][-]{subsection.2.3}{Debuggers}{section.2}% 5
-\BOOKMARK [2][-]{subsection.2.4}{Build Tools}{section.2}% 6
-\BOOKMARK [2][-]{subsection.2.5}{Test Tools}{section.2}% 7
-\BOOKMARK [2][-]{subsection.2.6}{Documentation}{section.2}% 8
-\BOOKMARK [1][-]{section.3}{Usage Instructions}{}% 9
-\BOOKMARK [2][-]{subsection.3.1}{Building}{section.3}% 10
-\BOOKMARK [2][-]{subsection.3.2}{Running}{section.3}% 11
-\BOOKMARK [2][-]{subsection.3.3}{Testing}{section.3}% 12
-\BOOKMARK [2][-]{subsection.3.4}{Generating Documentation}{section.3}% 13
-\BOOKMARK [2][-]{subsection.3.5}{Misc.}{section.3}% 14
-\BOOKMARK [1][-]{section.4}{Summary of Key Design Decisions}{}% 15
+\BOOKMARK [1][-]{section.2}{Prerequisites}{}% 2
+\BOOKMARK [1][-]{section.3}{General Information}{}% 3
+\BOOKMARK [2][-]{subsection.3.1}{Programming Language}{section.3}% 4
+\BOOKMARK [2][-]{subsection.3.2}{Version Control}{section.3}% 5
+\BOOKMARK [2][-]{subsection.3.3}{Debuggers}{section.3}% 6
+\BOOKMARK [2][-]{subsection.3.4}{Build Tools}{section.3}% 7
+\BOOKMARK [2][-]{subsection.3.5}{Test Tools}{section.3}% 8
+\BOOKMARK [2][-]{subsection.3.6}{Documentation}{section.3}% 9
+\BOOKMARK [1][-]{section.4}{Usage Instructions}{}% 10
+\BOOKMARK [2][-]{subsection.4.1}{Building}{section.4}% 11
+\BOOKMARK [2][-]{subsection.4.2}{Running}{section.4}% 12
+\BOOKMARK [2][-]{subsection.4.3}{Testing}{section.4}% 13
+\BOOKMARK [2][-]{subsection.4.4}{Generating Documentation}{section.4}% 14
+\BOOKMARK [2][-]{subsection.4.5}{Misc.}{section.4}% 15
+\BOOKMARK [1][-]{section.5}{Summary of Key Design Decisions}{}% 16
+\BOOKMARK [2][-]{subsection.5.1}{Directory Hierarchy}{section.5}% 17
+\BOOKMARK [2][-]{subsection.5.2}{Classes}{section.5}% 18
+\BOOKMARK [3][-]{subsubsection.5.2.1}{Cell}{subsection.5.2}% 19
+\BOOKMARK [3][-]{subsubsection.5.2.2}{Grid}{subsection.5.2}% 20

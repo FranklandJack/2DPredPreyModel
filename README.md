@@ -12,7 +12,7 @@ Authors:
 - Jack Frankland  s1404032
 
 ## Introduction
-This program simulates the evolution of a system of predator(pumas) and prey(hares) densities across a 2D landscape which includes land and water. Neither the predators nor prey are considered able to swim so in wet areas density is always zero. The evolution of the system is goverened by differential equations provided in the coursework development pdf:
+This program simulates the evolution of a system of predator(pumas) and prey(hares) densities across a 2D landscape which includes land and water. Neither the predators nor prey are considered able to swim so in wet areas density is always zero. The evolution of the system is governed by differential equations provided in the coursework development pdf:
 
 ∂H/∂t = rH - aHP + k (∂^2H/∂x^2 + ∂^2H/∂y^2)
 
@@ -75,11 +75,11 @@ These instructions were taken from: <https://github.com/softwaresaved/build_and_
 
 - To build and run the tests run: ```$ make test``` or alternatively check the Travis CI repository [here](https://travis-ci.org/FranklandJack/2DPredPreyModel). 
 
-- To generate the dat files for input from any .pnm files you have to just place your pnm files in the landscapes directory and run: ```$ make dats``` which will generate the .dats files and place them in the main 2DPredPreyModel directory ready to be run with the executuble. 
+- To generate the dat files for input from any .pnm files you have to just place your pnm files in the landscapes directory and run: ```$ make dats``` which will generate the .dats files and place them in the main 2DPredPreyModel directory ready to be run with the executable. 
 
 - For a full list of make functionality run: ```$ make help```.
 
-- To generate the code documentation run: ```$ doxygen Doxyfile```  which will output into the documentation directory two subdirectories called latex and html. To generate the reference manual ```$ mv documentation/latex``` and run ```$ make``` which will create a refman.pdf. The generated html documentation can be viewed by pointing a HTML broweser to the index.html file in the html directory.
+- To generate the code documentation run: ```$ doxygen Doxyfile```  which will output into the documentation directory two subdirectories called latex and html. To generate the reference manual ```$ mv documentation/latex``` and run ```$ make``` which will create a refman.pdf. The generated html documentation can be viewed by pointing a HTML browser to the index.html file in the html directory.
 
 ## Input Formatting
 
@@ -89,7 +89,7 @@ The program takes as its input:
 
 The location of the input parameters is hard coded into the main method, so its name should not be changed, however the user can feel free to change the values of the parameters in the file input/input_parameters.txt.
 
-The format of the input_patameters.txt file **MUST** be:
+The format of the input_parameters.txt file **MUST** be:
 
 1. birth rate of hares 
 2. predation rate at which pumas eat hares
@@ -97,12 +97,12 @@ The format of the input_patameters.txt file **MUST** be:
 4. puma mortality rate
 5. diffusion rate for hares
 6. diffusion rate for pumas
-7. size of timestep
-8. the number of timesteps between output of plain .pnm file
+7. size of time step
+8. the number of time steps between output of plain .pnm file
 
-With each value seperated by a newline.
+With each value separated by a newline.
 
-The .dat file is provided as the only command line argument to the executible and **MUST** be of the format:
+The .dat file is provided as the only command line argument to the executable and **MUST** be of the format:
 
 number columns number rows  
 X X X X X X X X ...... X X X X  
@@ -115,7 +115,7 @@ X X X X X X X X ...... X X X X
 where X=0 if the cell in the landscape is Wet and X=1 if the cell in the landscape is dry. 
 
 ## Output 
-The program will run from t=0 to t=500 and output the average density of the predators and prey (over the whole grid including wet areas) every 10 time steps into a file called Average_Densities.txt. It will also output a plain ppm file every n timesteps called output#step.ppm where n is the number of timesteps between output set by the user. All output files are created in the output directory. 
+The program will run from t=0 to t=500 and output the average density of the predators and prey (over the whole grid including wet areas) every 10 time steps into a file called Average_Densities.txt. It will also output a plain ppm file every n time steps called output#step.ppm where n is the number of time steps between output set by the user. All output files are created in the output directory. 
 
 
 

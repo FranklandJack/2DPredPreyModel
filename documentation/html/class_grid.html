@@ -81,9 +81,6 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a4ac9ff4f63552b4c61ff90fcb35ad66c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_grid.html#a4ac9ff4f63552b4c61ff90fcb35ad66c">Grid</a> ()</td></tr>
 <tr class="memdesc:a4ac9ff4f63552b4c61ff90fcb35ad66c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default constructor.  <a href="#a4ac9ff4f63552b4c61ff90fcb35ad66c">More...</a><br /></td></tr>
 <tr class="separator:a4ac9ff4f63552b4c61ff90fcb35ad66c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a88ab1ccc8100827b4da40e62b7b77e96"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_grid.html#a88ab1ccc8100827b4da40e62b7b77e96">Grid</a> (std::ifstream &amp;inputFile)</td></tr>
-<tr class="memdesc:a88ab1ccc8100827b4da40e62b7b77e96"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates <a class="el" href="class_grid.html" title="Models a 2D landscape of cells. ">Grid</a> objects from some input file representing the <a class="el" href="class_grid.html" title="Models a 2D landscape of cells. ">Grid</a>.  <a href="#a88ab1ccc8100827b4da40e62b7b77e96">More...</a><br /></td></tr>
-<tr class="separator:a88ab1ccc8100827b4da40e62b7b77e96"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab64f5607521a89e7a2fb99cbfa5f2b44"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_grid.html#ab64f5607521a89e7a2fb99cbfa5f2b44">Grid</a> (int columns, int rows, int **const data)</td></tr>
 <tr class="memdesc:ab64f5607521a89e7a2fb99cbfa5f2b44"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates <a class="el" href="class_grid.html" title="Models a 2D landscape of cells. ">Grid</a> objects from some input array representing the <a class="el" href="class_grid.html" title="Models a 2D landscape of cells. ">Grid</a>.  <a href="#ab64f5607521a89e7a2fb99cbfa5f2b44">More...</a><br /></td></tr>
 <tr class="separator:ab64f5607521a89e7a2fb99cbfa5f2b44"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -116,25 +113,26 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a17c062fcf4063a811bd8d95c32bce723"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_grid.html#a17c062fcf4063a811bd8d95c32bce723">setUniformDistribution</a> (double predUpperBound, double preyUpperbound, std::default_random_engine &amp;generator)</td></tr>
 <tr class="separator:a17c062fcf4063a811bd8d95c32bce723"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a25eeb1fef1d86fe74b45e615f0376158"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_grid.html#a25eeb1fef1d86fe74b45e615f0376158">predDensity</a> (bool includeWetCells=true) const</td></tr>
-<tr class="memdesc:a25eeb1fef1d86fe74b45e615f0376158"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calulates average predator density across the grid.  <a href="#a25eeb1fef1d86fe74b45e615f0376158">More...</a><br /></td></tr>
+<tr class="memdesc:a25eeb1fef1d86fe74b45e615f0376158"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculates average predator density across the grid.  <a href="#a25eeb1fef1d86fe74b45e615f0376158">More...</a><br /></td></tr>
 <tr class="separator:a25eeb1fef1d86fe74b45e615f0376158"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7dc8ae18c31e8e680f6369d7c07ea881"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_grid.html#a7dc8ae18c31e8e680f6369d7c07ea881">preyDensity</a> (bool includeWetCells=true) const</td></tr>
-<tr class="memdesc:a7dc8ae18c31e8e680f6369d7c07ea881"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calulates average prey density across the grid.  <a href="#a7dc8ae18c31e8e680f6369d7c07ea881">More...</a><br /></td></tr>
+<tr class="memdesc:a7dc8ae18c31e8e680f6369d7c07ea881"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculates average prey density across the grid.  <a href="#a7dc8ae18c31e8e680f6369d7c07ea881">More...</a><br /></td></tr>
 <tr class="separator:a7dc8ae18c31e8e680f6369d7c07ea881"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aed06be122077b3a0c1fe7c412c2535fc"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_cell.html">Cell</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_grid.html#aed06be122077b3a0c1fe7c412c2535fc">operator()</a> (int i, int j)</td></tr>
+<tr class="memdesc:aed06be122077b3a0c1fe7c412c2535fc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Operator overload to access the <a class="el" href="class_cell.html" title="Models a single cell. ">Cell</a> stored at the (i,j)th coordinates of the grid. Since the 2-D landscape is implemented as a 1-D array with the same number of elements for memory reasons, this opertor provides a way of acessing the elements of the 1-D array with two indices (i,j) as if it were a 2D-array. This operator should be used whenever direct access to the grid cells is needed and extensive use of it is made in the constructors.  <a href="#aed06be122077b3a0c1fe7c412c2535fc">More...</a><br /></td></tr>
 <tr class="separator:aed06be122077b3a0c1fe7c412c2535fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa89f5c17cb78658f3b82a3b2d93aeb92"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="class_cell.html">Cell</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_grid.html#aa89f5c17cb78658f3b82a3b2d93aeb92">operator()</a> (int i, int j) const</td></tr>
-<tr class="memdesc:aa89f5c17cb78658f3b82a3b2d93aeb92"><td class="mdescLeft">&#160;</td><td class="mdescRight">Second operator overload to acess the <a class="el" href="class_cell.html" title="Models a single cell. ">Cell</a> stored at the (i,j)th coordinate if the grid is a constant variable.  <a href="#aa89f5c17cb78658f3b82a3b2d93aeb92">More...</a><br /></td></tr>
+<tr class="memdesc:aa89f5c17cb78658f3b82a3b2d93aeb92"><td class="mdescLeft">&#160;</td><td class="mdescRight">Second operator overload to access the <a class="el" href="class_cell.html" title="Models a single cell. ">Cell</a> stored at the (i,j)th coordinate if the grid is a constant variable.  <a href="#aa89f5c17cb78658f3b82a3b2d93aeb92">More...</a><br /></td></tr>
 <tr class="separator:aa89f5c17cb78658f3b82a3b2d93aeb92"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a50f4c0db20b466c84a1d65004e51642e"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_grid.html#a50f4c0db20b466c84a1d65004e51642e">dryNeighbours</a> (int i, int j) const</td></tr>
-<tr class="memdesc:a50f4c0db20b466c84a1d65004e51642e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calulates number of Dry neighbours of a given cell.  <a href="#a50f4c0db20b466c84a1d65004e51642e">More...</a><br /></td></tr>
+<tr class="memdesc:a50f4c0db20b466c84a1d65004e51642e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculates number of Dry neighbours of a given cell.  <a href="#a50f4c0db20b466c84a1d65004e51642e">More...</a><br /></td></tr>
 <tr class="separator:a50f4c0db20b466c84a1d65004e51642e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4971cb9d47440bc63488993d5647f943"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_grid.html#a4971cb9d47440bc63488993d5647f943">printDensities</a> (std::ostream &amp;out) const</td></tr>
 <tr class="memdesc:a4971cb9d47440bc63488993d5647f943"><td class="mdescLeft">&#160;</td><td class="mdescRight">Outputs predator and prey densities to output stream.  <a href="#a4971cb9d47440bc63488993d5647f943">More...</a><br /></td></tr>
 <tr class="separator:a4971cb9d47440bc63488993d5647f943"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a518355eee78ffbe468034fed65bbcb48"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_grid.html#a518355eee78ffbe468034fed65bbcb48">printPPM</a> (std::ofstream &amp;file) const</td></tr>
-<tr class="memdesc:a518355eee78ffbe468034fed65bbcb48"><td class="mdescLeft">&#160;</td><td class="mdescRight">Prints the densities of the predators and prey to a ppm file provided.  <a href="#a518355eee78ffbe468034fed65bbcb48">More...</a><br /></td></tr>
-<tr class="separator:a518355eee78ffbe468034fed65bbcb48"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acf89a88b063c4f641ad1331bcf9447ad"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_grid.html#acf89a88b063c4f641ad1331bcf9447ad">printPPM</a> (std::ofstream &amp;file, int maxNumberPPM) const</td></tr>
+<tr class="memdesc:acf89a88b063c4f641ad1331bcf9447ad"><td class="mdescLeft">&#160;</td><td class="mdescRight">Prints the densities of the predators and prey to a ppm file provided.  <a href="#acf89a88b063c4f641ad1331bcf9447ad">More...</a><br /></td></tr>
+<tr class="separator:acf89a88b063c4f641ad1331bcf9447ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a425801f2747d6be34c10eb6535ab0829"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_cell.html#a21d74a2efcb79c93e5649b06a50b7cf5">Cell::State</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_grid.html#a425801f2747d6be34c10eb6535ab0829">getCellState</a> (int columnIndex, int rowIndex) const</td></tr>
 <tr class="memdesc:a425801f2747d6be34c10eb6535ab0829"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieves state of cell at a given coordinate.  <a href="#a425801f2747d6be34c10eb6535ab0829">More...</a><br /></td></tr>
 <tr class="separator:a425801f2747d6be34c10eb6535ab0829"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -153,7 +151,7 @@ Friends</h2></td></tr>
 <p>A <a class="el" href="class_grid.html" title="Models a 2D landscape of cells. ">Grid</a> consists of a (2D) array of cells that can either be land or water and each have a predator and prey density. The actual array is implemented with a "halo" of Wet cells, this means that the densities of predators and prey in these cells is zero. This is very useful for implementing any differential equations where we may inadvertently check the #columns + 1 or #rows + 1, so rather than introducing bounds checking, we can introduce this boundary. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a4ac9ff4f63552b4c61ff90fcb35ad66c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4ac9ff4f63552b4c61ff90fcb35ad66c">&#9670;&nbsp;</a></span>Grid() <span class="overload">[1/5]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a4ac9ff4f63552b4c61ff90fcb35ad66c">&#9670;&nbsp;</a></span>Grid() <span class="overload">[1/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -172,29 +170,8 @@ Friends</h2></td></tr>
 
 </div>
 </div>
-<a id="a88ab1ccc8100827b4da40e62b7b77e96"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a88ab1ccc8100827b4da40e62b7b77e96">&#9670;&nbsp;</a></span>Grid() <span class="overload">[2/5]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">Grid::Grid </td>
-          <td>(</td>
-          <td class="paramtype">std::ifstream &amp;&#160;</td>
-          <td class="paramname"><em>inputFile</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Creates <a class="el" href="class_grid.html" title="Models a 2D landscape of cells. ">Grid</a> objects from some input file representing the <a class="el" href="class_grid.html" title="Models a 2D landscape of cells. ">Grid</a>. </p>
-<p>This constructor will dynamically allocate a 1-D array of Cells with a halo of water cells, which represents the 2-D landscape. </p>
-
-</div>
-</div>
 <a id="ab64f5607521a89e7a2fb99cbfa5f2b44"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab64f5607521a89e7a2fb99cbfa5f2b44">&#9670;&nbsp;</a></span>Grid() <span class="overload">[3/5]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ab64f5607521a89e7a2fb99cbfa5f2b44">&#9670;&nbsp;</a></span>Grid() <span class="overload">[2/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -229,8 +206,8 @@ Friends</h2></td></tr>
 <p>This constructor will dynamically allocate a 1-D array of Cells with a halo of water cells, which represents the 2-D landscape.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">columns</td><td>Integer value represnting the number of columns in the <a class="el" href="class_grid.html" title="Models a 2D landscape of cells. ">Grid</a> object, not inluding the halo.</td></tr>
-    <tr><td class="paramname">rows</td><td>Integer value representing the number of rows in the <a class="el" href="class_grid.html" title="Models a 2D landscape of cells. ">Grid</a> objecet, not including the halo.</td></tr>
+    <tr><td class="paramname">columns</td><td>Integer value representing the number of columns in the <a class="el" href="class_grid.html" title="Models a 2D landscape of cells. ">Grid</a> object, not including the halo.</td></tr>
+    <tr><td class="paramname">rows</td><td>Integer value representing the number of rows in the <a class="el" href="class_grid.html" title="Models a 2D landscape of cells. ">Grid</a> object, not including the halo.</td></tr>
     <tr><td class="paramname">data</td><td>Integer array of values which represent the Wet and Dry cells in the grid, must be 1 and 0 only and must have the same number of rows and columns as the explicit values provided </td></tr>
   </table>
   </dd>
@@ -239,7 +216,7 @@ Friends</h2></td></tr>
 </div>
 </div>
 <a id="a2be5432331273bc420c252ea09631965"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2be5432331273bc420c252ea09631965">&#9670;&nbsp;</a></span>Grid() <span class="overload">[4/5]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a2be5432331273bc420c252ea09631965">&#9670;&nbsp;</a></span>Grid() <span class="overload">[3/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -266,7 +243,7 @@ Friends</h2></td></tr>
 </div>
 </div>
 <a id="a3828d0bf34f6c97ed93adc84d4ce6c4b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3828d0bf34f6c97ed93adc84d4ce6c4b">&#9670;&nbsp;</a></span>Grid() <span class="overload">[5/5]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a3828d0bf34f6c97ed93adc84d4ce6c4b">&#9670;&nbsp;</a></span>Grid() <span class="overload">[4/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -285,7 +262,7 @@ Friends</h2></td></tr>
 <p>This is implemented for performance reasons. If a grid is ever returned from a function, for example, a function that might update the grid, it is quicker to do this via move semantics rather than copy construction.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">sourceGrid</td><td>constant R-value reference from which the ownership of the member variables will be transfered. </td></tr>
+    <tr><td class="paramname">sourceGrid</td><td>constant R-value reference from which the ownership of the member variables will be transferred. </td></tr>
   </table>
   </dd>
 </dl>
@@ -339,12 +316,12 @@ Friends</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Calulates number of Dry neighbours of a given cell. </p>
+<p>Calculates number of Dry neighbours of a given cell. </p>
 <p>Neighbours are only considered to be non-diagonal, so this function counts the number of Dry cells directly above/below and to the left/right of the specified cell.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">i</td><td>column number/x-coordinate of cell. </td></tr>
-    <tr><td class="paramname">j</td><td>row number/y-corrdinate of cell.</td></tr>
+    <tr><td class="paramname">i</td><td>column number/x-coordinate of cell.</td></tr>
+    <tr><td class="paramname">j</td><td>row number/y-coordinate of cell.</td></tr>
   </table>
   </dd>
 </dl>
@@ -455,11 +432,12 @@ Friends</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Operator overload to access the <a class="el" href="class_cell.html" title="Models a single cell. ">Cell</a> stored at the (i,j)th coordinates of the grid. Since the 2-D landscape is implemeted as a 1-D array with the same number of elements for memory reasons, this opertor provides a way of acessing the elements of the 1-D array with two indicies (i,j) as if it were a 2D-array. This operator should be used whenever direct acess to the grid cells is needed and extensive use of it is made in the constructors.</p>
-<p>The indexing system for this operator and therefore the <a class="el" href="class_grid.html" title="Models a 2D landscape of cells. ">Grid</a> itself follows that given in the specification document for this project in the figure in section 2.1. i.e. (i,j) corresponds to x (column number) and y coordinates (row number) where the orgin is taken to be in the bottom left corner. This is not the same as matrix notation. For example (3,4) would return the cell in the 3rd column of the 4th row.</p>
+
+<p>Operator overload to access the <a class="el" href="class_cell.html" title="Models a single cell. ">Cell</a> stored at the (i,j)th coordinates of the grid. Since the 2-D landscape is implemented as a 1-D array with the same number of elements for memory reasons, this opertor provides a way of acessing the elements of the 1-D array with two indices (i,j) as if it were a 2D-array. This operator should be used whenever direct access to the grid cells is needed and extensive use of it is made in the constructors. </p>
+<p>The indexing system for this operator and therefore the <a class="el" href="class_grid.html" title="Models a 2D landscape of cells. ">Grid</a> itself follows that given in the specification document for this project in the figure in section 2.1. i.e. (i,j) corresponds to x (column number) and y coordinates (row number) where the origin is taken to be in the bottom left corner. This is not the same as matrix notation. For example (3,4) would return the cell in the 3rd column of the 4th row.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">i</td><td>column number/x-coordinate of cell. </td></tr>
+    <tr><td class="paramname">i</td><td>column number/x-coordinate of cell.</td></tr>
     <tr><td class="paramname">j</td><td>row/y-coordinate of cell.</td></tr>
   </table>
   </dd>
@@ -494,11 +472,11 @@ Friends</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Second operator overload to acess the <a class="el" href="class_cell.html" title="Models a single cell. ">Cell</a> stored at the (i,j)th coordinate if the grid is a constant variable. </p>
+<p>Second operator overload to access the <a class="el" href="class_cell.html" title="Models a single cell. ">Cell</a> stored at the (i,j)th coordinate if the grid is a constant variable. </p>
 <p>This function behaves in exactly the same way as its non-constant counterpart. However the non-constant operator() overload will not work with any constant grid objects, since it returns a reference, it would be able to edit contents of the constant Cells m_cellArray member. For an explanation of the indexing system please see the non-constant overload.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">i</td><td>column number/x-coordinate of cell. </td></tr>
+    <tr><td class="paramname">i</td><td>column number/x-coordinate of cell.</td></tr>
     <tr><td class="paramname">j</td><td>row/y-coordinate of cell.</td></tr>
   </table>
   </dd>
@@ -524,7 +502,7 @@ Friends</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Assigns <a class="el" href="class_grid.html" title="Models a 2D landscape of cells. ">Grid</a> objects from a source with deep copying. </p>
-<p>Due to the dynamic memory allocation that takes place in the constructor, the copy assignment opeartor is overloaded to insure that deep copying takes place in any assignment and that there are no dangling pointers when grid objects go out of scope. It also checks for self assignment which could otherwise lead to memory problems. This pairs with the copy constructor that also does deep copying.</p>
+<p>Due to the dynamic memory allocation that takes place in the constructor, the copy assignment operator is overloaded to insure that deep copying takes place in any assignment and that there are no dangling pointers when grid objects go out of scope. It also checks for self assignment which could otherwise lead to memory problems. This pairs with the copy constructor that also does deep copying.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">sourceGrid</td><td>constant <a class="el" href="class_grid.html" title="Models a 2D landscape of cells. ">Grid</a> reference from which the deep copying will be done in the assignment of the grid member variables.</td></tr>
@@ -555,7 +533,7 @@ Friends</h2></td></tr>
 <p>This is implemented for performance reasons to go with the move constructor. If an R-value <a class="el" href="class_grid.html" title="Models a 2D landscape of cells. ">Grid</a> is assigned to a <a class="el" href="class_grid.html" title="Models a 2D landscape of cells. ">Grid</a> variable, this operator will be used instead of the normal copy assignment and will be more performant.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">sourceGrid</td><td>constant R-value <a class="el" href="class_grid.html" title="Models a 2D landscape of cells. ">Grid</a> reference from which the ownership of the member variables will be transfered.</td></tr>
+    <tr><td class="paramname">sourceGrid</td><td>constant R-value <a class="el" href="class_grid.html" title="Models a 2D landscape of cells. ">Grid</a> reference from which the ownership of the member variables will be transferred.</td></tr>
   </table>
   </dd>
 </dl>
@@ -579,8 +557,8 @@ Friends</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Calulates average predator density across the grid. </p>
-<p>Calulates the average value of the predator density across the entire grid, not included the halo of Wet cells. However, the average can be taken over just the Dry cells in the grid, or over the Dry and Wet cells in the grid if the corresponding argument is provided.</p>
+<p>Calculates average predator density across the grid. </p>
+<p>Calculates the average value of the predator density across the entire grid, not included the halo of Wet cells. However, the average can be taken over just the Dry cells in the grid, or over the Dry and Wet cells in the grid if the corresponding argument is provided.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">includeWetCells</td><td>bool value that represents whether the user wants to include the Wet cells in the grid as the well as the Dry cells, as the total number of cells to take the average over. This value defaults to true i.e. the default behaviour is to average over all cells in the grid including the Wet ones where predator/prey densities will be zero.</td></tr>
@@ -588,8 +566,6 @@ Friends</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Floating point value representing the average predator density across the grid either including or not including the Wet cells, depending on how the function was called. </dd></dl>
-<p>Add the pred densities of each cell up.</p>
-<p>Total up the number of Wet cells as well. </p>
 
 </div>
 </div>
@@ -609,8 +585,8 @@ Friends</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Calulates average prey density across the grid. </p>
-<p>Calulates the average value of the prey density across the entire grid, not included the halo of Wet cells. However, the average can be taken over just the Dry cells in the grid, or over the Dry and Wet cells in the grid if the corresponding argument is provided.</p>
+<p>Calculates average prey density across the grid. </p>
+<p>Calculates the average value of the prey density across the entire grid, not included the halo of Wet cells. However, the average can be taken over just the Dry cells in the grid, or over the Dry and Wet cells in the grid if the corresponding argument is provided.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">includeWetCells</td><td>bool value that represents whether the user wants to include the Wet cells in the grid as the well as the Dry cells, as the total number of cells to take the average over. This value defaults to true i.e. the default behaviour is to average over all cells in the grid including the Wet ones where predator/prey densities will be zero.</td></tr>
@@ -649,26 +625,36 @@ Friends</h2></td></tr>
 
 </div>
 </div>
-<a id="a518355eee78ffbe468034fed65bbcb48"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a518355eee78ffbe468034fed65bbcb48">&#9670;&nbsp;</a></span>printPPM()</h2>
+<a id="acf89a88b063c4f641ad1331bcf9447ad"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acf89a88b063c4f641ad1331bcf9447ad">&#9670;&nbsp;</a></span>printPPM()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void Grid::printPPM </td>
+          <td class="memname">int Grid::printPPM </td>
           <td>(</td>
           <td class="paramtype">std::ofstream &amp;&#160;</td>
-          <td class="paramname"><em>file</em></td><td>)</td>
-          <td> const</td>
+          <td class="paramname"><em>file</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>maxNumberPPM</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 <p>Prints the densities of the predators and prey to a ppm file provided. </p>
 <p>This function will print the to the file in the format:</p>
-<p>P3 (required for a PPM and means this is a RGB color image in ASCII) m_columns m_rows (width and height of image) MAX (maximum value for each colour) 0 predDensity preyDensity (at coordinate (m_rows, 1)) 0 predDensity preyDensity (at coordinate (m_rows, 2)) 0 predDensity preyDensity (at coordinate (m_rows, 3)) . . . . . . . . . . . . . . . . . . . . . . . . 0 predDensity preyDensity (at coordinate (1, m_columns))</p>
-<p>To overcome the fact that each line can contain at most 70 characters each coordinate pixel is printed to a new line, this works fine formatting wise since the number of rows and columns are printed explcitly at the top of the file, so for any display purposes the file knows how to "count" the values into the correct coordinates.</p>
+<p>P3 (required for a PPM and means this is a RGB colour image in ASCII) m_columns m_rows (width and height of image) MAX (maximum value for each colour) 0 predDensity preyDensity (at coordinate (m_rows, 1)) 0 predDensity preyDensity (at coordinate (m_rows, 2)) 0 predDensity preyDensity (at coordinate (m_rows, 3)) . . . . . . . . . . . . . . . . . . . . . . . . 0 predDensity preyDensity (at coordinate (1, m_columns))</p>
+<p>To overcome the fact that each line can contain at most 70 characters each coordinate pixel is printed to a new line, this works fine formatting wise since the number of rows and columns are printed explicitly at the top of the file, so for any display purposes the file knows how to "count" the values into the correct coordinates.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">file</td><td>ppm file to which the densities should be printed. </td></tr>
@@ -710,12 +696,12 @@ Friends</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p>Sets uniform random predator and prey distribution in each grid cell.</p>
-<p>This function works by just calling the <a class="el" href="class_grid.html#a3a67056a86378f8ce24cdf3c19ee7817" title="Sets uniform random predator distribution in each grid cell. ">setUniformPredDistribution()</a> and setUniormPreyDistribution() functions with their respective upper bounds. For a more in depth discussion of the functionality plesae see those functions where the implementation is explained in full.</p>
+<p>This function works by just calling the <a class="el" href="class_grid.html#a3a67056a86378f8ce24cdf3c19ee7817" title="Sets uniform random predator distribution in each grid cell. ">setUniformPredDistribution()</a> and setUniormPreyDistribution() functions with their respective upper bounds. For a more in depth discussion of the functionality please see those functions where the implementation is explained in full.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">predUpperBound</td><td>floating point value that provides the upper bound for the random number distriubtion of the predators. </td></tr>
-    <tr><td class="paramname">preyUpperBound</td><td>floating point value that provides the upper bound for the random number distriubtion of the prey.</td></tr>
-    <tr><td class="paramname">generator</td><td>a default_random_engine refernece from the std library &lt;random&gt; class. </td></tr>
+    <tr><td class="paramname">predUpperBound</td><td>floating point value that provides the upper bound for the random number distribution of the predators.</td></tr>
+    <tr><td class="paramname">preyUpperBound</td><td>floating point value that provides the upper bound for the random number distribution of the prey.</td></tr>
+    <tr><td class="paramname">generator</td><td>a default_random_engine reference from the std library &lt;random&gt; class. </td></tr>
   </table>
   </dd>
 </dl>
@@ -749,11 +735,11 @@ Friends</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Sets uniform random predator distribution in each grid cell. </p>
-<p>Intially predator density will be zero in each cell since the constructors do no intialization of densities. This function sets the density of predators in every Dry grid cell to a random number between 0 and upperBound according to a uniform distribution. i.e. If upperBound = 5.0, then each dry cell will be assigned a density between 0.0 and 5.0 according to a uniform distribution.</p>
+<p>Initially predator density will be zero in each cell since the constructors do no initialization of densities. This function sets the density of predators in every Dry grid cell to a random number between 0 and upperBound according to a uniform distribution. i.e. If upperBound = 5.0, then each dry cell will be assigned a density between 0.0 and 5.0 according to a uniform distribution.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">upperBound</td><td>floating point value that provides the upper bound for the random number distriubtion.</td></tr>
-    <tr><td class="paramname">generator</td><td>a default_random_engine refernece from the std library &lt;random&gt; class. This is used to generate the random number from the distriubtion which is a local variable within the function. The generator should be provided by the main method so that chains of random predator densities can be reproduced if required for debugging. The generator is passed as a reference so that if any other functions which makes use of the same distribution are called from the main method, they do not produce the same chain of random numbers, rather they act on the next random number given by the generator. </td></tr>
+    <tr><td class="paramname">upperBound</td><td>floating point value that provides the upper bound for the random number distribution.</td></tr>
+    <tr><td class="paramname">generator</td><td>a default_random_engine reference from the std library &lt;random&gt; class. This is used to generate the random number from the distribution which is a local variable within the function. The generator should be provided by the main method so that chains of random predator densities can be reproduced if required for debugging. The generator is passed as a reference so that if any other functions which makes use of the same distribution are called from the main method, they do not produce the same chain of random numbers, rather they act on the next random number given by the generator. </td></tr>
   </table>
   </dd>
 </dl>
@@ -786,11 +772,11 @@ Friends</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p>Sets uniform random prey distribution in each grid cell.</p>
-<p>Intially prey density will be zero in each cell since the constructors do no intialization of densities. This function sets the density of predators in every Dry grid cell to a random number between 0 and upperBound according to a uniform distribution. i.e. If upperBound = 5.0, then each dry cell will be assigned a density between 0.0 and 5.0 according to a uniform distribution.</p>
+<p>Intially prey density will be zero in each cell since the constructors do no initialization of densities. This function sets the density of predators in every Dry grid cell to a random number between 0 and upperBound according to a uniform distribution. i.e. If upperBound = 5.0, then each dry cell will be assigned a density between 0.0 and 5.0 according to a uniform distribution.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">upperBound</td><td>floating point value that provides the upper bound for the random number distriubtion.</td></tr>
-    <tr><td class="paramname">generator</td><td>a default_random_engine refernece from the std library &lt;random&gt; class. This is used to generate the random number from the distriubtion which is a local variable within the function. The generator should be provided by the main method so that chains of random prey densities can be reproduced if required for debugging. The generator is passed as a reference so that if any other functions which makes use of the same distribution are called from the main method, they do not produce the same chain of random numbers, rather they act on the next random number given by the generator. </td></tr>
+    <tr><td class="paramname">upperBound</td><td>floating point value that provides the upper bound for the random number distribution.</td></tr>
+    <tr><td class="paramname">generator</td><td>a default_random_engine reference from the std library &lt;random&gt; class. This is used to generate the random number from the distribution which is a local variable within the function. The generator should be provided by the main method so that chains of random prey densities can be reproduced if required for debugging. The generator is passed as a reference so that if any other functions which makes use of the same distribution are called from the main method, they do not produce the same chain of random numbers, rather they act on the next random number given by the generator. </td></tr>
   </table>
   </dd>
 </dl>
@@ -833,16 +819,16 @@ Friends</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Operator overload for outputting the grid. </p>
-<p>Outputs the <a class="el" href="class_grid.html" title="Models a 2D landscape of cells. ">Grid</a> into an ouput stream in the format: #columns #rows x x ..... x x x ..... x . . ..... . . . ..... . . . ..... . x x ..... x where x take on the values of 0 or 1 depending on whether the corresponding (i,j)th cell measure from the bottom left corner is Wet or Dry respivtively.</p>
+<p>Outputs the <a class="el" href="class_grid.html" title="Models a 2D landscape of cells. ">Grid</a> into an output stream in the format: #columns #rows x x ..... x x x ..... x . . ..... . . . ..... . . . ..... . x x ..... x where x takes on the values of 0 or 1 depending on whether the corresponding (i,j)th cell from the bottom left corner is Wet or Dry respectively.</p>
 <p>This is a friend function since the first operand (argument on left of operator) is not the <a class="el" href="class_cell.html" title="Models a single cell. ">Cell</a></p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">out</td><td>std::ostream reference which is the output. </td></tr>
+    <tr><td class="paramname">out</td><td>std::ostream reference which is the output.</td></tr>
     <tr><td class="paramname">grid</td><td>const <a class="el" href="class_grid.html" title="Models a 2D landscape of cells. ">Grid</a> reference which is the grid to be sent into the output stream.</td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>std::ostream reference that is the same as the out parameter, this is so one can put this opearator in a chain of output operators. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>std::ostream reference that is the same as the out parameter, this is so one can put this operator in a chain of output operators. </dd></dl>
 
 </div>
 </div>
@@ -867,7 +853,7 @@ Friends</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Test class for the grid. </p>
-<p>Declare a <a class="el" href="class_test_grid.html">TestGrid</a> friend member variable to allow access to private member variables in test class. </p>
+<p>Declare a <a class="el" href="class_test_grid.html" title="Tests the Grid class. ">TestGrid</a> friend member variable to allow access to private member variables in test class. </p>
 
 </div>
 </div>
