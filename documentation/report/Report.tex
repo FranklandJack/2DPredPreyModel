@@ -169,6 +169,42 @@ $ make
 \end{lstlisting}
 from the main directory. This will generate the object files and place them in the main directory, as well as linking them to create an executable called predprey.
 
+\subsection{Input}
+The program takes as its input: 
+\begin{enumerate}
+\item A .txt file containing the various parameters for the differential equation which evolves the system. 
+\item A .dat file which contains the landscape of the system. 
+\end{enumerate}
+
+The location of the input parameters for time evolution is hard coded into the main method, so its name should not be changed, however the user can feel free to change the values of the parameters in the file input/input_parameters.txt.
+
+The format of the input_parameters.txt file \textbf{MUST} be:
+\begin{enumerate}
+\item birth rate of hares 
+\item predation rate at which pumas eat hares
+\item birth rate of pumas per one hare eaten
+\item puma mortality rate
+\item diffusion rate for hares
+\item diffusion rate for pumas
+\item size of time step
+\item the number of time steps between output of plain .pnm file
+\end{enumerate}
+
+With each value separated by a newline.
+
+The .dat file is provided as the only command line argument to the executable and \textcf{MUST} be of the format:
+
+number columns number rows  
+X X X X X X X X ...... X X X X  \\
+X X X X X X X X ...... X X X X  \\
+. . . . . . . . ...... . . . .  \\
+. . . . . . . . ...... . . . .  \\
+. . . . . . . . ...... . . . .  \\
+X X X X X X X X ...... X X X X  \\
+
+where X=0 if the cell in the landscape is Wet and X=1 if the cell in the landscape is dry. 
+
+
 \subsection{Running}
 To run the code run:
 \begin{lstlisting}[language=bash]
@@ -231,9 +267,10 @@ To keep the project organised into its component parts we have the following hie
 \item 2DPredPreyModel  - contains the entire project.
 \begin{itemize}
 \item documentation    - contains auto-generated and written documentation.
+\item input            - contains the file that stores the parameters for the time evolution of the system.
 \item landscapes       - where the user should store their input landscapes as .pnm files.
 \item output           - where the output of the simulation will be sent to.
-\item pnm2datConvertor - where the convertor tool for converting pnm files to the input format is stored.
+\item pnm2datConvertor - where the converter tool for converting pnm files to the input format is stored.
 \item src              - where all the source code for running the simulation is stored. 
 \item test             - where all the code for running tests is stored. 
 \end{itemize}
