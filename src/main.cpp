@@ -206,7 +206,12 @@ int main(int argc, char const *argv[])
      **************************************************************************************************/
     
     // Set uniform predator and prey distributions between 0 and 5.0 across the whole grid.
-    grid.setUniformDistribution(5.0, 5.0, generator);
+    double upperBound = 5.0;
+	
+    //can be added to exception
+    if ( upperBound <= 0)
+	    exit 1;
+    grid.setUniformDistribution(upperBound, upperBound, generator);
 
     
     // Total time for simulation. 
@@ -219,9 +224,30 @@ int main(int argc, char const *argv[])
     // Interval at which to print the predator and prey densities to the command line. 
     int averageDenOutputFreq = 10;
 
-    // Initial maximal colour value for the PPM output files. 
-    int maxNumberPPM = 10;
+    // Initial maximal colour number for the PPM output files. 
+    int maxNumberPPM;
 	
+    // Minimal number for the maximal colour number for the PPM output files.
+    int minLimit = 10;
+	
+    // Changeing maxNumberPPM when needed
+    double scaleFactor = 2.0;
+	
+    // Scaling densities before printing them in the PPM output files.
+    double scaling;
+	
+    // Evaluating scaling and maxNumberPPM
+    if ( upperBound > minLimit)
+    {
+	    scaling = 1.0;
+	    maxNumberPPM = static_cast<int>(scaleFactor * upperBound);
+    }
+     
+    else
+    {
+	    scaling = minLimit/upperBound;
+	    maxNumberPPM = static_cast<int>(scaleFactor * minLimit);
+    }
     // No file name will be longer than 50 characters. 
     char outputfile[50];
 
@@ -264,7 +290,7 @@ int main(int argc, char const *argv[])
         
                 if (outputPPM.is_open())
                 {
-                    maxNumberPPM = grid.printPPM(outputPPM, maxNumberPPM);
+                    maxNumberPPM = grid.printPPM(outputPPM, maxNumberPPM, scaling, scaleFactor);
                     outputPPM.close();
                 }
                 else
