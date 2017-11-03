@@ -446,10 +446,9 @@ void Grid::printDensities(std::ostream& out) const
 }
 
 
-int Grid::printPPM(std::ofstream &file, int maxNumberPPM) const
+int Grid::printPPM(std::ofstream &file, int maxNumberPPM, double scaling, double scaleFactor) const
 {
     double rounding = 0.5;
-    int scaleFactor = 2;
     double maxDensity;
     // Print the header which identifies it as a plain PPM file.
     file << "P3" << std::endl;
@@ -469,10 +468,16 @@ int Grid::printPPM(std::ofstream &file, int maxNumberPPM) const
             int rValue = 0;
 
             // The green value will be determined by the rounded predator density.
-            int gValue = static_cast<int>((*this)(i,j).getPredDensity() + rounding);
+            int gValue = static_cast<int>(scaling * (*this)(i,j).getPredDensity() + rounding);
 
             // The blue value will be deterined by the rounded prey density. 
-            int bValue = static_cast<int>((*this)(i,j).getPreyDensity() + rounding);
+            int bValue = static_cast<int>(scaling * (*this)(i,j).getPreyDensity() + rounding);
+            
+            if (gValue > maxNumberPPM)
+                gValue = maxNumberPPM;
+            
+            if (bValue > maxNumberPPM)
+                bValue = maxNumberPPM;
             
             file << rValue << " " << gValue << " " << bValue;
             
@@ -481,9 +486,9 @@ int Grid::printPPM(std::ofstream &file, int maxNumberPPM) const
             
             //Finds the higher density and changes maxNumberPPM so that for the next output maxNumberPPM is a high enough number.
             maxDensity = ( ((*this)(i,j).getPredDensity()) > ((*this)(i,j).getPreyDensity()) ? ((*this)(i,j).getPredDensity()) : ((*this)(i,j).getPreyDensity()) );
-            while(maxNumberPPM < scaleFactor * maxDensity)
+            while(maxNumberPPM < scaleFactor * maxDensity * scaling)
              {
-                maxNumberPPM = scaleFactor * maxNumberPPM;
+                maxNumberPPM = static_cast<int>(scaleFactor * maxNumberPPM);
              }
         }
     }
