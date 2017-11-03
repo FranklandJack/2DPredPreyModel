@@ -431,7 +431,7 @@ class Grid
          *
          */
 
-        void printPPM(std::ofstream &file) const;
+        int printPPM(std::ofstream &file, int maxNumberPPM) const;
 
         /**
          *
