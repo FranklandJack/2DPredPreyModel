@@ -5,4 +5,4 @@
 
 # stop data files being uploaded 
 *.dat 
-
+*.pbs
