@@ -20,7 +20,7 @@ OUT_FILES=$(wildcard $(OUT_DIR)/*)
 
 
 
-CXX=c++
+CXX=g++
 CPPSTD=-std=c++11 
 DEBUG=-g
 OPT=-O0
