@@ -1,116 +1,129 @@
-/* Make some islands */
+/** 
+ * Convert .pnm file created by GIMP to a plain-text DAT file.
+ *
+ * .pnm file is assumed to be Grayscale ("P2"), in ASCII format.
+ *
+ * For example:
+ * <code>
+ * P2
+ * # CREATOR: GIMP PNM Filter Version 1.1
+ * COLUMNS ROWS
+ * MAX_INTENSITY (assumed to be 255)
+ * COLUMNS*ROWS where each value is 0 (black/land) | 255 (white/water)
+ * </code>
+ * where 
+ * The output file is of form:
+ *
+ * <code>
+ * COLUMNS ROWS
+ * ROWS rows each with COLUMNS fields where each field is
+ * 1 (land) or 0 (water).
+ * </code>
+ */
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
-/* to read in a .pnm file created by the gimp. */
+#define MAX_EDGE 4000
+#define WATER 0
+#define LAND 1
 
-#define MAX 4000 
-	
-int map[MAX][MAX];
+int map[MAX_EDGE][MAX_EDGE];
 
 int main(int argc, char * argv[])
 {
-	int x, y = 200;
-	int i, j;
-	FILE * fp;
-	char inFile[20] = "\0";
-	char outFile[20] = "\0";
-	
-	/* should only be max 5 */
-	int length = 80;
-	char chars[length];	
-	char *morechars;
-	int num;
-	
-	
-	if (argc == 3)
-	{
-	  strcpy(inFile, argv[1]);
-	  strcpy(outFile, argv[2]);
-	}
-	else {
-	  printf("Usage: pnmreader infile outfile\n"); 
-          exit(1); 
-	}
-	
+    int columns = 200;
+    int rows = 200;
+    int column = 0;
+    int row = 0;
+    FILE* fp;
+    char inFile[20] = "\0";
+    char outFile[20] = "\0";
+    // Ideally, expect maximum length of Grayscale value to be < 5.
+    int length = 80;
+    char line[length];
+    char *word;
+    int num;
 
-  /* read back in convert to 0 and 1 */
-	if ((fp = fopen(inFile, "r+")) == NULL)
-	{
-	  printf("Cannot open file %s.\n", inFile);
-		exit(1);
-	}
-	
-	i = j = 0;
+    if (argc == 3)
+    {
+        strcpy(inFile, argv[1]);
+        strcpy(outFile, argv[2]);
+    }
+    else 
+    {
+        printf("Usage: pnmreader infile outfile\n"); 
+        exit(1); 
+    }
+    if ((fp = fopen(inFile, "r+")) == NULL)
+    {
+        printf("Cannot open file %s.\n", inFile);
+        exit(1);
+    }
+    
+    // Skip first line, with file type (assumed to be "P2").
+    fgets(line, (length - 1), fp);
+    printf(line); 
 
-	/* skip first two lines */ 
-        fgets(chars, (length - 1), fp);
-        printf(chars); 
-        fgets(chars, (length - 1), fp);
-        printf(chars); 
+    // Skip second line, with GIMP CREATOR comment.
+    fgets(line, (length - 1), fp);
+    printf(line);
 
+    // Parse third line into columns and rows.
+    word = (char*)malloc(length * sizeof(char));
+    fgets(line, (length - 1), fp);
+    printf(line);
+    columns = strtol(line, &word, 0);
+    rows = strtol(word, 0, 0);
+    printf("Columns=%d, Rows=%d\n", columns, rows);
 
-	/* next line contain x and y */ 
+    // Skip fourth, line with MAX_INTENSITY (assumed to be 255).
+    fgets(line, (length - 1), fp);
+    printf(line);
 
-        morechars = (char *) malloc(length* sizeof(char)); 
-	
-        fgets(chars, (length - 1), fp);
-        printf(chars); 
-	x = strtol(chars, &morechars, 0);
-	y = strtol(morechars, 0, 0) ; 
+    while (!feof(fp))
+    {
+        fgets(line, (length - 1), fp);
+        num = strtol(line, 0, 0);
+        // Land is black is 0, water is white is 255.
+        if (num < 128)
+        {
+            map[row][column++] = LAND;
+        }
+        else
+        {
+            map[row][column++] = WATER;
+        }
+        // Check if need to move to next row.
+        if (column == columns)
+        {
+            if (++row < rows)
+            {
+                column = 0;
+            }
+            else
+            {
+                break;
+            }
+        }
+    }
+    fclose(fp);
 
-	printf("x=%d, y=%d\n", x, y);
-	
-
-	while (!feof(fp))
-	{
-	  fgets(chars, (length - 1), fp);
-	  num = strtol(chars, 0, 0);	  
-	  
-	  /* sea is white is 255, land is black is 0 */
-	  if (num < 128) { 
-
-	    map[i][j++] = 1; 
-	  }
-	  else {
-	    map[i][j++] = 0;
-	  }
-	  // map[i][j++] = num ? 0 : 1;
-	  /* move to next row */
-	  if (j == x) 
-	    {
-	      if (++i < y) j = 0;
-	      else break;
-	    }
-	  
-	}
-	
-
-	
-	fclose(fp);
-	
-	/* write array to file */
-	/* Open file for output */
-	if ((fp = fopen(outFile, "w")) == NULL)
-	{
-	  printf("Cannot open file %s.\n", outFile);
-		exit(1);
-	}
-	
-        fprintf(fp, "%d %d\n", x, y);
-	for (i = 0; i < y; i++)
-	{
-		for (j = 0; j < x; j++)
-		{
-			fprintf(fp, "%d ", map[i][j]);
-		
-		}
-		fprintf(fp, "\n");
-	}
-	
-	
-	
-
-	return 0;
+    // Write columns, rows, map to output file.
+    if ((fp = fopen(outFile, "w")) == NULL)
+    {
+        printf("Cannot open file %s.\n", outFile);
+        exit(1);
+    }
+    fprintf(fp, "%d %d\n", columns, rows);
+    for (row = 0; row < rows; row++)
+    {
+        for (column = 0; column < columns; column++)
+        {
+            fprintf(fp, "%d ", map[row][column]);
+        }
+        fprintf(fp, "\n");
+    }
+    return 0;
 }
