@@ -4,6 +4,9 @@
 #include <random> 
 #include <stdexcept>
 #include <string>
+#include <sstream>
+#include <ctime>
+#include <boost/filesystem.hpp>
 #include "Grid.hpp"
 #include "updateGrid.hpp"
 
@@ -18,6 +21,22 @@ int main(int argc, char const *argv[])
 
     // Record a start time so we can time the code.
     auto start = std::chrono::system_clock::now();
+
+    // Create an output directory for the output files based on run time and date.
+    time_t startTime = chrono::system_clock::to_time_t(start);
+    string outputDirectoryName = ctime(&startTime);
+    boost::filesystem::path outPath = outputDirectoryName;
+    
+    // Since the directory name is unique only up to the second it is created in be can append a number if the program is
+    // run more than once in a second. We assume that the rate a user can call the program is less than 
+    // 10 times a second. 
+    for(int i = 2; boost::filesystem::exists(outPath) && i < 10; ++i)
+    {
+        stringstream ss;
+        ss << outPath << "(" << i << ")";
+        outPath = ss.str();
+    }
+    boost::filesystem::create_directory(outPath);
 
 	// Seed the pseudo random number generation using the system clock.
     unsigned int seed = static_cast<unsigned int>(std::chrono::system_clock::now().time_since_epoch().count());
@@ -248,7 +267,7 @@ int main(int argc, char const *argv[])
 
 
     // Name of output file for average densities
-    string averageDensitiesOutput("./output/Average_Densities.txt");
+    string averageDensitiesOutput(outputDirectoryName + "/Average_Densities.txt");
 
 
     // Create an output file for the average densities.
@@ -278,8 +297,11 @@ int main(int argc, char const *argv[])
         if(0 == iter % outputSteps)
         {  
             {
+                int outFileNum = iter/outputSteps;
+                string outputfile(outputDirectoryName + "/output" + to_string(outFileNum)+".ppm");
+                cout << outputfile << endl;
                 //Creates different names for each output file in the output folder, called output
-                sprintf(outputfile,"./output/output%d.ppm",iter/outputSteps);
+                //sprintf(outputfile,"./output/output%d.ppm",iter/outputSteps);
                 
                 ofstream outputPPM(outputfile, ios::out);
         

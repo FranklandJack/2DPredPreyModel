@@ -24,7 +24,7 @@ CXX=g++
 CPPSTD=-std=c++11 
 DEBUG=-g
 OPT=-O0
-CPPUNITLDFLAGS=-lcppunit
+CPPUNITLDFLAGS=-lcppunit -lboost_system -lboost_filesystem
 INC=-I$(SRC_DIR) -I$(TEST_DIR) -I$(HOME)/include
 
 
@@ -35,7 +35,7 @@ EXE_TEST=predprey-cppunittests
 
 
 $(EXE_FILE): $(OBJ_FILES) 
-	$(CXX) $(CPPSTD) $(OPT) -o $@  $^ 
+	$(CXX) $(CPPSTD) $(OPT) -o $@  $^ $(CPPUNITLDFLAGS)
 
 $(EXE_TEST): $(TEST_OBJ_FILES) Cell.o Grid.o updateGrid.o
 	$(CXX) $(CPPSTD) $(OPT) -o $@  $^ $(INC) $(CPPUNITLDFLAGS) 
