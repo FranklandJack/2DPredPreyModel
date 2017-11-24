@@ -299,7 +299,6 @@ int main(int argc, char const *argv[])
             {
                 int outFileNum = iter/outputSteps;
                 string outputfile(outputDirectoryName + "/output" + to_string(outFileNum)+".ppm");
-                cout << outputfile << endl;
                 //Creates different names for each output file in the output folder, called output
                 //sprintf(outputfile,"./output/output%d.ppm",iter/outputSteps);
                 
