@@ -23,7 +23,7 @@ OUT_FILES=$(wildcard $(OUT_DIR)/*)
 CXX=g++
 CPPSTD=-std=c++11 
 DEBUG=-g
-OPT=-O0
+OPT=-Os
 CPPUNITLDFLAGS=-lcppunit -lboost_system -lboost_filesystem
 INC=-I$(SRC_DIR) -I$(TEST_DIR) -I$(HOME)/include
 
