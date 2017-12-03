@@ -26,6 +26,7 @@ int main(int argc, char const *argv[])
     // Record a start time so we can time the code.
     auto start = std::chrono::system_clock::now();
 
+    cout << "Setting up simulation..." << '\n' << '\n';
     // Create an output directory for the output files based on run time and date.
     time_t startTime = chrono::system_clock::to_time_t(start);
     string outputName = ctime(&startTime);
@@ -59,7 +60,7 @@ int main(int argc, char const *argv[])
     /***************************  Input for the differential equation *********************************/
 
     // Parameters for differential equation implementation.
-    double r, a, b, m, k, l, deltaT, totalT;
+    double r, a, b, m, k, l, deltaT, totalTime;
     int outputSteps;
     bool includeWater = false;
 
@@ -75,7 +76,7 @@ int main(int argc, char const *argv[])
         ("prey-diffusion-rate,k", po::value<double>(&k)->default_value(0.2), "Diffusion rate of prey")
         ("predator-diffusion-rate,l", po::value<double>(&l)->default_value(0.2), "Diffusion rate of predators")
         ("time-step-size,t", po::value<double>(&deltaT)->default_value(0.4), "Time evolution step size")
-        ("total-time,T", po::value<double>(&totalT)->default_value(500.0), "Total run time")
+        ("total-time,T", po::value<double>(&totalTime)->default_value(500.0), "Total run time")
         ("ppm-output-frequency,f", po::value<int>(&outputSteps)->default_value(10), "Output frequency in time steps of plain .ppm file")
         ("include-water,i", "Include water in average calulations over landscape")
         ("help,h", "produce help message");
@@ -95,6 +96,22 @@ int main(int argc, char const *argv[])
     {
         includeWater = true;
     }
+
+    // Inform user of their input parameters since they may want to check they are correct before running a long simulation.
+    int outputColumnWidth = 30;
+    cout << "Input Parameters..." << '\n';
+    cout << setw(outputColumnWidth) << setfill(' ') << left << "Prey Birth Rate: " << right << r << '\n';
+    cout << setw(outputColumnWidth) << setfill(' ') << left << "Predation Rate: " << right << a << '\n';
+    cout << setw(outputColumnWidth) << setfill(' ') << left << "Predator Mortality Rate: " << right << b << '\n';
+    cout << setw(outputColumnWidth) << setfill(' ') << left << "Prey Diffusion Rate: " << right << m << '\n';
+    cout << setw(outputColumnWidth) << setfill(' ') << left << "Predator Diffusion Rate: " << right << k << '\n';
+    cout << setw(outputColumnWidth) << setfill(' ') << left << "Time Step Size: " << right << l << '\n';
+    cout << setw(outputColumnWidth) << setfill(' ') << left << "Time Step Size: " << right << deltaT << '\n';
+    cout << setw(outputColumnWidth) << setfill(' ') << left << "Total Simulation Time: " << right << totalTime << '\n';
+    cout << setw(outputColumnWidth) << setfill(' ') << left << "Output .PPM Frequency: " << right << outputSteps << '\n';
+    cout << setw(outputColumnWidth) << setfill(' ') << left << "Include Water in Averages: " << right << (includeWater ? "Yes" : "No") << '\n' << '\n';
+
+
 
 
                 
@@ -214,10 +231,6 @@ int main(int argc, char const *argv[])
     grid.setUniformDistribution(Cell::Prey, upperBound, generator);
     grid.setUniformDistribution(Cell::Predator, upperBound, generator);
 
-    
-    // Total time for simulation. 
-    int totalTime = 500;
-
 
     // Total number of iterations for the simulation.
     int numIterations = int(totalTime/deltaT);
@@ -277,8 +290,35 @@ int main(int argc, char const *argv[])
 
     // The densities of the cells in the grid are printed before any updates of the grid.
     // Iteration number numIterations allows printing values after numIterations updates, although one more update is made after that.
+
+    Grid grid2 = grid;
+    Grid* currentGrid = &grid;
+    Grid* updatedGrid = &grid2;
+    Grid* tempGrid;
+
+    // Inform user we have started simulation.
+    cout << "Starting Simulation..." << endl;
     for(int iter = 0; iter <= numIterations; ++iter)
     {
+        // Calulate how far through simulation we are.
+        double percentageComplete = 100*static_cast<double>(iter)/numIterations;
+        int    basePercentage     = static_cast<int>(percentageComplete);
+        int    decimalPercentage  = static_cast<int>(100 * (percentageComplete-basePercentage));
+        int    numBars            = static_cast<int>(percentageComplete/2);
+        string bars(numBars, '=');
+        ostringstream barStringStream;
+        barStringStream << setw(50) << setfill(' ') << left << bars;
+
+        ostringstream percentageBaseStream;
+        percentageBaseStream << setw(2) << setfill('0') << basePercentage; 
+
+        ostringstream percentageDecimalStream;
+        percentageDecimalStream << setw(2) << setfill('0') << decimalPercentage;
+
+        string percentage = percentageBaseStream.str() + '.' + percentageDecimalStream.str();
+        cout << '\r' << "Progress: " <<  percentage <<  "% " << '[' << barStringStream.str() << ']' << flush;
+
+
         
         
         if(0 == iter % averageDenOutputFreq)
@@ -318,7 +358,11 @@ int main(int argc, char const *argv[])
 
         }
 
-        grid = updateGrid(grid,r,a,b,m,k,l,deltaT);
+        updateGrid(currentGrid,updatedGrid,r,a,b,m,k,l,deltaT);
+        tempGrid    = currentGrid;
+        currentGrid = updatedGrid; 
+        updatedGrid = tempGrid;
+
 
     }
     output_avrg_dens.close();
@@ -328,7 +372,7 @@ int main(int argc, char const *argv[])
     *************************************** TIDYING UP ***********************************************
     **************************************************************************************************/
      
-    
+   cout << "Simulation complete!..." << endl; 
    // Print the destination of output files.
    cout << "Average densities have been printed to " << averageDensitiesOutput << endl; 
 
