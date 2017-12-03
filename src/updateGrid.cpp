@@ -19,16 +19,16 @@ Grid updateGrid(Grid& grid, double r, double a, double b, double m, double k, do
             int     dryNeighbours  = grid.dryNeighbours(i,j);
 
             // This is the implementation of the differential equations provided in the coursework development pdf.
-            double newPreyDensity = grid(i,j).getPreyDensity() + deltaT * ( r * grid(i,j).getPreyDensity() - a * grid(i,j).getPreyDensity() * grid(i,j).getPredDensity() +
-                               k * ( ( grid(i-1,j).getPreyDensity() + grid(i+1,j).getPreyDensity() + grid(i,j-1).getPreyDensity() + grid(i,j+1).getPreyDensity() ) -
-                                   dryNeighbours * grid(i,j).getPreyDensity() )  );
+            double newPreyDensity = grid(i,j).getDensity(Cell::Prey) + deltaT * ( r * grid(i,j).getDensity(Cell::Prey) - a * grid(i,j).getDensity(Cell::Prey) * grid(i,j).getDensity(Cell::Predator) +
+                               k * ( ( grid(i-1,j).getDensity(Cell::Prey) + grid(i+1,j).getDensity(Cell::Prey) + grid(i,j-1).getDensity(Cell::Prey) + grid(i,j+1).getDensity(Cell::Prey) ) -
+                                   dryNeighbours * grid(i,j).getDensity(Cell::Prey) )  );
 
-            double newPredDensity = grid(i,j).getPredDensity() + deltaT * ( b * grid(i,j).getPreyDensity() * grid(i,j).getPredDensity() - m * grid(i,j).getPredDensity() +
-                               l * ( ( grid(i-1,j).getPredDensity() + grid(i+1,j).getPredDensity() + grid(i,j-1).getPredDensity() + grid(i,j+1).getPredDensity() ) -
-                                   dryNeighbours * grid(i,j).getPredDensity() )  );
+            double newPredDensity = grid(i,j).getDensity(Cell::Predator) + deltaT * ( b * grid(i,j).getDensity(Cell::Prey) * grid(i,j).getDensity(Cell::Predator) - m * grid(i,j).getDensity(Cell::Predator) +
+                               l * ( ( grid(i-1,j).getDensity(Cell::Predator) + grid(i+1,j).getDensity(Cell::Predator) + grid(i,j-1).getDensity(Cell::Predator) + grid(i,j+1).getDensity(Cell::Predator) ) -
+                                   dryNeighbours * grid(i,j).getDensity(Cell::Predator) )  );
 
-            updatedGrid(i,j).setPreyDensity(newPreyDensity);
-            updatedGrid(i,j).setPredDensity(newPredDensity);
+            updatedGrid(i,j).setDensity(Cell::Prey,newPreyDensity);
+            updatedGrid(i,j).setDensity(Cell::Predator,newPredDensity);
         }
         }   
     }

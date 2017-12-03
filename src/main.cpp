@@ -6,11 +6,15 @@
 #include <string>
 #include <sstream>
 #include <ctime>
+#include <sstream>
+#include <iomanip>
 #include <boost/filesystem.hpp>
+#include <boost/program_options.hpp>
 #include "Grid.hpp"
 #include "updateGrid.hpp"
 
 using namespace std;
+namespace po = boost::program_options;
 
 int main(int argc, char const *argv[])
 {
@@ -24,12 +28,15 @@ int main(int argc, char const *argv[])
 
     // Create an output directory for the output files based on run time and date.
     time_t startTime = chrono::system_clock::to_time_t(start);
-    string outputDirectoryName = ctime(&startTime);
-    boost::filesystem::path outPath = outputDirectoryName;
+    string outputName = ctime(&startTime);
+    std::transform(outputName.begin(), outputName.end(), outputName.begin(), [](char ch) {return ch == ' ' ? '_' : ch;});
+    std::transform(outputName.begin(), outputName.end(), outputName.begin(), [](char ch) {return ch == ':' ? '-' : ch;});
+    outputName.erase(std::remove(outputName.begin(), outputName.end(), '\n'), outputName.end());
+    boost::filesystem::path outPath = outputName;
     
     // Since the directory name is unique only up to the second it is created in be can append a number if the program is
     // run more than once in a second. We assume that the rate a user can call the program is less than 
-    // 10 times a second. 
+    // 10 times a second.
     for(int i = 2; boost::filesystem::exists(outPath) && i < 10; ++i)
     {
         stringstream ss;
@@ -52,66 +59,45 @@ int main(int argc, char const *argv[])
     /***************************  Input for the differential equation *********************************/
 
     // Parameters for differential equation implementation.
-    double r, a, b, m, k, l, deltaT;
+    double r, a, b, m, k, l, deltaT, totalT;
     int outputSteps;
+    bool includeWater = false;
 
-    // The parameters are collected from the parameter input file.
-    ifstream input_par("./input/input_parameters.txt", ios::in);
+    // Set up optional command line argument.
+    po::options_description desc("Options for hmc oscillator program");
 
-    /*
-     * It needs to be checked that for each parameter the input has been successfully read in, i.e. it is of the right type
-     * and it needs to be checked that the input is physical, which in all cases here just corresponds to it being non-negative. 
-     * If either of these conditions fail the program exits with an appropriate message, since it is most likely the user made an
-     * error with their input values, and so wouldn't want the code to run anyway. 
-     */
-    try
-    {
-    if (input_par.is_open())
-    {
-        /*
-         * As specified in the development pdf:
-         * r is the birth rate of hares 
-         * a is the predation rate as which pumas eat hares
-         * b is the birth rate of pumas per one hare eaten
-         * m is the puma mortality rate
-         * k is the diffusion rate of hares
-         * l is the diffusion rate of pumas
-         * delta T is the size of the time step
-         *
-         * outputSteps is the number of steps between output
-         */
-        input_par >> r >> a >> b >> m >> k >> l >> deltaT >> outputSteps;
-
+    desc.add_options()
         
-        if(r < 0.0 || a < 0.0 || b < 0.0 || m < 0.0 || k < 0.0 || l < 0.0 || deltaT <= 0.0 || outputSteps < 1)
-        {
-            throw runtime_error("Input parameters are not all positive.");
-            
-        }
+        ("prey-birth-rate,r", po::value<double>(&r)->default_value(0.08), "Prey birth rate")
+        ("predation-rate,a", po::value<double>(&a)->default_value(0.04), "Predation rate at which predators eat prey")
+        ("predator-birth-rate,b", po::value<double>(&b)->default_value(0.02), "Birth rate for preadtors per one prey eaten")
+        ("predator-mortality-rate,m", po::value<double>(&m)->default_value(0.06), "Predator mortality rate")
+        ("prey-diffusion-rate,k", po::value<double>(&k)->default_value(0.2), "Diffusion rate of prey")
+        ("predator-diffusion-rate,l", po::value<double>(&l)->default_value(0.2), "Diffusion rate of predators")
+        ("time-step-size,t", po::value<double>(&deltaT)->default_value(0.4), "Time evolution step size")
+        ("total-time,T", po::value<double>(&totalT)->default_value(500.0), "Total run time")
+        ("ppm-output-frequency,f", po::value<int>(&outputSteps)->default_value(10), "Output frequency in time steps of plain .ppm file")
+        ("include-water,i", "Include water in average calulations over landscape")
+        ("help,h", "produce help message");
 
-        if(input_par.fail()) 
-        {
-            throw runtime_error("One or more parameters are of incorrect type.");
-            
-        }
-        
+    po::variables_map vm;
+    po::store(po::parse_command_line(argc,argv,desc), vm);
+    po::notify(vm);
 
-        input_par.close();
-    }
-
-    else
+    // If the user asks for help display it then exit.
+    if(vm.count("help"))
     {
-        throw runtime_error("input/input_parameters.txt could not be opened for reading.");    
-    }
-
-    }
-    catch(exception &exception)
-    {
-        cerr << "Exception: " << exception.what() << endl;
+        cout << desc << "\n";
         return 1;
     }
-                
 
+    if(vm.count("include-water"))
+    {
+        includeWater = true;
+    }
+
+
+                
     /************************************* Input for the landscape/grid **********************************************************/
 
     // Forward declare variables here since they will be unreachable if they are place inside a try block 
@@ -225,15 +211,16 @@ int main(int argc, char const *argv[])
     // Set uniform predator and prey distributions between 0 and 5.0 across the whole grid.
     double upperBound = 5.0;
 	
-    grid.setUniformDistribution(upperBound, upperBound, generator);
+    grid.setUniformDistribution(Cell::Prey, upperBound, generator);
+    grid.setUniformDistribution(Cell::Predator, upperBound, generator);
 
     
     // Total time for simulation. 
-    int t = 500;
+    int totalTime = 500;
 
 
     // Total number of iterations for the simulation.
-    int numIterations = int(t/deltaT);
+    int numIterations = int(totalTime/deltaT);
 
     // Interval at which to print the predator and prey densities to the command line. 
     int averageDenOutputFreq = 10;
@@ -262,12 +249,10 @@ int main(int argc, char const *argv[])
 	    scaling = minLimit/upperBound;
 	    maxNumberPPM = static_cast<int>(scaleFactor * minLimit);
     }
-    // No file name will be longer than 50 characters. 
-    char outputfile[50];
-
+    
 
     // Name of output file for average densities
-    string averageDensitiesOutput(outputDirectoryName + "/Average_Densities.txt");
+    string averageDensitiesOutput(outputName + "/Average_Densities.txt");
 
 
     // Create an output file for the average densities.
@@ -280,6 +265,16 @@ int main(int argc, char const *argv[])
         output_avrg_dens << "Time    Pred Dens.    Prey Dens." << endl;
     }
 
+    // Total number of output .ppm files.
+    int totalPPMcount = numIterations/outputSteps;
+    int outputDigits  = 0;
+    int ppmCount      = totalPPMcount; 
+    while(ppmCount != 0) 
+        { 
+            ppmCount/=10; 
+            ++outputDigits;
+        }
+
     // The densities of the cells in the grid are printed before any updates of the grid.
     // Iteration number numIterations allows printing values after numIterations updates, although one more update is made after that.
     for(int iter = 0; iter <= numIterations; ++iter)
@@ -289,7 +284,7 @@ int main(int argc, char const *argv[])
         if(0 == iter % averageDenOutputFreq)
         {
 
-            output_avrg_dens << iter * deltaT << "       " << grid.predDensity() << "       " << grid.preyDensity() << endl;
+            output_avrg_dens << iter * deltaT << "       " << grid.averageDensity(Cell::Predator, includeWater) << "       " << grid.averageDensity(Cell::Prey,includeWater) << endl;
 
         }
 
@@ -298,7 +293,9 @@ int main(int argc, char const *argv[])
         {  
             {
                 int outFileNum = iter/outputSteps;
-                string outputfile(outputDirectoryName + "/output" + to_string(outFileNum)+".ppm");
+                ostringstream ss;
+                ss << setw(outputDigits) << setfill('0') << outFileNum;
+                string outputfile(outputName + "/output" + ss.str() +".ppm");
                 //Creates different names for each output file in the output folder, called output
                 //sprintf(outputfile,"./output/output%d.ppm",iter/outputSteps);
                 
@@ -345,7 +342,7 @@ int main(int argc, char const *argv[])
 
 
    // Output the time taken to run the code to the command line. 
-   cout << "Time take to execute (us):   " << elapsed.count() << endl;
+   cout << "Time take to execute (ms):   " << elapsed.count() << endl;
 
    return 0;
 }

@@ -22,10 +22,15 @@ class Cell
 
         /**
         * \enum State
-        *
         * \brief Enum that represents a value that can be either wet or dry.
         */
-        enum State { Wet, Dry};
+        enum State {Wet, Dry};
+
+        /**
+         * \enum Animal
+         * \brief Enum that represents animal that can be predator or prey.
+         */
+        enum Animal {Predator, Prey};
 
     private:
 
@@ -82,19 +87,10 @@ class Cell
 
         /** 
         * \brief Getter for the predator density in the cell.
-        *
+        * \param Cell::Animal instance representing the animal of interest (predator/prey).
         * \return The value of m_predDensity.
         */
-        double getPredDensity() const;
-
-
-        /** 
-        * \brief Getter for the prey density in the cell.
-        *
-        * \return The value of m_preyDensity.
-        */
-        double getPreyDensity() const;
-
+        double getDensity(Cell::Animal animal) const;
 
         /** 
         * \brief Getter for the state of the cell.
@@ -106,20 +102,12 @@ class Cell
 
         /**
         * \brief Setter for the predator density in the cell
-        *
+        * \param Cell::Animal instance representing animal of interest (predator/prey).
         * \param predDensity a floating point value setting the density of the predators in 
         * the cell. Defaults to 0.
         */
-        void setPredDensity(double predDensity = 0.0);
+        void setDensity(Cell::Animal animal, double predDensity = 0.0);
 
-
-        /**
-        * \brief Setter for the prey density in the cell
-        *
-        * \param predDensity a floating point value setting the density of the prey in the 
-        * cell. Defaults to 0.
-        */
-        void setPreyDensity(double preyDensity = 0.0);
 
         /**
         * \brief Setter for the state of the cell

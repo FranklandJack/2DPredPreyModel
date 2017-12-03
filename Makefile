@@ -23,8 +23,8 @@ OUT_FILES=$(wildcard $(OUT_DIR)/*)
 CXX=g++
 CPPSTD=-std=c++11 
 DEBUG=-g
-OPT=-Os
-CPPUNITLDFLAGS=-lcppunit -lboost_system -lboost_filesystem
+OPT=-O0
+LFLAGS=-lcppunit -lboost_program_options -lboost_system -lboost_filesystem
 INC=-I$(SRC_DIR) -I$(TEST_DIR) -I$(HOME)/include
 
 
@@ -35,10 +35,10 @@ EXE_TEST=predprey-cppunittests
 
 
 $(EXE_FILE): $(OBJ_FILES) 
-	$(CXX) $(CPPSTD) $(OPT) -o $@  $^ $(CPPUNITLDFLAGS)
+	$(CXX) $(CPPSTD) $(OPT) -o $@  $^ $(LFLAGS)
 
 $(EXE_TEST): $(TEST_OBJ_FILES) Cell.o Grid.o updateGrid.o
-	$(CXX) $(CPPSTD) $(OPT) -o $@  $^ $(INC) $(CPPUNITLDFLAGS) 
+	$(CXX) $(CPPSTD) $(OPT) -o $@  $^ $(INC) $(LFLAGS) 
 
 ## objs      : create object files
 .PHONY : objs
@@ -79,6 +79,7 @@ clean :
 	rm -f $(OUT_FILES)
 	rm -f $(DAT_FILES)
 	rm -f TestResults.xml
+	rm -f $(CONVERT_EXE)
 
 ## variables : Print variables
 .PHONY :variables

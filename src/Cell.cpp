@@ -21,42 +21,52 @@ Cell::Cell(Cell::State state, double predDensity, double preyDensity):m_state(st
 
 Cell::~Cell(){}
 
-double        Cell::getPredDensity() const { return m_predDensity; }
-double        Cell::getPreyDensity() const { return m_preyDensity; }
-Cell::State   Cell::getState()       const { return m_state;       }
+double        Cell::getDensity(Cell::Animal animal) const 
+{ 
+    switch(animal)
+    {
+        case Cell::Predator:
+            return m_predDensity;
 
-void Cell::setPredDensity(double predDensity)
+        case Cell::Prey:
+            return m_preyDensity;
+
+        default:
+            return 0;
+    }
+}
+
+Cell::State Cell::getState() const { return m_state;}
+
+void Cell::setDensity(Cell::Animal animal, double density)
 {
     /*
      * If the predDensity < 0 or the Cell is Wet, then the m_predDensity will just be set to zero regardless
      * of the value of predDensity, since in these two cases the density is unphysical. 
      */
-    if(predDensity < 0.0 || Wet == m_state)
+    if(density < 0.0 || Wet == m_state)
     {
-        m_predDensity = 0.0;
+        density = 0.0;
     }
 
-    else
+    switch(animal)
     {
-        m_predDensity = predDensity;
+        case Cell::Predator:
+            m_predDensity = density;
+            break;
+
+        case Cell::Prey:
+            m_preyDensity = density;
+            break;
+
+        default:
+            break;
+
     }
+    
 }
 
-void Cell::setPreyDensity(double preyDensity)
-{
-    /* 
-     * If the preyDensity < 0 or the Cell is Wet, then the m_preyDensity will just be set to zero regardless
-     * of the value of predDensity, since in these two cases the density is unphysical. 
-     */
-    if(preyDensity < 0.0 || Wet == m_state) 
-    {
-        m_preyDensity = 0.0;
-    }
-    else
-    {
-        m_preyDensity = preyDensity;
-    }
-}
+
 
 void Cell::setState(Cell::State state){ m_state = state; }
 

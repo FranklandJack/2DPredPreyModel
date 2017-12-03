@@ -224,49 +224,10 @@ class Grid
          * produce the same chain of random numbers, rather they act on the next random number given by the generator.
          *
          */
-        void setUniformPredDistribution(double uppperBound, std::default_random_engine &generator);
+        void setUniformDistribution(Cell::Animal animal, double uppperBound, std::default_random_engine &generator);
 
-        /**
-         *
-         * \breif Sets uniform random prey distribution in each grid cell.
-         *
-         * Intially prey density will be zero in each cell since the constructors do no initialization of 
-         * densities. This function sets the density of predators in every Dry grid cell to a random number 
-         * between 0 and upperBound according to a uniform distribution. i.e. If upperBound = 5.0, then each 
-         * dry cell will be assigned a density between 0.0 and 5.0 according to a uniform distribution.
-         * 
-         * \param upperBound floating point value that provides the upper bound for the random number 
-         * distribution. 
-         * 
-         * \param generator a default_random_engine reference from the std library <random> class. This is used 
-         * to generate the random number from the distribution which is a local variable within the function. The 
-         * generator should be provided by the main method so that chains of random prey densities can be 
-         * reproduced if required for debugging. The generator is passed as a reference so that if any other functions
-         * which makes use of the same distribution are called from the main method, they do not 
-         * produce the same chain of random numbers, rather they act on the next random number given by the generator.
-         *
-         */
-        void setUniformPreyDistribution(double upperBound, std::default_random_engine &generator);
 
-        /**
-         *
-         * \breif Sets uniform random predator and prey distribution in each grid cell.
-         *
-         * This function works by just calling the setUniformPredDistribution() and setUniormPreyDistribution() functions with
-         * their respective upper bounds. For a more in depth discussion of the functionality please see those functions where
-         * the implementation is explained in full.
-         * 
-         * \param predUpperBound floating point value that provides the upper bound for the random number 
-         * distribution of the predators.
-         * 
-         * \param preyUpperBound floating point value that provides the upper bound for the random number 
-         * distribution of the prey.   
-         *
-         * 
-         * \param generator a default_random_engine reference from the std library <random> class.
-         * 
-         */
-        void setUniformDistribution(double predUpperBound, double preyUpperbound, std::default_random_engine &generator);
+        
 
         
         /**
@@ -286,26 +247,9 @@ class Grid
          * Wet cells, depending on how the function was called.
          *
          */
-        double predDensity(bool includeWetCells = true) const;
+        double averageDensity(Cell::Animal animal, bool includeWetCells = true) const;
 
-        /**
-         *
-         * \brief Calculates average prey density across the grid.
-         *
-         * Calculates the average value of the prey density across the entire grid, not included the halo of Wet cells. However, 
-         * the average can be taken over just the Dry cells in the grid, or over the Dry and Wet cells in the grid if the
-         * corresponding argument is provided.
-         *
-         * \param includeWetCells bool value that represents whether the user wants to include the Wet cells in the grid
-         * as the well as the Dry cells, as the total number of cells to take the average over. This value defaults to true i.e. 
-         * the default behaviour is to average over all cells in the grid including the Wet ones where predator/prey densities will
-         * be zero.
-         *        
-         * \return Floating point value representing the average prey density across the grid either including or not including the 
-         * Wet cells, depending on how the function was called.
-         *
-         */
-        double preyDensity(bool includeWetCells = true ) const;
+        
 
 
         /**

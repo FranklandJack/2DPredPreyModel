@@ -232,7 +232,7 @@ Cell::State Grid::getCellState(int columnIndex, int rowIndex) const
 }
 
 
-void Grid::setUniformPredDistribution(double upperBound, std::default_random_engine &generator)
+void Grid::setUniformDistribution(Cell::Animal animal, double upperBound, std::default_random_engine &generator)
 {
     // Create a uniform distribution of random numbers between 0.0 and upper bound.
     std::uniform_real_distribution<double> distribution(0.0,upperBound);
@@ -246,41 +246,16 @@ void Grid::setUniformPredDistribution(double upperBound, std::default_random_eng
             double randomDensity = distribution(generator);
 
             // Set each cell to have a random density. 
-            ((*this)(i,j)).setPredDensity(randomDensity);
+            ((*this)(i,j)).setDensity(animal,randomDensity);
         }
     }
 }
 
 
-void Grid::setUniformPreyDistribution(double upperBound, std::default_random_engine &generator)
+
+double Grid::averageDensity(Cell::Animal animal, bool includeWetCells) const
 {
-    // Create a uniform distribution of random numbers between 0.0 and upper bound.
-    std::uniform_real_distribution<double> distribution(0.0,upperBound);
-
-    // Loop through the entire grid not including the halo, hence only index from 1 to m_row and 1 to m_column.
-    for(int j = 1; j <= m_rows; ++j)
-    {
-        for(int i = 1; i <= m_columns; ++i)
-        {
-            // Acting on the generator with the distribution produces a new pseudo random number in the range (0.0, upperBound) according to the uniform distribution.
-            double randomDensity = distribution(generator);
-
-            // Set each cell to have a random density. 
-            ((*this)(i,j)).setPreyDensity(randomDensity);
-        }
-    }
-}
-
-
-void Grid::setUniformDistribution(double predUpperBound, double preyUpperbound, std::default_random_engine &generator)
-{
-    setUniformPredDistribution(predUpperBound, generator);
-    setUniformPreyDistribution(preyUpperbound, generator);
-}
-
-double Grid::predDensity(bool includeWetCells) const
-{
-    double totalPredDensity = 0.0;
+    double totalDensity = 0.0;
     int    totalNumbWetCells = 0;
     int    totalNumberCells = m_rows * m_columns;
 
@@ -290,7 +265,7 @@ double Grid::predDensity(bool includeWetCells) const
         for(int i = 1; i <= m_columns; ++i)
         {
             // Add the predator densities of each cell up.
-            totalPredDensity += (*this)(i,j).getPredDensity();
+            totalDensity += (*this)(i,j).getDensity(animal);
 
             // Total up the number of Wet cells as well.
             if(Cell::Wet == !((*this)(i,j).getState()))
@@ -306,58 +281,18 @@ double Grid::predDensity(bool includeWetCells) const
     // In the case that the caller specified to include Wet cells in the average use all Cells. 
     if(true == includeWetCells)
     {
-        return totalPredDensity/totalNumberCells;
+        return totalDensity/totalNumberCells;
     }
 
     // In the case that the caller specified not to include Wet cells in the average use all Cells only use dry cells.
     else
     {   
         // Since cells are either Wet or Dry totalNumbWetCells + totalNumbDryCells = totalNumberCells. 
-        return totalPredDensity/(totalNumberCells - totalNumbWetCells);
+        return totalDensity/(totalNumberCells - totalNumbWetCells);
     }
 
 }
 
-
-double Grid::preyDensity(bool includeWetCells) const
-{
-
-    double totalPreyDensity = 0.0;
-    int    totalNumbWetCell = 0;
-    int    totalNumberCells = m_rows * m_columns;
-
-    // Loop through the entire grid not including the halo, hence only index from 1 to m_row and 1 to m_column.
-    for(int j = 1; j <= m_rows; ++j)
-    {
-        for(int i = 1; i <= m_columns; ++i)
-        {
-            // Add the prey densities of each cell up.
-            totalPreyDensity += (*this)(i,j).getPreyDensity();
-
-            /// Total up the number of Wet cells as well.
-            if(!((*this)(i,j).getState()))
-            {
-                ++totalNumbWetCell;
-            }
-
-        }
-
-
-    } 
-
-    // In the case that the caller specified to include Wet cells in the average use all Cells. 
-    if(true == includeWetCells)
-    {
-        return totalPreyDensity/totalNumberCells;
-    }
-
-    // In the case that the caller specified not to include Wet cells in the average use all Cells only use dry cells.
-    else
-    {
-        // Since cells are either Wet or Dry totalNumbWetCells + totalNumbDryCells = totalNumberCells. 
-        return totalPreyDensity/(totalNumberCells - totalNumbWetCell);
-    }
-}
 
 
 Cell& Grid::operator()(int i, int j)
@@ -440,7 +375,7 @@ void Grid::printDensities(std::ostream& out) const
         for (int i = 1; i <= m_columns; ++i)
         {
             // Print column number, then row number, followed by predator density, then prey density. 
-            out << i << " " << j << " " << (*this)(i,j).getPredDensity() << " " << (*this)(i,j).getPreyDensity() << std::endl;
+            out << i << " " << j << " " << (*this)(i,j).getDensity(Cell::Predator) << " " << (*this)(i,j).getDensity(Cell::Prey) << std::endl;
         }
     }
 }
@@ -468,11 +403,11 @@ int Grid::printPPM(std::ofstream &file, int maxNumberPPM, double scaling, double
             int rValue = 0;
 
             // The green value will be determined by the rounded predator density.
-            int gValue = static_cast<int>(scaling * (*this)(i,j).getPredDensity() + rounding);
+            int gValue = static_cast<int>(scaling * (*this)(i,j).getDensity(Cell::Predator) + rounding);
 
 
             // The blue value will be deterined by the rounded prey density. 
-            int bValue = static_cast<int>(scaling * (*this)(i,j).getPreyDensity() + rounding);
+            int bValue = static_cast<int>(scaling * (*this)(i,j).getDensity(Cell::Prey) + rounding);
             
             if (gValue > maxNumberPPM)
                 gValue = maxNumberPPM;
@@ -487,7 +422,7 @@ int Grid::printPPM(std::ofstream &file, int maxNumberPPM, double scaling, double
             file << std::endl;
             
             //Finds the higher density and changes maxNumberPPM so that for the next output maxNumberPPM is a high enough number.
-            maxDensity = ( ((*this)(i,j).getPredDensity()) > ((*this)(i,j).getPreyDensity()) ? ((*this)(i,j).getPredDensity()) : ((*this)(i,j).getPreyDensity()) );
+            maxDensity = ( ((*this)(i,j).getDensity(Cell::Predator)) > ((*this)(i,j).getDensity(Cell::Prey)) ? ((*this)(i,j).getDensity(Cell::Predator)) : ((*this)(i,j).getDensity(Cell::Prey)) );
             while(maxNumberPPM < scaleFactor * maxDensity * scaling)
              {
                 maxNumberPPM = static_cast<int>(scaleFactor * maxNumberPPM);
