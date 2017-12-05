@@ -24,21 +24,19 @@ class Cell
         * \enum State
         * \brief Enum that represents a value that can be either wet or dry.
         */
-        enum State {Wet, Dry};
+        enum State {Wet, Dry, MAX_STATE};
 
         /**
          * \enum Animal
          * \brief Enum that represents animal that can be predator or prey.
          */
-        enum Animal {Predator, Prey};
+        enum Animal {Predator, Prey, MAX_ANIMAL};
 
     private:
-
-        /// Floating point member variable representing the predator density in the given cell as #predator in the cell.
-        double m_predDensity;
-
-        /// Floating point member variable representing the prey density in the given cell as #prey in the cell.
-        double m_preyDensity;
+        /**
+         * \brief member variable array to represent animal densities in the cell
+         */
+        double m_animalDensities[MAX_ANIMAL];
 
         /**
         * \brief Member variable representing the state of the Cell as either being Wet(water) or Dry(land)
@@ -58,6 +56,7 @@ class Cell
          *
          */
         friend class TestCell;
+
 
 
     public:

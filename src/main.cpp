@@ -27,24 +27,7 @@ int main(int argc, char const *argv[])
     auto start = std::chrono::system_clock::now();
 
     cout << "Setting up simulation..." << '\n' << '\n';
-    // Create an output directory for the output files based on run time and date.
-    time_t startTime = chrono::system_clock::to_time_t(start);
-    string outputName = ctime(&startTime);
-    std::transform(outputName.begin(), outputName.end(), outputName.begin(), [](char ch) {return ch == ' ' ? '_' : ch;});
-    std::transform(outputName.begin(), outputName.end(), outputName.begin(), [](char ch) {return ch == ':' ? '-' : ch;});
-    outputName.erase(std::remove(outputName.begin(), outputName.end(), '\n'), outputName.end());
-    boost::filesystem::path outPath = outputName;
-    
-    // Since the directory name is unique only up to the second it is created in be can append a number if the program is
-    // run more than once in a second. We assume that the rate a user can call the program is less than 
-    // 10 times a second.
-    for(int i = 2; boost::filesystem::exists(outPath) && i < 10; ++i)
-    {
-        stringstream ss;
-        ss << outPath << "(" << i << ")";
-        outPath = ss.str();
-    }
-    boost::filesystem::create_directory(outPath);
+   
 
 	// Seed the pseudo random number generation using the system clock.
     unsigned int seed = static_cast<unsigned int>(std::chrono::system_clock::now().time_since_epoch().count());
@@ -61,11 +44,12 @@ int main(int argc, char const *argv[])
 
     // Parameters for differential equation implementation.
     double r, a, b, m, k, l, deltaT, totalTime;
-    int outputSteps;
+    int outputFrequency;
     bool includeWater = false;
+    string inputLandscape;
 
     // Set up optional command line argument.
-    po::options_description desc("Options for hmc oscillator program");
+    po::options_description desc("Options for predator-prey simulation");
 
     desc.add_options()
         
@@ -77,19 +61,32 @@ int main(int argc, char const *argv[])
         ("predator-diffusion-rate,l", po::value<double>(&l)->default_value(0.2), "Diffusion rate of predators")
         ("time-step-size,t", po::value<double>(&deltaT)->default_value(0.4), "Time evolution step size")
         ("total-time,T", po::value<double>(&totalTime)->default_value(500.0), "Total run time")
-        ("ppm-output-frequency,f", po::value<int>(&outputSteps)->default_value(10), "Output frequency in time steps of plain .ppm file")
+        ("ppm-output-frequency,f", po::value<int>(&outputFrequency)->default_value(10), "Output frequency in time steps of plain .ppm file")
         ("include-water,i", "Include water in average calulations over landscape")
         ("help,h", "produce help message");
 
+    // Set up position command line arguments, i.e. input file.
+    po::options_description hidden("Hidden options");
+    hidden.add_options()
+        ("input-file",po::value<string>(&inputLandscape), "input file");
+
+    po::options_description cmdline_options;
+    cmdline_options.add(desc).add(hidden);
+
+    // Enable access to command line arguments.
+    po::positional_options_description p;
+    p.add("input-file",-1);
     po::variables_map vm;
-    po::store(po::parse_command_line(argc,argv,desc), vm);
+    po::store(po::command_line_parser(argc,argv).options(cmdline_options).positional(p).run(), vm);
     po::notify(vm);
+
+    
 
     // If the user asks for help display it then exit.
     if(vm.count("help"))
     {
         cout << desc << "\n";
-        return 1;
+        return 0;
     }
 
     if(vm.count("include-water"))
@@ -108,13 +105,29 @@ int main(int argc, char const *argv[])
     cout << setw(outputColumnWidth) << setfill(' ') << left << "Time Step Size: " << right << l << '\n';
     cout << setw(outputColumnWidth) << setfill(' ') << left << "Time Step Size: " << right << deltaT << '\n';
     cout << setw(outputColumnWidth) << setfill(' ') << left << "Total Simulation Time: " << right << totalTime << '\n';
-    cout << setw(outputColumnWidth) << setfill(' ') << left << "Output .PPM Frequency: " << right << outputSteps << '\n';
+    cout << setw(outputColumnWidth) << setfill(' ') << left << "Output .PPM Frequency: " << right << outputFrequency << '\n';
     cout << setw(outputColumnWidth) << setfill(' ') << left << "Include Water in Averages: " << right << (includeWater ? "Yes" : "No") << '\n' << '\n';
 
 
+     // Create an output directory for the output files based on run time and date.
+    time_t startTime = chrono::system_clock::to_time_t(start);
+    string outputName = ctime(&startTime);
+    std::transform(outputName.begin(), outputName.end(), outputName.begin(), [](char ch) {return ch == ' ' ? '_' : ch;});
+    std::transform(outputName.begin(), outputName.end(), outputName.begin(), [](char ch) {return ch == ':' ? '-' : ch;});
+    outputName.erase(std::remove(outputName.begin(), outputName.end(), '\n'), outputName.end());
+    boost::filesystem::path outPath = outputName;
+    
+    // Since the directory name is unique only up to the second it is created in be can append a number if the program is
+    // run more than once in a second. We assume that the rate a user can call the program is less than 
+    // 10 times a second.
+    for(int i = 2; boost::filesystem::exists(outPath) && i < 10; ++i)
+    {
+        stringstream ss;
+        ss << outPath << "(" << i << ")";
+        outPath = ss.str();
+    }
+    boost::filesystem::create_directory(outPath);
 
-
-                
     /************************************* Input for the landscape/grid **********************************************************/
 
     // Forward declare variables here since they will be unreachable if they are place inside a try block 
@@ -133,8 +146,8 @@ int main(int argc, char const *argv[])
 
     try
     {
-    // Take the first command line argument as the landscape input file.
-    ifstream input_Landscape(argv[1], ios::in);
+    // Take the string command line argument as the landscape input file.
+    ifstream input_Landscape(inputLandscape, ios::in);
 
     // First value in the file should be the number of columns and second value in the file should be the number of rows.
     input_Landscape >> columns >> rows;
@@ -279,7 +292,7 @@ int main(int argc, char const *argv[])
     }
 
     // Total number of output .ppm files.
-    int totalPPMcount = numIterations/outputSteps;
+    int totalPPMcount = numIterations/outputFrequency;
     int outputDigits  = 0;
     int ppmCount      = totalPPMcount; 
     while(ppmCount != 0) 
@@ -329,15 +342,15 @@ int main(int argc, char const *argv[])
         }
 
         
-        if(0 == iter % outputSteps)
+        if(0 == iter % outputFrequency)
         {  
             {
-                int outFileNum = iter/outputSteps;
+                int outFileNum = iter/outputFrequency;
                 ostringstream ss;
                 ss << setw(outputDigits) << setfill('0') << outFileNum;
                 string outputfile(outputName + "/output" + ss.str() +".ppm");
                 //Creates different names for each output file in the output folder, called output
-                //sprintf(outputfile,"./output/output%d.ppm",iter/outputSteps);
+                //sprintf(outputfile,"./output/output%d.ppm",iter/outputFrequency);
                 
                 ofstream outputPPM(outputfile, ios::out);
         
@@ -372,7 +385,7 @@ int main(int argc, char const *argv[])
     *************************************** TIDYING UP ***********************************************
     **************************************************************************************************/
      
-   cout << "Simulation complete!..." << endl; 
+   cout << "\nSimulation complete!..." << endl; 
    // Print the destination of output files.
    cout << "Average densities have been printed to " << averageDensitiesOutput << endl; 
 
@@ -382,11 +395,11 @@ int main(int argc, char const *argv[])
 
 
    // Calculate the elapsed time to an appropriate order. 
-   auto elapsed = std::chrono::duration_cast<chrono::milliseconds>(end - start);
+   auto elapsed = std::chrono::duration_cast<chrono::seconds>(end - start);
 
 
    // Output the time taken to run the code to the command line. 
-   cout << "Time take to execute (ms):   " << elapsed.count() << endl;
+   cout << "Time take to execute (s):   " << elapsed.count() << endl;
 
    return 0;
 }
