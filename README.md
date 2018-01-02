@@ -104,10 +104,10 @@ The default command line values will be:
 10. include water in density calculations = no.
 
 
-For a full list of optional command line argument, their descriptions, their default values and how to set them once compiled run ```./predprey -h''' or ```./predprey --help'''. There is no requirement to provide all these values, and they may be provided in any order provided the right flag is before each value. The .dat file requires no flag.
+For a full list of optional command line argument, their descriptions, their default values and how to set them once compiled run ```./predprey -h``` or ```./predprey --help```. There is no requirement to provide all these values, and they may be provided in any order provided the right flag is before each value. The .dat file requires no flag.
 
 
-An example run would be ```./predprey -r 0.2 -a 0.1 -b 0.01  -m 0.1 -k 0.2 -l 0.2 -t 0.1 -T 1000 -f 10 -i -MyLandscape.dat'''
+An example run would be ```./predprey -r 0.2 -a 0.1 -b 0.01  -m 0.1 -k 0.2 -l 0.2 -t 0.1 -T 1000 -f 10 -i -MyLandscape.dat```
 
 The .dat file is provided as the only command line argument to the executable and **MUST** be of the format:
 
