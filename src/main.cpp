@@ -112,8 +112,11 @@ int main(int argc, char const *argv[])
      // Create an output directory for the output files based on run time and date.
     time_t startTime = chrono::system_clock::to_time_t(start);
     string outputName = ctime(&startTime);
+    // Need to do some work to remove white space and replace it with an underscore for good formatting in the directory name.
     std::transform(outputName.begin(), outputName.end(), outputName.begin(), [](char ch) {return ch == ' ' ? '_' : ch;});
+    // Should replace : with - since this can be confusing in the command line.
     std::transform(outputName.begin(), outputName.end(), outputName.begin(), [](char ch) {return ch == ':' ? '-' : ch;});
+    // Remove any newlines.
     outputName.erase(std::remove(outputName.begin(), outputName.end(), '\n'), outputName.end());
     boost::filesystem::path outPath = outputName;
     

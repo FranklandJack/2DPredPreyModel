@@ -33,6 +33,8 @@ where:
 
 The source code in this project makes use of C++ move semantics, as such it needs to be compiled under the C++11 standard (or higher) hence the compiler on the user's machine must be C++11 compliant. 
 
+It also makes use of the Boost libraries in order implement optional command line arguments and construct unique directories to hold the output files. As such the user most have the C++ Boost libraries installed on their machine. They are free and can be found [here](http://www.boost.org/).
+
 The unit test framework used is cppunit. To download, build and install see [CppUnit](http://www.freedesktop.org/wiki/Software/cppunit/), or do the following:
 ```
 $ wget http://dev-www.libreoffice.org/src/cppunit-1.13.2.tar.gz
@@ -84,23 +86,28 @@ These instructions were taken from: <https://github.com/softwaresaved/build_and_
 ## Input Formatting
 
 The program takes as its input: 
-1. A .txt file containing the various parameters for the differential equation which evolves the system. 
-2. A .dat file which contains the landscape of the system. 
+1. A .dat file which contains the landscape of the system. 
+2. (optional) several command line arguments setting the initial conditions and tun parameters.
 
-The location of the input parameters is hard coded into the main method, so its name should not be changed, however the user can feel free to change the values of the parameters in the file input/input_parameters.txt.
 
-The format of the input_parameters.txt file **MUST** be:
+The default command line values will be:
 
-1. birth rate of hares 
-2. predation rate at which pumas eat hares
-3. birth rate of pumas per one hare eaten
-4. puma mortality rate
-5. diffusion rate for hares
-6. diffusion rate for pumas
-7. size of time step
-8. the number of time steps between output of plain .pnm file
+1. birth rate of hares = 0.08
+2. predation rate at which pumas eat hares = 0.04
+3. birth rate of pumas per one hare eaten = 0.02
+4. puma mortality rate = 0.06
+5. diffusion rate for hares = 0.2
+6. diffusion rate for pumas = 0.2
+7. size of time step = 0.4
+8. total run time = 500
+9. the number of time steps between output of plain .pnm file = 10
+10. include water in density calculations = no.
 
-With each value separated by a newline.
+
+For a full list of optional command line argument, their descriptions, their default values and how to set them once compiled run ```./predprey -h''' or ```./predprey --help'''. There is no requirement to provide all these values, and they may be provided in any order provided the right flag is before each value. The .dat file requires no flag.
+
+
+An example run would be ```./predprey -r 0.2 -a 0.1 -b 0.01  -m 0.1 -k 0.2 -l 0.2 -t 0.1 -T 1000 -f 10 -i -MyLandscape.dat'''
 
 The .dat file is provided as the only command line argument to the executable and **MUST** be of the format:
 
@@ -115,7 +122,7 @@ X X X X X X X X ...... X X X X
 where X=0 if the cell in the landscape is Wet and X=1 if the cell in the landscape is dry, and numberColumns and numberRows are both positive integers.
 
 ## Output 
-The program will run from t=0 to t=500 and output the average density of the predators and prey (over the whole grid including wet areas) every 10 time steps into a file called Average_Densities.txt. It will also output a plain ppm file every N time steps called outputM.ppm where N is the number of time steps between output set by the user in the input file, and M is the step number of the output. All output files are created in the output directory. The user should note that since output is always sent to the output directory if they run the simulation more than once they will overwrite their output from the first run. The user can either save the outputs into a different directory, or remove the original outputs by running ``` $ make clean ```.
+The program will run for the number of time steps specified by the user (or if not specified will default to 500), and output the average density (not including water unless specified by user) of the predators and prey every 10 time steps into a file called Average_Densities.txt. It will also output a plain ppm file every at the frequency specified by the user, called outputN.ppm where N is the number of time steps between output set by the user in the input file, and M is the step number of the output. Each run of the program will construct its own output directory containing the output files. This directory will be uniquely identifiable by a time and date stamp in its name and if the executable is run multiple times within the smallest unit of the time stamp then a number identifying the tun is appended to the stamp. 
 
 
 
