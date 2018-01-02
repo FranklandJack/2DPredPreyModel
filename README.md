@@ -87,7 +87,7 @@ These instructions were taken from: <https://github.com/softwaresaved/build_and_
 
 The program takes as its input: 
 1. A .dat file which contains the landscape of the system. 
-2. (optional) several command line arguments setting the initial conditions and tun parameters.
+2. (optional) several command line arguments setting the initial conditions and run parameters.
 
 
 The default command line values will be:
