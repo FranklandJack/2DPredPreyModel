@@ -38,7 +38,7 @@ $(EXE_FILE): $(OBJ_FILES)
 	$(CXX) $(CPPSTD) $(OPT) -o $@  $^ $(LFLAGS)
 
 $(EXE_TEST): $(TEST_OBJ_FILES) Cell.o Grid.o updateGrid.o
-	$(CXX) $(CPPSTD) $(OPT) -o $@  $^ $(INC) $(LFLAGS) 
+	$(CXX) $(CPPSTD) $(OPT) -o $@  $^ $(LFLAGS) 
 
 ## objs      : create object files
 .PHONY : objs
@@ -53,7 +53,7 @@ objs : $(OBJ_FILES) $(TEST_OBJ_FILES)
 
 ## test    : create and run unit tests
 .PHONY : test
-test : predprey-cppunittests
+test : $(EXE_TEST)
 	./$<
 
 
