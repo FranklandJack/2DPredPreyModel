@@ -3,6 +3,5 @@
 #to stop .o files being uploaded to the master repo
 *.o
 
-# stop data files being uploaded 
-*.dat 
+# stop data files being uploaded  
 *.pbs
